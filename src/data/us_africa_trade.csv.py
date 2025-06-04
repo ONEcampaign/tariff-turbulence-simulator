@@ -1,5 +1,8 @@
+import sys
+
 import json
 import pandas as pd
+
 from bblocks.data_importers import BACI
 import country_converter as coco
 
@@ -39,7 +42,7 @@ def map_hs_sections(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
+def clean_columns(df: pd.DataFrame) -> pd.DataFrame:
 
     column_mapping = {
         "year": "year",
@@ -51,10 +54,12 @@ def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
 
     df = df.rename(columns=column_mapping)[list(column_mapping.values())]
 
+    df['country'] = df['country'].astype("string[python]").str.encode('latin1').str.decode('utf-8')
+
     return df
 
 
-def average_value(df: pd.DataFrame, groupby_cols:list) -> pd.DataFrame:
+def average_value(df: pd.DataFrame, groupby_cols: list) -> pd.DataFrame:
 
     df = (
         df.groupby(groupby_cols, observed=True, dropna=False)["value"]
@@ -73,7 +78,7 @@ def get_us_africa_trade_data() -> pd.DataFrame:
 
     df_mapped = map_hs_sections(df_us_africa)
 
-    df_clean = rename_columns(df_mapped)
+    df_clean = clean_columns(df_mapped)
 
     df_total = average_value(df_clean, ["country", "iso3"])
     df_total["product"] = "All products"
@@ -84,7 +89,11 @@ def get_us_africa_trade_data() -> pd.DataFrame:
 
     return final_df
 
+
 if __name__ == "__main__":
+
     df = get_us_africa_trade_data()
 
-    df.to_csv("")
+    df.to_csv(sys.stdout, index=False)
+
+    # df.to_csv(PATHS.OUTPUTS / "us_africa_trade.csv", index=False)

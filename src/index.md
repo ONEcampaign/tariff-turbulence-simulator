@@ -1,5 +1,5 @@
-# tariff-project
+```js
+const data = FileAttachment("./data/us_africa_trade.csv").csv({typed: true});
+```
 
-This is the home page of your new Observable Framework app.
-
-For more, see <https://observablehq.com/framework/getting-started>.
+${Inputs.table(data)}

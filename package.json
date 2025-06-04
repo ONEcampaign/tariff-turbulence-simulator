@@ -3,10 +3,12 @@
   "private": true,
   "scripts": {
     "clean": "rimraf src/.observablehq/cache",
-    "build": "observable build",
-    "dev": "observable preview",
-    "deploy": "observable deploy",
-    "observable": "observable"
+    "build": "export PYTHONPATH=$(pwd) && observable build",
+    "dev": "export PYTHONPATH=$(pwd) && observable preview",
+    "deploy": "export PYTHONPATH=$(pwd) && observable deploy",
+    "observable": "observable",
+    "preinstall": "pip install poetry --upgrade && pip uninstall opencv-python",
+    "install": "poetry install"
   },
   "dependencies": {
     "@observablehq/framework": "^1.13.3"
