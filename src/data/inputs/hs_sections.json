@@ -1,0 +1,24 @@
+{
+    "Live animals, animal products" : ["01", "02", "03", "04", "05"],
+    "Vegetable products" : ["06", "07", "08", "09", "10", "11", "12", "13", "14"],
+    "Edible fats" : ["15"],
+    "Food, beverages, spirits, tobacco" : ["16", "17", "18", "19", "20", "21", "22", "23", "24"],
+    "Mineral products" : ["25", "26", "27"],
+    "Chemical products" : ["28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38"],
+    "Plastic, rubber products" : ["39", "40"],
+    "Fur, leather products": ["41", "42", "43"],
+    "Wood products" : ["44", "45", "46"],
+    "Paper products" : ["47", "48", "49"],
+    "Textiles" : ["50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63"],
+    "Footwear, headgear, accessories" : ["64", "65", "66", "67"],
+    "Stone, ceramic, glassware" : ["68", "69", "70"],
+    "Jewelery, precious metals, coins" : ["71"],
+    "Base metals" : ["72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83"],
+    "Machinery and electronics" : ["84", "85"],
+    "Vehicles, aircraft, vessels" : ["86", "87", "88", "89"],
+    "Optical, precision instruments" : ["90", "91", "92"],
+    "Arms and ammunition" : ["93"],
+    "Furniture, lighting, toys, misc." : ["94", "95", "96"],
+    "Art, collectibles, antiques" : ["97"]
+}
+
