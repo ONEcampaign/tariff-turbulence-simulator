@@ -5,12 +5,7 @@ from pathlib import Path
 import country_converter as coco
 from src.data.config import PATHS
 
-RATE_SUFFIX_MAP = {
-    0.00: "00",
-    0.10: "01",
-    0.25: "025",
-    0.50: "05"
-}
+RATE_SUFFIX_MAP = {0.00: "00", 0.10: "01", 0.25: "025", 0.50: "05"}
 
 RATE_VALUE_MAP = {
     suffix: rate for rate, suffix in RATE_SUFFIX_MAP.items() if rate != 0.00
@@ -18,6 +13,7 @@ RATE_VALUE_MAP = {
 
 
 # === File I/O Utilities ===
+
 
 def load_json(filepath: Path) -> dict:
     """Load a JSON file from a given path."""
@@ -31,6 +27,7 @@ def import_data() -> pd.DataFrame:
 
 
 # === Data Cleaning ===
+
 
 def clean_columns(df: pd.DataFrame) -> pd.DataFrame:
     """Standardize and clean key columns in the import dataset."""
@@ -67,6 +64,7 @@ def add_product_group_column(df: pd.DataFrame) -> pd.DataFrame:
     df["product_group"] = df["product_code"].apply(map_product_group)
     return df[df["product_group"].notna()].reset_index(drop=True)
 
+
 def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
     cc = coco.CountryConverter()
 
@@ -77,6 +75,7 @@ def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
 
 
 # === Tariff Rate Assignment ===
+
 
 def build_code_rate_map(json_paths: list[Path]) -> dict:
     """Build a map of product codes to tariff rates from multiple JSON files."""
@@ -91,8 +90,11 @@ def build_code_rate_map(json_paths: list[Path]) -> dict:
     return rate_map
 
 
-def assign_tariff_rate(df: pd.DataFrame, rate_map: dict, default_rate: float = 0.1) -> pd.DataFrame:
+def assign_tariff_rate(
+    df: pd.DataFrame, rate_map: dict, default_rate: float = 0.1
+) -> pd.DataFrame:
     """Assign the applicable tariff rate to each row based on its product_code."""
+
     def lookup_rate(code):
         code_str = str(code)
         for length in range(len(code_str), 3, -1):
@@ -121,6 +123,7 @@ def add_rate_columns(df: pd.DataFrame) -> pd.DataFrame:
 
 # === Pivoting and ETR ===
 
+
 def label_rate_column(df: pd.DataFrame, rate_col: str) -> pd.Series:
     """Generate a labeled value column (e.g., 'value_01') from a rate column."""
     labels = df[rate_col].map(RATE_SUFFIX_MAP).fillna("unknown")
@@ -128,10 +131,10 @@ def label_rate_column(df: pd.DataFrame, rate_col: str) -> pd.Series:
 
 
 def pivot_tariff_values(
-        df: pd.DataFrame,
-        idx_cols: list[str],
-        value_col: str = "value",
-        rate_col: str = "rate",
+    df: pd.DataFrame,
+    idx_cols: list[str],
+    value_col: str = "value",
+    rate_col: str = "rate",
 ) -> pd.DataFrame:
     """Pivot value column into wide format based on tariff rate labels."""
     df = df.copy()
@@ -151,22 +154,27 @@ def pivot_tariff_values(
 
 def compute_total_imports(df: pd.DataFrame, idx_cols: list[str]) -> pd.DataFrame:
     """Compute total import values for a set of group columns."""
-    totals = df.groupby(idx_cols, observed=True, dropna=False)["value"].sum().reset_index()
+    totals = (
+        df.groupby(idx_cols, observed=True, dropna=False)["value"].sum().reset_index()
+    )
     return totals.rename(columns={"value": "total_imports"})
 
 
 def compute_etr_column(df: pd.DataFrame) -> pd.Series:
     """Compute the effective tariff rate (ETR) from rate-labeled value columns."""
     etr_numerator = sum(
-        df.get(f"value_{suffix}", 0) * rate
-        for suffix, rate in RATE_VALUE_MAP.items()
+        df.get(f"value_{suffix}", 0) * rate for suffix, rate in RATE_VALUE_MAP.items()
     )
     return (etr_numerator / df["total_imports"]) * 100
 
 
 def compute_etr(df: pd.DataFrame, group_cols: list[str]) -> pd.DataFrame:
     """Compute ETR by grouping over specified columns (e.g., country, product_group)."""
-    df_by_rate = df.groupby(group_cols + ["rate"], observed=True, dropna=False)["value"].sum().reset_index()
+    df_by_rate = (
+        df.groupby(group_cols + ["rate"], observed=True, dropna=False)["value"]
+        .sum()
+        .reset_index()
+    )
     df_by_rate_wide = pivot_tariff_values(df_by_rate, idx_cols=group_cols)
 
     total_imports = compute_total_imports(df, group_cols)
@@ -186,12 +194,17 @@ def add_etr_column(df: pd.DataFrame) -> pd.DataFrame:
 
     final_df = pd.concat([etr_grouped, etr_country], ignore_index=True)
 
-    return final_df.rename(columns={"total_imports": "value"})[
-        ["country", "product_group", "value", "etr"]
-    ].sort_values(["country", "product_group"]).reset_index(drop=True)
+    return (
+        final_df.rename(columns={"total_imports": "value"})[
+            ["country", "product_group", "value", "etr"]
+        ]
+        .sort_values(["country", "product_group"])
+        .reset_index(drop=True)
+    )
 
 
 # === Pipeline ===
+
 
 def read_format_df() -> pd.DataFrame:
     """Load, clean, annotate, and compute ETR on the raw import data."""
