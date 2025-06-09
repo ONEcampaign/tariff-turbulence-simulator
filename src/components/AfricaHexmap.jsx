@@ -10,6 +10,8 @@ export function AfricaHexmap({
     const projection = d3.geoIdentity().reflectY(true).fitSize([width, height], data);
     const path = d3.geoPath().projection(projection);
     const opacity = 0.4;
+
+    // TODO: 
     
     return (
         <svg width={width} height={height}>

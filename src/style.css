@@ -9,3 +9,10 @@
 @import url("./styles/chart-title.css");
 @import url("./styles/chart-subtitle.css");
 @import url("./styles/africa-hexmap.css");
+@import url("./styles/exposure-card.css");
+
+/* for exposure and country card */
+.tariff-card {
+    border: 1px solid black;
+    padding: 4px 12px;
+}
