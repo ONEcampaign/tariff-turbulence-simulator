@@ -5,3 +5,6 @@
 
 @import url("./styles/headline.css");
 @import url("./styles/deck.css");
+@import url("./styles/legend.css");
+@import url("./styles/chart-title.css");
+@import url("./styles/chart-subtitle.css");
