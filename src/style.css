@@ -2,3 +2,6 @@
 
 @import url("observablehq:theme-air.css");
 @import url("observablehq:theme-alt.css");
+
+@import url("./styles/headline.css");
+@import url("./styles/deck.css");
