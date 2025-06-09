@@ -42,7 +42,7 @@ function App() {
 
     const countryData = {
         iso3: clickedCountry,
-        exposure: 123123, // TODO: get this values from mapData for clickedCountry
+        exposure: 123123, // TODO: get these values from mapData for clickedCountry
         percent: 1765,
     }
 
