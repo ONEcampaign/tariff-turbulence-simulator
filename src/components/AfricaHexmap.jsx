@@ -11,7 +11,7 @@ export function AfricaHexmap({
     const path = d3.geoPath().projection(projection);
     const opacity = 0.4;
 
-    // TODO: 
+    // TODO: create colroScale based on threshold and assign those colors based on data
     
     return (
         <svg width={width} height={height}>
