@@ -22,11 +22,11 @@ export function AfricaHexmap({
                         fill={"lightgray"}
                         stroke={"white"}
                         stroke-width={"2px"}
-                        opacity={clickedCountry === 'All' ? 1 : (thisCountryIsClicked ? 1 : opacity)}
+                        opacity={clickedCountry === 'ALL' ? 1 : (thisCountryIsClicked ? 1 : opacity)}
                         d={path(feature)}
                         onClick={() => {
                             if (thisCountryIsClicked) {
-                                onClick('All');
+                                onClick('ALL');
                             } else {
                                 onClick(feature.properties.iso3);
                             }

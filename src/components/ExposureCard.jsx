@@ -1,9 +1,9 @@
 export function ExposureCard({countryData} = {}) {
     return (
         <div className="tariff-card exposure-card">
-            <span>{countryData.iso3}</span>
-            <span>{countryData.exposure}</span>
-            <span>{countryData.percent}</span>
+            <span>{countryData.country}</span><br></br>
+            <span>{countryData.etr}</span><br></br>
+            <span>{countryData.exports}</span>
         </div>
     )
 };
