@@ -68,8 +68,8 @@ def add_product_group_column(df: pd.DataFrame) -> pd.DataFrame:
 def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
     cc = coco.CountryConverter()
 
-    df["iso3"] = cc.pandas_convert(df["country"], to="ISO3")
-    df["country"] = cc.pandas_convert(df["iso3"], src="ISO3", to="name_short")
+    df["iso3"] = cc.pandas_convert(df["country"], to="ISO3", not_found="ALL")
+    df["country"] = cc.pandas_convert(df["iso3"], src="ISO3", to="name_short", not_found="All countries")
 
     return df
 
@@ -121,7 +121,7 @@ def add_rate_columns(df: pd.DataFrame) -> pd.DataFrame:
     return assign_tariff_rate(df, rate_map)
 
 
-# === Pivoting and ETR ===
+# === ETR Computation ===
 
 
 def label_rate_column(df: pd.DataFrame, rate_col: str) -> pd.Series:
@@ -160,7 +160,7 @@ def compute_total_imports(df: pd.DataFrame, idx_cols: list[str]) -> pd.DataFrame
     return totals.rename(columns={"value": "total_imports"})
 
 
-def compute_etr_column(df: pd.DataFrame) -> pd.Series:
+def compute_etr(df: pd.DataFrame) -> pd.Series:
     """Compute the effective tariff rate (ETR) from rate-labeled value columns."""
     etr_numerator = sum(
         df.get(f"value_{suffix}", 0) * rate for suffix, rate in RATE_VALUE_MAP.items()
@@ -168,7 +168,7 @@ def compute_etr_column(df: pd.DataFrame) -> pd.Series:
     return (etr_numerator / df["total_imports"]) * 100
 
 
-def compute_etr(df: pd.DataFrame, group_cols: list[str]) -> pd.DataFrame:
+def compute_etr_by_group(df: pd.DataFrame, group_cols: list[str] = ["country", "product_group"]) -> pd.DataFrame:
     """Compute ETR by grouping over specified columns (e.g., country, product_group)."""
     df_by_rate = (
         df.groupby(group_cols + ["rate"], observed=True, dropna=False)["value"]
@@ -179,28 +179,32 @@ def compute_etr(df: pd.DataFrame, group_cols: list[str]) -> pd.DataFrame:
 
     total_imports = compute_total_imports(df, group_cols)
     merged = df_by_rate_wide.merge(total_imports, on=group_cols, how="outer")
-    merged["etr"] = compute_etr_column(merged)
+    merged["etr"] = compute_etr(merged)
 
     return merged[group_cols + ["total_imports", "etr"]]
 
 
 def add_etr_column(df: pd.DataFrame) -> pd.DataFrame:
-    """Compute ETR by country-product_group and by country only, then combine both."""
-    etr_grouped = compute_etr(df, ["country", "product_group"])
+    variants = [
+        {},
+        {"product_group": "All products"},
+        {"country": "All countries"},
+        {"country": "All countries", "product_group": "All products"},
+    ]
 
-    df_all = df.copy()
-    df_all["product_group"] = "All products"
-    etr_country = compute_etr(df_all, ["country", "product_group"])
+    frames = []
+    for overrides in variants:
+        df_variant = df.assign(**overrides)
+        frames.append(compute_etr_by_group(df_variant))
 
-    final_df = pd.concat([etr_grouped, etr_country], ignore_index=True)
-
-    return (
-        final_df.rename(columns={"total_imports": "value"})[
-            ["country", "product_group", "value", "etr"]
-        ]
+    final_df = (
+        pd.concat(frames, ignore_index=True)
+        .rename(columns={"total_imports": "value"})
+        .loc[:, ["country", "product_group", "value", "etr"]]
         .sort_values(["country", "product_group"])
         .reset_index(drop=True)
     )
+    return final_df
 
 
 # === Pipeline ===
