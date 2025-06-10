@@ -6,7 +6,6 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">=3.11,<4.0"
 pandas = "^2.2.3"
-bblocks_data_importers = { git = "https://github.com/ONEcampaign/bblocks_data_importers.git", rev = "36-comtradebaci-importer" }
 black = "^25.1.0"
 country-converter = "^1.3"
 
