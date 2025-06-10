@@ -121,7 +121,7 @@ def add_rate_columns(df: pd.DataFrame) -> pd.DataFrame:
     return assign_tariff_rate(df, rate_map)
 
 
-# === Pivoting and ETR ===
+# === ETR Computation ===
 
 
 def label_rate_column(df: pd.DataFrame, rate_col: str) -> pd.Series:
