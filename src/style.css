@@ -1,4 +1,5 @@
 @import url("@one-data/observable-themes/styles/main.css");
+@import url("@one-data/observable-themes/styles/fonts.css");
 
 @import url("observablehq:theme-air.css");
 @import url("observablehq:theme-alt.css");
@@ -11,8 +12,19 @@
 @import url("./styles/africa-hexmap.css");
 @import url("./styles/exposure-card.css");
 
+:root {
+    --wrapper-width: 600px
+}
+
+/* wrapper styles */
+.wrapper {
+    margin: auto;
+    max-width: var(--wrapper-width);
+    text-align: center;
+}
+
 /* for exposure and country card */
 .tariff-card {
-    border: 1px solid black;
-    padding: 4px 12px;
+    border: 2px solid black;
+    /*padding: 4px 12px;*/
 }
