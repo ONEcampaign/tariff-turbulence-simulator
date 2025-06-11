@@ -6,34 +6,74 @@ export function AfricaHexmap({
     width, height, data, clickedCountry, onClick
 } = {}) {
     const [hoveredCountry, setHoveredCountry] = React.useState('NONE');
+    const svgRef = React.useRef();
 
-    const projection = d3.geoIdentity().reflectY(true).fitSize([width, height], data);
+    const verticalPadding = 20;
+
+    const projection = d3.geoIdentity()
+        .reflectY(true)
+        .fitSize([width, height - 2 * verticalPadding], data);
     const path = d3.geoPath().projection(projection);
-    const opacity = 0.4;
 
-    // TODO: create colroScale based on threshold and assign those colors based on data
+    const colorPalette = {
+        low: "#9ACACD",
+        medium: "#4DAEB4",
+        high: "#17858C",
+        na: "#F8F7F8"
+    }
+
+    const colorScale = d3.scaleThreshold([5, 15], [colorPalette.low, colorPalette.medium, colorPalette.high]);
+
+    // Reorder hexes so that clicked hex is above
+    const reorderedFeatures = data.features
+        .slice()
+        .sort((a, b) => {
+            const iso3a = a.properties.iso3;
+            const iso3b = b.properties.iso3;
+
+            const aIsFocused = iso3a === clickedCountry || iso3a === hoveredCountry;
+            const bIsFocused = iso3b === clickedCountry || iso3b === hoveredCountry;
+
+            return aIsFocused - bIsFocused; // draw non-focused first, focused last
+        });
+
+    // Attach listener to handle clicks outside any path
+    React.useEffect(() => {
+        const handleClick = (e) => {
+            // Reset only if the clicked element is NOT a <path>
+            if (e.target.nodeName !== 'path') {
+                onClick('ALL');
+            }
+        };
+
+        document.addEventListener('click', handleClick);
+        return () => document.removeEventListener('click', handleClick);
+    }, [onClick]);
     
     return (
-        <svg width={width} height={height}>
-            {data.features.map(feature => {
-                const thisCountryIsClicked = clickedCountry === feature.properties.iso3;
-                return (
-                    <path
-                        fill={"lightgray"}
-                        stroke={"white"}
-                        stroke-width={"2px"}
-                        opacity={clickedCountry === 'ALL' ? 1 : (thisCountryIsClicked ? 1 : opacity)}
-                        d={path(feature)}
-                        onClick={() => {
-                            if (thisCountryIsClicked) {
-                                onClick('ALL');
-                            } else {
-                                onClick(feature.properties.iso3);
-                            }
-                        }}
-                    />
-                )
-            })}
+        <svg ref={svgRef} width={width} height={height}>
+            <g transform={`translate(0, ${verticalPadding})`}>
+                {reorderedFeatures.map(feature => {
+                    const thisCountryIsClicked = clickedCountry === feature.properties.iso3;
+                    return (
+                        <path
+                            fill={feature.properties.etr === null ? colorPalette.na : colorScale(feature.properties.etr)}
+                            stroke={clickedCountry === 'ALL' ? "white" : (thisCountryIsClicked ? "black" : "white")}
+                            stroke-width={"2px"}
+                            d={path(feature)}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                if (thisCountryIsClicked) {
+                                    onClick('ALL');
+                                } else {
+                                    onClick(feature.properties.iso3);
+                                }
+                            }}
+                            style={{cursor: "pointer"}}
+                        />
+                    )
+                })}
+            </g>
         </svg>
-    )
+)
 }
