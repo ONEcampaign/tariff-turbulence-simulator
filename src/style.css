@@ -14,7 +14,8 @@
 @import url("./styles/dropdown.css");
 
 :root {
-    --wrapper-width: 600px
+    --wrapper-width: 600px;
+    --dropdown-menu-width: 250px
 }
 
 /* center-block styles */

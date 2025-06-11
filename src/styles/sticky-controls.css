@@ -15,7 +15,7 @@
 
 .separator {
     height: 1px;
-    width: 216px;
+    width: calc(var(--dropdown-menu-width) - 34px);
     margin: auto;
     border-bottom: 1px solid #CAC4D0;
 }
