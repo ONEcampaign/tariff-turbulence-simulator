@@ -37,18 +37,7 @@ export function AfricaHexmap({
             return aIsFocused - bIsFocused; // draw non-focused first, focused last
         });
 
-    // Attach listener to handle clicks outside any path
-    React.useEffect(() => {
-        const handleClick = (e) => {
-            // Reset only if the clicked element is NOT a <path>
-            if (e.target.nodeName !== 'path') {
-                onClick('ALL');
-            }
-        };
-
-        document.addEventListener('click', handleClick);
-        return () => document.removeEventListener('click', handleClick);
-    }, [onClick]);
+    console.log("Map received clickedCountry:", clickedCountry);
     
     return (
         <svg ref={svgRef} width={width} height={height}>
@@ -61,8 +50,7 @@ export function AfricaHexmap({
                             stroke={clickedCountry === 'ALL' ? "white" : (thisCountryIsClicked ? "black" : "white")}
                             stroke-width={"2px"}
                             d={path(feature)}
-                            onClick={(e) => {
-                                e.stopPropagation();
+                            onClick={() => {
                                 if (thisCountryIsClicked) {
                                     onClick('ALL');
                                 } else {
