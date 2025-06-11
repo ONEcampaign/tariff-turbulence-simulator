@@ -48,20 +48,28 @@ function App() {
         d => d.iso3 === clickedCountry && d.product_group === clickedSector
     );
 
-    const exports = selectedData.value * 1e-6;
-    const formattedExports = exports < 0.1
-        ? d3.format(",.2f")(exports)
-        : Math.abs(exports) < 1
-            ? d3.format(",.1f")(exports)
-            : d3.format(",.0f")(exports);
+    function formatExports(value) {
+        const absValue = Math.abs(value);
+
+        if (absValue >= 1e9) {
+            return `$${d3.format(",.1f")(value / 1e9)}B`;
+        } else if (absValue >= 1e6) {
+            return `$${d3.format(",.1f")(value / 1e6)}M`;
+        } else {
+            return `$${d3.format(",.1f")(value)}`;
+        }
+    }
 
     const countryData = {
-        country: selectedData.country,
+        country: selectedData.country === "All countries" 
+            ? "all countries"
+            : selectedData.country,
+        product: selectedData.product_group.toLowerCase(),
         etr: selectedData?.etr != null
             ? `${Math.round(selectedData.etr)}%`
             : null,
-        exports: exports != null
-            ? `US$ ${formattedExports} M`
+        exports: selectedData.value != null
+            ? formatExports(selectedData.value)
             : null
     };
     
