@@ -1,0 +1,22 @@
+.sticky-controls {
+    position: fixed;
+    top: 33%;
+    left: 0;
+    margin: 50px;
+}
+
+.filter-title {
+    font-family: Italian Plate;
+    font-weight: 400;
+    font-size: 19.2px;
+    line-height: 21.12px;
+    letter-spacing: 0px;
+}
+
+.separator {
+    height: 1px;
+    width: 216px;
+    margin: auto;
+    border-bottom: 1px solid #CAC4D0;
+}
+
