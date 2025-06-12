@@ -29,7 +29,7 @@ function App() {
     // Set ETR as default tariff
     React.useEffect(() => {
         if (selectedData?.etr != null && selectedTariff == null) {
-            setSelectedTariff(Math.round(selectedData.etr));
+            setSelectedTariff(selectedData.etr);
         }
     }, [selectedData, selectedTariff]);
 
@@ -50,11 +50,11 @@ function App() {
                 ...feat,
                 properties: {
                     ...feat.properties,
-                    exposure_usd: row?.exports * selectedTariff * 0.01 ?? null,
-                    exposure_pct: row?.exports * selectedTariff / row?.gdp ?? null,
-                    exports: row?.exports ?? null,
                     etr: row?.etr ?? null,
-                    gdp: row?.gdp ?? null
+                    // exposure_usd: row?.exports * selectedTariff * 0.01 ?? null,
+                    // exposure_pct: row?.exports * selectedTariff / row?.gdp ?? null,
+                    // exports: row?.exports ?? null,
+                    // gdp: row?.gdp ?? null
                 }
             };
         })
@@ -77,7 +77,7 @@ function App() {
             ? "all countries"
             : selectedData.country,
         product: selectedData.product.toLowerCase(),
-        tariff: `${d3.format(",.1f")(selectedTariff)}%`,
+        tariff: `${selectedTariff}%`,
         exports: selectedData.exports != null
             ? formatCurrency(selectedData.exports)
             : null,
@@ -94,6 +94,8 @@ function App() {
         new Set(data.map(d => d.product))
     );
 
+    const allETR = data.find(d => d.iso3 === 'ALL' && d.product === clickedSector)?.etr ?? 0;
+
     return (
         <div className="wrapper">
             <div className="sticky-controls">
@@ -102,18 +104,28 @@ function App() {
                     options={countryMap}
                     selectedOption={clickedCountry}
                     setOption={setClickedCountry}
+                    setETR={setSelectedTariff}
+                    getETRForOption={(iso3) => {
+                        const etr = data.find(d => d.iso3 === iso3 && d.product === clickedSector)?.etr
+                        return Number.isFinite(etr) ? etr : 0; 
+                    }}
                 />
                 <Dropdown
                     options={productGroups}
                     selectedOption={clickedSector}
                     setOption={setClickedSector}
+                    setETR={setSelectedTariff}
+                    getETRForOption={(product) => {
+                        const etr = data.find(d => d.iso3 === clickedCountry && d.product === product)?.etr;
+                        return Number.isFinite(etr) ? etr : 0;
+                    }}
                 />
                 <div className="separator"></div>
                 <span className="filter-title">Simulate tariff</span>
-                <Slider 
-                    value={selectedTariff} 
-                    setValue={setSelectedTariff} 
-                    etr={Math.round(selectedData?.etr)} 
+                <Slider
+                    value={selectedTariff ?? 0}
+                    setValue={setSelectedTariff}
+                    etr={Number.isFinite(selectedData.etr) ? selectedData.etr : 0}
                 />
             </div>
             <div className="center-block">
@@ -127,7 +139,9 @@ function App() {
                     height={height}
                     data={mapData}
                     clickedCountry={clickedCountry}
-                    onClick={setClickedCountry}
+                    setCountry={setClickedCountry}
+                    setETR={setSelectedTariff}
+                    allETR={Number.isFinite(allETR) ? allETR : 0}
                 />
                 <ExposureCard countryData={countryData}/>
             </div>
