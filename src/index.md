@@ -19,6 +19,18 @@ function App() {
 
     const [clickedCountry, setClickedCountry] = React.useState('ALL');
     const [clickedSector, setClickedSector] = React.useState('All products');
+    const [selectedTariff, setSelectedTariff] = React.useState();
+
+    const selectedData = data.find(
+        d => d.iso3 === clickedCountry && d.product === clickedSector
+    );
+
+    // Set ETR as default tariff
+    React.useEffect(() => {
+        if (selectedData?.etr != null && selectedTariff == null) {
+            setSelectedTariff(selectedData.etr);
+        }
+    }, [selectedData, selectedTariff]);
 
     const width = 600;
     const height = 600;
@@ -28,32 +40,31 @@ function App() {
         features: geoData.features.map(feat => {
             const iso3 = feat.properties.iso3;
 
-            // Find matching row by iso3 and product_group (if any filter applied)
+            // Find matching row by iso3 and product (if any filter applied)
             const row = data.find(d =>
-                d.iso3 === iso3 && d.product_group === clickedSector
+                d.iso3 === iso3 && d.product === clickedSector
             );
 
             return {
                 ...feat,
                 properties: {
                     ...feat.properties,
-                    value: row?.value ?? null,
-                    etr: row?.etr ?? null
+                    exposure_usd: row?.exports * selectedTariff * 0.01 ?? null,
+                    exposure_pct: row?.exports * selectedTariff / row?.gdp ?? null,
+                    exports: row?.exports ?? null,
+                    etr: row?.etr ?? null,
+                    gdp: row?.gdp ?? null
                 }
             };
         })
     };
 
-    const selectedData = data.find(
-        d => d.iso3 === clickedCountry && d.product_group === clickedSector
-    );
-
-    function formatExports(value) {
+    function formatCurrency(value) {
         const absValue = Math.abs(value);
 
-        if (absValue >= 1e9) {
+        if (absValue >= 1e8) {
             return `$${d3.format(",.1f")(value / 1e9)} B`;
-        } else if (absValue >= 1e6) {
+        } else if (absValue >= 1e5) {
             return `$${d3.format(",.1f")(value / 1e6)} M`;
         } else {
             return `$${d3.format(",.1f")(value)}`;
@@ -64,12 +75,13 @@ function App() {
         country: selectedData.country === "All countries"
             ? "all countries"
             : selectedData.country,
-        product: selectedData.product_group.toLowerCase(),
-        etr: selectedData?.etr != null
-            ? `${Math.round(selectedData.etr)}%`
+        product: selectedData.product.toLowerCase(),
+        tariff: `${d3.format(",.1f")(selectedTariff)}%`,
+        exports: selectedData.exports != null
+            ? formatCurrency(selectedData.exports)
             : null,
-        exports: selectedData.value != null
-            ? formatExports(selectedData.value)
+        impact_usd: selectedData.exports != null 
+            ? formatCurrency(selectedData.exports * selectedTariff * 0.01)
             : null
     };
 
@@ -78,7 +90,7 @@ function App() {
     );
 
     const productGroups = Array.from(
-        new Set(data.map(d => d.product_group))
+        new Set(data.map(d => d.product))
     );
 
     return (
@@ -114,8 +126,6 @@ function App() {
             </div>
         </div>
     )
-
-    console.log("clickedCountry:", clickedCountry);
 }
 
 display(
