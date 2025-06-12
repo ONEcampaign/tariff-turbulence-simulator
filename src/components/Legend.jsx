@@ -1,18 +1,18 @@
 import * as React from "npm:react";
 import * as d3 from "npm:d3";
 import {colorPalette} from "./colorPalette.js";
+import {riskThresholds} from "./riskThresholds.js";
 
 // Match your color scale thresholds
-const colorScale = d3.scaleThreshold([5, 15], [
-    colorPalette.low,
-    colorPalette.medium,
-    colorPalette.high
-]);
+const colorScale = d3.scaleThreshold(
+    riskThresholds,
+    [colorPalette.low, colorPalette.medium, colorPalette.high]
+);
 
 const legendItems = [
-    { label: "0–5%", color: colorPalette.low },
-    { label: "5–15%", color: colorPalette.medium },
-    { label: "+15%", color: colorPalette.high },
+    { label: `0-${riskThresholds[0]}%`, color: colorPalette.low },
+    { label: `${riskThresholds[0]}-${riskThresholds[1]-1}%`, color: colorPalette.medium },
+    { label: `+${riskThresholds[1]-1}%`, color: colorPalette.high },
     { label: "No data", color: colorPalette.na }
 ];
 
@@ -24,10 +24,10 @@ export function Legend({ title, subtitle} = {}) {
             <div className="legend-items">
                 {legendItems.map(({ label, color }) => (
                     <div className="legend-item" key={label}>
-            <span
-                className="legend-swatch"
-                style={{ backgroundColor: color }}
-            />
+                        <span
+                            className="legend-swatch"
+                            style={{ backgroundColor: color }}
+                        />
                         <span className="legend-label">{label}</span>
                     </div>
                 ))}
