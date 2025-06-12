@@ -12,10 +12,11 @@
 @import url("./styles/exposure-card.css");
 @import url("./styles/sticky-controls.css");
 @import url("./styles/dropdown.css");
+@import url("./styles/slider.css");
 
 :root {
     --wrapper-width:  768px;
-    --dropdown-menu-width: 250px
+    --filters-width: 250px;
 }
 
 /* center-block styles */

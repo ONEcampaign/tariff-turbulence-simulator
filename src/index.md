@@ -7,6 +7,7 @@ import { ChartSubTitle } from './components/ChartSubTitle.js';
 import { AfricaHexmap } from './components/AfricaHexmap.js';
 import { ExposureCard } from './components/ExposureCard.js';
 import { Dropdown } from "./components/Dropdown.js"
+import { Slider } from "./components/Slider.js"
 
 const data = FileAttachment("./data/us_africa_trade.csv").csv({typed: true});
 const geoData = FileAttachment("./data/africa_hexmap.geojson").json({typed: true});
@@ -28,7 +29,7 @@ function App() {
     // Set ETR as default tariff
     React.useEffect(() => {
         if (selectedData?.etr != null && selectedTariff == null) {
-            setSelectedTariff(selectedData.etr);
+            setSelectedTariff(Math.round(selectedData.etr));
         }
     }, [selectedData, selectedTariff]);
 
@@ -108,6 +109,12 @@ function App() {
                     setOption={setClickedSector}
                 />
                 <div className="separator"></div>
+                <span className="filter-title">Simulate tariff</span>
+                <Slider 
+                    value={selectedTariff} 
+                    setValue={setSelectedTariff} 
+                    etr={Math.round(selectedData?.etr)} 
+                />
             </div>
             <div className="center-block">
                 <Headline content={headline}/>

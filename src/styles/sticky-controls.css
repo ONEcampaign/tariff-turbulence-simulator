@@ -1,8 +1,11 @@
 .sticky-controls {
     position: fixed;
-    top: 33%;
+    top: 25%;
     left: 0;
     margin: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .filter-title {
@@ -15,7 +18,7 @@
 
 .separator {
     height: 1px;
-    width: calc(var(--dropdown-menu-width) - 34px);
+    width: calc(var(--filters-width) - 34px);
     margin: auto;
     border-bottom: 1px solid #CAC4D0;
 }
