@@ -1,9 +1,8 @@
 ```js
 import { Headline } from './components/Headline.js';
 import { Deck } from './components/Deck.js';
+import { IntroText } from './components/IntroText.js'
 import { Legend } from './components/Legend.js';
-import { ChartTitle } from './components/ChartTitle.js';
-import { ChartSubTitle } from './components/ChartSubTitle.js';
 import { AfricaHexmap } from './components/AfricaHexmap.js';
 import { ExposureCard } from './components/ExposureCard.js';
 import { Dropdown } from "./components/Dropdown.js"
@@ -15,8 +14,9 @@ const geoData = FileAttachment("./data/africa_hexmap.geojson").json({typed: true
 
 ```jsx
 function App() {
-    const headline = "The Tariffs Game";
+    const headline = "Tariff Simulator";
     const deck = "What’s the impact of US tariffs on African economies? Use this simulation tool to find out.";
+    const introText = "Tariffs are like taxes on exports, and some products get hit harder than others. The Effective Tariff Rate (ETR) reflects the average tariff a country faces, weighted by the value of its exports. It offers a clearer view of how US tariffs affect each economy.";
     const legendTitle = "Exposure to US tariffs by country"
     const legendSubtitle = "Based on the Effective Tarriff Rate"
 
@@ -133,8 +133,7 @@ function App() {
             <div className="main-block">
                 <Headline content={headline}/>
                 <Deck content={deck}/>
-                <ChartTitle content={""}/>
-                <ChartSubTitle content={""}/>
+                <IntroText content={introText}/>
                 <Legend
                     title={legendTitle}
                     subtitle={legendSubtitle}

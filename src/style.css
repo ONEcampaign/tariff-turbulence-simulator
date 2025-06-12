@@ -5,9 +5,8 @@
 
 @import url("./styles/headline.css");
 @import url("./styles/deck.css");
+@import url("./styles/intro-text.css");
 @import url("./styles/legend.css");
-@import url("./styles/chart-title.css");
-@import url("./styles/chart-subtitle.css");
 @import url("./styles/africa-hexmap.css");
 @import url("./styles/exposure-card.css");
 @import url("./styles/sticky-controls.css");

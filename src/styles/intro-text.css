@@ -1,9 +1,9 @@
-.deck {
+.intro-text {
     font-family: Colfax;
-    font-weight: 700;
-    font-size: 24px;
+    font-weight: 500;
+    font-size: 19.2px;
     line-height: 35.2px;
     letter-spacing: 0px;
     text-align: left;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
