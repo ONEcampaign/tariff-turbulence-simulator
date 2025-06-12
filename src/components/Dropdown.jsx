@@ -1,6 +1,6 @@
 import * as React from "npm:react";
 
-export function Dropdown({ options, selectedOption, setOption } = {}) {
+export function Dropdown({ options, selectedOption, setOption, setETR, getETRForOption } = {}) {
     const [showOptions, setShowOptions] = React.useState(false);
 
     // Normalize input: allow options to be either an array or a map
@@ -27,6 +27,8 @@ export function Dropdown({ options, selectedOption, setOption } = {}) {
                             setOption={setOption}
                             setVisible={setShowOptions}
                             labelMap={labelMap}
+                            setETR={setETR}
+                            getETRForOption={getETRForOption}
                         />
                     </div>
                 )}
@@ -35,7 +37,7 @@ export function Dropdown({ options, selectedOption, setOption } = {}) {
     );
 }
 
-function DropdownList({ options, setOption, setVisible, labelMap = {} }) {
+function DropdownList({ options, setOption, setVisible, labelMap = {}, setETR, getETRForOption }) {
     return options.map(option => (
         <span
             key={option}
@@ -43,6 +45,12 @@ function DropdownList({ options, setOption, setVisible, labelMap = {} }) {
             onClick={() => {
                 setOption(option);
                 setVisible(false);
+                if (setETR && getETRForOption) {
+                    const etr = getETRForOption(option);
+                    if (Number.isFinite(etr)) {
+                        setETR(etr);
+                    }
+                }
             }}
         >
       {labelMap[option]}
