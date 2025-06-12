@@ -1,9 +1,9 @@
 .dropdown-menu {
-    width: var(--dropdown-menu-width);
+    width: var(--filters-width);
 }
 
 .dropdown-menu:first-of-type {
-    margin: 10px 0 30px;
+    /*margin: 10px 0 30px;*/
 }
 
 .dropdown-selected {
