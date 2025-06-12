@@ -1,5 +1,6 @@
 import * as d3 from 'npm:d3';
 import * as React from "npm:react";
+import {colorPalette} from "./colorPalette.js";
 
 
 export function AfricaHexmap({
@@ -14,13 +15,6 @@ export function AfricaHexmap({
         .reflectY(true)
         .fitSize([width, height - 2 * verticalPadding], data);
     const path = d3.geoPath().projection(projection);
-
-    const colorPalette = {
-        low: "#9ACACD",
-        medium: "#4DAEB4",
-        high: "#17858C",
-        na: "#F8F7F8"
-    }
 
     const colorScale = d3.scaleThreshold(
         [5, 15],
@@ -52,7 +46,7 @@ export function AfricaHexmap({
                                     ? colorScale(feature.properties.etr)
                                     : colorPalette.na
                             }
-                            opacity={clickedCountry === 'ALL' ? 1 : (thisCountryIsClicked ? 1 : 0.3)}
+                            opacity={clickedCountry === 'ALL' ? 1 : (thisCountryIsClicked ? 1 : 0.2)}
                             stroke={clickedCountry === 'ALL' ? "white" : (thisCountryIsClicked ? "black" : "white")}
                             stroke-width={"2px"}
                             d={path(feature)}
