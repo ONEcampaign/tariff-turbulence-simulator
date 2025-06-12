@@ -14,7 +14,7 @@
 @import url("./styles/dropdown.css");
 
 :root {
-    --wrapper-width: 600px;
+    --wrapper-width:  768px;
     --dropdown-menu-width: 250px
 }
 

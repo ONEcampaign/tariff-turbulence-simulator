@@ -2,6 +2,10 @@ import sys
 import json
 import pandas as pd
 from pathlib import Path
+
+from bblocks import places
+import bblocks_data_importers as bbdata
+
 import country_converter as coco
 from src.data.config import PATHS
 
@@ -23,7 +27,7 @@ def load_json(filepath: Path) -> dict:
 
 def import_data() -> pd.DataFrame:
     """Import raw trade data CSV from predefined path."""
-    return pd.read_csv(PATHS.IMPORTS_2024, skiprows=2)
+    return pd.read_csv(PATHS.IMPORTS_2024)
 
 
 # === Data Cleaning ===
@@ -35,12 +39,12 @@ def clean_columns(df: pd.DataFrame) -> pd.DataFrame:
         "Country": "country",
         "Time": "year",
         "Commodity": "product_code",
-        "Customs  Value (Cons) ($US)": "value",
+        "Customs  Value (Cons) ($US)": "exports",
     }
 
     df = df.rename(columns=column_dict)[column_dict.values()]
     df["product_code"] = df["product_code"].str.extract(r"^(\d{10})")
-    df["value"] = pd.to_numeric(df["value"].str.replace(",", ""), errors="coerce")
+    df["exports"] = pd.to_numeric(df["exports"].str.replace(",", ""), errors="coerce")
 
     return df
 
@@ -61,8 +65,8 @@ def add_product_group_column(df: pd.DataFrame) -> pd.DataFrame:
         return prefix_to_group.get(prefix)
 
     df = df.copy()
-    df["product_group"] = df["product_code"].apply(map_product_group)
-    return df[df["product_group"].notna()].reset_index(drop=True)
+    df["product"] = df["product_code"].apply(map_product_group)
+    return df[df["product"].notna()].reset_index(drop=True)
 
 
 def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
@@ -72,6 +76,60 @@ def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
     df["country"] = cc.pandas_convert(df["iso3"], src="ISO3", to="name_short", not_found="All countries")
 
     return df
+
+
+# === GDP Data ===
+
+def get_africa_gdp_data() -> pd.DataFrame:
+    """Retrieve GDP data from African countries"""
+
+    weo = bbdata.WEO()
+    data = weo.get_data()
+
+    gdp_df = data.query("`indicator_code` == 'NGDPD' and `year` == 2024").dropna(subset=["entity_name"])
+    gdp_df["gdp"] = gdp_df["value"] * gdp_df["scale_code"]
+    gdp_df["region"] = places.resolve(gdp_df["entity_name"], to_type="region", not_found="ignore")
+    gdp_df = gdp_df.query("`region` == 'Africa'")
+    gdp_df["iso3"] = places.resolve(gdp_df["entity_name"], to_type="iso3_code")
+
+    return gdp_df[["iso3", "gdp"]]
+
+
+def assert_iso3_code_alignment(df1: pd.DataFrame, df2: pd.DataFrame) -> bool:
+    """
+    Check whether two DataFrames have the same set of ISO3 country codes (excluding "ALL").
+    """
+    set1 = set(df1["iso3"].unique()) - {"ALL"}
+    set2 = set(df2["iso3"].unique()) - {"ALL"}
+
+    if set1 == set2:
+        return True
+    else:
+        only_in_df1 = set1 - set2
+        only_in_df2 = set2 - set1
+        raise ValueError(
+            f"ISO3 code mismatch:\n"
+            f"Only in df1: {sorted(only_in_df1)}\n"
+            f"Only in df2: {sorted(only_in_df2)}"
+        )
+
+
+def add_gdp_column(df: pd.DataFrame) -> pd.DataFrame:
+    """Adds a GDP column to the dataframe."""
+
+    gdp_df = get_africa_gdp_data()
+
+    if assert_iso3_code_alignment(df, gdp_df):
+
+        gdp_df_all = pd.DataFrame(
+            {
+                "iso3": ["ALL"],
+                "gdp": [gdp_df["gdp"].sum()]
+            },
+        )
+        gdp_df_complete = pd.concat([gdp_df, gdp_df_all], ignore_index=True)
+
+        return pd.merge(df, gdp_df_complete, on="iso3", how="left")
 
 
 # === Tariff Rate Assignment ===
@@ -133,7 +191,7 @@ def label_rate_column(df: pd.DataFrame, rate_col: str) -> pd.Series:
 def pivot_tariff_values(
     df: pd.DataFrame,
     idx_cols: list[str],
-    value_col: str = "value",
+    value_col: str = "exports",
     rate_col: str = "rate",
 ) -> pd.DataFrame:
     """Pivot value column into wide format based on tariff rate labels."""
@@ -155,9 +213,9 @@ def pivot_tariff_values(
 def compute_total_imports(df: pd.DataFrame, idx_cols: list[str]) -> pd.DataFrame:
     """Compute total import values for a set of group columns."""
     totals = (
-        df.groupby(idx_cols, observed=True, dropna=False)["value"].sum().reset_index()
+        df.groupby(idx_cols, observed=True, dropna=False)["exports"].sum().reset_index()
     )
-    return totals.rename(columns={"value": "total_imports"})
+    return totals.rename(columns={"exports": "total_imports"})
 
 
 def compute_etr(df: pd.DataFrame) -> pd.Series:
@@ -168,10 +226,10 @@ def compute_etr(df: pd.DataFrame) -> pd.Series:
     return (etr_numerator / df["total_imports"]) * 100
 
 
-def compute_etr_by_group(df: pd.DataFrame, group_cols: list[str] = ["country", "product_group"]) -> pd.DataFrame:
+def compute_etr_by_group(df: pd.DataFrame, group_cols: list[str] = ["country", "product"]) -> pd.DataFrame:
     """Compute ETR by grouping over specified columns (e.g., country, product_group)."""
     df_by_rate = (
-        df.groupby(group_cols + ["rate"], observed=True, dropna=False)["value"]
+        df.groupby(group_cols + ["rate"], observed=True, dropna=False)["exports"]
         .sum()
         .reset_index()
     )
@@ -187,9 +245,9 @@ def compute_etr_by_group(df: pd.DataFrame, group_cols: list[str] = ["country", "
 def add_etr_column(df: pd.DataFrame) -> pd.DataFrame:
     variants = [
         {},
-        {"product_group": "All products"},
+        {"product": "All products"},
         {"country": "All countries"},
-        {"country": "All countries", "product_group": "All products"},
+        {"country": "All countries", "product": "All products"},
     ]
 
     frames = []
@@ -199,9 +257,9 @@ def add_etr_column(df: pd.DataFrame) -> pd.DataFrame:
 
     final_df = (
         pd.concat(frames, ignore_index=True)
-        .rename(columns={"total_imports": "value"})
-        .loc[:, ["country", "product_group", "value", "etr"]]
-        .sort_values(["country", "product_group"])
+        .rename(columns={"total_imports": "exports"})
+        .loc[:, ["country", "product", "exports", "etr"]]
+        .sort_values(["country", "product"])
         .reset_index(drop=True)
     )
     return final_df
@@ -218,8 +276,9 @@ def read_format_df() -> pd.DataFrame:
     df = add_rate_columns(df)
     df = add_etr_column(df)
     df = normalize_country_names(df)
+    df = add_gdp_column(df)
 
-    ordered_columns = ["country", "iso3", "product_group", "value", "etr"]
+    ordered_columns = ["country", "iso3", "product", "exports", "etr", "gdp"]
 
     return df[ordered_columns]
 

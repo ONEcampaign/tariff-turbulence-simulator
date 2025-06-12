@@ -22,7 +22,19 @@ export function AfricaHexmap({
         na: "#F8F7F8"
     }
 
-    const colorScale = d3.scaleThreshold([5, 15], [colorPalette.low, colorPalette.medium, colorPalette.high]);
+    const exposureValues = data.features
+        .map(d => d.properties.exposure_pct)
+        .filter(d => Number.isFinite(d));
+    const minVal = d3.min(exposureValues);
+    const maxVal = d3.max(exposureValues);
+
+    console.log(data)
+    console.log(minVal)
+    console.log(exposureValues)
+
+    const colorScale = d3.scaleLinear()
+        .domain([minVal, maxVal])
+        .range([colorPalette.low, colorPalette.high]);
 
     // Reorder hexes so that clicked hex is above
     const reorderedFeatures = data.features
@@ -36,8 +48,6 @@ export function AfricaHexmap({
 
             return aIsFocused - bIsFocused; // draw non-focused first, focused last
         });
-
-    console.log("Map received clickedCountry:", clickedCountry);
     
     return (
         <svg ref={svgRef} width={width} height={height}>
@@ -46,7 +56,11 @@ export function AfricaHexmap({
                     const thisCountryIsClicked = clickedCountry === feature.properties.iso3;
                     return (
                         <path
-                            fill={feature.properties.etr === null ? colorPalette.na : colorScale(feature.properties.etr)}
+                            fill={
+                                Number.isFinite(feature.properties.exposure_pct)
+                                    ? colorScale(feature.properties.exposure_pct)
+                                    : colorPalette.na
+                            }
                             stroke={clickedCountry === 'ALL' ? "white" : (thisCountryIsClicked ? "black" : "white")}
                             stroke-width={"2px"}
                             d={path(feature)}
