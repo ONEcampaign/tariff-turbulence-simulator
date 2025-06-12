@@ -3,7 +3,7 @@ import * as React from "npm:react";
 
 
 export function AfricaHexmap({
-    width, height, data, clickedCountry, onClick
+    width, height, data, clickedCountry, setCountry, setETR, allETR
 } = {}) {
     const [hoveredCountry, setHoveredCountry] = React.useState('NONE');
     const svgRef = React.useRef();
@@ -22,19 +22,10 @@ export function AfricaHexmap({
         na: "#F8F7F8"
     }
 
-    const exposureValues = data.features
-        .map(d => d.properties.exposure_pct)
-        .filter(d => Number.isFinite(d));
-    const minVal = d3.min(exposureValues);
-    const maxVal = d3.max(exposureValues);
-
-    console.log(data)
-    console.log(minVal)
-    console.log(exposureValues)
-
-    const colorScale = d3.scaleLinear()
-        .domain([minVal, maxVal])
-        .range([colorPalette.low, colorPalette.high]);
+    const colorScale = d3.scaleThreshold(
+        [5, 15],
+        [colorPalette.low, colorPalette.medium, colorPalette.high]
+    );
 
     // Reorder hexes so that clicked hex is above
     const reorderedFeatures = data.features
@@ -57,18 +48,28 @@ export function AfricaHexmap({
                     return (
                         <path
                             fill={
-                                Number.isFinite(feature.properties.exposure_pct)
-                                    ? colorScale(feature.properties.exposure_pct)
+                                Number.isFinite(feature.properties.etr)
+                                    ? colorScale(feature.properties.etr)
                                     : colorPalette.na
                             }
+                            opacity={clickedCountry === 'ALL' ? 1 : (thisCountryIsClicked ? 1 : 0.3)}
                             stroke={clickedCountry === 'ALL' ? "white" : (thisCountryIsClicked ? "black" : "white")}
                             stroke-width={"2px"}
                             d={path(feature)}
                             onClick={() => {
-                                if (thisCountryIsClicked) {
-                                    onClick('ALL');
+                                const iso3 = feature.properties.iso3;
+                                const etr = feature.properties.etr;
+
+                                if (clickedCountry === iso3) {
+                                    setCountry('ALL');
+                                    if (Number.isFinite(allETR)) {
+                                        setETR(allETR);
+                                    }
                                 } else {
-                                    onClick(feature.properties.iso3);
+                                    setCountry(iso3);
+                                    if (Number.isFinite(etr)) {
+                                        setETR(etr);
+                                    }
                                 }
                             }}
                             style={{cursor: "pointer"}}
