@@ -223,7 +223,7 @@ def compute_etr(df: pd.DataFrame) -> pd.Series:
     etr_numerator = sum(
         df.get(f"value_{suffix}", 0) * rate for suffix, rate in RATE_VALUE_MAP.items()
     )
-    return (etr_numerator / df["total_imports"]) * 100
+    return round((etr_numerator / df["total_imports"]) * 100)
 
 
 def compute_etr_by_group(df: pd.DataFrame, group_cols: list[str] = ["country", "product"]) -> pd.DataFrame:
