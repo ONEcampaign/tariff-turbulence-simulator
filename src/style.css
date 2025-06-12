@@ -20,7 +20,7 @@
 }
 
 /* center-block styles */
-.center-block {
+.main-block {
     margin: auto;
     max-width: var(--wrapper-width);
     text-align: center;

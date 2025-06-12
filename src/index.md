@@ -17,6 +17,8 @@ const geoData = FileAttachment("./data/africa_hexmap.geojson").json({typed: true
 function App() {
     const headline = "The Tariffs Game";
     const deck = "What’s the impact of US tariffs on African economies? Use this simulation tool to find out.";
+    const legendTitle = "Exposure to US tariffs by country"
+    const legendSubtitle = "Based on the Effective Tarriff Rate"
 
     const [clickedCountry, setClickedCountry] = React.useState('ALL');
     const [clickedSector, setClickedSector] = React.useState('All products');
@@ -81,7 +83,7 @@ function App() {
         exports: selectedData.exports != null
             ? formatCurrency(selectedData.exports)
             : null,
-        impact_usd: selectedData.exports != null 
+        impact_usd: selectedData.exports != null
             ? formatCurrency(selectedData.exports * selectedTariff * 0.01)
             : null
     };
@@ -107,7 +109,7 @@ function App() {
                     setETR={setSelectedTariff}
                     getETRForOption={(iso3) => {
                         const etr = data.find(d => d.iso3 === iso3 && d.product === clickedSector)?.etr
-                        return Number.isFinite(etr) ? etr : 0; 
+                        return Number.isFinite(etr) ? etr : 0;
                     }}
                 />
                 <Dropdown
@@ -128,12 +130,15 @@ function App() {
                     etr={Number.isFinite(selectedData.etr) ? selectedData.etr : 0}
                 />
             </div>
-            <div className="center-block">
+            <div className="main-block">
                 <Headline content={headline}/>
                 <Deck content={deck}/>
                 <ChartTitle content={""}/>
                 <ChartSubTitle content={""}/>
-                <Legend/>
+                <Legend
+                    title={legendTitle}
+                    subtitle={legendSubtitle}
+                />
                 <AfricaHexmap
                     width={width}
                     height={height}
