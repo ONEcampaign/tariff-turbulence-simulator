@@ -1,7 +1,7 @@
 import * as d3 from 'npm:d3';
 import * as React from "npm:react";
-import {colorPalette} from "./colorPalette.js";
-import {riskThresholds} from "./riskThresholds.js";
+import {colorPalette} from "../js/colorPalette.js";
+import {riskThresholds} from "../js/riskThresholds.js";
 
 export function AfricaHexmap({
     width, height, data, clickedCountry, setCountry, setETR, allETR, setTooltip

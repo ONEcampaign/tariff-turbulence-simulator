@@ -1,7 +1,7 @@
 import * as React from "npm:react";
 import * as d3 from "npm:d3";
-import {colorPalette} from "./colorPalette.js";
-import {riskThresholds} from "./riskThresholds.js";
+import { colorPalette } from "../js/colorPalette.js";
+import { riskThresholds } from "../js/riskThresholds.js";
 
 // Match your color scale thresholds
 const colorScale = d3.scaleThreshold(

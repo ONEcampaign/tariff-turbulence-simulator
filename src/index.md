@@ -7,7 +7,12 @@ import { AfricaHexmap } from './components/AfricaHexmap.js';
 import { ExposureCard } from './components/ExposureCard.js';
 import { Dropdown } from "./components/Dropdown.js";
 import { Slider } from "./components/Slider.js";
+<<<<<<< layout-tooltip
 import { Tooltip } from "./components/Tooltip.js";
+=======
+
+import { formatCurrency } from "./js/format.js";
+>>>>>>> layout
 
 const data = FileAttachment("./data/us_africa_trade.csv").csv({typed: true});
 const geoData = FileAttachment("./data/africa_hexmap.geojson").json({typed: true});
@@ -69,18 +74,6 @@ function App() {
             };
         })
     };
-
-    function formatCurrency(value) {
-        const absValue = Math.abs(value);
-
-        if (absValue >= 1e8) {
-            return `$${d3.format(",.1f")(value / 1e9)} B`;
-        } else if (absValue >= 1e5) {
-            return `$${d3.format(",.1f")(value / 1e6)} M`;
-        } else {
-            return `$${d3.format(",.1f")(value)}`;
-        }
-    }
 
     const countryData = {
         country: selectedData.country === "All countries"
