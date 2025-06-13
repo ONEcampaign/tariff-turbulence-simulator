@@ -6,7 +6,6 @@ from pathlib import Path
 from bblocks import places
 import bblocks_data_importers as bbdata
 
-import country_converter as coco
 from src.data.config import PATHS
 
 RATE_SUFFIX_MAP = {0.00: "00", 0.10: "01", 0.25: "025", 0.50: "05"}
@@ -70,10 +69,9 @@ def add_product_group_column(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
-    cc = coco.CountryConverter()
 
-    df["iso3"] = cc.pandas_convert(df["country"], to="ISO3", not_found="ALL")
-    df["country"] = cc.pandas_convert(df["iso3"], src="ISO3", to="name_short", not_found="All countries")
+    df["iso3"] = places.resolve(df["country"], to_type="iso3_code", not_found="ALL")
+    df["country"] = places.resolve(df["iso3"], to_type="name_short", not_found="All countries")
 
     return df
 
@@ -86,11 +84,11 @@ def get_africa_gdp_data() -> pd.DataFrame:
     weo = bbdata.WEO()
     data = weo.get_data()
 
-    gdp_df = data.query("`indicator_code` == 'NGDPD' and `year` == 2024").dropna(subset=["entity_name"])
-    gdp_df["gdp"] = gdp_df["value"] * gdp_df["scale_code"]
-    gdp_df["region"] = places.resolve(gdp_df["entity_name"], to_type="region", not_found="ignore")
+    gdp_df = data.query("`indicator_code` == 'NGDPD' and `year` == 2024")
+    gdp_df.loc[:, "gdp"] = gdp_df["value"] * gdp_df["scale_code"]
+    gdp_df.loc[:, "region"] = places.resolve(gdp_df["entity_name"], to_type="region", not_found="ignore")
     gdp_df = gdp_df.query("`region` == 'Africa'")
-    gdp_df["iso3"] = places.resolve(gdp_df["entity_name"], to_type="iso3_code")
+    gdp_df.loc[:, "iso3"] = places.resolve(gdp_df["entity_name"], to_type="iso3_code")
 
     return gdp_df[["iso3", "gdp"]]
 
