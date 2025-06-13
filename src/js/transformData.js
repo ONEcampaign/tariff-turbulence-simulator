@@ -113,6 +113,7 @@ export function generateTooltipData(hoveredData, selectedTariff) {
             ? "all countries"
             : hoveredData?.country,
         product: hoveredData?.product.toLowerCase(),
+        etr: hoveredData?.etr,
         tariff: `${selectedTariff}%`,
         exports: hoveredData?.exports != null
             ? formatCurrency(hoveredData.exports)
