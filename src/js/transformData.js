@@ -68,3 +68,23 @@ export function generateMapData(data, geoData, clickedSector) {
         })
     };
 }
+
+export function calculateCountryEntries(crossData) {
+    return Array.from(
+        new Map(crossData.map(d => [d.iso3, d.country])).entries()
+    ).sort((a, b) => {
+        if (a[1] === "All countries") return -1;
+        if (b[1] === "All countries") return 1;
+        return a[1].localeCompare(b[1]);
+    });
+}
+
+export function calculateProductGroups(crossData) {
+    return Array.from(
+        new Set(crossData.map(d => d.product))
+    ).sort((a, b) => {
+        if (a === "All products") return -1;
+        if (b === "All products") return 1;
+        return a.localeCompare(b);
+    });
+}

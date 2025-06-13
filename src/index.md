@@ -10,7 +10,10 @@ import { DropdownProvider } from "./components/DropdownContext.js";
 import { Slider } from "./components/Slider.js";
 import { Tooltip } from "./components/Tooltip.js";
 import { formatCurrency, formatPercentage } from "./js/format.js";
-import { generateCrossData, generateMapData } from "./js/transformData.js";
+import {
+    generateCrossData, generateMapData,
+    calculateCountryEntries, calculateProductGroups
+} from "./js/transformData.js";
 
 const data = FileAttachment("./data/us_africa_trade.csv").csv({typed: true});
 const geoData = FileAttachment("./data/africa_hexmap.geojson").json({typed: true});
@@ -97,24 +100,11 @@ function App() {
     };
 
     // Generate iso3-country name map for dropdown menu
-    const countryEntries = Array.from(
-        new Map(crossData.map(d => [d.iso3, d.country])).entries()
-    ).sort((a, b) => {
-        if (a[1] === "All countries") return -1;
-        if (b[1] === "All countries") return 1;
-        return a[1].localeCompare(b[1]);
-    });
-
+    const countryEntries = calculateCountryEntries(crossData);
     const countryMap = Object.fromEntries(countryEntries);
 
     // Generate a list of unique product groups fro dropdown menu
-    const productGroups = Array.from(
-        new Set(crossData.map(d => d.product))
-    ).sort((a, b) => {
-        if (a === "All products") return -1;
-        if (b === "All products") return 1;
-        return a.localeCompare(b);
-    });
+    const productGroups = calculateProductGroups(crossData);
 
     // Determine the ETR for all countries
     const allETR = crossData.find(d => d.iso3 === 'ALL' && d.product === clickedSector)?.etr ?? 0;
