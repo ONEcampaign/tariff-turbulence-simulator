@@ -9,10 +9,10 @@ import { Dropdown } from "./components/Dropdown.js";
 import { DropdownProvider } from "./components/DropdownContext.js";
 import { Slider } from "./components/Slider.js";
 import { Tooltip } from "./components/Tooltip.js";
-import { formatCurrency, formatPercentage } from "./js/format.js";
 import {
     generateCrossData, generateMapData,
-    calculateCountryEntries, calculateProductGroups
+    generateCountryEntries, generateProductGroups,
+    generateCountryData, generateTooltipData
 } from "./js/transformData.js";
 import {
     headline, deck, introText, legendTitle, legendSubtitle
@@ -64,43 +64,15 @@ function App() {
         }
     }, [selectedData, selectedTariff]);
 
-    const countryData = {
-        country: selectedData.country === "All countries"
-            ? "all countries"
-            : selectedData.country,
-        product: selectedData.product.toLowerCase(),
-        tariff: `${selectedTariff}%`,
-        exports: selectedData.exports != null
-            ? formatCurrency(selectedData.exports)
-            : null,
-        impact_usd: selectedData.exports != null
-            ? formatCurrency(selectedData.exports * selectedTariff * 0.01)
-            : null
-    };
-
-    const tooltipData = {
-        country: hoveredData?.country === "All countries"
-            ? "all countries"
-            : hoveredData?.country,
-        product: hoveredData?.product.toLowerCase(),
-        tariff: `${selectedTariff}%`,
-        exports: hoveredData?.exports != null
-            ? formatCurrency(hoveredData.exports)
-            : null,
-        impact_usd: hoveredData?.exports != null
-            ? formatCurrency(hoveredData.exports * selectedTariff * 0.01)
-            : null,
-        impact_pct: hoveredData?.exports != null && hoveredData.gdp != null
-            ? formatPercentage(hoveredData.exports * selectedTariff * 0.01 / hoveredData.gdp)
-            : null
-    };
+    const countryData = generateCountryData(selectedData, selectedTariff);
+    const tooltipData = generateTooltipData(hoveredData, selectedTariff);
 
     // Generate iso3-country name map for dropdown menu
-    const countryEntries = calculateCountryEntries(crossData);
+    const countryEntries = generateCountryEntries(crossData);
     const countryMap = Object.fromEntries(countryEntries);
 
     // Generate a list of unique product groups fro dropdown menu
-    const productGroups = calculateProductGroups(crossData);
+    const productGroups = generateProductGroups(crossData);
 
     // Determine the ETR for all countries
     const allETR = crossData.find(d => d.iso3 === 'ALL' && d.product === clickedSector)?.etr ?? 0;
