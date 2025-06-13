@@ -7,12 +7,9 @@ import { AfricaHexmap } from './components/AfricaHexmap.js';
 import { ExposureCard } from './components/ExposureCard.js';
 import { Dropdown } from "./components/Dropdown.js";
 import { Slider } from "./components/Slider.js";
-<<<<<<< layout-tooltip
 import { Tooltip } from "./components/Tooltip.js";
-=======
-
-import { formatCurrency } from "./js/format.js";
->>>>>>> layout
+import { formatCurrency, formatPercentage } from "./js/format.js";
+import { generateCrossData, generateMapData } from "./js/transformData.js";
 
 const data = FileAttachment("./data/us_africa_trade.csv").csv({typed: true});
 const geoData = FileAttachment("./data/africa_hexmap.geojson").json({typed: true});
@@ -20,12 +17,19 @@ const geoData = FileAttachment("./data/africa_hexmap.geojson").json({typed: true
 
 ```jsx
 function App() {
+
+    // Hexmap dimensions
+    const width = 600;
+    const height = 600;
+
+    // Text variables
     const headline = "Tariff Simulator";
     const deck = "What’s the impact of US tariffs on African economies? Use this simulation tool to find out.";
     const introText = "Tariffs are like taxes on exports, and some products get hit harder than others. The Effective Tariff Rate (ETR) reflects the average tariff a country faces, weighted by the value of its exports. It offers a clearer view of how US tariffs affect each economy.";
     const legendTitle = "Exposure to US tariffs by country"
     const legendSubtitle = "Based on the Effective Tarriff Rate (ETR)"
 
+    // Reactive variables
     const [clickedCountry, setClickedCountry] = React.useState('ALL');
     const [clickedSector, setClickedSector] = React.useState('All products');
     const [selectedTariff, setSelectedTariff] = React.useState();
@@ -34,14 +38,21 @@ function App() {
         x: null,
         y: null
     })
-
     const isTooltipVisible = tooltipContent.country !== null;
 
-    const selectedData = data.find(
+    // Crossed data between csv and geojson to make sure all countries are present
+    const crossData = generateCrossData(data, geoData)
+
+    // Data to use on hexMap
+    const mapData = generateMapData(crossData, geoData, clickedSector)
+
+    // Set data on click
+    const selectedData = crossData.find(
         d => d.iso3 === clickedCountry && d.product === clickedSector
     );
 
-    const hoveredData = data.find(
+    // Set data on hover
+    const hoveredData = crossData.find(
         d => d.iso3 === tooltipContent.iso3 && d.product === clickedSector
     );
 
@@ -51,29 +62,6 @@ function App() {
             setSelectedTariff(selectedData.etr);
         }
     }, [selectedData, selectedTariff]);
-
-    const width = 600;
-    const height = 600;
-
-    const mapData = {
-        type: "FeatureCollection",
-        features: geoData.features.map(feat => {
-            const iso3 = feat.properties.iso3;
-
-            // Find matching row by iso3 and product (if any filter applied)
-            const row = data.find(d =>
-                d.iso3 === iso3 && d.product === clickedSector
-            );
-
-            return {
-                ...feat,
-                properties: {
-                    ...feat.properties,
-                    etr: row?.etr ?? null
-                }
-            };
-        })
-    };
 
     const countryData = {
         country: selectedData.country === "All countries"
@@ -101,20 +89,23 @@ function App() {
         impact_usd: hoveredData?.exports != null
             ? formatCurrency(hoveredData.exports * selectedTariff * 0.01)
             : null,
-        impact_pct: hoveredData?.exports != null && hoveredData.gdp !=null
-            ? hoveredData.exports * selectedTariff * 0.01 / hoveredData.gdp
+        impact_pct: hoveredData?.exports != null && hoveredData.gdp != null
+            ? formatPercentage(hoveredData.exports * selectedTariff * 0.01 / hoveredData.gdp)
             : null
     };
 
+    // Generate iso3-country name map for dropdown menu
     const countryMap = Object.fromEntries(
-        data.map(d => [d.iso3, d.country])
+        crossData.map(d => [d.iso3, d.country])
     );
 
+    // Generate a list of unique product groups fro dropdown menu
     const productGroups = Array.from(
-        new Set(data.map(d => d.product))
+        new Set(crossData.map(d => d.product))
     );
 
-    const allETR = data.find(d => d.iso3 === 'ALL' && d.product === clickedSector)?.etr ?? 0;
+    // Determine the ETR for all countries
+    const allETR = crossData.find(d => d.iso3 === 'ALL' && d.product === clickedSector)?.etr ?? 0;
 
     return (
         <div className="wrapper">
@@ -126,7 +117,7 @@ function App() {
                     setOption={setClickedCountry}
                     setETR={setSelectedTariff}
                     getETRForOption={(iso3) => {
-                        const etr = data.find(d => d.iso3 === iso3 && d.product === clickedSector)?.etr
+                        const etr = crossData.find(d => d.iso3 === iso3 && d.product === clickedSector)?.etr
                         return Number.isFinite(etr) ? etr : 0;
                     }}
                 />
@@ -136,7 +127,7 @@ function App() {
                     setOption={setClickedSector}
                     setETR={setSelectedTariff}
                     getETRForOption={(product) => {
-                        const etr = data.find(d => d.iso3 === clickedCountry && d.product === product)?.etr;
+                        const etr = crossData.find(d => d.iso3 === clickedCountry && d.product === product)?.etr;
                         return Number.isFinite(etr) ? etr : 0;
                     }}
                 />
@@ -166,7 +157,7 @@ function App() {
                     allETR={Number.isFinite(allETR) ? allETR : 0}
                     setTooltip={setTooltipContent}
                 />
-                <Tooltip 
+                <Tooltip
                     x={tooltipContent.x}
                     y={tooltipContent.y}
                     tooltipData={tooltipData}
