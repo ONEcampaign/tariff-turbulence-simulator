@@ -54,15 +54,17 @@ export function AfricaHexmap({
                                 const iso3 = feature.properties.iso3;
                                 const etr = feature.properties.etr;
 
-                                if (clickedCountry === iso3) {
-                                    setCountry('ALL');
-                                    if (Number.isFinite(allETR)) {
-                                        setETR(allETR);
-                                    }
-                                } else {
-                                    setCountry(iso3);
-                                    if (Number.isFinite(etr)) {
-                                        setETR(etr);
+                                if (etr != null) {
+                                    if (clickedCountry === iso3) {
+                                        setCountry('ALL');
+                                        if (Number.isFinite(allETR)) {
+                                            setETR(allETR);
+                                        }
+                                    } else {
+                                        setCountry(iso3);
+                                        if (Number.isFinite(etr)) {
+                                            setETR(etr);
+                                        }
                                     }
                                 }
                             }}
