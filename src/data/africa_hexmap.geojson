@@ -119,8 +119,9 @@
         ]
       },
       "properties": {
+        "country": "Western Sahara",
         "iso3": "ESH",
-        "name": "Western Sahara"
+        "iso2": "EH"
       }
     },
     {
@@ -241,8 +242,9 @@
         ]
       },
       "properties": {
+        "country": "Morocco",
         "iso3": "MAR",
-        "name": "Morocco"
+        "iso2": "MA"
       }
     },
     {
@@ -363,8 +365,9 @@
         ]
       },
       "properties": {
+        "country": "Algeria",
         "iso3": "DZA",
-        "name": "Algeria"
+        "iso2": "DZ"
       }
     },
     {
@@ -485,8 +488,9 @@
         ]
       },
       "properties": {
+        "country": "Mali",
         "iso3": "MLI",
-        "name": "Mali"
+        "iso2": "ML"
       }
     },
     {
@@ -607,8 +611,9 @@
         ]
       },
       "properties": {
+        "country": "Mauritania",
         "iso3": "MRT",
-        "name": "Mauritania"
+        "iso2": "MR"
       }
     },
     {
@@ -729,8 +734,9 @@
         ]
       },
       "properties": {
+        "country": "Senegal",
         "iso3": "SEN",
-        "name": "Senegal"
+        "iso2": "SN"
       }
     },
     {
@@ -851,8 +857,9 @@
         ]
       },
       "properties": {
+        "country": "Gambia",
         "iso3": "GMB",
-        "name": "Gambia"
+        "iso2": "GM"
       }
     },
     {
@@ -973,8 +980,9 @@
         ]
       },
       "properties": {
+        "country": "Guinea",
         "iso3": "GIN",
-        "name": "Guinea"
+        "iso2": "GN"
       }
     },
     {
@@ -1095,8 +1103,9 @@
         ]
       },
       "properties": {
+        "country": "Guinea-Bissau",
         "iso3": "GNB",
-        "name": "Guinea-Bissau"
+        "iso2": "GW"
       }
     },
     {
@@ -1217,8 +1226,9 @@
         ]
       },
       "properties": {
+        "country": "Burkina-Faso",
         "iso3": "BFA",
-        "name": "Burkina-Faso"
+        "iso2": "BF"
       }
     },
     {
@@ -1339,8 +1349,9 @@
         ]
       },
       "properties": {
+        "country": "Niger",
         "iso3": "NER",
-        "name": "Niger"
+        "iso2": "NE"
       }
     },
     {
@@ -1461,8 +1472,9 @@
         ]
       },
       "properties": {
+        "country": "Tunisia",
         "iso3": "TUN",
-        "name": "Tunisia"
+        "iso2": "TN"
       }
     },
     {
@@ -1583,8 +1595,9 @@
         ]
       },
       "properties": {
+        "country": "Egypt",
         "iso3": "EGY",
-        "name": "Egypt"
+        "iso2": "EG"
       }
     },
     {
@@ -1705,8 +1718,9 @@
         ]
       },
       "properties": {
+        "country": "Eritrea",
         "iso3": "ERI",
-        "name": "Eritrea"
+        "iso2": "ER"
       }
     },
     {
@@ -1827,8 +1841,9 @@
         ]
       },
       "properties": {
+        "country": "Djibouti",
         "iso3": "DJI",
-        "name": "Djibouti"
+        "iso2": "DJ"
       }
     },
     {
@@ -1949,8 +1964,9 @@
         ]
       },
       "properties": {
+        "country": "Somalia",
         "iso3": "SOM",
-        "name": "Somalia"
+        "iso2": "SO"
       }
     },
     {
@@ -2071,8 +2087,9 @@
         ]
       },
       "properties": {
+        "country": "South Africa",
         "iso3": "ZAF",
-        "name": "South Africa"
+        "iso2": "ZA"
       }
     },
     {
@@ -2193,8 +2210,9 @@
         ]
       },
       "properties": {
+        "country": "eSwatini",
         "iso3": "SWZ",
-        "name": "eSwatini"
+        "iso2": "SZ"
       }
     },
     {
@@ -2315,8 +2333,9 @@
         ]
       },
       "properties": {
+        "country": "Lesotho",
         "iso3": "LSO",
-        "name": "Lesotho"
+        "iso2": "LS"
       }
     },
     {
@@ -2437,8 +2456,9 @@
         ]
       },
       "properties": {
+        "country": "Zimbabwe",
         "iso3": "ZWE",
-        "name": "Zimbabwe"
+        "iso2": "ZW"
       }
     },
     {
@@ -2559,8 +2579,9 @@
         ]
       },
       "properties": {
+        "country": "Zambia",
         "iso3": "ZMB",
-        "name": "Zambia"
+        "iso2": "ZM"
       }
     },
     {
@@ -2681,8 +2702,9 @@
         ]
       },
       "properties": {
+        "country": "Gabon",
         "iso3": "GAB",
-        "name": "Gabon"
+        "iso2": "GA"
       }
     },
     {
@@ -2803,8 +2825,9 @@
         ]
       },
       "properties": {
+        "country": "Congo",
         "iso3": "COG",
-        "name": "Congo"
+        "iso2": "CG"
       }
     },
     {
@@ -2925,8 +2948,9 @@
         ]
       },
       "properties": {
+        "country": "Togo",
         "iso3": "TGO",
-        "name": "Togo"
+        "iso2": "TG"
       }
     },
     {
@@ -3047,8 +3071,9 @@
         ]
       },
       "properties": {
+        "country": "Benin",
         "iso3": "BEN",
-        "name": "Benin"
+        "iso2": "BJ"
       }
     },
     {
@@ -3169,8 +3194,9 @@
         ]
       },
       "properties": {
+        "country": "Sierra Leone",
         "iso3": "SLE",
-        "name": "Sierra Leone"
+        "iso2": "SL"
       }
     },
     {
@@ -3291,8 +3317,9 @@
         ]
       },
       "properties": {
+        "country": "Liberia",
         "iso3": "LBR",
-        "name": "Liberia"
+        "iso2": "LR"
       }
     },
     {
@@ -3413,8 +3440,9 @@
         ]
       },
       "properties": {
+        "country": "C\u00f4te d'Ivoire",
         "iso3": "CIV",
-        "name": "C\u00f4te d'Ivoire"
+        "iso2": "CI"
       }
     },
     {
@@ -3535,8 +3563,9 @@
         ]
       },
       "properties": {
+        "country": "Ghana",
         "iso3": "GHA",
-        "name": "Ghana"
+        "iso2": "GH"
       }
     },
     {
@@ -3657,8 +3686,9 @@
         ]
       },
       "properties": {
+        "country": "Nigeria",
         "iso3": "NGA",
-        "name": "Nigeria"
+        "iso2": "NG"
       }
     },
     {
@@ -3779,8 +3809,9 @@
         ]
       },
       "properties": {
+        "country": "Libya",
         "iso3": "LBY",
-        "name": "Libya"
+        "iso2": "LY"
       }
     },
     {
@@ -3901,8 +3932,9 @@
         ]
       },
       "properties": {
+        "country": "Sudan",
         "iso3": "SDN",
-        "name": "Sudan"
+        "iso2": "SD"
       }
     },
     {
@@ -4023,8 +4055,9 @@
         ]
       },
       "properties": {
+        "country": "Chad",
         "iso3": "TCD",
-        "name": "Chad"
+        "iso2": "TD"
       }
     },
     {
@@ -4145,8 +4178,9 @@
         ]
       },
       "properties": {
+        "country": "South Sudan",
         "iso3": "SSD",
-        "name": "South Sudan"
+        "iso2": "SS"
       }
     },
     {
@@ -4267,8 +4301,9 @@
         ]
       },
       "properties": {
+        "country": "Ethiopia",
         "iso3": "ETH",
-        "name": "Ethiopia"
+        "iso2": "ET"
       }
     },
     {
@@ -4389,8 +4424,9 @@
         ]
       },
       "properties": {
+        "country": "Kenya",
         "iso3": "KEN",
-        "name": "Kenya"
+        "iso2": "KE"
       }
     },
     {
@@ -4511,8 +4547,9 @@
         ]
       },
       "properties": {
+        "country": "Equatorial Guinea",
         "iso3": "GNQ",
-        "name": "Equatorial Guinea"
+        "iso2": "GQ"
       }
     },
     {
@@ -4633,8 +4670,9 @@
         ]
       },
       "properties": {
+        "country": "Uganda",
         "iso3": "UGA",
-        "name": "Uganda"
+        "iso2": "UG"
       }
     },
     {
@@ -4755,8 +4793,9 @@
         ]
       },
       "properties": {
+        "country": "Central African Republic",
         "iso3": "CAF",
-        "name": "Central African Republic"
+        "iso2": "CF"
       }
     },
     {
@@ -4877,8 +4916,9 @@
         ]
       },
       "properties": {
+        "country": "Rwanda",
         "iso3": "RWA",
-        "name": "Rwanda"
+        "iso2": "RW"
       }
     },
     {
@@ -4999,8 +5039,9 @@
         ]
       },
       "properties": {
+        "country": "Dem. Rep. Congo",
         "iso3": "COD",
-        "name": "Dem. Rep. Congo"
+        "iso2": "CD"
       }
     },
     {
@@ -5121,8 +5162,9 @@
         ]
       },
       "properties": {
+        "country": "Burundi",
         "iso3": "BDI",
-        "name": "Burundi"
+        "iso2": "BI"
       }
     },
     {
@@ -5243,8 +5285,9 @@
         ]
       },
       "properties": {
+        "country": "Malawi",
         "iso3": "MWI",
-        "name": "Malawi"
+        "iso2": "MW"
       }
     },
     {
@@ -5365,8 +5408,9 @@
         ]
       },
       "properties": {
+        "country": "Tanzania",
         "iso3": "TZA",
-        "name": "Tanzania"
+        "iso2": "TZ"
       }
     },
     {
@@ -5487,8 +5531,9 @@
         ]
       },
       "properties": {
+        "country": "Mozambique",
         "iso3": "MOZ",
-        "name": "Mozambique"
+        "iso2": "MZ"
       }
     },
     {
@@ -5609,8 +5654,9 @@
         ]
       },
       "properties": {
+        "country": "Cabo Verde",
         "iso3": "CPV",
-        "name": "Cabo Verde"
+        "iso2": "CV"
       }
     },
     {
@@ -5731,8 +5777,9 @@
         ]
       },
       "properties": {
+        "country": "S\u00e3o Tom\u00e9 and Pr\u00edncipe",
         "iso3": "STP",
-        "name": "S\u00e3o Tom\u00e9 and Pr\u00edncipe"
+        "iso2": "ST"
       }
     },
     {
@@ -5853,8 +5900,9 @@
         ]
       },
       "properties": {
+        "country": "Cameroon",
         "iso3": "CMR",
-        "name": "Cameroon"
+        "iso2": "CM"
       }
     },
     {
@@ -5975,8 +6023,9 @@
         ]
       },
       "properties": {
+        "country": "Angola",
         "iso3": "AGO",
-        "name": "Angola"
+        "iso2": "AO"
       }
     },
     {
@@ -6097,8 +6146,9 @@
         ]
       },
       "properties": {
+        "country": "Namibia",
         "iso3": "NAM",
-        "name": "Namibia"
+        "iso2": null
       }
     },
     {
@@ -6219,8 +6269,9 @@
         ]
       },
       "properties": {
+        "country": "Botswana",
         "iso3": "BWA",
-        "name": "Botswana"
+        "iso2": "BW"
       }
     },
     {
@@ -6341,8 +6392,9 @@
         ]
       },
       "properties": {
+        "country": "Comoros",
         "iso3": "COM",
-        "name": "Comoros"
+        "iso2": "KM"
       }
     },
     {
@@ -6463,8 +6515,9 @@
         ]
       },
       "properties": {
+        "country": "Seychelles",
         "iso3": "SYC",
-        "name": "Seychelles"
+        "iso2": "SC"
       }
     },
     {
@@ -6585,8 +6638,9 @@
         ]
       },
       "properties": {
+        "country": "Madagascar",
         "iso3": "MDG",
-        "name": "Madagascar"
+        "iso2": "MG"
       }
     },
     {
@@ -6707,8 +6761,9 @@
         ]
       },
       "properties": {
-        "iso3": "MUS",
-        "name": "Madagascar"
+        "country": "Madagascar",
+        "iso3": "MDG",
+        "iso2": "MG"
       }
     }
   ]
