@@ -10,4 +10,10 @@ export function formatCurrency(value) {
     } else {
         return `$${d3.format(",.1f")(value)}`;
     }
-};
+}
+
+export function formatPercentage(value) {
+    if (typeof value !== 'number' || isNaN(value)) return '';
+    const rounded = Number.parseFloat(value.toPrecision(1));
+    return `${rounded}%`;
+}
