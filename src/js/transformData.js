@@ -1,3 +1,5 @@
+import { formatCurrency, formatPercentage } from "./format.js";
+
 export function generateCrossData(data, geoData) {
     // 1. Get unique products from data
     const products = Array.from(new Set(data.map(d => d.product)));
@@ -66,5 +68,61 @@ export function generateMapData(data, geoData, clickedSector) {
                 }
             };
         })
+    };
+}
+
+export function generateCountryEntries(crossData) {
+    return Array.from(
+        new Map(crossData.map(d => [d.iso3, d.country])).entries()
+    ).sort((a, b) => {
+        if (a[1] === "All countries") return -1;
+        if (b[1] === "All countries") return 1;
+        return a[1].localeCompare(b[1]);
+    });
+}
+
+export function generateProductGroups(crossData) {
+    return Array.from(
+        new Set(crossData.map(d => d.product))
+    ).sort((a, b) => {
+        if (a === "All products") return -1;
+        if (b === "All products") return 1;
+        return a.localeCompare(b);
+    });
+}
+
+export function generateCountryData(selectedData, selectedTariff) {
+    return {
+        country: selectedData.country === "All countries"
+            ? "all countries"
+            : selectedData.country,
+        product: selectedData.product.toLowerCase(),
+        tariff: `${selectedTariff}%`,
+        exports: selectedData.exports != null
+            ? formatCurrency(selectedData.exports)
+            : null,
+        impact_usd: selectedData.exports != null
+            ? formatCurrency(selectedData.exports * selectedTariff * 0.01)
+            : null
+    };
+}
+
+export function generateTooltipData(hoveredData, selectedTariff) {
+    return {
+        country: hoveredData?.country === "All countries"
+            ? "all countries"
+            : hoveredData?.country,
+        product: hoveredData?.product.toLowerCase(),
+        etr: hoveredData?.etr,
+        tariff: `${selectedTariff}%`,
+        exports: hoveredData?.exports != null
+            ? formatCurrency(hoveredData.exports)
+            : null,
+        impact_usd: hoveredData?.exports != null
+            ? formatCurrency(hoveredData.exports * selectedTariff * 0.01)
+            : null,
+        impact_pct: hoveredData?.exports != null && hoveredData.gdp != null
+            ? formatPercentage(hoveredData.exports * selectedTariff * 0.01 / hoveredData.gdp)
+            : null
     };
 }
