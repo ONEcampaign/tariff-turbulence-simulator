@@ -13,7 +13,7 @@ export function Tooltip({ x, y, tooltipData, isVisible } ={}) {
             </div>
             <div className="tooltip-row">
                 <span className="tooltip-var-name">% of GDP</span>
-                <span className="tooltip-var-value">17%</span>
+                <span className="tooltip-var-value">{tooltipData.impact_pct}</span>
             </div>
         </div>
     )
