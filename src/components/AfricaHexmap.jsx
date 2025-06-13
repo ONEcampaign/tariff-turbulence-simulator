@@ -69,11 +69,13 @@ export function AfricaHexmap({
                                 }
                             }}
                             onMouseMove={(event) => {
-                                setTooltip({
-                                    x: event.pageX,
-                                    y: event.pageY - 100,
-                                    iso3: feature.properties.iso3
-                                })
+                                if (clickedCountry === "ALL") {
+                                    setTooltip({
+                                        x: event.pageX,
+                                        y: event.pageY - 100,
+                                        iso3: feature.properties.iso3
+                                    })
+                                }
                             }}
                             onMouseOut={(event) => {
                                 setTooltip({
