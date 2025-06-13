@@ -6,6 +6,7 @@ import { Legend } from './components/Legend.js';
 import { AfricaHexmap } from './components/AfricaHexmap.js';
 import { ExposureCard } from './components/ExposureCard.js';
 import { Dropdown } from "./components/Dropdown.js";
+import { DropdownProvider } from "./components/DropdownContext.js";
 import { Slider } from "./components/Slider.js";
 import { Tooltip } from "./components/Tooltip.js";
 import { formatCurrency, formatPercentage } from "./js/format.js";
@@ -35,6 +36,7 @@ function App() {
     const [selectedTariff, setSelectedTariff] = React.useState();
     const [tooltipContent, setTooltipContent] = React.useState({
         iso3: null,
+        country: null,
         x: null,
         y: null
     })
@@ -95,14 +97,24 @@ function App() {
     };
 
     // Generate iso3-country name map for dropdown menu
-    const countryMap = Object.fromEntries(
-        crossData.map(d => [d.iso3, d.country])
-    );
+    const countryEntries = Array.from(
+        new Map(crossData.map(d => [d.iso3, d.country])).entries()
+    ).sort((a, b) => {
+        if (a[1] === "All countries") return -1;
+        if (b[1] === "All countries") return 1;
+        return a[1].localeCompare(b[1]);
+    });
+
+    const countryMap = Object.fromEntries(countryEntries);
 
     // Generate a list of unique product groups fro dropdown menu
     const productGroups = Array.from(
         new Set(crossData.map(d => d.product))
-    );
+    ).sort((a, b) => {
+        if (a === "All products") return -1;
+        if (b === "All products") return 1;
+        return a.localeCompare(b);
+    });
 
     // Determine the ETR for all countries
     const allETR = crossData.find(d => d.iso3 === 'ALL' && d.product === clickedSector)?.etr ?? 0;
@@ -112,6 +124,7 @@ function App() {
             <div className="sticky-controls">
                 <span className="filter-title">Filter the data</span>
                 <Dropdown
+                    dropdownId="countryMenu"
                     options={countryMap}
                     selectedOption={clickedCountry}
                     setOption={setClickedCountry}
@@ -122,6 +135,7 @@ function App() {
                     }}
                 />
                 <Dropdown
+                    dropdownId="productMenu"
                     options={productGroups}
                     selectedOption={clickedSector}
                     setOption={setClickedSector}
@@ -170,6 +184,8 @@ function App() {
 }
 
 display(
-    <App/>
+    <DropdownProvider>
+        <App />
+    </DropdownProvider>
 )
 ```

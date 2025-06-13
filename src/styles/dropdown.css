@@ -1,9 +1,7 @@
 .dropdown-menu {
     width: var(--filters-width);
-}
-
-.dropdown-menu:first-of-type {
-    /*margin: 10px 0 30px;*/
+    background: white;
+    position: relative;
 }
 
 .dropdown-selected {
@@ -15,6 +13,7 @@
     border: 2px black solid;
     border-radius: 6px;
     min-width: 150px;
+    height: 22px;
 }
 
 .dropdown-selected > span {
@@ -25,6 +24,9 @@
     letter-spacing: 0.4px;
     text-align: left;
     text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dropdown-chevron {
@@ -42,6 +44,11 @@
     padding: 0.25em .5em;
     max-height: 250px;
     overflow-y: scroll;
+    position: absolute;
+    background: #F8F7F8;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    z-index: 10;
 }
 
 .dropdown-list-item {
