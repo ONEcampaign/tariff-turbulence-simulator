@@ -7,8 +7,12 @@ import { AfricaHexmap } from './components/AfricaHexmap.js';
 import { ExposureCard } from './components/ExposureCard.js';
 import { Dropdown } from "./components/Dropdown.js";
 import { Slider } from "./components/Slider.js";
+<<<<<<< layout-tooltip
+import { Tooltip } from "./components/Tooltip.js";
+=======
 
 import { formatCurrency } from "./js/format.js";
+>>>>>>> layout
 
 const data = FileAttachment("./data/us_africa_trade.csv").csv({typed: true});
 const geoData = FileAttachment("./data/africa_hexmap.geojson").json({typed: true});
@@ -25,9 +29,20 @@ function App() {
     const [clickedCountry, setClickedCountry] = React.useState('ALL');
     const [clickedSector, setClickedSector] = React.useState('All products');
     const [selectedTariff, setSelectedTariff] = React.useState();
+    const [tooltipContent, setTooltipContent] = React.useState({
+        iso3: null,
+        x: null,
+        y: null
+    })
+
+    const isTooltipVisible = tooltipContent.country !== null;
 
     const selectedData = data.find(
         d => d.iso3 === clickedCountry && d.product === clickedSector
+    );
+
+    const hoveredData = data.find(
+        d => d.iso3 === tooltipContent.iso3 && d.product === clickedSector
     );
 
     // Set ETR as default tariff
@@ -54,11 +69,7 @@ function App() {
                 ...feat,
                 properties: {
                     ...feat.properties,
-                    etr: row?.etr ?? null,
-                    // exposure_usd: row?.exports * selectedTariff * 0.01 ?? null,
-                    // exposure_pct: row?.exports * selectedTariff / row?.gdp ?? null,
-                    // exports: row?.exports ?? null,
-                    // gdp: row?.gdp ?? null
+                    etr: row?.etr ?? null
                 }
             };
         })
@@ -75,6 +86,23 @@ function App() {
             : null,
         impact_usd: selectedData.exports != null
             ? formatCurrency(selectedData.exports * selectedTariff * 0.01)
+            : null
+    };
+
+    const tooltipData = {
+        country: hoveredData?.country === "All countries"
+            ? "all countries"
+            : hoveredData?.country,
+        product: hoveredData?.product.toLowerCase(),
+        tariff: `${selectedTariff}%`,
+        exports: hoveredData?.exports != null
+            ? formatCurrency(hoveredData.exports)
+            : null,
+        impact_usd: hoveredData?.exports != null
+            ? formatCurrency(hoveredData.exports * selectedTariff * 0.01)
+            : null,
+        impact_pct: hoveredData?.exports != null && hoveredData.gdp !=null
+            ? hoveredData.exports * selectedTariff * 0.01 / hoveredData.gdp
             : null
     };
 
@@ -136,6 +164,13 @@ function App() {
                     setCountry={setClickedCountry}
                     setETR={setSelectedTariff}
                     allETR={Number.isFinite(allETR) ? allETR : 0}
+                    setTooltip={setTooltipContent}
+                />
+                <Tooltip 
+                    x={tooltipContent.x}
+                    y={tooltipContent.y}
+                    tooltipData={tooltipData}
+                    isVisible={isTooltipVisible}
                 />
                 <ExposureCard countryData={countryData}/>
             </div>

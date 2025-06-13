@@ -4,7 +4,7 @@ import {colorPalette} from "../js/colorPalette.js";
 import {riskThresholds} from "../js/riskThresholds.js";
 
 export function AfricaHexmap({
-    width, height, data, clickedCountry, setCountry, setETR, allETR
+    width, height, data, clickedCountry, setCountry, setETR, allETR, setTooltip
 } = {}) {
     const [hoveredCountry, setHoveredCountry] = React.useState('NONE');
     const svgRef = React.useRef();
@@ -65,6 +65,20 @@ export function AfricaHexmap({
                                         setETR(etr);
                                     }
                                 }
+                            }}
+                            onMouseMove={(event) => {
+                                setTooltip({
+                                    x: event.pageX,
+                                    y: event.pageY - 100,
+                                    iso3: feature.properties.iso3
+                                })
+                            }}
+                            onMouseOut={(event) => {
+                                setTooltip({
+                                    x: null,
+                                    y: null,
+                                    country: null
+                                })
                             }}
                             style={{cursor: "pointer"}}
                         />
