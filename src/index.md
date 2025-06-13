@@ -64,11 +64,7 @@ function App() {
                 ...feat,
                 properties: {
                     ...feat.properties,
-                    etr: row?.etr ?? null,
-                    // exposure_usd: row?.exports * selectedTariff * 0.01 ?? null,
-                    // exposure_pct: row?.exports * selectedTariff / row?.gdp ?? null,
-                    // exports: row?.exports ?? null,
-                    // gdp: row?.gdp ?? null
+                    etr: row?.etr ?? null
                 }
             };
         })
@@ -107,10 +103,13 @@ function App() {
         product: hoveredData?.product.toLowerCase(),
         tariff: `${selectedTariff}%`,
         exports: hoveredData?.exports != null
-            ? formatCurrency(selectedData.exports)
+            ? formatCurrency(hoveredData.exports)
             : null,
         impact_usd: hoveredData?.exports != null
-            ? formatCurrency(selectedData.exports * selectedTariff * 0.01)
+            ? formatCurrency(hoveredData.exports * selectedTariff * 0.01)
+            : null,
+        impact_pct: hoveredData?.exports != null && hoveredData.gdp !=null
+            ? hoveredData.exports * selectedTariff * 0.01 / hoveredData.gdp
             : null
     };
 
