@@ -78,13 +78,15 @@ function App() {
             ? formatCurrency(selectedData.exports * selectedTariff * 0.01)
             : null
     };
+    
+    console.log(hoveredData)
 
     const tooltipData = {
         country: hoveredData?.country === "All countries"
             ? "all countries"
             : hoveredData?.country,
         product: hoveredData?.product.toLowerCase(),
-        tariff: `${selectedTariff}%`,
+        etr: hoveredData?.etr,
         exports: hoveredData?.exports != null
             ? formatCurrency(hoveredData.exports)
             : null,
