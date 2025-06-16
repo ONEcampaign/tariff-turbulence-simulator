@@ -47,8 +47,14 @@ export function AfricaHexmap({
                                     : colorPalette.na
                             }
                             opacity={clickedCountry === 'ALL' ? 1 : (thisCountryIsClicked ? 1 : 0.2)}
-                            stroke={clickedCountry === 'ALL' ? "white" : (thisCountryIsClicked ? "black" : "white")}
-                            stroke-width={"2px"}
+                            stroke={
+                                hoveredCountry === feature.properties.iso3
+                                    ? "black"
+                                    : (clickedCountry === 'ALL'
+                                        ? "white"
+                                        : (thisCountryIsClicked ? "black" : "white"))
+                            }
+                            strokeWidth={"2px"}
                             d={path(feature)}
                             onClick={() => {
                                 const iso3 = feature.properties.iso3;
@@ -74,15 +80,13 @@ export function AfricaHexmap({
                                         x: event.pageX,
                                         y: event.pageY - 100,
                                         iso3: feature.properties.iso3
-                                    })
+                                    });
                                 }
                             }}
-                            onMouseOut={(event) => {
-                                setTooltip({
-                                    x: null,
-                                    y: null,
-                                    country: null
-                                })
+                            onMouseEnter={() => setHoveredCountry(feature.properties.iso3)}
+                            onMouseLeave={() => setHoveredCountry(null)}
+                            onMouseOut={() => {
+                                setTooltip({x: null, y: null, country: null});
                             }}
                             style={{cursor: "pointer"}}
                         />
@@ -90,5 +94,5 @@ export function AfricaHexmap({
                 })}
             </g>
         </svg>
-)
+    )
 }
