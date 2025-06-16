@@ -142,11 +142,11 @@ export function generateTooltipData(hoveredData, selectedTariff) {
         exports: hoveredData?.exports != null
             ? formatCurrency(hoveredData.exports)
             : null,
-        impact_usd: hoveredData?.exports != null
-            ? formatCurrency(hoveredData.exports * selectedTariff * 0.01)
+        impact_usd: hoveredData?.exports != null && hoveredData?.etr !== null
+            ? formatCurrency(hoveredData.exports * hoveredData.etr * 0.01)
             : null,
-        impact_pct: hoveredData?.exports != null && hoveredData.gdp != null
-            ? formatPercentage(hoveredData.exports * selectedTariff * 0.01 / hoveredData.gdp)
+        impact_pct: hoveredData?.exports != null && hoveredData.gdp != null && hoveredData?.etr !== null
+            ? formatPercentage((hoveredData.exports * hoveredData.etr) / hoveredData.gdp)
             : null
     };
 }
