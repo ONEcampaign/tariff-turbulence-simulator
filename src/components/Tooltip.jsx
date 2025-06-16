@@ -30,7 +30,7 @@ export function Tooltip({ x, y, tooltipData, isVisible } ={}) {
             </div>
             <div className="tooltip-header">
                 <span className="tooltip-country-name">{tooltipData.country}</span>
-                <span className="tooltip-flag">[flag]</span>
+                <span className={`fi fi-${tooltipData.iso2.toLowerCase()} fis`}></span>
             </div>
             <div className="tooltip-row">
                 <span className="tooltip-var-name">Total exposure</span>
