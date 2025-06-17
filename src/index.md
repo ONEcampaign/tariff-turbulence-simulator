@@ -1,25 +1,25 @@
 ```js
-import {Headline} from './components/Headline.js';
-import {Deck} from './components/Deck.js';
-import {IntroText} from './components/IntroText.js'
-import {Legend} from './components/Legend.js';
-import {AfricaHexmap} from './components/AfricaHexmap.js';
-import {ExposureCard} from './components/ExposureCard.js';
-import {Dropdown} from "./components/Dropdown.js";
-import {DropdownProvider} from "./components/DropdownContext.js";
-import {Slider} from "./components/Slider.js";
-import {Tooltip} from "./components/Tooltip.js";
-import {SubsectionTitle} from "./components/SubsectionTitle.js";
-import {SubsectionText} from "./components/SubsectionText.js";
-import {ToggleButton} from "./components/ToggleButton.js";
-import {CountryCarousel} from "./components/Countrycarousel.js"
+import { Headline } from './components/Headline.js';
+import { Deck } from './components/Deck.js';
+import { IntroText } from './components/IntroText.js'
+import { Legend } from './components/Legend.js';
+import { AfricaHexmap } from './components/AfricaHexmap.js';
+import { ExposureCard } from './components/ExposureCard.js';
+import { Dropdown } from "./components/Dropdown.js";
+import { DropdownProvider } from "./components/DropdownContext.js";
+import { Slider } from "./components/Slider.js";
+import { Tooltip } from "./components/Tooltip.js";
+import { SubsectionTitle } from "./components/SubsectionTitle.js";
+import { SubsectionText } from "./components/SubsectionText.js";
+import { ToggleButton } from "./components/ToggleButton.js";
+import { CountryCarousel } from "./components/CountryCarousel.jsx"
 import {
-    generateCrossData, 
+    generateCrossData,
     generateMapData,
-    generateCountryEntries, 
+    generateCountryEntries,
     generateProductGroups,
-    generateExposureCardData, 
-    generateTooltipData, 
+    generateExposureCardData,
+    generateTooltipData,
     generateCarouselData
 } from "./js/transformData.js";
 import {
