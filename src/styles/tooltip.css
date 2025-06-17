@@ -1,6 +1,9 @@
 :root {
     --tooltip-width: 220px;
     --tooltip-height: 200px;
+    --tooltip-swatch-width: 93px;
+    --tooltip-swatch-height: 20px;
+    --tooltip-flag-icon-diameter: 28px;
 }
 
 .tooltip {
@@ -16,7 +19,12 @@
 }
 
 .tooltip-swatch {
-    width: 60%;
+    width: var(--tooltip-swatch-width);
+    height: var(--tooltip-swatch-height);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .tooltip-swatch-text {
@@ -54,7 +62,7 @@
 
 .tooltip-header > .fi.fis {
     display: inline-block;
-    width: 30px;
+    width: var(--tooltip-flag-icon-diameter);
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     overflow: hidden;

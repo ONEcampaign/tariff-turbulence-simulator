@@ -1,6 +1,9 @@
 :root {
     --country-card-width: 250px;
     --country-card-height: 400px;
+    --carousel-swatch-width: 145px;
+    --carousel-swatch-height: 43px;
+    --carousel-flag-icon-diameter: 52px;
 }
 
 .carousel-track {
@@ -15,12 +18,12 @@
     display: none; /* Chrome, Safari, Edge */
 }
 
-.country-card {
+.carousel-country-card {
     min-width: var(--country-card-width);
     height: var(--country-card-height);
     flex: 0 0 auto;
     background: white;
-    border: 1px solid black;
+    border: 2px solid black;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -28,7 +31,12 @@
 }
 
 .carousel-swatch {
-    width: 60%;
+    width: var(--carousel-swatch-width);
+    height: var(--carousel-swatch-height);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel-swatch-text {
@@ -61,7 +69,7 @@
 
 .carousel-header > .fi.fis {
     display: inline-block;
-    width: 40px;
+    width: var(--carousel-flag-icon-diameter);
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     overflow: hidden;
