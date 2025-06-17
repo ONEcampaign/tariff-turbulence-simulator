@@ -10,6 +10,7 @@ export function AfricaHexmap({
     const svgRef = React.useRef();
 
     const verticalPadding = 20;
+    const marginBottom = 240;
 
     const projection = d3.geoIdentity()
         .reflectY(true)
@@ -78,7 +79,8 @@ export function AfricaHexmap({
                                 if (clickedCountry === "ALL") {
                                     setTooltip({
                                         x: event.pageX,
-                                        y: event.pageY - 100,
+                                        y: event.clientY + marginBottom > window.innerHeight ? 
+                                            event.pageY - 150 - marginBottom : event.pageY - 100,
                                         iso3: feature.properties.iso3
                                     });
                                 }
