@@ -13,10 +13,19 @@
 @import url("./styles/dropdown.css");
 @import url("./styles/slider.css");
 @import url("./styles/tooltip.css");
+@import url("./styles/subsection-title.css");
+@import url("./styles/subsection-text.css");
+@import url("./styles/toggle-button.css");
+@import url("./styles/country-carousel.css");
 
 :root {
     --wrapper-width:  768px;
     --filters-width: 250px;
+
+    --small-margin: 10px;
+    --medium-margin: 20px;
+    --large-margin: 40px;
+    --extra-large-margin: 80px;
 }
 
 /* center-block styles */
