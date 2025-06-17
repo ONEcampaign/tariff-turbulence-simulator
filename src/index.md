@@ -12,7 +12,8 @@ import { Tooltip } from "./components/Tooltip.js";
 import { SubsectionTitle } from "./components/SubsectionTitle.js";
 import { SubsectionText } from "./components/SubsectionText.js";
 import { ToggleButton } from "./components/ToggleButton.js";
-import { CountryCarousel } from "./components/CountryCarousel.jsx"
+import { CountryCarousel } from "./components/CountryCarousel.js"
+import { SingleCountryCard } from "./components/SingleCountryCard.js";
 import {
     generateCrossData,
     generateMapData,
@@ -20,7 +21,8 @@ import {
     generateProductGroups,
     generateExposureCardData,
     generateTooltipData,
-    generateCarouselData
+    generateCarouselData,
+    generateSingleCountryCardData
 } from "./js/transformData.js";
 import {
     headline, deck, introText, legendTitle, legendSubtitle, subsectionTitle, subsectionText
@@ -31,7 +33,6 @@ const geoData = FileAttachment("./data/africa_hexmap.geojson").json({typed: true
 ```
 
 ```jsx
-
 function App() {
 
     // Hexmap dimensions
@@ -74,9 +75,10 @@ function App() {
         }
     }, [selectedData, selectedTariff]);
 
-    const countryData = generateExposureCardData(selectedData, selectedTariff);
+    const exposureCardData = generateExposureCardData(selectedData, selectedTariff);
     const tooltipData = generateTooltipData(hoveredData, selectedTariff);
-    const carouselData = generateCarouselData(crossData, selectedSector)
+    const carouselData = generateCarouselData(crossData, selectedSector, selectedTariff)
+    const singleCountryCardData = generateSingleCountryCardData(crossData, selectedCountry, selectedTariff)
 
     // Generate iso3-country name map for dropdown menu
     const countryEntries = generateCountryEntries(crossData);
@@ -146,17 +148,27 @@ function App() {
                     tooltipData={tooltipData}
                     isVisible={isTooltipVisible}
                 />
-                <ExposureCard countryData={countryData}/>
+                <ExposureCard countryData={exposureCardData}/>
                 <SubsectionTitle content={subsectionTitle}/>
                 <SubsectionText content={subsectionText}/>
-                <ToggleButton
-                    selected={selectedUnits}
-                    setSelected={setSelectedUnits}
-                />
-                <CountryCarousel
-                    data={carouselData}
-                    selectedUnits={selectedUnits}
-                />
+                {
+                    selectedCountry === "ALL" ? (
+                        <div>
+                            <ToggleButton
+                                selected={selectedUnits}
+                                setSelected={setSelectedUnits}
+                            />
+                            <CountryCarousel
+                                data={carouselData}
+                                selectedUnits={selectedUnits}
+                            />
+                        </div>
+                    ) : (
+                        <SingleCountryCard
+                            data={singleCountryCardData}
+                        />
+                    )
+                }
             </div>
         </div>
     )
