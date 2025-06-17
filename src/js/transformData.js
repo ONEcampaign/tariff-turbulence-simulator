@@ -123,7 +123,7 @@ export function generateExposureCardData(selectedData, selectedTariff) {
             ? formatCurrency(selectedData.exports)
             : null,
         impact_usd: selectedData.exports != null
-            ? formatCurrency(selectedData.exports * selectedTariff * 0.01)
+            ? formatCurrency(selectedData.exports * selectedTariff)
             : null
     };
 }
@@ -143,7 +143,7 @@ export function generateTooltipData(hoveredData, selectedTariff) {
             ? formatCurrency(hoveredData.exports)
             : null,
         impact_usd: hoveredData?.exports != null && hoveredData?.etr !== null
-            ? formatCurrency(hoveredData.exports * hoveredData.etr * 0.01)
+            ? formatCurrency(hoveredData.exports * hoveredData.etr)
             : null,
         impact_pct: hoveredData?.exports != null && hoveredData.gdp != null && hoveredData?.etr !== null
             ? formatPercentage((hoveredData.exports * hoveredData.etr) / hoveredData.gdp)
@@ -151,14 +151,27 @@ export function generateTooltipData(hoveredData, selectedTariff) {
     };
 }
 
-export function generateCarouselData(data, selectedSector) {
+export function generateCarouselData(data, selectedSector, selectedTariff) {
     return data
         .filter(d => d.product === selectedSector && d.country !== "All countries")
         .map(d => ({
             country: d.country,
             iso2: d.iso2,
             etr: d.etr,
-            impact_usd: d.exports * d.etr,
-            impact_pct: (d.exports * d.etr) / d.gdp,
+            impact_usd: d.exports * selectedTariff,
+            impact_pct: (d.exports * selectedTariff) / d.gdp,
+        }));
+}
+
+export function generateSingleCountryCardData(data, selectedCountry, selectedTariff) {
+    return data
+        .filter(d => d.iso3 === selectedCountry)
+        .map(d => ({
+            country: d.country,
+            iso2: d.iso2,
+            product: d.product,
+            etr: d.etr,
+            impact_usd: d.exports * selectedTariff,
+            impact_pct: (d.exports * selectedTariff) / d.gdp,
         }));
 }
