@@ -23,7 +23,7 @@ export function CountryCarousel({data, selectedUnits = "usd"}) {
         <div className="carousel-container">
             <div className="carousel-track">
                 {sorted.map((countryData, index) => (
-                    <div className="country-card" key={countryData.iso2 || index}>
+                    <div className="carousel-country-card" key={countryData.iso2 || index}>
                         <div
                             className="carousel-swatch"
                             style={{
