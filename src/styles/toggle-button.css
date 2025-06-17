@@ -1,0 +1,52 @@
+.toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: var(--large-margin);
+}
+
+.toggle-label {
+    font-family: Colfax;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 22.4px;
+    letter-spacing: 0.4px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: font-weight 0.2s ease-in-out;
+}
+
+.toggle-label.on {
+    font-weight: 700;
+}
+
+.toggle-button {
+    width: 52px;
+    height: 32px;
+    border: 1px solid black;
+    background-color: black;
+    border-radius: 100px;
+    position: relative;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.toggle-button.on {
+    background-color: black;
+}
+
+.toggle-knob {
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 23px;
+    transition: left 0.2s ease-in-out;
+}
+
+.toggle-button.on .toggle-knob {
+    left: 3px;
+}

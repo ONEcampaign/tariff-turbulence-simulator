@@ -5,5 +5,5 @@
     line-height: 35.2px;
     letter-spacing: 0px;
     text-align: left;
-    margin-bottom: 60px;
+    margin: 0 0 var(--extra-large-margin);
 }

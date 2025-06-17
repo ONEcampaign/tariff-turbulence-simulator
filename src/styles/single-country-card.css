@@ -1,0 +1,137 @@
+:root {
+    --single-country-card-swatch-width: 145px;
+    --single-country-card-swatch-height: 43px;
+    --single-country-card-flag-icon-diameter: 52px;
+}
+
+.single-country-card {
+    width: var(--wrapper-width);
+    flex: 0 0 auto;
+    background: white;
+    border: 2px solid black;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.single-country-card-swatch-plus-icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.single-country-card-swatch {
+    width: var(--single-country-card-swatch-width);
+    height: var(--single-country-card-swatch-height);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.single-country-card-swatch-text {
+    font-family: Colfax;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19.2px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: white;
+    vertical-align: middle;
+}
+
+.single-country-card-swatch-plus-icon > .fi.fis {
+    display: inline-block;
+    width: var(--single-country-card-flag-icon-diameter);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 0 !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    vertical-align: middle;
+}
+
+/* Make Sao Tome & principe and Central African Republic flag-icons larger as they are smaller by default */
+.fi-st,
+.fi-cf{
+    transform: scale(1.3);
+}
+
+
+.single-country-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--medium-margin);
+}
+
+.single-country-card-country-name {
+    font-family: Colfax;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 35.2px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.single-country-card-row {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 10px;
+
+}
+
+.single-country-card-var-name {
+    font-family: Italian Plate;
+    font-weight: 400;
+    font-size: 19.2px;
+    line-height: 21.12px;
+    letter-spacing: 0px;
+    margin: 0;
+}
+
+.single-country-card-var-value {
+    font-family: Italian Plate;
+    font-weight: 700;
+    font-size: 96px;
+    line-height: 100%;
+    letter-spacing: 0.75%;
+    text-align: left;
+    margin: 0;
+}
+
+.single-country-card-chart-title {
+    font-family: Italian Plate;
+    font-weight: 400;
+    font-size: 19.2px;
+    line-height: 21.12px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.bar-label {
+    font-family: "Italian Plate";
+    font-weight: 400;
+    font-size: 19.2px;
+    line-height: 21.12px;
+    letter-spacing: 0px;
+    text-align: center;
+    width: 100%;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.bar-value {
+    font-family: "Italian Plate";
+    font-weight: 700;
+    font-size: 19.2px;
+    line-height: 21.12px;
+    letter-spacing: 0px;
+    text-align: center;
+}

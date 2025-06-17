@@ -9,13 +9,23 @@ import { Dropdown } from "./components/Dropdown.js";
 import { DropdownProvider } from "./components/DropdownContext.js";
 import { Slider } from "./components/Slider.js";
 import { Tooltip } from "./components/Tooltip.js";
+import { SubsectionTitle } from "./components/SubsectionTitle.js";
+import { SubsectionText } from "./components/SubsectionText.js";
+import { ToggleButton } from "./components/ToggleButton.js";
+import { CountryCarousel } from "./components/CountryCarousel.js"
+import { SingleCountryCard } from "./components/SingleCountryCard.js";
 import {
-    generateCrossData, generateMapData,
-    generateCountryEntries, generateProductGroups,
-    generateCountryData, generateTooltipData
+    generateCrossData,
+    generateMapData,
+    generateCountryEntries,
+    generateProductGroups,
+    generateExposureCardData,
+    generateTooltipData,
+    generateCarouselData,
+    generateSingleCountryCardData
 } from "./js/transformData.js";
 import {
-    headline, deck, introText, legendTitle, legendSubtitle
+    headline, deck, introText, legendTitle, legendSubtitle, subsectionTitle, subsectionText
 } from "./js/copyText.js";
 
 const data = FileAttachment("./data/us_africa_trade.csv").csv({typed: true});
@@ -27,11 +37,11 @@ function App() {
 
     // Hexmap dimensions
     const width = 600;
-    const height = 600;    
+    const height = 600;
 
     // Reactive variables
-    const [clickedCountry, setClickedCountry] = React.useState('ALL');
-    const [clickedSector, setClickedSector] = React.useState('All products');
+    const [selectedCountry, setSelectedCountry] = React.useState('ALL');
+    const [selectedSector, setSelectedSector] = React.useState('All products');
     const [selectedTariff, setSelectedTariff] = React.useState();
     const [tooltipContent, setTooltipContent] = React.useState({
         iso3: null,
@@ -40,21 +50,22 @@ function App() {
         y: null
     })
     const isTooltipVisible = tooltipContent.country !== null;
+    const [selectedUnits, setSelectedUnits] = React.useState("usd")
 
     // Crossed data between csv and geojson to make sure all countries are present
     const crossData = generateCrossData(data, geoData)
 
     // Data to use on hexMap
-    const mapData = generateMapData(crossData, geoData, clickedSector)
+    const mapData = generateMapData(crossData, geoData, selectedSector)
 
     // Set data on click
     const selectedData = crossData.find(
-        d => d.iso3 === clickedCountry && d.product === clickedSector
+        d => d.iso3 === selectedCountry && d.product === selectedSector
     );
 
     // Set data on hover
     const hoveredData = crossData.find(
-        d => d.iso3 === tooltipContent.iso3 && d.product === clickedSector
+        d => d.iso3 === tooltipContent.iso3 && d.product === selectedSector
     );
 
     // Set ETR as default tariff
@@ -64,8 +75,10 @@ function App() {
         }
     }, [selectedData, selectedTariff]);
 
-    const countryData = generateCountryData(selectedData, selectedTariff);
+    const exposureCardData = generateExposureCardData(selectedData, selectedTariff);
     const tooltipData = generateTooltipData(hoveredData, selectedTariff);
+    const carouselData = generateCarouselData(crossData, selectedSector, selectedTariff)
+    const singleCountryCardData = generateSingleCountryCardData(crossData, selectedCountry, selectedTariff)
 
     // Generate iso3-country name map for dropdown menu
     const countryEntries = generateCountryEntries(crossData);
@@ -75,7 +88,7 @@ function App() {
     const productGroups = generateProductGroups(crossData);
 
     // Determine the ETR for all countries
-    const allETR = crossData.find(d => d.iso3 === 'ALL' && d.product === clickedSector)?.etr ?? 0;
+    const allETR = crossData.find(d => d.iso3 === 'ALL' && d.product === selectedSector)?.etr ?? 0;
 
     return (
         <div className="wrapper">
@@ -84,22 +97,22 @@ function App() {
                 <Dropdown
                     dropdownId="countryMenu"
                     options={countryMap}
-                    selectedOption={clickedCountry}
-                    setOption={setClickedCountry}
+                    selectedOption={selectedCountry}
+                    setOption={setSelectedCountry}
                     setETR={setSelectedTariff}
                     getETRForOption={(iso3) => {
-                        const etr = crossData.find(d => d.iso3 === iso3 && d.product === clickedSector)?.etr
+                        const etr = crossData.find(d => d.iso3 === iso3 && d.product === selectedSector)?.etr
                         return Number.isFinite(etr) ? etr : 0;
                     }}
                 />
                 <Dropdown
                     dropdownId="productMenu"
                     options={productGroups}
-                    selectedOption={clickedSector}
-                    setOption={setClickedSector}
+                    selectedOption={selectedSector}
+                    setOption={setSelectedSector}
                     setETR={setSelectedTariff}
                     getETRForOption={(product) => {
-                        const etr = crossData.find(d => d.iso3 === clickedCountry && d.product === product)?.etr;
+                        const etr = crossData.find(d => d.iso3 === selectedCountry && d.product === product)?.etr;
                         return Number.isFinite(etr) ? etr : 0;
                     }}
                 />
@@ -123,8 +136,8 @@ function App() {
                     width={width}
                     height={height}
                     data={mapData}
-                    clickedCountry={clickedCountry}
-                    setCountry={setClickedCountry}
+                    clickedCountry={selectedCountry}
+                    setCountry={setSelectedCountry}
                     setETR={setSelectedTariff}
                     allETR={Number.isFinite(allETR) ? allETR : 0}
                     setTooltip={setTooltipContent}
@@ -135,7 +148,27 @@ function App() {
                     tooltipData={tooltipData}
                     isVisible={isTooltipVisible}
                 />
-                <ExposureCard countryData={countryData}/>
+                <ExposureCard countryData={exposureCardData}/>
+                <SubsectionTitle content={subsectionTitle}/>
+                <SubsectionText content={subsectionText}/>
+                {
+                    selectedCountry === "ALL" ? (
+                        <div>
+                            <ToggleButton
+                                selected={selectedUnits}
+                                setSelected={setSelectedUnits}
+                            />
+                            <CountryCarousel
+                                data={carouselData}
+                                selectedUnits={selectedUnits}
+                            />
+                        </div>
+                    ) : (
+                        <SingleCountryCard
+                            data={singleCountryCardData}
+                        />
+                    )
+                }
             </div>
         </div>
     )
@@ -143,7 +176,7 @@ function App() {
 
 display(
     <DropdownProvider>
-        <App />
+        <App/>
     </DropdownProvider>
 )
 ```

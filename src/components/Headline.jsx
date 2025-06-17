@@ -1,7 +1,7 @@
 export function Headline({content} = {}) {
     return (
-        <div className="headline">
+        <h1 className="headline">
             {content}
-        </div>
+        </h1>
     )
 };

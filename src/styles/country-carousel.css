@@ -1,0 +1,123 @@
+:root {
+    --country-card-width: 300px;
+    --country-card-height: 400px;
+    --carousel-swatch-width: 145px;
+    --carousel-swatch-height: 43px;
+    --carousel-flag-icon-diameter: 52px;
+}
+
+.carousel-track {
+    overflow-x: auto;
+    padding: 1rem 0;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    gap: 1rem;
+    scrollbar-width: none; /* Firefox */
+}
+.carousel-track::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+}
+
+.carousel-country-card {
+    min-width: var(--country-card-width);
+    height: var(--country-card-height);
+    flex: 0 0 auto;
+    background: white;
+    border: 2px solid black;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.carousel-swatch {
+    width: var(--carousel-swatch-width);
+    height: var(--carousel-swatch-height);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-swatch-text {
+    font-family: Colfax;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19.2px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: white;
+    vertical-align: middle;
+}
+
+.carousel-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.carousel-country-name {
+    font-family: Colfax;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.carousel-header > .fi.fis {
+    display: inline-block;
+    width: var(--carousel-flag-icon-diameter);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 0 !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    vertical-align: middle;
+}
+
+/* Make Sao Tome & principe and Central African Republic flag-icons larger as they are smaller by default */
+.fi-st,
+.fi-cf{
+    transform: scale(1.3);
+}
+
+.carousel-row {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 10px;
+
+}
+
+.carousel-var-name {
+    font-family: Italian Plate;
+    font-weight: 400;
+    font-size: 19.2px;
+    line-height: 21.12px;
+    letter-spacing: 0px;
+    margin: 0;
+}
+
+.carousel-var-value {
+    font-family: Italian Plate;
+    font-weight: 700;
+    font-size: 96px;
+    line-height: 100%;
+    letter-spacing: 0.75%;
+    margin: 0;
+}
+
+.scroll-message {
+    font-family: Italian Plate;
+    font-weight: 400;
+    font-size: 17.6px;
+    line-height: 19.36px;
+    letter-spacing: 0px;
+    text-align: left;
+    margin: 0;
+}

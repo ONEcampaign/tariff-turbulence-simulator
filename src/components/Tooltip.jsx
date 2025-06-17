@@ -29,16 +29,16 @@ export function Tooltip({ x, y, tooltipData, isVisible } ={}) {
                 </span>
             </div>
             <div className="tooltip-header">
-                <span className="tooltip-country-name">{tooltipData.country}</span>
-                <span className={`fi fi-${tooltipData.iso2.toLowerCase()} fis`}></span>
+                <h3 className="tooltip-country-name">{tooltipData.country}</h3>
+                <p className={`fi fi-${tooltipData.iso2.toLowerCase()} fis`}></p>
             </div>
             <div className="tooltip-row">
-                <span className="tooltip-var-name">Total exposure</span>
-                <span className="tooltip-var-value">{tooltipData.impact_usd}</span>
+                <h4 className="tooltip-var-name">Total exposure</h4>
+                <p className="tooltip-var-value">{tooltipData.impact_usd}</p>
             </div>
             <div className="tooltip-row">
-                <span className="tooltip-var-name">% of GDP</span>
-                <span className="tooltip-var-value">{tooltipData.impact_pct}</span>
+                <h4 className="tooltip-var-name">% of GDP</h4>
+                <p className="tooltip-var-value">{tooltipData.impact_pct}</p>
             </div>
         </div>
     )

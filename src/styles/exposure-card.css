@@ -1,6 +1,6 @@
 .exposure-card {
     width: var(--wrapper-width);
-    margin: 50px auto;
+    margin: var(--extra-large-margin) auto;
     padding: 24px;
     display: flex;
     flex-direction: row;
@@ -12,7 +12,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 60%;
     gap: 30px
 }
 
@@ -23,6 +22,7 @@
     line-height: 33.44px;
     letter-spacing: 0px;
     text-align: left;
+    margin: 0;
 }
 
 .exports-text {
@@ -32,6 +32,7 @@
     line-height: 125%;
     letter-spacing: 0%;
     text-align: left;
+    margin: 0;
 }
 
 .tariff-text {
@@ -41,4 +42,6 @@
     line-height: 100%;
     letter-spacing: 1%;
     vertical-align: middle;
+    margin: 0;
+    width: max-content;
 }
