@@ -17,6 +17,7 @@
 @import url("./styles/subsection-text.css");
 @import url("./styles/toggle-button.css");
 @import url("./styles/country-carousel.css");
+@import url("./styles/single-country-card.css");
 
 :root {
     --wrapper-width:  768px;
