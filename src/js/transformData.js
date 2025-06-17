@@ -1,31 +1,31 @@
 import { formatCurrency, formatPercentage } from "./format.js";
 
 export function generateCrossData(data, geoData) {
-    // 1. Unique products from the dataset
+    // Unique products from the dataset
     const products = Array.from(new Set(data.map(d => d.product)));
 
-    // 2. Collect all keys (columns) present in the original data
+    // Collect all keys (columns) present in the original data
     const dataKeys = new Set(data.flatMap(d => Object.keys(d)));
     dataKeys.add("iso2"); // Ensure iso2 is always included
 
-    // 3. Build iso2 → iso3 mapping from geoData
+    // Build iso2 → iso3 mapping from geoData
     const iso2to3 = Object.fromEntries(
         geoData.features
             .map(f => [f.properties.iso2, f.properties.iso3])
             .filter(([iso2, iso3]) => iso2 && iso3)
     );
 
-    // 4. Build country list from geoData with both iso2 and iso3
+    // Build country list from geoData with both iso2 and iso3
     const countries = geoData.features.map(f => ({
         iso3: f.properties.iso3,
         iso2: f.properties.iso2,
         country: f.properties.country
     }));
 
-    // 5. Create lookup using iso3 keys
+    // Create lookup using iso3 keys
     const dataMap = new Map(data.map(d => [`${d.iso3}|${d.product}`, d]));
 
-    // 6. Build crossData entries
+    // Build crossData entries
     const crossData = [];
 
     for (const { iso3, iso2, country } of countries) {
@@ -55,7 +55,7 @@ export function generateCrossData(data, geoData) {
         }
     }
 
-    // 7. Add any "ALL" rows
+    // Add any "ALL" rows
     for (const d of data) {
         if (d.iso3 === "ALL") {
             crossData.push({
@@ -112,7 +112,7 @@ export function generateProductGroups(crossData) {
     });
 }
 
-export function generateCountryData(selectedData, selectedTariff) {
+export function generateExposureCardData(selectedData, selectedTariff) {
     return {
         country: selectedData.country === "All countries"
             ? "all countries"
@@ -149,4 +149,16 @@ export function generateTooltipData(hoveredData, selectedTariff) {
             ? formatPercentage((hoveredData.exports * hoveredData.etr) / hoveredData.gdp)
             : null
     };
+}
+
+export function generateCarouselData(data, selectedSector) {
+    return data
+        .filter(d => d.product === selectedSector && d.country !== "All countries")
+        .map(d => ({
+            country: d.country,
+            iso2: d.iso2,
+            etr: d.etr,
+            impact_usd: d.exports * d.etr,
+            impact_pct: (d.exports * d.etr) / d.gdp,
+        }));
 }
