@@ -5,5 +5,5 @@
     line-height: 81.6px;
     letter-spacing: 0.75%;
     text-align: left;
-    margin-bottom: 20px;
+    margin: 0 0 var(--medium-margin);
 }

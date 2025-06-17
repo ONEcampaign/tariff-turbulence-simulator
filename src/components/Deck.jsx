@@ -1,7 +1,7 @@
 export function Deck({content} = {}) {
     return (
-        <div className="deck">
+        <h2 className="deck">
             {content}
-        </div>
+        </h2>
     )
 };

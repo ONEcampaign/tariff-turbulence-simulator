@@ -2,18 +2,17 @@ export function ExposureCard({countryData} = {}) {
     return (
         <div className="tariff-card exposure-card">
             <div className="left-column">
-                <span
+                <h4
                     className="description-text">Exposure to the US tariffs for {countryData.country} exports of {countryData.product}
-                </span>
-
-                <span className="exports-text">
+                </h4>
+                <p className="exports-text">
                     Simulated tariff: <b>{countryData.tariff}</b>
-                </span>
+                </p>
             </div>
             <div className="right-column">
-                <span className="tariff-text">
+                <p className="tariff-text">
                     {countryData.impact_usd}
-                </span>
+                </p>
             </div>
         </div>
     )

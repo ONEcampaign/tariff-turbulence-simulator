@@ -1,7 +1,7 @@
 export function IntroText({content} = {}) {
     return (
-        <div className="intro-text">
+        <p className="intro-text">
             {content}
-        </div>
+        </p>
     )
 };
