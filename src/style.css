@@ -21,7 +21,7 @@
 @import url("./styles/tariff-buttons.css");
 
 :root {
-    --wrapper-width:  768px;
+    --main-block-width:  768px;
     --filters-width: 250px;
 
     --small-margin: 10px;
@@ -33,7 +33,7 @@
 /* center-block styles */
 .main-block {
     margin: auto;
-    max-width: var(--wrapper-width);
+    max-width: var(--main-block-width);
     text-align: center;
 }
 
