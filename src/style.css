@@ -18,6 +18,7 @@
 @import url("./styles/toggle-button.css");
 @import url("./styles/country-carousel.css");
 @import url("./styles/single-country-card.css");
+@import url("./styles/tariff-buttons.css");
 
 :root {
     --wrapper-width:  768px;
