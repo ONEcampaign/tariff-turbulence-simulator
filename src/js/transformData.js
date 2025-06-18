@@ -167,7 +167,7 @@ export function generateCarouselData(data, selectedSector, selectedIndividualTar
         }));
 }
 
-export function generateSingleCountryCardData(data, selectedCountry, selectedTariff) {
+export function generateSingleCountryCardData(data, selectedCountry, selectedIndividualTariff) {
     return data
         .filter(d => d.iso3 === selectedCountry)
         .map(d => ({
@@ -175,7 +175,11 @@ export function generateSingleCountryCardData(data, selectedCountry, selectedTar
             iso2: d.iso2,
             product: d.product,
             etr: d.etr,
-            impact_usd: d.exports * selectedTariff,
-            impact_pct: (d.exports * selectedTariff) / d.gdp,
+            impact_usd: selectedIndividualTariff === "ETR" ?
+                d.exports * d.etr :
+                d.exports * selectedIndividualTariff,
+            impact_pct: selectedIndividualTariff === "ETR" ?
+                (d.exports * d.etr) / d.gdp :
+                (d.exports * selectedIndividualTariff) / d.gdp,
         }));
 }

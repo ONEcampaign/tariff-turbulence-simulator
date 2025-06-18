@@ -1,16 +1,17 @@
 import * as React from "npm:react";
 import * as d3 from "npm:d3";
-import { BarChart } from "../components/BarChart.js";
+import { BarChart } from "./BarChart.js";
 import { formatPercentage, formatCurrency } from "../js/format.js";
 import { colorPalette } from "../js/colorPalette.js";
 import { riskThresholds } from "../js/riskThresholds.js";
+import {TariffButtons} from "./TariffButtons.js";
 
 const colorScale = d3.scaleThreshold(
     riskThresholds,
     [colorPalette.low, colorPalette.medium, colorPalette.high]
 );
 
-export function SingleCountryCard({ data }) {
+export function SingleCountryCard({ data, selectedTariff, selectedIndividualTariff, setSelectedIndividualTariff }) {
     const allProductsData = data.find((d) => d.product === "All products");
 
     const topProducts = data
@@ -52,6 +53,21 @@ export function SingleCountryCard({ data }) {
                 </h3>
             </div>
 
+            <div className="single-country-card-settings">
+                <div className="single-country-card-settings-partner">
+                    <p>Trade partner</p>
+                    <span>US</span>
+                </div>
+                <div className="single-country-card-settings-tariff">
+                    <p>Individual tariff</p>
+                    <TariffButtons
+                        selectedTariff={selectedTariff}
+                        selectedIndividualTariff={selectedIndividualTariff}
+                        setSelectedIndividualTariff={setSelectedIndividualTariff}
+                    />
+                </div>
+            </div>
+
             <div className="single-country-card-row">
                 <h4 className="single-country-card-var-name">Total exposure</h4>
                 <p className="single-country-card-var-value">
@@ -62,11 +78,11 @@ export function SingleCountryCard({ data }) {
             <div className="single-country-card-row">
                 <h4 className="single-country-card-var-name">% of GDP</h4>
                 <p className="single-country-card-var-value">
-                    {formatPercentage(allProductsData.impact_pct)}
+                {formatPercentage(allProductsData.impact_pct)}
                 </p>
             </div>
 
-            <BarChart data={topProducts} />
+            <BarChart data={topProducts}/>
         </div>
     );
 }
