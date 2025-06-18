@@ -52,7 +52,7 @@ export function BarChart({ data }) {
                 <g>
                     {data.map((d) => {
                         const barHeight = yScale(0) - yScale(d.impact_usd);
-                        const fitsInside = barHeight > 24;
+                        const fitsInside = barHeight > 25;
                         return (
                             <g key={d.product}>
                                 <rect
