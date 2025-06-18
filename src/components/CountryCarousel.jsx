@@ -3,13 +3,14 @@ import * as d3 from 'npm:d3';
 import {colorPalette} from "../js/colorPalette.js";
 import {riskThresholds} from "../js/riskThresholds.js";
 import {formatPercentage, formatCurrency} from "../js/format.js";
+import {TariffButtons} from "../components/TariffButtons.js";
 
 const colorScale = d3.scaleThreshold(
     riskThresholds,
     [colorPalette.low, colorPalette.medium, colorPalette.high]
 );
 
-export function CountryCarousel({data, selectedUnits = "usd"}) {
+export function CountryCarousel({data, selectedTariff, selectedIndividualTariff, setIndividualTariff, selectedUnits = "usd"}) {
     const sortKey = selectedUnits === "usd" ? "impact_usd" : "impact_pct";
     const cleaned = data.filter(
         (d) =>
@@ -23,16 +24,16 @@ export function CountryCarousel({data, selectedUnits = "usd"}) {
         <div className="carousel-container">
             <div className="carousel-track">
                 {sorted.map((countryData, index) => (
-                    <div className="carousel-country-card" key={countryData.iso2 || index}>
+                    <div className="carousel-card" key={countryData.iso2 || index}>
                         <div
-                            className="carousel-swatch"
+                            className="carousel-card-swatch"
                             style={{
                                 backgroundColor:
                                     countryData.etr != null ? colorScale(countryData.etr) : colorPalette.na
                             }}
                         >
                             <span
-                                className="carousel-swatch-text"
+                                className="carousel-card-swatch-text"
                                 style={{
                                     color: countryData.etr != null ? "white" : "black"
                                 }}
@@ -40,25 +41,36 @@ export function CountryCarousel({data, selectedUnits = "usd"}) {
                                 {countryData.etr != null ? `ETR: ${countryData.etr}%` : "No data"}
                             </span>
                         </div>
-                        <div className="carousel-header">
-                            <h3 className="carousel-country-name">{countryData.country}</h3>
+                        <div className="carousel-card-header">
+                            <h3 className="carousel-card-country-name">{countryData.country}</h3>
                             <span className={`fi fi-${countryData.iso2.toLowerCase()} fis`}></span>
                         </div>
-                        <div className="carousel-row">
-                            <h4 className="carousel-var-name">Total exposure</h4>
-                            <p className="carousel-var-value">{formatCurrency(countryData.impact_usd)}</p>
+                        <div className="carousel-card-row">
+                            <h4 className="carousel-card-var-name">Total exposure</h4>
+                            <p className="carousel-card-var-value">{formatCurrency(countryData.impact_usd)}</p>
                         </div>
-                        <div className="carousel-row">
-                            <h4 className="carousel-var-name">% of GDP</h4>
-                            <p className="carousel-var-value">{formatPercentage(countryData.impact_pct)}</p>
+                        <div className="carousel-card-row">
+                            <h4 className="carousel-card-var-name">% of GDP</h4>
+                            <p className="carousel-card-var-value">{formatPercentage(countryData.impact_pct)}</p>
+                        </div>
+                        <div className="carousel-card-partner-info">
+                            <p>Trade partner</p>
+                            <span>US</span>
+                        </div>
+                        <div className="carousel-card-tariff-info">
+                            <p>Individual tariff</p>
+                            <TariffButtons
+                                selectedTariff={selectedTariff}
+                                selectedIndividualTariff={selectedIndividualTariff}
+                                setIndividualTariff={setIndividualTariff}
+                            />
                         </div>
                     </div>
                 ))}
             </div>
-            <p className="scroll-message">Scroll to the right to view more countries →</p>
+            <p className="carousel-scroll-message">Scroll to the right to view more countries →</p>
         </div>
-    )
-        ;
+    );
 }
 
 
