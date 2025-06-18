@@ -5,7 +5,7 @@
 }
 
 .single-country-card {
-    width: var(--wrapper-width);
+    width: var(--main-block-width);
     flex: 0 0 auto;
     background: white;
     border: 2px solid black;

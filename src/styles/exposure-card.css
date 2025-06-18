@@ -1,5 +1,5 @@
 .exposure-card {
-    width: var(--wrapper-width);
+    width: var(--main-block-width);
     margin: var(--extra-large-margin) auto;
     padding: 24px;
     display: flex;
