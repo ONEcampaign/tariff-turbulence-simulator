@@ -43,6 +43,7 @@ function App() {
     const [selectedCountry, setSelectedCountry] = React.useState('ALL');
     const [selectedSector, setSelectedSector] = React.useState('All products');
     const [selectedTariff, setSelectedTariff] = React.useState();
+    const [selectedIndividualTariff, setIndividualTariff] = React.useState("ETR")
     const [tooltipContent, setTooltipContent] = React.useState({
         iso3: null,
         country: null,
@@ -77,7 +78,7 @@ function App() {
 
     const exposureCardData = generateExposureCardData(selectedData, selectedTariff);
     const tooltipData = generateTooltipData(hoveredData, selectedTariff);
-    const carouselData = generateCarouselData(crossData, selectedSector, selectedTariff)
+    const carouselData = generateCarouselData(crossData, selectedSector, selectedIndividualTariff)
     const singleCountryCardData = generateSingleCountryCardData(crossData, selectedCountry, selectedTariff)
 
     // Generate iso3-country name map for dropdown menu
@@ -160,6 +161,9 @@ function App() {
                             />
                             <CountryCarousel
                                 data={carouselData}
+                                selectedTariff={selectedTariff}
+                                selectedIndividualTariff={selectedIndividualTariff}
+                                setIndividualTariff={setIndividualTariff}
                                 selectedUnits={selectedUnits}
                             />
                         </div>
