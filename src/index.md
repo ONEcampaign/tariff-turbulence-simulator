@@ -43,6 +43,7 @@ function App() {
     const [selectedCountry, setSelectedCountry] = React.useState('ALL');
     const [selectedSector, setSelectedSector] = React.useState('All products');
     const [selectedTariff, setSelectedTariff] = React.useState();
+    const [selectedIndividualTariff, setSelectedIndividualTariff] = React.useState("ETR")
     const [tooltipContent, setTooltipContent] = React.useState({
         iso3: null,
         country: null,
@@ -77,8 +78,8 @@ function App() {
 
     const exposureCardData = generateExposureCardData(selectedData, selectedTariff);
     const tooltipData = generateTooltipData(hoveredData, selectedTariff);
-    const carouselData = generateCarouselData(crossData, selectedSector, selectedTariff)
-    const singleCountryCardData = generateSingleCountryCardData(crossData, selectedCountry, selectedTariff)
+    const carouselData = generateCarouselData(crossData, selectedSector, selectedIndividualTariff)
+    const singleCountryCardData = generateSingleCountryCardData(crossData, selectedCountry, selectedIndividualTariff)
 
     // Generate iso3-country name map for dropdown menu
     const countryEntries = generateCountryEntries(crossData);
@@ -119,8 +120,10 @@ function App() {
                 <div className="separator"></div>
                 <span className="filter-title">Simulate tariff</span>
                 <Slider
-                    value={selectedTariff ?? 0}
-                    setValue={setSelectedTariff}
+                    selectedTariff={selectedTariff ?? 0}
+                    setSelectedTariff={setSelectedTariff}
+                    selectedIndividualTariff={selectedIndividualTariff}
+                    setSelectedIndividualTariff={setSelectedIndividualTariff}
                     etr={Number.isFinite(selectedData.etr) ? selectedData.etr : 0}
                 />
             </div>
@@ -160,12 +163,18 @@ function App() {
                             />
                             <CountryCarousel
                                 data={carouselData}
+                                selectedTariff={selectedTariff}
+                                selectedIndividualTariff={selectedIndividualTariff}
+                                setSelectedIndividualTariff={setSelectedIndividualTariff}
                                 selectedUnits={selectedUnits}
                             />
                         </div>
                     ) : (
                         <SingleCountryCard
                             data={singleCountryCardData}
+                            selectedTariff={selectedTariff}
+                            selectedIndividualTariff={selectedIndividualTariff}
+                            setSelectedIndividualTariff={setSelectedIndividualTariff}
                         />
                     )
                 }

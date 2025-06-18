@@ -151,19 +151,23 @@ export function generateTooltipData(hoveredData, selectedTariff) {
     };
 }
 
-export function generateCarouselData(data, selectedSector, selectedTariff) {
+export function generateCarouselData(data, selectedSector, selectedIndividualTariff) {
     return data
         .filter(d => d.product === selectedSector && d.country !== "All countries")
         .map(d => ({
             country: d.country,
             iso2: d.iso2,
             etr: d.etr,
-            impact_usd: d.exports * selectedTariff,
-            impact_pct: (d.exports * selectedTariff) / d.gdp,
+            impact_usd: selectedIndividualTariff === "ETR" ?
+                d.exports * d.etr :
+                d.exports * selectedIndividualTariff,
+            impact_pct: selectedIndividualTariff === "ETR" ?
+                (d.exports * d.etr) / d.gdp :
+                (d.exports * selectedIndividualTariff) / d.gdp,
         }));
 }
 
-export function generateSingleCountryCardData(data, selectedCountry, selectedTariff) {
+export function generateSingleCountryCardData(data, selectedCountry, selectedIndividualTariff) {
     return data
         .filter(d => d.iso3 === selectedCountry)
         .map(d => ({
@@ -171,7 +175,11 @@ export function generateSingleCountryCardData(data, selectedCountry, selectedTar
             iso2: d.iso2,
             product: d.product,
             etr: d.etr,
-            impact_usd: d.exports * selectedTariff,
-            impact_pct: (d.exports * selectedTariff) / d.gdp,
+            impact_usd: selectedIndividualTariff === "ETR" ?
+                d.exports * d.etr :
+                d.exports * selectedIndividualTariff,
+            impact_pct: selectedIndividualTariff === "ETR" ?
+                (d.exports * d.etr) / d.gdp :
+                (d.exports * selectedIndividualTariff) / d.gdp,
         }));
 }

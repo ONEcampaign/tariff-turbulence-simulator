@@ -59,4 +59,9 @@
     letter-spacing: 0.4px;
     text-transform: uppercase;
     margin: 5px 0;
+    cursor: pointer;
+}
+
+.dropdown-list-item:hover {
+    font-weight: 700;
 }

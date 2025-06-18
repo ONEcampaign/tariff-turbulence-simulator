@@ -1,0 +1,43 @@
+:root {
+    --tariff-button-width: 46px;
+    --tariff-button-height: 27px;
+}
+
+.tariff-buttons-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.tariff-button {
+    width: var(--tariff-button-width);
+    height: var(--tariff-button-height);
+
+    color: black;
+    background-color: #E5E7EB;
+    font-family: Italian Plate;
+    font-weight: 400;
+    font-size: 17.6px;
+    /*line-height: 19.36px;*/
+    letter-spacing: 0px;
+    vertical-align: middle;
+    text-align: center;
+    border: 2px solid #E5E7EB;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+
+.tariff-button.selected {
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    border: 2px solid black;
+}
+
+.tariff-button:hover {
+    cursor: pointer;
+}
+
+.tariff-button.selected:hover {
+    cursor: default;
+}
