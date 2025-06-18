@@ -3,14 +3,14 @@ import * as d3 from 'npm:d3';
 import {colorPalette} from "../js/colorPalette.js";
 import {riskThresholds} from "../js/riskThresholds.js";
 import {formatPercentage, formatCurrency} from "../js/format.js";
-import {TariffButtons} from "../components/TariffButtons.js";
+import {TariffButtons} from "./TariffButtons.js";
 
 const colorScale = d3.scaleThreshold(
     riskThresholds,
     [colorPalette.low, colorPalette.medium, colorPalette.high]
 );
 
-export function CountryCarousel({data, selectedTariff, selectedIndividualTariff, setIndividualTariff, selectedUnits = "usd"}) {
+export function CountryCarousel({data, selectedTariff, selectedIndividualTariff, setSelectedIndividualTariff, selectedUnits = "usd"}) {
     const sortKey = selectedUnits === "usd" ? "impact_usd" : "impact_pct";
     const cleaned = data.filter(
         (d) =>
@@ -53,16 +53,16 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                             <h4 className="carousel-card-var-name">% of GDP</h4>
                             <p className="carousel-card-var-value">{formatPercentage(countryData.impact_pct)}</p>
                         </div>
-                        <div className="carousel-card-partner-info">
+                        <div className="carousel-card-settings-partner">
                             <p>Trade partner</p>
                             <span>US</span>
                         </div>
-                        <div className="carousel-card-tariff-info">
+                        <div className="carousel-card-settings-tariff">
                             <p>Individual tariff</p>
                             <TariffButtons
                                 selectedTariff={selectedTariff}
                                 selectedIndividualTariff={selectedIndividualTariff}
-                                setIndividualTariff={setIndividualTariff}
+                                setSelectedIndividualTariff={setSelectedIndividualTariff}
                             />
                         </div>
                     </div>

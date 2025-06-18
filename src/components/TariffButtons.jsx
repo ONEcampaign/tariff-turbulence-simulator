@@ -1,18 +1,18 @@
 import * as React from "npm:react";
 
-export function TariffButtons({ selectedTariff, selectedIndividualTariff, setIndividualTariff }) {
+export function TariffButtons({ selectedTariff, selectedIndividualTariff, setSelectedIndividualTariff }) {
 
     return (
         <div className="tariff-buttons-wrapper">
             <button
                 className={`tariff-button ${selectedIndividualTariff === "ETR" ? "selected" : ""}`}
-                onClick={() => setIndividualTariff("ETR")}
+                onClick={() => setSelectedIndividualTariff("ETR")}
             >
                 ETR
             </button>
             <button
                 className={`tariff-button ${selectedIndividualTariff !== "ETR" ? "selected" : ""}`}
-                onClick={() => setIndividualTariff(selectedTariff)}
+                onClick={() => setSelectedIndividualTariff(selectedTariff)}
             >
                 {selectedTariff}%
             </button>
