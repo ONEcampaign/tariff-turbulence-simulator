@@ -120,10 +120,10 @@ export function generateExposureCardData(selectedData, selectedTariff) {
         product: selectedData.product.toLowerCase(),
         tariff: `${selectedTariff}%`,
         exports: selectedData.exports != null
-            ? formatCurrency(selectedData.exports)
+            ? formatCurrency(selectedData.exports / 100)
             : null,
         impact_usd: selectedData.exports != null
-            ? formatCurrency(selectedData.exports * selectedTariff)
+            ? formatCurrency(selectedData.exports * selectedTariff / 100)
             : null
     };
 }
@@ -143,10 +143,10 @@ export function generateTooltipData(hoveredData, selectedTariff) {
             ? formatCurrency(hoveredData.exports)
             : null,
         impact_usd: hoveredData?.exports != null && hoveredData?.etr !== null
-            ? formatCurrency(hoveredData.exports * hoveredData.etr)
+            ? formatCurrency(hoveredData.exports * hoveredData.etr / 100)
             : null,
         impact_pct: hoveredData?.exports != null && hoveredData.gdp != null && hoveredData?.etr !== null
-            ? formatPercentage((hoveredData.exports * hoveredData.etr) / hoveredData.gdp)
+            ? formatPercentage((hoveredData.exports * hoveredData.etr / 100) / hoveredData.gdp)
             : null
     };
 }
@@ -159,11 +159,11 @@ export function generateCarouselData(data, selectedSector, selectedIndividualTar
             iso2: d.iso2,
             etr: d.etr,
             impact_usd: selectedIndividualTariff === "ETR" ?
-                d.exports * d.etr :
-                d.exports * selectedIndividualTariff,
+                d.exports * d.etr / 100:
+                d.exports * selectedIndividualTariff/ 100,
             impact_pct: selectedIndividualTariff === "ETR" ?
-                (d.exports * d.etr) / d.gdp :
-                (d.exports * selectedIndividualTariff) / d.gdp,
+                (d.exports * d.etr / 100) / d.gdp :
+                (d.exports * selectedIndividualTariff / 100) / d.gdp,
         }));
 }
 
@@ -176,10 +176,10 @@ export function generateSingleCountryCardData(data, selectedCountry, selectedInd
             product: d.product,
             etr: d.etr,
             impact_usd: selectedIndividualTariff === "ETR" ?
-                d.exports * d.etr :
-                d.exports * selectedIndividualTariff,
+                d.exports * d.etr * 10e-3 :
+                d.exports * selectedIndividualTariff * 10e-3,
             impact_pct: selectedIndividualTariff === "ETR" ?
-                (d.exports * d.etr) / d.gdp :
-                (d.exports * selectedIndividualTariff) / d.gdp,
+                (d.exports * d.etr * 10e-3) / d.gdp :
+                (d.exports * selectedIndividualTariff * 10e-3) / d.gdp,
         }));
 }
