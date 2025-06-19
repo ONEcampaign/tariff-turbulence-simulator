@@ -41,7 +41,7 @@ function App() {
     const height = 600;
 
     // Reactive variables
-    const [selectedCountry, setSelectedCountry] = React.useState('KEN');
+    const [selectedCountry, setSelectedCountry] = React.useState('ALL');
     const [selectedSector, setSelectedSector] = React.useState('All products');
     const [selectedTariff, setSelectedTariff] = React.useState();
     const [selectedIndividualTariff, setSelectedIndividualTariff] = React.useState("ETR")
@@ -53,6 +53,20 @@ function App() {
     })
     const isTooltipVisible = tooltipContent.country !== null;
     const [selectedUnits, setSelectedUnits] = React.useState("usd")
+
+    // When country changes, reset sector if necessary
+        React.useEffect(() => {
+            if (selectedCountry !== "ALL" && selectedSector !== "All products") {
+                setSelectedSector("All products");
+            }
+        }, [selectedCountry]);
+    
+    // When sector changes, reset country if necessary
+        React.useEffect(() => {
+            if (selectedSector !== "All products" && selectedCountry !== "ALL") {
+                setSelectedCountry("ALL");
+            }
+        }, [selectedSector]);
 
     // Crossed data between csv and geojson to make sure all countries are present
     const crossData = generateCrossData(recentData, geoData)
@@ -98,7 +112,7 @@ function App() {
     return (
         <div className="wrapper">
             <div className="sticky-controls">
-                <span className="filter-title">Filter the data</span>
+                <h4 className="controls-title">Filter the data</h4>
                 <Dropdown
                     dropdownId="countryMenu"
                     options={countryMap}
@@ -110,6 +124,7 @@ function App() {
                         return Number.isFinite(etr) ? etr : 0;
                     }}
                 />
+                <h5 className="controls-or">or</h5>
                 <Dropdown
                     dropdownId="productMenu"
                     options={productGroups}
@@ -121,8 +136,8 @@ function App() {
                         return Number.isFinite(etr) ? etr : 0;
                     }}
                 />
-                <div className="separator"></div>
-                <span className="filter-title">Simulate tariff</span>
+                <div className="controls-separator"></div>
+                <span className="controls-title extra-margin">Simulate tariff</span>
                 <Slider
                     selectedTariff={selectedTariff ?? 0}
                     setSelectedTariff={setSelectedTariff}
