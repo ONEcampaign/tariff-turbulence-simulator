@@ -1,6 +1,7 @@
 import * as React from "npm:react";
 import * as d3 from "npm:d3";
-import { BarChart } from "./BarChart.js";
+import { ColumnPlot } from "./ColumnPlot.js";
+import { LinePlot} from "./LinePlot.js";
 import { formatPercentage, formatCurrency } from "../js/format.js";
 import { colorPalette } from "../js/colorPalette.js";
 import { riskThresholds } from "../js/riskThresholds.js";
@@ -11,7 +12,10 @@ const colorScale = d3.scaleThreshold(
     [colorPalette.low, colorPalette.medium, colorPalette.high]
 );
 
-export function SingleCountryCard({ data, selectedTariff, selectedIndividualTariff, setSelectedIndividualTariff }) {
+export function SingleCountryCard({ data, historicalData, selectedTariff, selectedIndividualTariff, setSelectedIndividualTariff }) {
+
+    console.log(historicalData);
+
     const allProductsData = data.find((d) => d.product === "All products");
 
     const topProducts = data
@@ -68,21 +72,26 @@ export function SingleCountryCard({ data, selectedTariff, selectedIndividualTari
                 </div>
             </div>
 
-            <div className="single-country-card-row">
-                <h4 className="single-country-card-var-name">Total exposure</h4>
-                <p className="single-country-card-var-value">
-                    {formatCurrency(allProductsData.impact_usd)}
-                </p>
+            <div className="single-country-card-row-with-columns">
+                <div className="single-country-card-row-left-column">
+                    <h4 className="single-country-card-var-name">Total exposure</h4>
+                    <p className="single-country-card-var-value">
+                        {formatCurrency(allProductsData.impact_usd)}
+                    </p>
+                </div>
+                <LinePlot
+                    data={historicalData}
+                />
             </div>
 
             <div className="single-country-card-row">
                 <h4 className="single-country-card-var-name">% of GDP</h4>
                 <p className="single-country-card-var-value">
-                {formatPercentage(allProductsData.impact_pct)}
+                    {formatPercentage(allProductsData.impact_pct)}
                 </p>
             </div>
 
-            <BarChart data={topProducts}/>
+            <ColumnPlot data={topProducts}/>
         </div>
     );
 }

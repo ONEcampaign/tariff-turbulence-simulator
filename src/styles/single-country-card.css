@@ -130,7 +130,6 @@
     flex-direction: column;
     text-align: left;
     gap: 10px;
-
 }
 
 .single-country-card-var-name {
@@ -161,23 +160,24 @@
     text-align: left;
 }
 
-.bar-label {
-    font-family: "Italian Plate";
-    font-weight: 400;
-    font-size: 19.2px;
-    line-height: 21.12px;
-    letter-spacing: 0px;
-    text-align: center;
-    width: 100%;
-    white-space: normal;
-    word-wrap: break-word;
+.single-country-card-row-with-columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
 }
 
-.bar-value {
-    font-family: "Italian Plate";
-    font-weight: 700;
-    font-size: 19.2px;
-    line-height: 21.12px;
-    letter-spacing: 0px;
-    text-align: center;
+.single-country-card-row-left-column {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 10px;
+}
+
+.single-country-card-row-right-column {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 10px;
 }
