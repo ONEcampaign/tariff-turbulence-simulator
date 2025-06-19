@@ -107,7 +107,7 @@ function App() {
     const productGroups = generateProductGroups(crossData);
 
     // Determine the ETR for all countries
-    const allETR = crossData.find(d => d.iso3 === 'ALL' && d.product === selectedSector)?.etr ?? 0;
+    const allETR = crossData.find(d => d.iso3 === 'ALL' && d.product === selectedSector)?.etr ?? null;
 
     return (
         <div className="wrapper">
@@ -121,7 +121,7 @@ function App() {
                     setETR={setSelectedTariff}
                     getETRForOption={(iso3) => {
                         const etr = crossData.find(d => d.iso3 === iso3 && d.product === selectedSector)?.etr
-                        return Number.isFinite(etr) ? etr : 0;
+                        return Number.isFinite(etr) ? etr : null;
                     }}
                 />
                 <h5 className="controls-or">or</h5>
@@ -133,7 +133,7 @@ function App() {
                     setETR={setSelectedTariff}
                     getETRForOption={(product) => {
                         const etr = crossData.find(d => d.iso3 === selectedCountry && d.product === product)?.etr;
-                        return Number.isFinite(etr) ? etr : 0;
+                        return Number.isFinite(etr) ? etr  : null;
                     }}
                 />
                 <div className="controls-separator"></div>
@@ -143,7 +143,7 @@ function App() {
                     setSelectedTariff={setSelectedTariff}
                     selectedIndividualTariff={selectedIndividualTariff}
                     setSelectedIndividualTariff={setSelectedIndividualTariff}
-                    etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : 0}
+                    etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
                 />
             </div>
             <div className="main-block">
@@ -161,7 +161,7 @@ function App() {
                     clickedCountry={selectedCountry}
                     setCountry={setSelectedCountry}
                     setETR={setSelectedTariff}
-                    allETR={Number.isFinite(allETR) ? allETR : 0}
+                    allETR={Number.isFinite(allETR) ? allETR : null}
                     setTooltip={setTooltipContent}
                 />
                 <Tooltip
