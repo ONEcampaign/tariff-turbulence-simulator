@@ -4,7 +4,7 @@ import pandas as pd
 from pathlib import Path
 
 from bblocks import places
-import bblocks_data_importers as bbdata
+from bblocks.data_importers import WEO
 
 from src.data.config import PATHS
 
@@ -26,7 +26,7 @@ def load_json(filepath: Path) -> dict:
 
 def import_data() -> pd.DataFrame:
     """Import raw trade data CSV from predefined path."""
-    return pd.read_csv(PATHS.IMPORTS_2024)
+    return pd.read_csv(PATHS.EXPORTS_2024)
 
 
 # === Data Cleaning ===
@@ -70,8 +70,10 @@ def add_product_group_column(df: pd.DataFrame) -> pd.DataFrame:
 
 def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
 
-    df["iso3"] = places.resolve(df["country"], to_type="iso3_code", not_found="ALL")
-    df["country"] = places.resolve(df["iso3"], to_type="name_short", not_found="All countries")
+    df["iso3"] = places.resolve_places(df["country"], to_type="iso3_code", not_found="ALL")
+    df.loc[df["iso3"].isna(), "iso3"] = "ALL"
+    df["country"] = places.resolve_places(df["iso3"], to_type="name_short", not_found="All countries")
+    df.loc[df["country"].isna(), "country"] = "All countries"
 
     return df
 
@@ -81,14 +83,14 @@ def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
 def get_africa_gdp_data() -> pd.DataFrame:
     """Retrieve GDP data from African countries"""
 
-    weo = bbdata.WEO()
+    weo = WEO()
     data = weo.get_data()
 
     gdp_df = data.query("`indicator_code` == 'NGDPD' and `year` == 2024")
     gdp_df.loc[:, "gdp"] = gdp_df["value"] * gdp_df["scale_code"]
-    gdp_df.loc[:, "region"] = places.resolve(gdp_df["entity_name"], to_type="region", not_found="ignore")
+    gdp_df.loc[:, "region"] = places.resolve_places(gdp_df["entity_name"], to_type="region", not_found="ignore")
     gdp_df = gdp_df.query("`region` == 'Africa'")
-    gdp_df.loc[:, "iso3"] = places.resolve(gdp_df["entity_name"], to_type="iso3_code")
+    gdp_df.loc[:, "iso3"] = places.resolve_places(gdp_df["entity_name"], to_type="iso3_code", not_found="ignore")
 
     return gdp_df[["iso3", "gdp"]]
 

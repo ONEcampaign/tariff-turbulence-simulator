@@ -28,7 +28,8 @@ import {
     headline, deck, introText, legendTitle, legendSubtitle, subsectionTitle, subsectionText
 } from "./js/copyText.js";
 
-const data = FileAttachment("./data/us_africa_trade.csv").csv({typed: true});
+const recentData = FileAttachment("./data/africa_exports_to_us_2024.csv").csv({typed: true});
+const historicalData = FileAttachment("./data/africa_exports_to_us_2002_2023.csv").csv({typed: true});
 const geoData = FileAttachment("./data/africa_hexmap.geojson").json({typed: true});
 ```
 
@@ -40,7 +41,7 @@ function App() {
     const height = 600;
 
     // Reactive variables
-    const [selectedCountry, setSelectedCountry] = React.useState('ALL');
+    const [selectedCountry, setSelectedCountry] = React.useState('KEN');
     const [selectedSector, setSelectedSector] = React.useState('All products');
     const [selectedTariff, setSelectedTariff] = React.useState();
     const [selectedIndividualTariff, setSelectedIndividualTariff] = React.useState("ETR")
@@ -54,14 +55,17 @@ function App() {
     const [selectedUnits, setSelectedUnits] = React.useState("usd")
 
     // Crossed data between csv and geojson to make sure all countries are present
-    const crossData = generateCrossData(data, geoData)
+    const crossData = generateCrossData(recentData, geoData)
 
     // Data to use on hexMap
     const mapData = generateMapData(crossData, geoData, selectedSector)
 
     // Set data on click
-    const selectedData = crossData.find(
+    const selectedRecentData = crossData.find(
         d => d.iso3 === selectedCountry && d.product === selectedSector
+    );
+    const selectedHistoricalData = historicalData.filter(
+        d => d.iso3 === selectedCountry
     );
 
     // Set data on hover
@@ -71,12 +75,12 @@ function App() {
 
     // Set ETR as default tariff
     React.useEffect(() => {
-        if (selectedData?.etr != null && selectedTariff == null) {
-            setSelectedTariff(selectedData.etr);
+        if (selectedRecentData?.etr != null && selectedTariff == null) {
+            setSelectedTariff(selectedRecentData.etr);
         }
-    }, [selectedData, selectedTariff]);
+    }, [selectedRecentData, selectedTariff]);
 
-    const exposureCardData = generateExposureCardData(selectedData, selectedTariff);
+    const exposureCardData = generateExposureCardData(selectedRecentData, selectedTariff);
     const tooltipData = generateTooltipData(hoveredData, selectedTariff);
     const carouselData = generateCarouselData(crossData, selectedSector, selectedIndividualTariff)
     const singleCountryCardData = generateSingleCountryCardData(crossData, selectedCountry, selectedIndividualTariff)
@@ -124,7 +128,7 @@ function App() {
                     setSelectedTariff={setSelectedTariff}
                     selectedIndividualTariff={selectedIndividualTariff}
                     setSelectedIndividualTariff={setSelectedIndividualTariff}
-                    etr={Number.isFinite(selectedData.etr) ? selectedData.etr : 0}
+                    etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : 0}
                 />
             </div>
             <div className="main-block">
@@ -172,6 +176,7 @@ function App() {
                     ) : (
                         <SingleCountryCard
                             data={singleCountryCardData}
+                            historicalData={selectedHistoricalData}
                             selectedTariff={selectedTariff}
                             selectedIndividualTariff={selectedIndividualTariff}
                             setSelectedIndividualTariff={setSelectedIndividualTariff}

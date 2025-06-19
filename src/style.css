@@ -17,8 +17,10 @@
 @import url("./styles/subsection-text.css");
 @import url("./styles/toggle-button.css");
 @import url("./styles/country-carousel.css");
-@import url("./styles/single-country-card.css");
 @import url("./styles/tariff-buttons.css");
+@import url("./styles/single-country-card.css");
+@import url("./styles/column-plot.css");
+@import url("./styles/line-plot.css");
 
 :root {
     --main-block-width:  768px;

@@ -3,7 +3,7 @@ import * as d3 from "npm:d3";
 import { formatCurrency } from "../js/format.js";
 import { colorPalette } from "../js/colorPalette.js";
 
-export function BarChart({ data }) {
+export function ColumnPlot({ data }) {
     const containerRef = React.useRef(null);
     const [width, setWidth] = React.useState(0);
 
@@ -63,7 +63,7 @@ export function BarChart({ data }) {
                                     fill={colorPalette.columns}
                                 />
                                 <text
-                                    className="bar-value"
+                                    className="column-plot-value"
                                     x={xScale(d.product) + xScale.bandwidth() / 2}
                                     y={
                                         fitsInside
@@ -99,7 +99,7 @@ export function BarChart({ data }) {
                 {data.map((d) => (
                     <div
                         key={d.product}
-                        className="bar-label"
+                        className="column-plot-label"
                         style={{ width: `${xScale.bandwidth()}px` }}
                     >
                         {d.product}
