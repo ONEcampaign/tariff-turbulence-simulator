@@ -14,7 +14,7 @@ import {SubsectionText} from "./components/SubsectionText.js";
 import {ToggleButton} from "./components/ToggleButton.js";
 import {CountryCarousel} from "./components/CountryCarousel.js"
 import {SelectionCard} from "./components/SelectionCard.js";
-import {useMutualExclusion} from "./components/MutualExclusion.js";
+import {MutualExclusion} from "./components/MutualExclusion.js";
 import {
     generateCrossData,
     generateMapData,
@@ -62,7 +62,7 @@ function App() {
     const {
         updateCountry,
         updateSector
-    } = useMutualExclusion({
+    } = MutualExclusion({
         selectedCountry,
         selectedSector,
         setSelectedCountry,

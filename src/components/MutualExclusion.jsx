@@ -1,7 +1,7 @@
 import * as React from "npm:react";
 
 // Utility to update both country and sector in a controlled way
-export function useMutualExclusion({
+export function MutualExclusion({
                                        selectedCountry,
                                        selectedSector,
                                        setSelectedCountry,
