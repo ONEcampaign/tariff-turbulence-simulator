@@ -95,7 +95,13 @@ export function Dropdown({
         <div className="dropdown">
             <div className="dropdown-menu">
                 <div className="dropdown-selected" onClick={toggleOpen}>
-                    <span>{labelMap[selectedOption]}</span>
+                    <span className={!labelMap[selectedOption] ? "placeholder" : ""}>
+                        {labelMap[selectedOption] === "All countries"
+                            ? "Choose a country"
+                            : labelMap[selectedOption] === "All products"
+                                ? "Choose a sector"
+                                : labelMap[selectedOption]}
+                    </span>
                     <ChevronDown className={`dropdown-chevron ${isOpen ? "rotate" : ""}`} />
                 </div>
                 {isOpen && (
@@ -124,8 +130,8 @@ export function Dropdown({
                                     onClick={() => selectOption(option)}
                                     onKeyDown={e => handleItemKeyDown(e, i)}
                                 >
-                  {labelMap[option]}
-                </span>
+                                    {labelMap[option]}
+                                </span>
                             ))}
                         </div>
                     </div>
