@@ -1,19 +1,19 @@
 ```js
-import { Headline } from './components/Headline.js';
-import { Deck } from './components/Deck.js';
-import { IntroText } from './components/IntroText.js'
-import { Legend } from './components/Legend.js';
-import { AfricaHexmap } from './components/AfricaHexmap.js';
-import { ExposureCard } from './components/ExposureCard.js';
-import { Dropdown } from "./components/Dropdown.js";
-import { DropdownProvider } from "./components/DropdownContext.js";
-import { Slider } from "./components/Slider.js";
-import { Tooltip } from "./components/Tooltip.js";
-import { SubsectionTitle } from "./components/SubsectionTitle.js";
-import { SubsectionText } from "./components/SubsectionText.js";
-import { ToggleButton } from "./components/ToggleButton.js";
-import { CountryCarousel } from "./components/CountryCarousel.js"
-import { SingleCountryCard } from "./components/SingleCountryCard.js";
+import {Headline} from './components/Headline.js';
+import {Deck} from './components/Deck.js';
+import {IntroText} from './components/IntroText.js'
+import {Legend} from './components/Legend.js';
+import {AfricaHexmap} from './components/AfricaHexmap.js';
+import {ExposureCard} from './components/ExposureCard.js';
+import {Dropdown} from "./components/Dropdown.js";
+import {DropdownProvider} from "./components/DropdownContext.js";
+import {Slider} from "./components/Slider.js";
+import {Tooltip} from "./components/Tooltip.js";
+import {SubsectionTitle} from "./components/SubsectionTitle.js";
+import {SubsectionText} from "./components/SubsectionText.js";
+import {ToggleButton} from "./components/ToggleButton.js";
+import {CountryCarousel} from "./components/CountryCarousel.js"
+import {SelectionCard} from "./components/SelectionCard.js";
 import {
     generateCrossData,
     generateMapData,
@@ -22,7 +22,8 @@ import {
     generateExposureCardData,
     generateTooltipData,
     generateCarouselData,
-    generateSingleCountryCardData
+    generateSelectionCardData,
+    binaryFilter
 } from "./js/transformData.js";
 import {
     headline, deck, introText, legendTitle, legendSubtitle, subsectionTitle, subsectionText
@@ -55,18 +56,18 @@ function App() {
     const [selectedUnits, setSelectedUnits] = React.useState("usd")
 
     // When country changes, reset sector if necessary
-        React.useEffect(() => {
-            if (selectedCountry !== "ALL" && selectedSector !== "All products") {
-                setSelectedSector("All products");
-            }
-        }, [selectedCountry]);
-    
+    React.useEffect(() => {
+        if (selectedCountry !== "ALL" && selectedSector !== "All products") {
+            setSelectedSector("All products");
+        }
+    }, [selectedCountry]);
+
     // When sector changes, reset country if necessary
-        React.useEffect(() => {
-            if (selectedSector !== "All products" && selectedCountry !== "ALL") {
-                setSelectedCountry("ALL");
-            }
-        }, [selectedSector]);
+    React.useEffect(() => {
+        if (selectedSector !== "All products" && selectedCountry !== "ALL") {
+            setSelectedCountry("ALL");
+        }
+    }, [selectedSector]);
 
     // Crossed data between csv and geojson to make sure all countries are present
     const crossData = generateCrossData(recentData, geoData)
@@ -77,9 +78,6 @@ function App() {
     // Set data on click
     const selectedRecentData = crossData.find(
         d => d.iso3 === selectedCountry && d.product === selectedSector
-    );
-    const selectedHistoricalData = historicalData.filter(
-        d => d.iso3 === selectedCountry
     );
 
     // Set data on hover
@@ -97,7 +95,8 @@ function App() {
     const exposureCardData = generateExposureCardData(selectedRecentData, selectedTariff);
     const tooltipData = generateTooltipData(hoveredData, selectedTariff);
     const carouselData = generateCarouselData(crossData, selectedSector, selectedIndividualTariff)
-    const singleCountryCardData = generateSingleCountryCardData(crossData, selectedCountry, selectedIndividualTariff)
+    const selectionCardData = generateSelectionCardData(crossData, selectedCountry, selectedSector, selectedIndividualTariff)
+    const selectedHistoricalData = binaryFilter(historicalData, selectedCountry, selectedSector)
 
     // Generate iso3-country name map for dropdown menu
     const countryEntries = generateCountryEntries(crossData);
@@ -133,7 +132,7 @@ function App() {
                     setETR={setSelectedTariff}
                     getETRForOption={(product) => {
                         const etr = crossData.find(d => d.iso3 === selectedCountry && d.product === product)?.etr;
-                        return Number.isFinite(etr) ? etr  : null;
+                        return Number.isFinite(etr) ? etr : null;
                     }}
                 />
                 <div className="controls-separator"></div>
@@ -174,7 +173,7 @@ function App() {
                 <SubsectionTitle content={subsectionTitle}/>
                 <SubsectionText content={subsectionText}/>
                 {
-                    selectedCountry === "ALL" ? (
+                    selectedCountry === "ALL" && selectedSector === "All products" ? (
                         <div>
                             <ToggleButton
                                 selected={selectedUnits}
@@ -189,9 +188,10 @@ function App() {
                             />
                         </div>
                     ) : (
-                        <SingleCountryCard
-                            data={singleCountryCardData}
+                        <SelectionCard
+                            data={selectionCardData}
                             historicalData={selectedHistoricalData}
+                            mode={selectedCountry === "ALL" ? "product" : "country"}
                             selectedTariff={selectedTariff}
                             selectedIndividualTariff={selectedIndividualTariff}
                             setSelectedIndividualTariff={setSelectedIndividualTariff}

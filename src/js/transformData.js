@@ -167,9 +167,22 @@ export function generateCarouselData(data, selectedSector, selectedIndividualTar
         }));
 }
 
-export function generateSingleCountryCardData(data, selectedCountry, selectedIndividualTariff) {
+export function binaryFilter(data, selectedCountry, selectedSector) {
+
+    if (selectedCountry !== "ALL") {
+        return data.filter(d => d.iso3 === selectedCountry);
+    } else if (selectedSector !== "All products") {
+        return data.filter(d => d.product === selectedSector);
+    } else {
+        return data
+    }
+}
+
+export function generateSelectionCardData(data, selectedCountry, selectedSector, selectedIndividualTariff) {
+
+    data = binaryFilter(data, selectedCountry, selectedSector);
+
     return data
-        .filter(d => d.iso3 === selectedCountry)
         .map(d => ({
             country: d.country,
             iso2: d.iso2,

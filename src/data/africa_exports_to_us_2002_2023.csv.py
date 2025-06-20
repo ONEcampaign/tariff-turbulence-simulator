@@ -75,7 +75,7 @@ def clean_df(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
-def add_all_products (df: pd.DataFrame) -> pd.DataFrame:
+def add_all_countries(df: pd.DataFrame) -> pd.DataFrame:
 
     df_all = group_data(df, ["year", "product"])
 
@@ -86,9 +86,20 @@ def add_all_products (df: pd.DataFrame) -> pd.DataFrame:
 
     return combined_df
 
+def add_all_products(df: pd.DataFrame) -> pd.DataFrame:
+
+    df_all = group_data(df, ["year", "iso3", "country"])
+
+    df_all["product"] = "All products"
+
+    combined_df = pd.concat([df, df_all])
+
+    return combined_df
+
 if __name__ == "__main__":
     df = get_trade_data()
     df = clean_df(df)
+    df = add_all_countries(df)
     df = add_all_products(df)
     df.to_csv(sys.stdout, index=False)
 
