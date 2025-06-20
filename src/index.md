@@ -14,7 +14,6 @@ import {SubsectionText} from "./components/SubsectionText.js";
 import {ToggleButton} from "./components/ToggleButton.js";
 import {CountryCarousel} from "./components/CountryCarousel.js"
 import {SelectionCard} from "./components/SelectionCard.js";
-import {useMutualExclusion} from "./components/MutualExclusion.js";
 import {
     generateCrossData,
     generateMapData,
@@ -56,20 +55,22 @@ function App() {
     const isTooltipVisible = tooltipContent.country !== null;
     const [selectedUnits, setSelectedUnits] = React.useState("usd")
 
+    // When country changes, reset sector if necessary
+    React.useEffect(() => {
+        if (selectedCountry !== "ALL" && selectedSector !== "All products") {
+            setSelectedSector("All products");
+        }
+    }, [selectedCountry]);
+
+    // When sector changes, reset country if necessary
+    React.useEffect(() => {
+        if (selectedSector !== "All products" && selectedCountry !== "ALL") {
+            setSelectedCountry("ALL");
+        }
+    }, [selectedSector]);
+
     // Crossed data between csv and geojson to make sure all countries are present
     const crossData = generateCrossData(recentData, geoData)
-
-    const {
-        updateCountry,
-        updateSector
-    } = useMutualExclusion({
-        selectedCountry,
-        selectedSector,
-        setSelectedCountry,
-        setSelectedSector,
-        crossData,
-        setSelectedTariff
-    });
 
     // Data to use on hexMap
     const mapData = generateMapData(crossData, geoData, selectedSector)
@@ -83,6 +84,13 @@ function App() {
     const hoveredData = crossData.find(
         d => d.iso3 === tooltipContent.iso3 && d.product === selectedSector
     );
+
+    // Set ETR as default tariff
+    React.useEffect(() => {
+        if (selectedRecentData?.etr != null && selectedTariff == null) {
+            setSelectedTariff(selectedRecentData.etr);
+        }
+    }, [selectedRecentData, selectedTariff]);
 
     const exposureCardData = generateExposureCardData(selectedRecentData, selectedTariff);
     const tooltipData = generateTooltipData(hoveredData, selectedTariff);
@@ -108,19 +116,19 @@ function App() {
                     dropdownId="countryMenu"
                     options={countryMap}
                     selectedOption={selectedCountry}
-                    setOption={updateCountry}
+                    setOption={setSelectedCountry}
                     setETR={setSelectedTariff}
                     getETRForOption={(iso3) => {
                         const etr = crossData.find(d => d.iso3 === iso3 && d.product === selectedSector)?.etr
                         return Number.isFinite(etr) ? etr : null;
                     }}
                 />
-
+                <h5 className="controls-or">or</h5>
                 <Dropdown
                     dropdownId="productMenu"
                     options={productGroups}
                     selectedOption={selectedSector}
-                    setOption={updateSector}
+                    setOption={setSelectedSector}
                     setETR={setSelectedTariff}
                     getETRForOption={(product) => {
                         const etr = crossData.find(d => d.iso3 === selectedCountry && d.product === product)?.etr;
