@@ -1,11 +1,11 @@
 import sys
-import json
 import pandas as pd
 from pathlib import Path
 
-from bblocks import places
+import country_converter as coco
 from bblocks.data_importers import WEO
 
+from src.data.common import load_json, add_product_group_column
 from src.data.config import PATHS
 
 RATE_SUFFIX_MAP = {0.00: "00", 0.10: "01", 0.25: "025", 0.50: "05"}
@@ -13,21 +13,6 @@ RATE_SUFFIX_MAP = {0.00: "00", 0.10: "01", 0.25: "025", 0.50: "05"}
 RATE_VALUE_MAP = {
     suffix: rate for rate, suffix in RATE_SUFFIX_MAP.items() if rate != 0.00
 }
-
-
-# === File I/O Utilities ===
-
-
-def load_json(filepath: Path) -> dict:
-    """Load a JSON file from a given path."""
-    with open(filepath, "r") as f:
-        return json.load(f)
-
-
-def import_data() -> pd.DataFrame:
-    """Import raw trade data CSV from predefined path."""
-    return pd.read_csv(PATHS.EXPORTS_2024)
-
 
 # === Data Cleaning ===
 
@@ -48,32 +33,12 @@ def clean_columns(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def add_product_group_column(df: pd.DataFrame) -> pd.DataFrame:
-    """Assign each product_code to a product group, dropping unmapped rows."""
-    product_group_map = load_json(PATHS.HTS_GROUPS)
-
-    prefix_to_group = {
-        prefix: group
-        for group, prefix_list in product_group_map.items()
-        for prefix in prefix_list
-    }
-
-    def map_product_group(code):
-        code_str = str(code).zfill(2)
-        prefix = code_str[:2]
-        return prefix_to_group.get(prefix)
-
-    df = df.copy()
-    df["product"] = df["product_code"].apply(map_product_group)
-    return df[df["product"].notna()].reset_index(drop=True)
-
-
 def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
 
-    df["iso3"] = places.resolve_places(df["country"], to_type="iso3_code", not_found="ALL")
-    df.loc[df["iso3"].isna(), "iso3"] = "ALL"
-    df["country"] = places.resolve_places(df["iso3"], to_type="name_short", not_found="All countries")
-    df.loc[df["country"].isna(), "country"] = "All countries"
+    cc = coco.CountryConverter()
+
+    df["country"] = cc.pandas_convert(df["country"], to="name_short", not_found="All countries")
+    df["iso3"] = cc.pandas_convert(df["country"], to="ISO3", not_found="ALL")
 
     return df
 
@@ -83,14 +48,16 @@ def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
 def get_africa_gdp_data() -> pd.DataFrame:
     """Retrieve GDP data from African countries"""
 
+    cc = coco.CountryConverter()
+
     weo = WEO()
     data = weo.get_data()
 
     gdp_df = data.query("`indicator_code` == 'NGDPD' and `year` == 2024")
     gdp_df.loc[:, "gdp"] = gdp_df["value"] * gdp_df["scale_code"]
-    gdp_df.loc[:, "region"] = places.resolve_places(gdp_df["entity_name"], to_type="region", not_found="ignore")
+    gdp_df["region"] = cc.pandas_convert(gdp_df["entity_name"], to="continent")
     gdp_df = gdp_df.query("`region` == 'Africa'")
-    gdp_df.loc[:, "iso3"] = places.resolve_places(gdp_df["entity_name"], to_type="iso3_code", not_found="ignore")
+    gdp_df["iso3"] = cc.pandas_convert(gdp_df["entity_name"], to="ISO3")
 
     return gdp_df[["iso3", "gdp"]]
 
@@ -270,7 +237,7 @@ def add_etr_column(df: pd.DataFrame) -> pd.DataFrame:
 
 def read_format_df() -> pd.DataFrame:
     """Load, clean, annotate, and compute ETR on the raw import data."""
-    raw_df = import_data()
+    raw_df = pd.read_csv(PATHS.EXPORTS_2024)
     df = clean_columns(raw_df)
     df = add_product_group_column(df)
     df = add_rate_columns(df)
