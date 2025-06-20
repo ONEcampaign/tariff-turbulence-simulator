@@ -115,7 +115,7 @@ function App() {
                         return Number.isFinite(etr) ? etr : null;
                     }}
                 />
-
+                <h4 className="controls-or">or</h4>
                 <Dropdown
                     dropdownId="productMenu"
                     options={productGroups}
