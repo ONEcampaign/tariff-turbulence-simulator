@@ -2,8 +2,9 @@ import sys
 
 import pandas as pd
 from bblocks.data_importers import BACI
-from bblocks import places
+import country_converter as coco
 
+from src.data.common import add_product_group_column
 from src.data.config import PATHS
 
 def get_trade_data() -> pd.DataFrame:
@@ -18,21 +19,19 @@ def get_trade_data() -> pd.DataFrame:
         )
 
         df = raw_df.query("importer_iso3_code == 'USA'")
-        df = group_baci_data(df)
+        df = add_product_group_column(df)
+        df = group_data(df, ["year", "exporter_iso3_code", "product"])
         df = filter_african_countries(df)
 
         df.to_csv(PATHS.EXPORTS_HIST, index=False)
 
         return df
 
-def group_baci_data(df: pd.DataFrame) -> pd.DataFrame:
+def group_data(df: pd.DataFrame, group_cols: list) -> pd.DataFrame:
 
     grouped_df = (
         df.groupby(
-            [
-                "year",
-                "exporter_iso3_code",
-            ],
+            group_cols,
             observed=True,
             dropna=False
         )["value"]
@@ -44,12 +43,11 @@ def group_baci_data(df: pd.DataFrame) -> pd.DataFrame:
 
 def filter_african_countries(df: pd.DataFrame) -> pd.DataFrame:
 
-    df_clean = df[~df["exporter_iso3_code"].str.contains(r"\d", regex=True)]
+    cc = coco.CountryConverter()
 
-    df_clean["region"] = places.resolve_places(df_clean["exporter_iso3_code"], to_type="region", not_found="ignore")
-
-    df_africa = df_clean.query("region == 'Africa'")
-    df_africa["country"] = places.resolve_places(df_africa["exporter_iso3_code"], to_type="name_short", not_found="ignore")
+    df["region"] = cc.pandas_convert(df["exporter_iso3_code"], to="continent")
+    df_africa = df.query("region == 'Africa'")
+    df_africa["country"] = cc.pandas_convert(df["exporter_iso3_code"], to="name_short")
 
     territories = [
         'French Southern Territories',
@@ -69,6 +67,7 @@ def clean_df(df: pd.DataFrame) -> pd.DataFrame:
         "year": "year",
         "exporter_iso3_code": "iso3",
         "country": "country",
+        "product": "product",
         "value": "value",
     }
 
@@ -76,8 +75,20 @@ def clean_df(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
+def add_all_products (df: pd.DataFrame) -> pd.DataFrame:
+
+    df_all = group_data(df, ["year", "product"])
+
+    df_all["iso3"] = "ALL"
+    df_all["country"] = "All countries"
+
+    combined_df = pd.concat([df, df_all])
+
+    return combined_df
+
 if __name__ == "__main__":
     df = get_trade_data()
     df = clean_df(df)
+    df = add_all_products(df)
     df.to_csv(sys.stdout, index=False)
 
