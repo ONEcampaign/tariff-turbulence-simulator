@@ -3,5 +3,6 @@ export const colorPalette = {
     medium: "#4DAEB4",
     high: "#17858C",
     na: "#F8F7F8",
-    columns: "#A3DAF5"
+    countryMode: "#A3DAF5",
+    productMode: "#F7CE5B"
 };

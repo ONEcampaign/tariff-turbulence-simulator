@@ -69,7 +69,7 @@
     margin-bottom: var(--medium-margin);
 }
 
-.single-country-card-country-name {
+.single-country-card-header > h3 {
     font-family: Colfax;
     font-weight: 700;
     font-size: 24px;
@@ -180,4 +180,8 @@
     flex-direction: column;
     text-align: left;
     gap: 10px;
+}
+
+.hide {
+    display: none;
 }

@@ -3,7 +3,12 @@ import * as d3 from "npm:d3";
 import { formatCurrency } from "../js/format.js";
 import { colorPalette } from "../js/colorPalette.js";
 
-export function ColumnPlot({ data }) {
+export function ColumnPlot({ data, mode }) {
+
+    const isCountryMode = mode === "country";
+
+    const varName = isCountryMode ? "product" : "country"
+
     const containerRef = React.useRef(null);
     const [width, setWidth] = React.useState(0);
 
@@ -30,7 +35,7 @@ export function ColumnPlot({ data }) {
     // Scales
     const xScale = d3
         .scaleBand()
-        .domain(data.map((d) => d.product))
+        .domain(data.map((d) => d[varName]))
         .range([margin.left, width - margin.right])
         .paddingInner(0.1)
         .paddingOuter(0);
@@ -47,24 +52,24 @@ export function ColumnPlot({ data }) {
             ref={containerRef}
             style={{ position: "relative", width: "100%" }}
         >
-            <h4 className="single-country-card-chart-title">Most exposed sectors</h4>
+            <h4 className="single-country-card-chart-title">Most exposed {isCountryMode ? "sectors" : "countries"}</h4>
             <svg width={width} height={height}>
                 <g>
                     {data.map((d) => {
                         const barHeight = yScale(0) - yScale(d.impact_usd);
                         const fitsInside = barHeight > 25;
                         return (
-                            <g key={d.product}>
+                            <g key={d[varName]}>
                                 <rect
-                                    x={xScale(d.product)}
+                                    x={xScale(d[varName])}
                                     y={yScale(d.impact_usd)}
                                     width={xScale.bandwidth()}
                                     height={barHeight}
-                                    fill={colorPalette.columns}
+                                    fill={isCountryMode ? colorPalette.countryMode : colorPalette.productMode}
                                 />
                                 <text
                                     className="column-plot-value"
-                                    x={xScale(d.product) + xScale.bandwidth() / 2}
+                                    x={xScale(d[varName]) + xScale.bandwidth() / 2}
                                     y={
                                         fitsInside
                                             ? yScale(d.impact_usd) + barHeight / 2
@@ -98,11 +103,11 @@ export function ColumnPlot({ data }) {
             >
                 {data.map((d) => (
                     <div
-                        key={d.product}
+                        key={d[varName]}
                         className="column-plot-label"
                         style={{ width: `${xScale.bandwidth()}px` }}
                     >
-                        {d.product}
+                        {d[varName]}
                     </div>
                 ))}
             </div>
