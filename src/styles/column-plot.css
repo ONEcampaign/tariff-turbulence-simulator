@@ -1,0 +1,20 @@
+.column-plot-label {
+    font-family: "Italian Plate";
+    font-weight: 400;
+    font-size: 19.2px;
+    line-height: 21.12px;
+    letter-spacing: 0px;
+    text-align: center;
+    width: 100%;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.column-plot-value {
+    font-family: "Italian Plate";
+    font-weight: 700;
+    font-size: 19.2px;
+    line-height: 21.12px;
+    letter-spacing: 0px;
+    text-align: center;
+}

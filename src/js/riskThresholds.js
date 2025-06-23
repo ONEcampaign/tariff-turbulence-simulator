@@ -1,0 +1,1 @@
+export const riskThresholds = [5, 11]

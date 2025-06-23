@@ -1,4 +1,45 @@
 @import url("@one-data/observable-themes/styles/main.css");
+@import url("@one-data/observable-themes/styles/fonts.css");
 
 @import url("observablehq:theme-air.css");
-@import url("observablehq:theme-alt.css");
+
+@import url("./styles/headline.css");
+@import url("./styles/deck.css");
+@import url("./styles/intro-text.css");
+@import url("./styles/legend.css");
+@import url("./styles/africa-hexmap.css");
+@import url("./styles/exposure-card.css");
+@import url("./styles/sticky-controls.css");
+@import url("./styles/dropdown.css");
+@import url("./styles/slider.css");
+@import url("./styles/tooltip.css");
+@import url("./styles/subsection-title.css");
+@import url("./styles/subsection-text.css");
+@import url("./styles/toggle-button.css");
+@import url("./styles/country-carousel.css");
+@import url("./styles/tariff-buttons.css");
+@import url("styles/selection-card.css");
+@import url("./styles/column-plot.css");
+@import url("./styles/line-plot.css");
+
+:root {
+    --main-block-width:  768px;
+    --filters-width: 250px;
+
+    --small-margin: 10px;
+    --medium-margin: 20px;
+    --large-margin: 40px;
+    --extra-large-margin: 80px;
+}
+
+/* center-block styles */
+.main-block {
+    margin: auto;
+    max-width: var(--main-block-width);
+    text-align: center;
+}
+
+/* for exposure and country card */
+.tariff-card {
+    border: 2px solid black;
+}
