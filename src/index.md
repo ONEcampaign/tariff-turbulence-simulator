@@ -47,6 +47,7 @@ function App() {
     const [selectedSector, setSelectedSector] = React.useState('All products');
     const [selectedTariff, setSelectedTariff] = React.useState();
     const [selectedIndividualTariff, setSelectedIndividualTariff] = React.useState("ETR")
+    const [isManualTariff, setIsManualTariff] = React.useState(false);
     const [tooltipContent, setTooltipContent] = React.useState({
         iso3: null,
         country: null,
@@ -68,7 +69,8 @@ function App() {
         setSelectedCountry,
         setSelectedSector,
         crossData,
-        setSelectedTariff
+        setSelectedTariff,
+        isManualTariff
     });
 
     // Data to use on hexMap
@@ -134,6 +136,7 @@ function App() {
                     setSelectedTariff={setSelectedTariff}
                     selectedIndividualTariff={selectedIndividualTariff}
                     setSelectedIndividualTariff={setSelectedIndividualTariff}
+                    setIsManualTariff={setIsManualTariff}
                     etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
                 />
             </div>
