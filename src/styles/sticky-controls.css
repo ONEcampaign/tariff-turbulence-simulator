@@ -1,11 +1,19 @@
 .sticky-controls {
-    position: fixed;
+    position: -webkit-sticky;
+    position: sticky;
+    width: 250px;
+    -webkit-transform: translate(-200px, 0);
+    -moz-transform: translate(-200px, 0);
+    transform: translate(-400px, 0);
     top: 20%;
-    left: 0;
-    margin: 50px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    text-align: left;
+}
+
+.sticky-controls>* {
+    text-align: left;
 }
 
 .controls-title,
@@ -18,13 +26,13 @@
     margin: 0;
 }
 
-.controls-title {
+/* .controls-title {
     text-align: left;
 }
 
 .controls-or {
-    text-align: center;
-}
+    text-align: center; // TODO: put it back in the center
+} */
 
 .controls-separator {
     height: 1px;
