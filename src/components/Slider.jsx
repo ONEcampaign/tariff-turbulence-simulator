@@ -1,6 +1,6 @@
 import * as React from "npm:react";
 
-export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTariff, setSelectedIndividualTariff,  etr = 0 }) {
+export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTariff, setSelectedIndividualTariff, setIsManualTariff, etr = 0}) {
     const trackRef = React.useRef(null);
 
     // Get a selectedTariff based on x position
@@ -21,6 +21,7 @@ export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTa
 
         const handleMouseMove = (e) => {
             updateselectedTariffFromClientX(e.clientX);
+            setIsManualTariff(true);
         };
 
         const handleMouseUp = () => {
@@ -34,6 +35,7 @@ export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTa
 
     const handleTrackClick = (e) => {
         updateselectedTariffFromClientX(e.clientX);
+        setIsManualTariff(true);
     };
 
     return (
@@ -44,6 +46,7 @@ export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTa
                     className="slider-marker-label-etr"
                     onClick={() => {
                         setSelectedTariff(etr);
+                        setIsManualTariff(false);
                         if (selectedIndividualTariff !== "ETR") {
                             setSelectedIndividualTariff(etr);
                         }
