@@ -28,4 +28,8 @@
     .carousel-card {
         min-width: 75%;
     }
+
+    .selection-card-row-container {
+        flex-direction: column;
+    }
 }
