@@ -1,12 +1,15 @@
 @media (max-width: 600px) {
     .sticky-controls {
-        top: 20px;
+        top: 0;
         background-color: white;
         transform: translate(0,0);
         z-index: 10;
+        width: 100vw;
+        padding: 20px 0;
     }
 
     .visualizations {
         top: 50px;
     }
+
 }
