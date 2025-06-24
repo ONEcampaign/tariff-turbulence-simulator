@@ -1,3 +1,10 @@
+---
+sidebar: false
+header: false
+footer: false
+pager: false
+---
+
 ```js
 import {Headline} from './components/Headline.js';
 import {Deck} from './components/Deck.js';
