@@ -14,7 +14,7 @@ export function ToggleButton({
 
     return (
         <div className="toggle-wrapper">
-            <span className={`toggle-label ${isUsd ? "on" : ""}`}>{leftLabel}</span>
+            <span className={`text-toggle-button text-inputs ${isUsd ? "on" : ""}`}>{leftLabel}</span>
             <button
                 className={`toggle-button ${isUsd ? "on" : "off"}`}
                 onClick={handleClick}
@@ -22,7 +22,7 @@ export function ToggleButton({
             >
                 <div className="toggle-knob" />
             </button>
-            <span className={`toggle-label ${isUsd ? "" : "on"}`}>{rightLabel}</span>
+            <span className={`text-toggle-button text-inputs ${isUsd ? "" : "on"}`}>{rightLabel}</span>
         </div>
     );
 }

@@ -1,50 +1,36 @@
 :root {
-    --single-country-card-swatch-width: 145px;
-    --single-country-card-swatch-height: 43px;
-    --single-country-card-flag-icon-diameter: 52px;
+    --selection-card-swatch-width: 145px;
+    --selection-card-swatch-height: 43px;
+    --selection-card-flag-icon-diameter: 52px;
 }
 
-.single-country-card {
+.selection-card {
     width: var(--main-block-width);
     flex: 0 0 auto;
-    background: white;
-    border: 2px solid black;
-    padding: 2rem;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.single-country-card-swatch-plus-icon {
+.selection-card-swatch-plus-icon {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
-.single-country-card-swatch {
-    width: var(--single-country-card-swatch-width);
-    height: var(--single-country-card-swatch-height);
+.selection-card-swatch {
+    width: var(--selection-card-swatch-width);
+    height: var(--selection-card-swatch-height);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.single-country-card-swatch-text {
-    font-family: Colfax;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 19.2px;
-    letter-spacing: 0px;
-    text-align: center;
-    color: white;
-    vertical-align: middle;
-}
-
-.single-country-card-swatch-plus-icon > .fi.fis {
+.selection-card-swatch-plus-icon > .fi.fis {
     display: inline-block;
-    width: var(--single-country-card-flag-icon-diameter);
+    width: var(--selection-card-flag-icon-diameter);
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     overflow: hidden;
@@ -61,7 +47,7 @@
     transform: scale(1.3);
 }
 
-.single-country-card-header {
+.selection-card-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -69,112 +55,43 @@
     margin-bottom: var(--medium-margin);
 }
 
-.single-country-card-header > h3 {
-    font-family: Colfax;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 35.2px;
-    letter-spacing: 0px;
-    text-align: left;
-    margin: 0;
-}
-
-.single-country-card-settings {
+.selection-card-settings {
     display: flex;
     flex-direction: row;
     gap: 40px;
     margin-bottom: var(--medium-margin);
 }
 
-.single-country-card-settings-partner,
-.single-country-card-settings-tariff {
+.selection-card-settings-partner,
+.selection-card-settings-tariff {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
 }
 
-.single-country-card-settings-partner > p,
-.single-country-card-settings-tariff > p {
-    font-family: Italian Plate;
-    font-weight: 400;
-    font-size: 19.2px;
-    line-height: 21.12px;
-    letter-spacing: 0px;
-    margin: 0;
-}
-
-.single-country-card-settings-partner > span {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-
-    width: var(--tariff-button-width);
-    height: var(--tariff-button-height);
-
-    color: white;
-    background-color: black;
-    font-family: Italian Plate;
-    font-weight: 700;
-    font-size: 17.6px;
-    /*line-height: 19.2px;*/
-    letter-spacing: 0px;
-    text-align: center;
-    border-radius: 6px;
-    text-transform: uppercase;
-}
-
-.single-country-card-row {
+.selection-card-row {
     display: flex;
     flex-direction: column;
     text-align: left;
     gap: 10px;
 }
 
-.single-country-card-var-name {
-    font-family: Italian Plate;
-    font-weight: 400;
-    font-size: 19.2px;
-    line-height: 21.12px;
-    letter-spacing: 0px;
-    margin: 0;
-}
-
-.single-country-card-var-value {
-    font-family: Italian Plate;
-    font-weight: 700;
-    font-size: 96px;
-    line-height: 100%;
-    letter-spacing: 0.75%;
-    text-align: left;
-    margin: 0;
-}
-
-.single-country-card-chart-title {
-    font-family: Italian Plate;
-    font-weight: 400;
-    font-size: 19.2px;
-    line-height: 21.12px;
-    letter-spacing: 0px;
-    text-align: left;
-}
-
-.single-country-card-row-with-columns {
+.selection-card-row-with-columns {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 10px;
 }
 
-.single-country-card-row-left-column {
+.selection-card-row-left-column {
     display: flex;
     flex-direction: column;
     text-align: left;
     gap: 10px;
 }
 
-.single-country-card-row-right-column {
+.selection-card-row-right-column {
     max-width: 400px;
     display: flex;
     flex-direction: column;

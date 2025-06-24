@@ -17,9 +17,6 @@
     min-width: var(--country-card-width);
     /*height: var(--country-card-height);*/
     flex: 0 0 auto;
-    background: white;
-    border: 2px solid black;
-    padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -34,32 +31,12 @@
     justify-content: center;
 }
 
-.carousel-card-swatch-text {
-    font-family: Colfax;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 19.2px;
-    letter-spacing: 0px;
-    text-align: center;
-    color: white;
-    vertical-align: middle;
-}
-
 .carousel-card-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
-}
-
-.carousel-card-country-name {
-    font-family: Colfax;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 30px;
-    letter-spacing: 0px;
-    text-align: left;
 }
 
 .carousel-card-header > .fi.fis {
@@ -89,24 +66,6 @@
 
 }
 
-.carousel-card-var-name {
-    font-family: Italian Plate;
-    font-weight: 400;
-    font-size: 19.2px;
-    line-height: 21.12px;
-    letter-spacing: 0px;
-    margin: 0;
-}
-
-.carousel-card-var-value {
-    font-family: Italian Plate;
-    font-weight: 700;
-    font-size: 96px;
-    line-height: 100%;
-    letter-spacing: 0.75%;
-    margin: 0;
-}
-
 .carousel-card-settings-partner,
 .carousel-card-settings-tariff {
     display: flex;
@@ -116,43 +75,6 @@
     gap: 10px
 }
 
-.carousel-card-settings-partner > p,
-.carousel-card-settings-tariff > p {
-    font-family: Italian Plate;
-    font-weight: 400;
-    font-size: 19.2px;
-    line-height: 21.12px;
-    letter-spacing: 0px;
-    margin: 0;
-}
-
-.carousel-card-settings-partner > span {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-
-    width: var(--tariff-button-width);
-    height: var(--tariff-button-height);
-
-    color: white;
-    background-color: black;
-    font-family: Italian Plate;
-    font-weight: 700;
-    font-size: 17.6px;
-    /*line-height: 19.2px;*/
-    letter-spacing: 0px;
-    text-align: center;
-    border-radius: 6px;
-    text-transform: uppercase;
-}
-
-.carousel-scroll-message {
-    font-family: Italian Plate;
-    font-weight: 400;
-    font-size: 17.6px;
-    line-height: 19.36px;
-    letter-spacing: 0px;
-    text-align: left;
+.carousel-scroll-message.text-support-small {
     margin: 10px 0 0;
 }

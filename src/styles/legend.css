@@ -7,23 +7,11 @@
     margin-bottom: var(--large-margin);
 }
 
-.legend-title {
-    font-family: Italian Plate;
-    font-weight: 700;
-    font-size: 40px;
-    line-height: 44px;
-    letter-spacing: 0.75%;
-    text-align: left;
+.legend-title.text-impact-medium {
     margin-bottom: var(--small-margin);
 }
 
-.legend-subtitle {
-    font-family: Italian Plate;
-    font-weight: 400;
-    font-size: 30.4px;
-    line-height: 33.44px;
-    letter-spacing: 0px;
-    text-align: left;
+.legend-subtitle.text-support-xlarge {
     margin-bottom: var(--medium-margin);
 }
 
@@ -50,12 +38,4 @@
 
 .legend-item:nth-child(4) > .legend-swatch {
     border: 1px #0000001A solid
-}
-
-.legend-label {
-    font-family: Italian Plate;
-    font-weight: 400;
-    font-size: 19.2px;
-    line-height: 21.12px;
-    letter-spacing: 0px;
 }

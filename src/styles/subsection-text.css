@@ -1,9 +1,3 @@
-.subsection-text {
-    font-family: Colfax;
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 28.8px;
-    letter-spacing: 0px;
+.text-body.subsection-text {
     margin-bottom: var(--large-margin);
-    text-align: left;
 }

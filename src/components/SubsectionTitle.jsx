@@ -1,6 +1,6 @@
 export function SubsectionTitle({content} = {}) {
     return (
-        <div className="subsection-title">
+        <div className="text-subsection-heading">
             {content}
         </div>
     )

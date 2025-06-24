@@ -16,14 +16,8 @@
     height: 22px;
 }
 
-.dropdown-selected > span {
-    font-family: Colfax;
+.dropdown-selected > .text-inputs {
     font-weight: 700;
-    font-size: 17px;
-    line-height: 22.4px;
-    letter-spacing: 0.4px;
-    text-align: left;
-    text-transform: uppercase;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -55,12 +49,7 @@
 }
 
 .dropdown-list-item {
-    font-family: Colfax;
     font-weight: 500;
-    font-size: 17px;
-    line-height: 22.4px;
-    letter-spacing: 0.4px;
-    text-transform: uppercase;
     padding: 5px 0;
     cursor: pointer;
 }
@@ -71,8 +60,6 @@
     border: none;
     outline: none;
 }
-
-
 
 .dropdown-search {
     width: calc(var(--filters-width) - 16px) !important;

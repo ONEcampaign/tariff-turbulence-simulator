@@ -1,6 +1,6 @@
 export function SubsectionText({content} = {}) {
     return (
-        <div className="subsection-text">
+        <div className="text-body subsection-text">
             {content}
         </div>
     )

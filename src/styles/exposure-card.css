@@ -1,7 +1,6 @@
 .exposure-card {
     width: var(--main-block-width);
     margin: var(--extra-large-margin) auto;
-    padding: 24px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -15,33 +14,7 @@
     gap: 30px
 }
 
-.description-text {
-    font-family: Italian Plate;
-    font-weight: 700;
-    font-size: 30.4px;
-    line-height: 33.44px;
-    letter-spacing: 0px;
-    text-align: left;
-    margin: 0;
-}
-
-.exports-text {
-    font-family: Italian Plate;
-    font-weight: 400;
-    font-size: 28px;
-    line-height: 125%;
-    letter-spacing: 0%;
-    text-align: left;
-    margin: 0;
-}
-
 .tariff-text {
-    font-family: Italian Plate;
-    font-weight: 700;
-    font-size: 96px;
-    line-height: 100%;
     letter-spacing: 1%;
-    vertical-align: middle;
-    margin: 0;
     width: max-content;
 }
