@@ -1,10 +1,10 @@
 .exposure-card {
     width: var(--main-block-width);
-    margin: var(--extra-large-margin) auto;
+    margin: var(--margin-extra-large) auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 20px;
+    gap: var(--margin-medium);
 }
 
 .left-column {

@@ -5,7 +5,7 @@
     margin: 50px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--margin-small);
 }
 
 .text-support-medium.center-aligned {
@@ -15,10 +15,10 @@
 .controls-separator {
     height: 1px;
     width: calc(var(--filters-width) - 34px);
-    margin: 10px auto;
+    margin: var(--margin-small) auto;
     border-bottom: 1px solid #CAC4D0;
 }
 
 .text-support-medium.extra-margin {
-    margin-bottom: 10px;
+    margin-bottom: var(--margin-small);
 }

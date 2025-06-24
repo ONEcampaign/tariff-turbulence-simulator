@@ -19,7 +19,7 @@
 }
 
 .carousel-card > .swatch,
-.selection-card-swatch-plus-icon > .swatch {
+.selection-card .swatch {
     width: var(--swatch-width-large);
     height: var(--swatch-height-large);
 }

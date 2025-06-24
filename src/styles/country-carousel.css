@@ -12,38 +12,37 @@
 
 .carousel-card {
     min-width: var(--country-card-width);
-    /*height: var(--country-card-height);*/
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--margin-medium);
 }
 
 .carousel-card-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: var(--margin-medium);
+}
+
+.carousel-card .flag-icon.fi.fis {
+    width: var(--flag-icon-size-large);
+    flex-shrink: 0;
+}
+
+.carousel-card-row,
+.carousel-card-settings {
+    gap: var(--margin-small);
 }
 
 .carousel-card-row {
-    display: flex;
     flex-direction: column;
     text-align: left;
-    gap: 10px;
-
 }
 
-.carousel-card-settings-partner,
-.carousel-card-settings-tariff {
-    display: flex;
+.carousel-card-settings {
     flex-direction: row;
     justify-content: start;
     align-items: center;
-    gap: 10px
 }
 
 .carousel-scroll-message.text-support-small {
-    margin: 10px 0 0;
+    margin-top: var(--margin-small);
 }

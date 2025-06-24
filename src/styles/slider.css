@@ -1,7 +1,6 @@
 :root {
     --slider-height: 24px;
     --marker-height: 44px;
-    --secondary-color: #17858C
 }
 
 /* Wrapper for the whole component, allows marker freedom */
@@ -41,7 +40,7 @@
     top: 0;
     height: 100%;
     right: 0;
-    background: #E5E7EB;
+    background: var(--color-grey);
     pointer-events: none;
 }
 
@@ -75,7 +74,7 @@
 }
 
 .slider-marker-line-etr {
-    background: var(--secondary-color);
+    background: var(--color-teal);
 }
 .slider-marker-line-selected {
     background: black;
@@ -97,7 +96,7 @@
 
 .slider-marker-label-etr {
     bottom: calc(100% + 4px); /* above the line */
-    background-color: var(--secondary-color);
+    background-color: var(--color-teal);
 }
 
 .slider-marker-label-selected {

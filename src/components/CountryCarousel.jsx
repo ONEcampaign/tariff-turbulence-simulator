@@ -24,7 +24,7 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
         <div className="carousel-container">
             <div className="carousel-track">
                 {sorted.map((countryData, index) => (
-                    <div className="carousel-card tariff-card" key={countryData.iso2 || index}>
+                    <div className="tariff-card carousel-card" key={countryData.iso2 || index}>
                         <div
                             className="swatch"
                             style={{
@@ -41,23 +41,23 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                                 {countryData.etr != null ? `ETR: ${countryData.etr}%` : "No data"}
                             </span>
                         </div>
-                        <div className="carousel-card-header">
-                            <h2 className="text-heading">{countryData.country}</h2>
+                        <div className="card-header carousel-card-header">
+                            <h3 className="text-heading">{countryData.country}</h3>
                             <span className={`flag-icon fi fi-${countryData.iso2.toLowerCase()} fis`}></span>
                         </div>
-                        <div className="carousel-card-row">
+                        <div className="card-row carousel-card-row">
                             <h4 className="text-support-medium">Total exposure</h4>
                             <p className="text-impact-large">{formatCurrency(countryData.impact_usd)}</p>
                         </div>
-                        <div className="carousel-card-row">
+                        <div className="card-row carousel-card-row">
                             <h4 className="text-support-medium">% of GDP</h4>
                             <p className="text-impact-large">{formatPercentage(countryData.impact_pct)}</p>
                         </div>
-                        <div className="carousel-card-settings-partner">
+                        <div className="card-row carousel-card-settings">
                             <h4 className="text-support-medium">Trade partner</h4>
                             <div className="tariff-button text-support-small selected">US</div>
                         </div>
-                        <div className="carousel-card-settings-tariff">
+                        <div className="card-row carousel-card-settings">
                             <h4 className="text-support-medium">Individual tariff</h4>
                             <TariffButtons
                                 selectedTariff={selectedTariff}

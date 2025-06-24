@@ -3,66 +3,37 @@
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: var(--margin-medium);
 }
 
-.selection-card-swatch-plus-icon {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.selection-card-header,
+.selection-card-settings {
+    margin-bottom: var(--margin-medium);
 }
 
-.selection-card-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--medium-margin);
+.selection-card .flag-icon.fi.fis {
+    width: var(--flag-icon-size-large);
+    flex-shrink: 0;
 }
 
 .selection-card-settings {
     display: flex;
     flex-direction: row;
-    gap: 40px;
-    margin-bottom: var(--medium-margin);
-}
-
-.selection-card-settings-partner,
-.selection-card-settings-tariff {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    gap: var(--margin-medium);
 }
 
 .selection-card-row {
-    display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    gap: var(--margin-small);
     text-align: left;
-    gap: 10px;
 }
 
-.selection-card-row-with-columns {
+.selection-card-row-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 10px;
-}
-
-.selection-card-row-left-column {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    gap: 10px;
-}
-
-.selection-card-row-right-column {
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    gap: 10px;
+    gap: var(--margin-small);
 }
 
 .hide {

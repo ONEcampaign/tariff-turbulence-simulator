@@ -33,11 +33,11 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
     const title = mode === "country" ? allData.country : allData.product;
 
     return (
-        <div className="selection-card tariff-card">
+        <div className="tariff-card selection-card">
 
             {
                 isCountryMode ? (
-                    <div className={"selection-card-swatch-plus-icon"}>
+                    <div className={"card-header selection-card-header"}>
                         <div
                             className="swatch"
                             style={{
@@ -65,16 +65,16 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
                 ) : null
             }
 
-            <div className="selection-card-header">
-                <h2 className="text-heading">{title}</h2>
+            <div className="card-header selection-card-header">
+                <h3 className="text-heading">{title}</h3>
             </div>
 
             <div className="selection-card-settings">
-                <div className="selection-card-settings-partner">
+                <div className="card-row selection-card-row">
                     <h4 className="text-support-medium">Trade partner</h4>
                     <div className="tariff-button text-support-small selected">US</div>
                 </div>
-                <div className="selection-card-settings-tariff">
+                <div className="card-row selection-card-row">
                     <h4 className="text-support-medium">Individual tariff</h4>
                     <TariffButtons
                         selectedTariff={selectedTariff}
@@ -84,9 +84,9 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
                 </div>
             </div>
 
-            <div className="selection-card-row-with-columns">
-                <div className="selection-card-row-left-column">
-                <h4 className="text-support-medium">Total exposure</h4>
+            <div className="card-row selection-card-row-container">
+                <div className="card-row selection-card-row">
+                    <h4 className="text-support-medium">Total exposure</h4>
                     <p className="text-impact-large">
                         {formatCurrency(allData.impact_usd)}
                     </p>
@@ -98,7 +98,7 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
 
             {
                 isCountryMode ? (
-                    <div className="selection-card-row">
+                    <div className="card-row selection-card-row">
                         <h4 className="text-support-medium">% of GDP</h4>
                         <p className="text-impact-large">
                             {formatPercentage(allData.impact_pct)}

@@ -1,31 +1,27 @@
 :root {
     --tooltip-width: 220px;
-    --tooltip-height: 200px;
 }
 
 .tooltip {
     position: absolute;
     display: flex;
-    gap: 10px;
     flex-direction: column;
+    gap: var(--margin-small);
     width: var(--tooltip-width);
-    /*height: var(--tooltip-height);*/
-    padding: 20px 30px;
-}
-
-.tooltip-header,
-.tooltip-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }
 
 .tooltip-header {
-    align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: var(--margin-small);
+}
+
+.tooltip .flag-icon.fi.fis {
+    width: var(--flag-icon-size-small);
+    flex-shrink: 0;
 }
 
 .tooltip-row {
+    flex-direction: row;
+    justify-content: space-between;
     align-items: last baseline;
 }
 

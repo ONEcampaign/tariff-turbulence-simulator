@@ -10,18 +10,18 @@
 }
 
 .tariff-button.text-support-small {
-    width: var(--tariff-button-width);
+    /*width: var(--tariff-button-width);*/
     height: var(--tariff-button-height);
     box-sizing: border-box;
 
     color: black;
-    background-color: #E5E7EB;
+    background-color: var(--color-grey);
 
     line-height: initial;
     text-align: center;
     vertical-align: middle;
 
-    border: 2px solid #E5E7EB;
+    border: 2px solid var(--color-grey);
     border-radius: 6px;
     padding: 4px 8px;
 }

@@ -4,15 +4,15 @@
 }
 
 .legend {
-    margin-bottom: var(--large-margin);
+    margin-bottom: var(--margin-large);
 }
 
 .legend-title.text-impact-medium {
-    margin-bottom: var(--small-margin);
+    margin-bottom: var(--margin-small);
 }
 
 .legend-subtitle.text-support-xlarge {
-    margin-bottom: var(--medium-margin);
+    margin-bottom: var(--margin-medium);
 }
 
 .legend-items {
@@ -33,7 +33,7 @@
 }
 
 .legend-item:nth-child(4) {
-    margin-left: 10px;
+    margin-left: var(--margin-small);
 }
 
 .legend-item:nth-child(4) > .legend-swatch {

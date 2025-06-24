@@ -1,7 +1,7 @@
 export function SubsectionText({content} = {}) {
     return (
-        <div className="text-body subsection-text">
+        <p className="text-body subsection-text">
             {content}
-        </div>
+        </p>
     )
 };

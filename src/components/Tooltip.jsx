@@ -11,7 +11,7 @@ export function Tooltip({ x, y, tooltipData, isVisible } ={}) {
     if (!isVisible) return (<div></div>);
 
     return (
-        <div className="tooltip tariff-card" style={{"left": x, "top": y}}>
+        <div className="tariff-card tooltip" style={{"left": x, "top": y}}>
             <div
                 className="swatch"
                 style={{
@@ -28,15 +28,15 @@ export function Tooltip({ x, y, tooltipData, isVisible } ={}) {
                     {tooltipData.etr != null ? `ETR: ${tooltipData.etr}%` : "No data"}
                 </span>
             </div>
-            <div className="tooltip-header">
-                <h2 className="text-heading">{tooltipData.country}</h2>
-                <p className={`flag-icon fi fi-${tooltipData.iso2.toLowerCase()} fis`}></p>
+            <div className="card-header tooltip-header">
+                <h3 className="text-heading">{tooltipData.country}</h3>
+                <span className={`flag-icon fi fi-${tooltipData.iso2.toLowerCase()} fis`}></span>
             </div>
-            <div className="tooltip-row">
+            <div className="card-row tooltip-row">
                 <h4 className="tooltip-var-name text-support-small">Total exposure</h4>
                 <p className="text-impact-medium">{tooltipData.impact_usd}</p>
             </div>
-            <div className="tooltip-row">
+            <div className="card-row tooltip-row">
                 <h4 className="tooltip-var-name text-support-small">% of GDP</h4>
                 <p className="text-impact-medium">{tooltipData.impact_pct}</p>
             </div>

@@ -23,7 +23,7 @@ export function LinePlot({ data, height = 100 }) {
 
     const margin = {
         vertical: 10,
-        horizontal: 60,
+        horizontal: 50,
     }
 
     const x = d3.scaleLinear().domain([minYear, maxYear]).range([margin.horizontal, svgWidth - margin.horizontal]);
@@ -34,7 +34,10 @@ export function LinePlot({ data, height = 100 }) {
         .y(d => y(d.value));
 
     return (
-        <div className="selection-card-row-right-column">
+        <div
+            className="card-row selection-card-row"
+            style={{maxWidth: "400px"}}
+        >
             <h4 className="text-support-medium">
                 Historical exports
             </h4>

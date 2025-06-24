@@ -19,8 +19,8 @@ const legendItems = [
 export function Legend({ title, subtitle} = {}) {
     return (
         <div className="legend">
-            <div className="legend-title text-impact-medium">{title}</div>
-            <div className="legend-subtitle text-support-xlarge">{subtitle}</div>
+            <h3 className="legend-title text-impact-medium">{title}</h3>
+            <h4 className="legend-subtitle text-support-xlarge">{subtitle}</h4>
             <div className="legend-items">
                 {legendItems.map(({ label, color }) => (
                     <div className="legend-item" key={label}>
