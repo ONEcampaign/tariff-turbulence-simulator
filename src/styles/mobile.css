@@ -4,7 +4,7 @@
         background-color: white;
         transform: translate(0,0);
         z-index: 10;
-        width: 100vw;
+        width: 100%;
         padding: 20px 0;
     }
 
