@@ -24,4 +24,8 @@
     .legend-swatch {
         width: var(--swatch-width-mobile);
     }
+
+    .carousel-card {
+        min-width: 75%;
+    }
 }
