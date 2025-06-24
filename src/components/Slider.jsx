@@ -33,6 +33,23 @@ export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTa
         window.addEventListener("mouseup", handleMouseUp);
     };
 
+    const startTouch = (e) => {
+        e.preventDefault();
+
+        const handleMouseMove = (e) => {
+            updateselectedTariffFromClientX(e.touches[0].clientX);
+            setIsManualTariff(true);
+        };
+
+        const handleMouseUp = () => {
+            window.removeEventListener("touchmove", handleMouseMove);
+            window.removeEventListener("touchend", handleMouseUp);
+        };
+
+        window.addEventListener("touchmove", handleMouseMove);
+        window.addEventListener("touchend", handleMouseUp);
+    }
+
     const handleTrackClick = (e) => {
         updateselectedTariffFromClientX(e.clientX);
         setIsManualTariff(true);
@@ -72,6 +89,7 @@ export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTa
                 <div
                     className="slider-marker-line-selected"
                     onMouseDown={startDrag}
+                    onTouchStart={startTouch}
                     style={{ cursor: "grab" }}
                 />
                 <div className="slider-marker-label-selected text-support-medium">{selectedTariff}%</div>
