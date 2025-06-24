@@ -77,10 +77,12 @@ export function AfricaHexmap({
                             }}
                             onMouseMove={(event) => {
                                 if (clickedCountry === "ALL") {
+                                    console.log(event)
                                     setTooltip({
-                                        x: event.pageX,
-                                        y: event.clientY + marginBottom > window.innerHeight ? 
-                                            event.pageY - 150 - marginBottom : event.pageY - 100,
+                                        x: event.nativeEvent.layerX,
+                                        y: event.clientY - marginBottom < 0 ? 
+                                            event.nativeEvent.layerY + marginBottom + 20
+                                            : event.nativeEvent.layerY - 20,
                                         iso3: feature.properties.iso3
                                     });
                                 }
