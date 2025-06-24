@@ -24,41 +24,43 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
         <div className="carousel-container">
             <div className="carousel-track">
                 {sorted.map((countryData, index) => (
-                    <div className="carousel-card" key={countryData.iso2 || index}>
+                    <div className="tariff-card carousel-card" key={countryData.iso2 || index}>
                         <div
-                            className="carousel-card-swatch"
+                            className="swatch"
                             style={{
                                 backgroundColor:
                                     countryData.etr != null ? colorScale(countryData.etr) : colorPalette.na
                             }}
                         >
-                            <span
-                                className="carousel-card-swatch-text"
+                            <p
+                                className="text-swatch"
                                 style={{
                                     color: countryData.etr != null ? "white" : "black"
                                 }}
                             >
                                 {countryData.etr != null ? `ETR: ${countryData.etr}%` : "No data"}
-                            </span>
+                            </p>
                         </div>
-                        <div className="carousel-card-header">
-                            <h3 className="carousel-card-country-name">{countryData.country}</h3>
-                            <span className={`fi fi-${countryData.iso2.toLowerCase()} fis`}></span>
+                        <div className="card-header carousel-card-header">
+                            <h3 className="text-heading">{countryData.country}</h3>
+                            <span className={`flag-icon fi fi-${countryData.iso2.toLowerCase()} fis`}></span>
                         </div>
-                        <div className="carousel-card-row">
-                            <h4 className="carousel-card-var-name">Total exposure</h4>
-                            <p className="carousel-card-var-value">{formatCurrency(countryData.impact_usd)}</p>
+                        <div className="card-row carousel-card-row">
+                            <h4 className="text-support-medium">Total exposure</h4>
+                            <p className="text-impact-large">{formatCurrency(countryData.impact_usd)}</p>
                         </div>
-                        <div className="carousel-card-row">
-                            <h4 className="carousel-card-var-name">% of GDP</h4>
-                            <p className="carousel-card-var-value">{formatPercentage(countryData.impact_pct)}</p>
+                        <div className="card-row carousel-card-row">
+                            <h4 className="text-support-medium">% of GDP</h4>
+                            <p className="text-impact-large">{formatPercentage(countryData.impact_pct)}</p>
                         </div>
-                        <div className="carousel-card-settings-partner">
-                            <p>Trade partner</p>
-                            <span>US</span>
+                        <div className="card-row carousel-card-settings">
+                            <h4 className="text-support-medium">Trade partner</h4>
+                            <div className="swatch us-swatch">
+                                <p className="text-swatch">US</p>
+                            </div>
                         </div>
-                        <div className="carousel-card-settings-tariff">
-                            <p>Individual tariff</p>
+                        <div className="card-row carousel-card-settings">
+                            <h4 className="text-support-medium">Individual tariff</h4>
                             <TariffButtons
                                 selectedTariff={selectedTariff}
                                 selectedIndividualTariff={selectedIndividualTariff}
@@ -68,7 +70,7 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                     </div>
                 ))}
             </div>
-            <p className="carousel-scroll-message">Scroll to the right to view more countries →</p>
+            <p className="carousel-scroll-message text-support-small">Scroll to the right to view more countries →</p>
         </div>
     );
 }

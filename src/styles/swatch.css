@@ -1,0 +1,30 @@
+:root {
+    --swatch-width-small: 93px;
+    --swatch-height-small: 20px;
+
+    --swatch-width-large: 145px;
+    --swatch-height-large: 43px;
+}
+
+.swatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tooltip > .swatch {
+    width: var(--swatch-width-small);
+    height: var(--swatch-height-small);
+}
+
+.carousel-card > .swatch,
+.selection-card-header > .swatch {
+    width: var(--swatch-width-large);
+    height: var(--swatch-height-large);
+}
+
+.swatch.us-swatch {
+    background-color: black;
+    padding: 4px 8px;
+}

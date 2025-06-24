@@ -116,7 +116,7 @@ function App() {
     return (
         <div className="wrapper">
             <div className="sticky-controls">
-                <h4 className="controls-title">Filter the data</h4>
+                <h4 className="text-support-medium">Filter the data</h4>
                 <Dropdown
                     dropdownId="countryMenu"
                     options={countryMap}
@@ -128,7 +128,7 @@ function App() {
                         return Number.isFinite(etr) ? etr : null;
                     }}
                 />
-                <h4 className="controls-or">or</h4>
+                <h4 className="text-support-medium center-aligned">or</h4>
                 <Dropdown
                     dropdownId="productMenu"
                     options={productGroups}
@@ -141,7 +141,7 @@ function App() {
                     }}
                 />
                 <div className="controls-separator"></div>
-                <span className="controls-title extra-margin">Simulate tariff</span>
+                <span className="text-support-medium extra-margin">Simulate tariff</span>
                 <Slider
                     selectedTariff={selectedTariff ?? 0}
                     setSelectedTariff={setSelectedTariff}

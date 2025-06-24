@@ -1,0 +1,190 @@
+:root {
+    /* Font families */
+    --font-colfax: Colfax, sans-serif;
+    --font-italian-plate: Italian Plate, sans-serif;
+
+    /* Font sizes (in rem) */
+    --font-hero: 4.5rem;              /* 72px */
+    --font-section-heading: 2.75rem;  /* 44px */
+    --font-heading: 1.5rem;           /* 24px */
+    --font-body: 1.1875rem;           /* 19px */
+    --font-text-input: 1.0625rem;     /* 17px */
+    --font-swatch: 0.875rem;          /* 14px */
+
+    --font-impact-large: 6rem;        /* 96px */
+    --font-impact-medium: 2.5rem;     /* 40px */
+    --font-impact-small: 1.9rem;      /* 30.4px */
+
+    --font-support-xlarge: 1.9rem;    /* 30.4px */
+    --font-support-large: 1.75rem;    /* 28px */
+    --font-support-medium: 1.2rem;    /* 19.2px */
+    --font-support-small: 1.1rem;     /* 17.6px */
+
+    /* Line heights */
+    --lh-hero: 5.1rem;                /* 81.6px */
+    --lh-section-heading: 3.2rem;     /* 51.2px */
+    --lh-heading: 2.2rem;             /* 35.2px */
+    --lh-body: 1.8rem;                /* 28.8px */
+    --lh-text-input: 1.4rem;          /* 22.4px */
+    --lh-swatch: 1.2rem;              /* 19.2px */
+    --lh-impact-medium: 2.75rem;      /* 44px */
+    --lh-impact-small: 2.09rem;       /* 33.44px */
+    --lh-support-medium: 1.32rem;     /* 21.12px */
+    --lh-support-small: 1.21rem;      /* 19.36px */
+
+    /* Letter spacing */
+    --ls-tight: 0.75%;
+    --ls-text-input: 0.025rem;        /* 0.4px */
+    --ls-none: 0;
+}
+
+html {
+    font-size: 12px; /* default (mobile) */
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 1200px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* Typography classes */
+
+.text-hero {
+    font-family: var(--font-colfax);
+    font-weight: 900;
+    font-size: var(--font-hero);
+    line-height: var(--lh-hero);
+    letter-spacing: var(--ls-tight);
+    text-align: left;
+}
+
+.text-heading {
+    font-family: var(--font-colfax);
+    font-weight: 700;
+    font-size: var(--font-heading);
+    line-height: var(--lh-heading);
+    letter-spacing: var(--ls-none);
+    text-align: left;
+    font-style: normal;
+    margin: 0;
+}
+
+.text-subsection-heading {
+    font-family: var(--font-colfax);
+    font-weight: 700;
+    font-size: var(--font-section-heading);
+    line-height: var(--lh-section-heading);
+    letter-spacing: 0;
+    margin-bottom: var(--margin-medium);
+    text-align: left;
+}
+
+.text-body {
+    font-family: var(--font-colfax);
+    font-weight: 400;
+    font-size: var(--font-body);
+    line-height: var(--lh-body);
+    letter-spacing: var(--ls-none);
+    text-align: left;
+    margin: 0;
+}
+
+.text-swatch {
+    font-family: var(--font-colfax);
+    font-weight: 700;
+    font-size: var(--font-swatch);
+    line-height: var(--lh-swatch);
+    letter-spacing: var(--ls-none);
+    text-align: center;
+    color: white;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.text-inputs {
+    font-family: var(--font-colfax);
+    font-weight: 400;
+    font-size: var(--font-text-input);
+    line-height: var(--lh-text-input);
+    letter-spacing: var(--ls-text-input);
+    text-transform: uppercase;
+}
+
+/* Impact styles */
+
+.text-impact-large {
+    font-family: var(--font-italian-plate);
+    font-weight: 700;
+    font-size: var(--font-impact-large);
+    line-height: 100%;
+    letter-spacing: var(--ls-tight);
+    margin: 0;
+}
+
+.text-impact-medium {
+    font-family: var(--font-italian-plate);
+    font-weight: 700;
+    font-size: var(--font-impact-medium);
+    line-height: var(--lh-impact-medium);
+    letter-spacing: var(--ls-tight);
+    text-align: left;
+    margin: 0;
+}
+
+.text-impact-small {
+    font-family: var(--font-italian-plate);
+    font-weight: 700;
+    font-size: var(--font-impact-small);
+    line-height: var(--lh-impact-small);
+    letter-spacing: var(--ls-none);
+    text-align: left;
+    margin: 0;
+}
+
+/* Support styles */
+
+.text-support-xlarge {
+    font-family: var(--font-italian-plate);
+    font-weight: 400;
+    font-size: var(--font-support-xlarge);
+    line-height: var(--lh-support-medium);
+    letter-spacing: var(--ls-none);
+    text-align: left;
+}
+
+.text-support-large {
+    font-family: var(--font-italian-plate);
+    font-weight: 400;
+    font-size: var(--font-support-large);
+    line-height: 1.25; /* 125% */
+    letter-spacing: var(--ls-none);
+    text-align: left;
+    margin: 0;
+}
+
+.text-support-medium {
+    font-family: var(--font-italian-plate);
+    font-weight: 400;
+    font-size: var(--font-support-medium);
+    line-height: var(--lh-support-medium);
+    letter-spacing: var(--ls-none);
+    text-align: left;
+    margin: 0;
+}
+
+.text-support-small {
+    font-family: var(--font-italian-plate);
+    font-weight: 400;
+    font-size: var(--font-support-small);
+    line-height: var(--lh-support-small);
+    letter-spacing: var(--ls-none);
+    text-align: left;
+    margin: 0;
+}
