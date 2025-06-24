@@ -20,4 +20,8 @@
     .exposure-card {
         flex-direction: column-reverse;
     }
+
+    .legend-swatch {
+        width: var(--swatch-width-mobile);
+    }
 }
