@@ -32,4 +32,8 @@
     .selection-card-row-container {
         flex-direction: column;
     }
+
+    .tooltip {
+        display: none;
+    }
 }
