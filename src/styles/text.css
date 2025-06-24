@@ -154,7 +154,7 @@ html {
     font-family: var(--font-italian-plate);
     font-weight: 400;
     font-size: var(--font-support-xlarge);
-    line-height: var(--lh-support-medium);
+    line-height: var(--lh-support-xlarge);
     letter-spacing: var(--ls-none);
     text-align: left;
 }
