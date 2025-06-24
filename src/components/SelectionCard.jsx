@@ -39,7 +39,7 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
                 isCountryMode ? (
                     <div className={"selection-card-swatch-plus-icon"}>
                         <div
-                            className="selection-card-swatch"
+                            className="swatch"
                             style={{
                                 backgroundColor:
                                     allData.etr != null
@@ -47,19 +47,19 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
                                         : colorPalette.na,
                             }}
                         >
-                        <span
-                            className="text-tariff-swatch"
-                            style={{
-                                color: allData.etr != null ? "white" : "black",
-                            }}
-                        >
-                          {allData.etr != null
-                              ? `ETR: ${allData.etr}%`
-                              : "No data"}
-                        </span>
+                            <span
+                                className="text-swatch"
+                                style={{
+                                    color: allData.etr != null ? "white" : "black",
+                                }}
+                            >
+                                {allData.etr != null
+                                    ? `ETR: ${allData.etr}%`
+                                    : "No data"}
+                            </span>
                         </div>
                         <span
-                            className={`fi fi-${allData.iso2.toLowerCase()} fis`}
+                            className={`flag-icon fi fi-${allData.iso2.toLowerCase()} fis`}
                         ></span>
                     </div>
                 ) : null

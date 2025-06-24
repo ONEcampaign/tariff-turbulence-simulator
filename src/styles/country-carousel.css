@@ -1,9 +1,6 @@
 :root {
     --country-card-width: 300px;
     --country-card-height: 400px;
-    --carousel-swatch-width: 145px;
-    --carousel-swatch-height: 43px;
-    --carousel-flag-icon-diameter: 52px;
 }
 
 .carousel-track {
@@ -22,40 +19,12 @@
     gap: 10px;
 }
 
-.carousel-card-swatch {
-    width: var(--carousel-swatch-width);
-    height: var(--carousel-swatch-height);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
 .carousel-card-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
-}
-
-.carousel-card-header > .fi.fis {
-    display: inline-block;
-    width: var(--carousel-flag-icon-diameter);
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    overflow: hidden;
-    padding: 0 !important;
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
-    vertical-align: middle;
-}
-
-/* Make Sao Tome & principe and Central African Republic flag-icons larger as they are smaller by default */
-.fi-st,
-.fi-cf{
-    transform: scale(1.3);
 }
 
 .carousel-card-row {

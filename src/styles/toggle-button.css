@@ -1,7 +1,9 @@
 :root {
     --toggle-button-width: 52px;
     --toggle-button-height: 32px;
+
     --toggle-knob-size: 24px;
+
     --toggle-button-transition: all 0.2s ease-in-out;
 }
 

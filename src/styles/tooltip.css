@@ -1,9 +1,6 @@
 :root {
     --tooltip-width: 220px;
     --tooltip-height: 200px;
-    --tooltip-swatch-width: 93px;
-    --tooltip-swatch-height: 20px;
-    --tooltip-flag-icon-diameter: 28px;
 }
 
 .tooltip {
@@ -16,15 +13,6 @@
     padding: 20px 30px;
 }
 
-.tooltip-swatch {
-    width: var(--tooltip-swatch-width);
-    height: var(--tooltip-swatch-height);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
 .tooltip-header,
 .tooltip-row {
     display: flex;
@@ -35,25 +23,6 @@
 .tooltip-header {
     align-items: center;
     margin-bottom: 10px;
-}
-
-.tooltip-header > .fi.fis {
-    display: inline-block;
-    width: var(--tooltip-flag-icon-diameter);
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    overflow: hidden;
-    padding: 0 !important;
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
-    vertical-align: middle;
-}
-
-/* Make Sao Tome & principe and Central African Republic flag-icons larger as they are smaller by default */
-.fi-st,
-.fi-cf{
-    transform: scale(1.3);
 }
 
 .tooltip-row {

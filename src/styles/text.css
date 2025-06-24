@@ -96,7 +96,7 @@ html {
     margin: 0;
 }
 
-.text-tariff-swatch {
+.text-swatch {
     font-family: var(--font-colfax);
     font-weight: 700;
     font-size: var(--font-swatch);

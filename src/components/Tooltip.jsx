@@ -13,14 +13,14 @@ export function Tooltip({ x, y, tooltipData, isVisible } ={}) {
     return (
         <div className="tooltip tariff-card" style={{"left": x, "top": y}}>
             <div
-                className="tooltip-swatch"
+                className="swatch"
                 style={{
                     backgroundColor:
                         tooltipData.etr != null ? colorScale(tooltipData.etr) : colorPalette.na
                 }}
             >
                 <span
-                    className="text-tariff-swatch"
+                    className="text-swatch"
                     style={{
                         color: tooltipData.etr != null ? "white" : "black"
                     }}
@@ -30,7 +30,7 @@ export function Tooltip({ x, y, tooltipData, isVisible } ={}) {
             </div>
             <div className="tooltip-header">
                 <h2 className="text-heading">{tooltipData.country}</h2>
-                <p className={`fi fi-${tooltipData.iso2.toLowerCase()} fis`}></p>
+                <p className={`flag-icon fi fi-${tooltipData.iso2.toLowerCase()} fis`}></p>
             </div>
             <div className="tooltip-row">
                 <h4 className="tooltip-var-name text-support-small">Total exposure</h4>

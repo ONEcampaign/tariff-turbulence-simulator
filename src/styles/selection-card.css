@@ -1,9 +1,3 @@
-:root {
-    --selection-card-swatch-width: 145px;
-    --selection-card-swatch-height: 43px;
-    --selection-card-flag-icon-diameter: 52px;
-}
-
 .selection-card {
     width: var(--main-block-width);
     flex: 0 0 auto;
@@ -17,34 +11,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-}
-
-.selection-card-swatch {
-    width: var(--selection-card-swatch-width);
-    height: var(--selection-card-swatch-height);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.selection-card-swatch-plus-icon > .fi.fis {
-    display: inline-block;
-    width: var(--selection-card-flag-icon-diameter);
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    overflow: hidden;
-    padding: 0 !important;
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
-    vertical-align: middle;
-}
-
-/* Make Sao Tome & principe and Central African Republic flag-icons larger as they are smaller by default */
-.fi-st,
-.fi-cf{
-    transform: scale(1.3);
 }
 
 .selection-card-header {

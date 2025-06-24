@@ -26,14 +26,14 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                 {sorted.map((countryData, index) => (
                     <div className="carousel-card tariff-card" key={countryData.iso2 || index}>
                         <div
-                            className="carousel-card-swatch"
+                            className="swatch"
                             style={{
                                 backgroundColor:
                                     countryData.etr != null ? colorScale(countryData.etr) : colorPalette.na
                             }}
                         >
                             <span
-                                className="text-tariff-swatch"
+                                className="text-swatch"
                                 style={{
                                     color: countryData.etr != null ? "white" : "black"
                                 }}
@@ -43,7 +43,7 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                         </div>
                         <div className="carousel-card-header">
                             <h2 className="text-heading">{countryData.country}</h2>
-                            <span className={`fi fi-${countryData.iso2.toLowerCase()} fis`}></span>
+                            <span className={`flag-icon fi fi-${countryData.iso2.toLowerCase()} fis`}></span>
                         </div>
                         <div className="carousel-card-row">
                             <h4 className="text-support-medium">Total exposure</h4>

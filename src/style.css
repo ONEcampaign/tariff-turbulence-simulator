@@ -19,6 +19,8 @@
 @import url("./styles/tariff-buttons.css");
 @import url("styles/selection-card.css");
 @import url("./styles/column-plot.css");
+@import url("styles/flag-icon.css");
+@import url("styles/swatch.css");
 
 :root {
     --main-block-width:  768px;

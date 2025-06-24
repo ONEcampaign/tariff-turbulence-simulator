@@ -1,0 +1,31 @@
+:root {
+    --flag-icon-size-small: 28px;
+    --flag-icon-size-large: 52px;
+}
+
+.flag-icon {
+    display: inline-block;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 0 !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    vertical-align: middle;
+}
+
+.tooltip-header > .flag-icon.fi.fis {
+    width: var(--flag-icon-size-small);
+}
+
+.carousel-card-header > .flag-icon.fi.fis,
+.selection-card-swatch-plus-icon > .flag-icon.fi.fis {
+    width: var(--flag-icon-size-large);
+}
+
+/* Make Sao Tome & principe and Central African Republic flag-icons larger as they are smaller by default */
+.flag-icon.fi-st,
+.flag-icon.fi-cf{
+    transform: scale(1.3);
+}
