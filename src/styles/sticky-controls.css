@@ -1,8 +1,11 @@
 .sticky-controls {
-    position: fixed;
+    position: -webkit-sticky;
+    position: sticky;
+    width: 250px;
+    -webkit-transform: translate(-200px, 0);
+    -moz-transform: translate(-200px, 0);
+    transform: translate(-400px, 0);
     top: 20%;
-    left: 0;
-    margin: 50px;
     display: flex;
     flex-direction: column;
     gap: var(--margin-small);
