@@ -48,11 +48,11 @@ export function ColumnPlot({ data, mode }) {
 
     return (
         <div
-            className="single-country-card-chart"
+            className="selection-card-chart"
             ref={containerRef}
             style={{ position: "relative", width: "100%" }}
         >
-            <h4 className="single-country-card-chart-title">Most exposed {isCountryMode ? "sectors" : "countries"}</h4>
+            <h4 className="text-support-medium">Most exposed {isCountryMode ? "sectors" : "countries"}</h4>
             <svg width={width} height={height}>
                 <g>
                     {data.map((d) => {
@@ -68,7 +68,7 @@ export function ColumnPlot({ data, mode }) {
                                     fill={isCountryMode ? colorPalette.countryMode : colorPalette.productMode}
                                 />
                                 <text
-                                    className="column-plot-value"
+                                    className="column-plot-value text-support-medium"
                                     x={xScale(d[varName]) + xScale.bandwidth() / 2}
                                     y={
                                         fitsInside
@@ -104,7 +104,7 @@ export function ColumnPlot({ data, mode }) {
                 {data.map((d) => (
                     <div
                         key={d[varName]}
-                        className="column-plot-label"
+                        className="column-plot-label text-support-medium"
                         style={{ width: `${xScale.bandwidth()}px` }}
                     >
                         {d[varName]}

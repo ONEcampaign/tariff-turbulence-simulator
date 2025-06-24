@@ -1,7 +1,6 @@
 :root {
     --slider-height: 24px;
     --marker-height: 44px;
-    --secondary-color: #17858C
 }
 
 /* Wrapper for the whole component, allows marker freedom */
@@ -41,7 +40,7 @@
     top: 0;
     height: 100%;
     right: 0;
-    background: #E5E7EB;
+    background: var(--color-grey);
     pointer-events: none;
 }
 
@@ -75,24 +74,20 @@
 }
 
 .slider-marker-line-etr {
-    background: var(--secondary-color);
+    background: var(--color-teal);
 }
 .slider-marker-line-selected {
     background: black;
 }
 
-.slider-marker-label-etr,
-.slider-marker-label-selected {
+.slider-marker-label-etr.text-support-medium,
+.slider-marker-label-selected.text-support-medium {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
     color: white;
-    font-family: Italian Plate;
-    font-weight: 400;
-    font-size: 19.2px;
-    line-height: 21.12px;
-    letter-spacing: 0;
+
     text-align: center;
     vertical-align: middle;
     border-radius: 12px;
@@ -101,7 +96,7 @@
 
 .slider-marker-label-etr {
     bottom: calc(100% + 4px); /* above the line */
-    background-color: var(--secondary-color);
+    background-color: var(--color-teal);
 }
 
 .slider-marker-label-selected {

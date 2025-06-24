@@ -3,34 +3,43 @@
 
 @import url("observablehq:theme-air.css");
 
+@import url("./styles/text.css");
+
+@import url("styles/tariff-card.css");
+@import url("styles/flag-icon.css");
+@import url("styles/swatch.css");
+
 @import url("./styles/headline.css");
 @import url("./styles/deck.css");
 @import url("./styles/intro-text.css");
-@import url("./styles/legend.css");
-@import url("./styles/africa-hexmap.css");
-@import url("./styles/exposure-card.css");
+@import url("./styles/subsection-text.css");
+
 @import url("./styles/sticky-controls.css");
 @import url("./styles/dropdown.css");
 @import url("./styles/slider.css");
 @import url("./styles/tooltip.css");
-@import url("./styles/subsection-title.css");
-@import url("./styles/subsection-text.css");
 @import url("./styles/toggle-button.css");
-@import url("./styles/country-carousel.css");
 @import url("./styles/tariff-buttons.css");
+
+@import url("./styles/legend.css");
+@import url("./styles/exposure-card.css");
+@import url("./styles/country-carousel.css");
 @import url("styles/selection-card.css");
+
 @import url("./styles/column-plot.css");
-@import url("./styles/line-plot.css");
 @import url("./styles/mobile.css");
 
 :root {
     --main-block-width:  768px;
     --filters-width: 250px;
 
-    --small-margin: 10px;
-    --medium-margin: 20px;
-    --large-margin: 40px;
-    --extra-large-margin: 80px;
+    --margin-small: 10px;
+    --margin-medium: 20px;
+    --margin-large: 40px;
+    --margin-extra-large: 80px;
+
+    --color-grey: #E5E7EB;
+    --color-teal: #17858C;
 }
 
 /* center-block styles */
@@ -40,9 +49,9 @@
     text-align: center;
 }
 
-/* for exposure and country card */
-.tariff-card {
-    border: 2px solid black;
+/* Overrides from Observable styles*/
+p, table, figure, figcaption, h1, h2, h3, h4, h5, h6, .katex-display {
+    max-width: none !important;
 }
 
 .viz-container {

@@ -3,14 +3,14 @@ export function ExposureCard({countryData} = {}) {
         <div className="tariff-card exposure-card">
             <div className="left-column">
                 <h4
-                    className="description-text">Exposure to US tariffs for {countryData.country} exports of {countryData.product}
+                    className="text-impact-small">Exposure to US tariffs for {countryData.country} exports of {countryData.product}
                 </h4>
-                <p className="exports-text">
+                <p className="text-support-large">
                     Simulated tariff: <b>{countryData.tariff}</b>
                 </p>
             </div>
             <div className="right-column">
-                <p className="tariff-text">
+                <p className="tariff-text text-impact-large">
                     {countryData.impact_usd}
                 </p>
             </div>

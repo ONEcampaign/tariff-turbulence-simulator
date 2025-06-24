@@ -1,5 +1,3 @@
-import {generateHeader} from "@one-data/observable-themes/header";
-import {generateFooter} from "@one-data/observable-themes/footer";
 import {icon} from "@one-data/observable-themes/use-images";
 
 const projectTitle = "Tariff Simulator"
@@ -16,9 +14,6 @@ export default {
                       width=device-width, initial-scale=1.0, 
                       minimum-scale=1.0, maximum-scale=1.0, 
                       user-scalable=no, target-densitydpi=device-dpi">`,
-
-  header: generateHeader({title: projectTitle}),
-  footer: generateFooter(),
 
   root: "src",
   style: "style.css",

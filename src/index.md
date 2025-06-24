@@ -1,3 +1,14 @@
+---
+sidebar: false
+header: false
+footer: false
+pager: false
+---
+```js
+const observer = new ResizeObserver(([entry]) => parent.postMessage({height: entry.target.offsetHeight}, "*"));
+observer.observe(document.documentElement);
+```
+
 ```js
 import {Headline} from './components/Headline.js';
 import {Deck} from './components/Deck.js';
@@ -114,7 +125,7 @@ function App() {
                 />
                 <div className="viz-container">
                     <div className="sticky-controls">
-                        <h4 className="controls-title">Filter the data</h4>
+                        <h4 className="text-support-medium">Filter the data</h4>
                         <Dropdown
                             dropdownId="countryMenu"
                             options={countryMap}
@@ -126,7 +137,7 @@ function App() {
                                 return Number.isFinite(etr) ? etr : null;
                             }}
                         />
-                        <h4 className="controls-or">or</h4>
+                        <h4 className="text-support-medium center-aligned">or</h4>
                         <Dropdown
                             dropdownId="productMenu"
                             options={productGroups}
@@ -139,7 +150,7 @@ function App() {
                             }}
                         />
                         <div className="controls-separator"></div>
-                        <span className="controls-title extra-margin">Simulate tariff</span>
+                        <span className="text-support-medium extra-margin">Simulate tariff</span>
                         <Slider
                             selectedTariff={selectedTariff ?? 0}
                             setSelectedTariff={setSelectedTariff}
