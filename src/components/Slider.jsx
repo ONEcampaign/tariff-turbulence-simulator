@@ -43,7 +43,7 @@ export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTa
             {/* ETR Marker */}
             <div className="slider-marker-etr" style={{ left: `${etr}%` }}>
                 <div
-                    className="slider-marker-label-etr"
+                    className="slider-marker-label-etr text-support-medium"
                     onClick={() => {
                         setSelectedTariff(etr);
                         setIsManualTariff(false);
@@ -74,7 +74,7 @@ export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTa
                     onMouseDown={startDrag}
                     style={{ cursor: "grab" }}
                 />
-                <div className="slider-marker-label-selected">{selectedTariff}%</div>
+                <div className="slider-marker-label-selected text-support-medium">{selectedTariff}%</div>
             </div>
 
             {/* Track */}

@@ -5,34 +5,20 @@
     margin: 50px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--margin-small);
 }
 
-.controls-title,
-.controls-or {
-    font-family: Italian Plate;
-    font-weight: 400;
-    font-size: 19.2px;
-    line-height: 21.12px;
-    letter-spacing: 0px;
-    margin: 0;
-}
-
-.controls-title {
-    text-align: left;
-}
-
-.controls-or {
+.text-support-medium.center-aligned {
     text-align: center;
 }
 
 .controls-separator {
     height: 1px;
     width: calc(var(--filters-width) - 34px);
-    margin: 10px auto;
+    margin: var(--margin-small) auto;
     border-bottom: 1px solid #CAC4D0;
 }
 
-.controls-title.extra-margin{
-    margin-bottom: 10px;
+.text-support-medium.extra-margin {
+    margin-bottom: var(--margin-small);
 }

@@ -5,13 +5,13 @@ export function TariffButtons({ selectedTariff, selectedIndividualTariff, setSel
     return (
         <div className="tariff-buttons-wrapper">
             <button
-                className={`tariff-button ${selectedIndividualTariff === "ETR" ? "selected" : ""}`}
+                className={`tariff-button text-support-small ${selectedIndividualTariff === "ETR" ? "selected" : ""}`}
                 onClick={() => setSelectedIndividualTariff("ETR")}
             >
                 ETR
             </button>
             <button
-                className={`tariff-button ${selectedIndividualTariff !== "ETR" ? "selected" : ""}`}
+                className={`tariff-button text-support-small ${selectedIndividualTariff !== "ETR" ? "selected" : ""}`}
                 onClick={() => setSelectedIndividualTariff(selectedTariff)}
             >
                 {selectedTariff}%

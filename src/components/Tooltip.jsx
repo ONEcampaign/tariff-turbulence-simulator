@@ -11,34 +11,34 @@ export function Tooltip({ x, y, tooltipData, isVisible } ={}) {
     if (!isVisible) return (<div></div>);
 
     return (
-        <div className="tooltip" style={{"left": x, "top": y}}>
+        <div className="tariff-card tooltip" style={{"left": x, "top": y}}>
             <div
-                className="tooltip-swatch"
+                className="swatch"
                 style={{
                     backgroundColor:
                         tooltipData.etr != null ? colorScale(tooltipData.etr) : colorPalette.na
                 }}
             >
-                <span
-                    className="tooltip-swatch-text"
+                <p
+                    className="text-swatch"
                     style={{
                         color: tooltipData.etr != null ? "white" : "black"
                     }}
                 >
                     {tooltipData.etr != null ? `ETR: ${tooltipData.etr}%` : "No data"}
-                </span>
+                </p>
             </div>
-            <div className="tooltip-header">
-                <h3 className="tooltip-country-name">{tooltipData.country}</h3>
-                <p className={`fi fi-${tooltipData.iso2.toLowerCase()} fis`}></p>
+            <div className="card-header tooltip-header">
+                <h3 className="text-heading">{tooltipData.country}</h3>
+                <span className={`flag-icon fi fi-${tooltipData.iso2.toLowerCase()} fis`}></span>
             </div>
-            <div className="tooltip-row">
-                <h4 className="tooltip-var-name">Total exposure</h4>
-                <p className="tooltip-var-value">{tooltipData.impact_usd}</p>
+            <div className="card-row tooltip-row">
+                <h4 className="tooltip-var-name text-support-small">Total exposure</h4>
+                <p className="text-impact-medium">{tooltipData.impact_usd}</p>
             </div>
-            <div className="tooltip-row">
-                <h4 className="tooltip-var-name">% of GDP</h4>
-                <p className="tooltip-var-value">{tooltipData.impact_pct}</p>
+            <div className="card-row tooltip-row">
+                <h4 className="tooltip-var-name text-support-small">% of GDP</h4>
+                <p className="text-impact-medium">{tooltipData.impact_pct}</p>
             </div>
         </div>
     )

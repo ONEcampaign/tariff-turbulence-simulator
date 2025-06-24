@@ -23,7 +23,7 @@ export function LinePlot({ data, height = 100 }) {
 
     const margin = {
         vertical: 10,
-        horizontal: 60,
+        horizontal: 50,
     }
 
     const x = d3.scaleLinear().domain([minYear, maxYear]).range([margin.horizontal, svgWidth - margin.horizontal]);
@@ -34,8 +34,11 @@ export function LinePlot({ data, height = 100 }) {
         .y(d => y(d.value));
 
     return (
-        <div className="single-country-card-row-right-column">
-            <h4 className="single-country-card-var-name">
+        <div
+            className="card-row selection-card-row"
+            style={{maxWidth: "400px"}}
+        >
+            <h4 className="text-support-medium">
                 Historical exports
             </h4>
             <div ref={ref} style={{width: "100%"}}>
@@ -59,22 +62,22 @@ export function LinePlot({ data, height = 100 }) {
                         fill="black"
                     />
                     <text
-                        className="line-plot-label"
+                        className="text-support-small"
                         x={x(minYear) - 5}
                         y={y(data.find(d => d.year === minYear).value)}
                         textAnchor="end"
                         dy="6"
-                        dx="-8"
+                        dx="-6"
                     >
                         {minYear}
                     </text>
                     <text
-                        className="line-plot-label"
+                        className="text-support-small"
                         x={x(maxYear) + 5}
                         y={y(data.find(d => d.year === maxYear).value)}
                         textAnchor="start"
                         dy="6"
-                        dx=""
+                        dx="6"
                     >
                         {maxYear}
                     </text>

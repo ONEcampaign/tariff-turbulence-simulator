@@ -95,7 +95,7 @@ export function Dropdown({
         <div className="dropdown">
             <div className="dropdown-menu">
                 <div className="dropdown-selected" onClick={toggleOpen}>
-                    <span className={!labelMap[selectedOption] ? "placeholder" : ""}>
+                    <span className={`text-inputs ${!labelMap[selectedOption] ? "placeholder" : ""}`}>
                         {labelMap[selectedOption] === "All countries"
                             ? "Choose a country"
                             : labelMap[selectedOption] === "All products"
@@ -124,7 +124,7 @@ export function Dropdown({
                                 <span
                                     key={option}
                                     ref={el => (itemRefs.current[i] = el)}
-                                    className={`dropdown-list-item ${i === highlightedIndex ? "highlighted" : ""}`}
+                                    className={`text-inputs dropdown-list-item ${i === highlightedIndex ? "highlighted" : ""}`}
                                     tabIndex="-1"
                                     onMouseEnter={() => setHighlightedIndex(i)}
                                     onClick={() => selectOption(option)}
