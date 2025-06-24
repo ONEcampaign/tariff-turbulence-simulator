@@ -1,0 +1,8 @@
+@media (max-width: 600px) {
+    .sticky-controls {
+        top: 10px;
+        background-color: white;
+        transform: translate(0,0);
+        z-index: 10;
+    }
+}

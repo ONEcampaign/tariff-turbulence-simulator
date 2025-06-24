@@ -3,7 +3,6 @@
 
 @import url("observablehq:theme-air.css");
 
-@import url("./styles/mobile.css");
 @import url("./styles/headline.css");
 @import url("./styles/deck.css");
 @import url("./styles/intro-text.css");
@@ -22,6 +21,7 @@
 @import url("styles/selection-card.css");
 @import url("./styles/column-plot.css");
 @import url("./styles/line-plot.css");
+@import url("./styles/mobile.css");
 
 :root {
     --main-block-width:  768px;
