@@ -1,3 +1,14 @@
+---
+sidebar: false
+header: false
+footer: false
+pager: false
+---
+```js
+const observer = new ResizeObserver(([entry]) => parent.postMessage({height: entry.target.offsetHeight}, "*"));
+observer.observe(document.documentElement);
+```
+
 ```js
 import {Headline} from './components/Headline.js';
 import {Deck} from './components/Deck.js';
