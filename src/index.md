@@ -119,10 +119,6 @@ function App() {
                 <Headline content={headline}/>
                 <Deck content={deck}/>
                 <IntroText content={introText}/>
-                <Legend
-                    title={legendTitle}
-                    subtitle={legendSubtitle}
-                />
                 <div className="viz-container">
                     <div className="sticky-controls">
                         <h4 className="text-support-medium">Filter the data</h4>
@@ -161,6 +157,10 @@ function App() {
                         />
                     </div>
                     <div className="visualizations">
+                        <Legend
+                            title={legendTitle}
+                            subtitle={legendSubtitle}
+                        />
                         <AfricaHexmap
                             width={width}
                             height={height}
