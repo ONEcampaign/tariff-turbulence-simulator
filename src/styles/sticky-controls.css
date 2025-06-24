@@ -11,6 +11,10 @@
     gap: var(--margin-small);
 }
 
+.sticky-wrapper {
+    width: 250px;
+}
+
 .text-support-medium.center-aligned {
     text-align: center;
 }

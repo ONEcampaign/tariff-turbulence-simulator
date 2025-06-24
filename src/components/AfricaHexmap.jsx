@@ -36,7 +36,7 @@ export function AfricaHexmap({
         });
     
     return (
-        <svg ref={svgRef} width={width} height={height}>
+        <svg ref={svgRef} width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
             <g transform={`translate(0, ${verticalPadding})`}>
                 {reorderedFeatures.map(feature => {
                     const thisCountryIsClicked = clickedCountry === feature.properties.iso3;

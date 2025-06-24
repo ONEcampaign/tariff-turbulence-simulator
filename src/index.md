@@ -121,40 +121,42 @@ function App() {
                 <IntroText content={introText}/>
                 <div className="viz-container">
                     <div className="sticky-controls">
-                        <h4 className="text-support-medium">Filter the data</h4>
-                        <Dropdown
-                            dropdownId="countryMenu"
-                            options={countryMap}
-                            selectedOption={selectedCountry}
-                            setOption={updateCountry}
-                            setETR={setSelectedTariff}
-                            getETRForOption={(iso3) => {
-                                const etr = crossData.find(d => d.iso3 === iso3 && d.product === selectedSector)?.etr
-                                return Number.isFinite(etr) ? etr : null;
-                            }}
-                        />
-                        <h4 className="text-support-medium center-aligned">or</h4>
-                        <Dropdown
-                            dropdownId="productMenu"
-                            options={productGroups}
-                            selectedOption={selectedSector}
-                            setOption={updateSector}
-                            setETR={setSelectedTariff}
-                            getETRForOption={(product) => {
-                                const etr = crossData.find(d => d.iso3 === selectedCountry && d.product === product)?.etr;
-                                return Number.isFinite(etr) ? etr : null;
-                            }}
-                        />
-                        <div className="controls-separator"></div>
-                        <span className="text-support-medium extra-margin">Simulate tariff</span>
-                        <Slider
-                            selectedTariff={selectedTariff ?? 0}
-                            setSelectedTariff={setSelectedTariff}
-                            selectedIndividualTariff={selectedIndividualTariff}
-                            setSelectedIndividualTariff={setSelectedIndividualTariff}
-                            setIsManualTariff={setIsManualTariff}
-                            etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
-                        />
+                        <div className="sticky-wrapper">
+                            <h4 className="text-support-medium">Filter the data</h4>
+                            <Dropdown
+                                dropdownId="countryMenu"
+                                options={countryMap}
+                                selectedOption={selectedCountry}
+                                setOption={updateCountry}
+                                setETR={setSelectedTariff}
+                                getETRForOption={(iso3) => {
+                                    const etr = crossData.find(d => d.iso3 === iso3 && d.product === selectedSector)?.etr
+                                    return Number.isFinite(etr) ? etr : null;
+                                }}
+                            />
+                            <h4 className="text-support-medium center-aligned">or</h4>
+                            <Dropdown
+                                dropdownId="productMenu"
+                                options={productGroups}
+                                selectedOption={selectedSector}
+                                setOption={updateSector}
+                                setETR={setSelectedTariff}
+                                getETRForOption={(product) => {
+                                    const etr = crossData.find(d => d.iso3 === selectedCountry && d.product === product)?.etr;
+                                    return Number.isFinite(etr) ? etr : null;
+                                }}
+                            />
+                            <div className="controls-separator"></div>
+                            <span className="text-support-medium extra-margin">Simulate tariff</span>
+                            <Slider
+                                selectedTariff={selectedTariff ?? 0}
+                                setSelectedTariff={setSelectedTariff}
+                                selectedIndividualTariff={selectedIndividualTariff}
+                                setSelectedIndividualTariff={setSelectedIndividualTariff}
+                                setIsManualTariff={setIsManualTariff}
+                                etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
+                            />
+                        </div>
                     </div>
                     <div className="visualizations">
                         <Legend
