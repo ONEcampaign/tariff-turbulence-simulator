@@ -32,14 +32,14 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                                     countryData.etr != null ? colorScale(countryData.etr) : colorPalette.na
                             }}
                         >
-                            <span
+                            <p
                                 className="text-swatch"
                                 style={{
                                     color: countryData.etr != null ? "white" : "black"
                                 }}
                             >
                                 {countryData.etr != null ? `ETR: ${countryData.etr}%` : "No data"}
-                            </span>
+                            </p>
                         </div>
                         <div className="card-header carousel-card-header">
                             <h3 className="text-heading">{countryData.country}</h3>
@@ -55,7 +55,9 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                         </div>
                         <div className="card-row carousel-card-settings">
                             <h4 className="text-support-medium">Trade partner</h4>
-                            <div className="tariff-button text-support-small selected">US</div>
+                            <div className="swatch us-swatch">
+                                <p className="text-swatch">US</p>
+                            </div>
                         </div>
                         <div className="card-row carousel-card-settings">
                             <h4 className="text-support-medium">Individual tariff</h4>

@@ -47,7 +47,7 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
                                         : colorPalette.na,
                             }}
                         >
-                            <span
+                            <p
                                 className="text-swatch"
                                 style={{
                                     color: allData.etr != null ? "white" : "black",
@@ -56,7 +56,7 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
                                 {allData.etr != null
                                     ? `ETR: ${allData.etr}%`
                                     : "No data"}
-                            </span>
+                            </p>
                         </div>
                         <span
                             className={`flag-icon fi fi-${allData.iso2.toLowerCase()} fis`}
@@ -72,7 +72,9 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
             <div className="selection-card-settings">
                 <div className="card-row selection-card-row">
                     <h4 className="text-support-medium">Trade partner</h4>
-                    <div className="tariff-button text-support-small selected">US</div>
+                    <div className="swatch us-swatch">
+                        <p className="text-swatch">US</p>
+                    </div>
                 </div>
                 <div className="card-row selection-card-row">
                     <h4 className="text-support-medium">Individual tariff</h4>

@@ -1,6 +1,8 @@
 :root {
     --tariff-button-width: 46px;
     --tariff-button-height: 27px;
+
+    --tariff-button-transition: all 0.2s ease-in-out;
 }
 
 .tariff-buttons-wrapper {
@@ -15,13 +17,13 @@
     box-sizing: border-box;
 
     color: black;
-    background-color: var(--color-grey);
+    background-color: white;
 
     line-height: initial;
     text-align: center;
     vertical-align: middle;
 
-    border: 2px solid var(--color-grey);
+    border: 2px solid black;
     border-radius: 6px;
     padding: 4px 8px;
 }
@@ -35,8 +37,10 @@
 
 .tariff-button:hover {
     cursor: pointer;
+    background-color: var(--color-grey);
+    transition: var(--tariff-button-transition);
 }
 
 .tariff-button.selected:hover {
-    cursor: default;
+    background-color: black;
 }

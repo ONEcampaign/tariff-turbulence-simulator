@@ -19,14 +19,14 @@ export function Tooltip({ x, y, tooltipData, isVisible } ={}) {
                         tooltipData.etr != null ? colorScale(tooltipData.etr) : colorPalette.na
                 }}
             >
-                <span
+                <p
                     className="text-swatch"
                     style={{
                         color: tooltipData.etr != null ? "white" : "black"
                     }}
                 >
                     {tooltipData.etr != null ? `ETR: ${tooltipData.etr}%` : "No data"}
-                </span>
+                </p>
             </div>
             <div className="card-header tooltip-header">
                 <h3 className="text-heading">{tooltipData.country}</h3>

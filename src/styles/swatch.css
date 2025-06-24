@@ -19,7 +19,12 @@
 }
 
 .carousel-card > .swatch,
-.selection-card .swatch {
+.selection-card-header > .swatch {
     width: var(--swatch-width-large);
     height: var(--swatch-height-large);
+}
+
+.swatch.us-swatch {
+    background-color: black;
+    padding: 4px 8px;
 }
