@@ -37,9 +37,6 @@ jobs:
           key: data-${{ hashFiles('src/data/*') }}-${{ steps.date.outputs.date }}
 
       - run: poetry run npm run build
-      - run: env | grep OBSERVABLE
-        env:
-          OBSERVABLE_TOKEN: ${{ secrets.OBSERVABLE_TOKEN }}
       - run: npm run deploy -- --message "$(git log -1 --pretty=%s)"
         env:
           OBSERVABLE_TOKEN: ${{ secrets.OBSERVABLE_TOKEN }}
