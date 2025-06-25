@@ -127,6 +127,7 @@ function App() {
                         const etr = crossData.find(d => d.iso3 === iso3 && d.product === selectedSector)?.etr
                         return Number.isFinite(etr) ? etr : null;
                     }}
+                    isInactive={selectedCountry === "ALL" && selectedSector !== "All products"}
                 />
                 <h4 className="text-support-medium center-aligned">or</h4>
                 <Dropdown
@@ -139,6 +140,7 @@ function App() {
                         const etr = crossData.find(d => d.iso3 === selectedCountry && d.product === product)?.etr;
                         return Number.isFinite(etr) ? etr : null;
                     }}
+                    isInactive={selectedCountry !== "ALL" && selectedSector === "All products"}
                 />
                 <div className="controls-separator"></div>
                 <span className="text-support-medium extra-margin">Simulate tariff</span>
