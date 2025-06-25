@@ -8,17 +8,42 @@ from bblocks.data_importers import WEO
 from src.data.common import load_json, add_product_group_column
 from src.data.config import PATHS
 
+YEAR_RANGE = range(2022, 2025)
+
 RATE_SUFFIX_MAP = {0.00: "00", 0.10: "01", 0.25: "025", 0.50: "05"}
 
 RATE_VALUE_MAP = {
     suffix: rate for rate, suffix in RATE_SUFFIX_MAP.items() if rate != 0.00
 }
 
+# === Data Import ===
+
+def load_data() -> pd.DataFrame:
+    """Load raw import data from CSV."""
+    raw_dfs = []
+    for y in YEAR_RANGE:
+        d = pd.read_csv(PATHS.INPUTS / f"africa_exports_to_us_{y}_raw.csv")
+        d = clean_columns(d)
+        raw_dfs.append(d)
+
+    raw_df = pd.concat(raw_dfs)
+
+    df = (
+        raw_df.groupby(
+            ["country", "product_code"],
+            observed=True, dropna=False
+        )["exports"]
+        .mean()
+        .reset_index()
+    )
+
+    return df
+
 # === Data Cleaning ===
 
 
 def clean_columns(df: pd.DataFrame) -> pd.DataFrame:
-    """Standardize and clean key columns in the import dataset."""
+    """Standardize and clean key columns in the exports dataset."""
     column_dict = {
         "Country": "country",
         "Time": "year",
@@ -46,20 +71,29 @@ def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
 # === GDP Data ===
 
 def get_africa_gdp_data() -> pd.DataFrame:
-    """Retrieve GDP data from African countries"""
+    """Retrieve GDP data for African countries"""
 
     cc = coco.CountryConverter()
 
     weo = WEO()
     data = weo.get_data()
 
-    gdp_df = data.query("`indicator_code` == 'NGDPD' and `year` == 2024")
-    gdp_df.loc[:, "gdp"] = gdp_df["value"] * gdp_df["scale_code"]
-    gdp_df["region"] = cc.pandas_convert(gdp_df["entity_name"], to="continent")
-    gdp_df = gdp_df.query("`region` == 'Africa'")
-    gdp_df["iso3"] = cc.pandas_convert(gdp_df["entity_name"], to="ISO3")
+    filtered_df = data.query("`indicator_code` == 'NGDPD' and `year` in @YEAR_RANGE").copy()
+    groudped_df = (
+        filtered_df.groupby(
+            ["entity_name", "scale_code"],
+            observed=True, dropna=False
+        )["value"]
+        .mean()
+        .reset_index()
+    )
 
-    return gdp_df[["iso3", "gdp"]]
+    groudped_df["gdp"] = groudped_df["value"] * groudped_df["scale_code"]
+    groudped_df["region"] = cc.pandas_convert(groudped_df["entity_name"], to="continent")
+    africa_df = groudped_df.query("`region` == 'Africa'")
+    africa_df["iso3"] = cc.pandas_convert(africa_df["entity_name"], to="ISO3")
+
+    return africa_df[["iso3", "gdp"]]
 
 
 def assert_iso3_code_alignment(df1: pd.DataFrame, df2: pd.DataFrame) -> bool:
@@ -81,8 +115,12 @@ def assert_iso3_code_alignment(df1: pd.DataFrame, df2: pd.DataFrame) -> bool:
         )
 
 
-def add_gdp_column(df: pd.DataFrame) -> pd.DataFrame:
-    """Adds a GDP column to the dataframe."""
+def add_denominator_column(df: pd.DataFrame) -> pd.DataFrame:
+    """Adds a value column to the dataframe which will be the denominator to compute exports to the US in relative terms.
+    If denominator is set to "gdp" the added column will contain GPD values.
+    If denominator is set to "exports" the added column will contain total exports values.
+
+    """
 
     gdp_df = get_africa_gdp_data()
 
@@ -177,12 +215,12 @@ def pivot_tariff_values(
     return wide_df
 
 
-def compute_total_imports(df: pd.DataFrame, idx_cols: list[str]) -> pd.DataFrame:
-    """Compute total import values for a set of group columns."""
+def compute_total_exports(df: pd.DataFrame, idx_cols: list[str]) -> pd.DataFrame:
+    """Compute total export values for a set of group columns."""
     totals = (
         df.groupby(idx_cols, observed=True, dropna=False)["exports"].sum().reset_index()
     )
-    return totals.rename(columns={"exports": "total_imports"})
+    return totals.rename(columns={"exports": "total_exports"})
 
 
 def compute_etr(df: pd.DataFrame) -> pd.Series:
@@ -190,7 +228,7 @@ def compute_etr(df: pd.DataFrame) -> pd.Series:
     etr_numerator = sum(
         df.get(f"value_{suffix}", 0) * rate for suffix, rate in RATE_VALUE_MAP.items()
     )
-    return round((etr_numerator / df["total_imports"]) * 100)
+    return etr_numerator / df["total_exports"]
 
 
 def compute_etr_by_group(df: pd.DataFrame, group_cols: list[str] = ["country", "product"]) -> pd.DataFrame:
@@ -202,11 +240,11 @@ def compute_etr_by_group(df: pd.DataFrame, group_cols: list[str] = ["country", "
     )
     df_by_rate_wide = pivot_tariff_values(df_by_rate, idx_cols=group_cols)
 
-    total_imports = compute_total_imports(df, group_cols)
-    merged = df_by_rate_wide.merge(total_imports, on=group_cols, how="outer")
+    total_exports = compute_total_exports(df, group_cols)
+    merged = df_by_rate_wide.merge(total_exports, on=group_cols, how="outer")
     merged["etr"] = compute_etr(merged)
 
-    return merged[group_cols + ["total_imports", "etr"]]
+    return merged[group_cols + ["total_exports", "etr"]]
 
 
 def add_etr_column(df: pd.DataFrame) -> pd.DataFrame:
@@ -224,7 +262,7 @@ def add_etr_column(df: pd.DataFrame) -> pd.DataFrame:
 
     final_df = (
         pd.concat(frames, ignore_index=True)
-        .rename(columns={"total_imports": "exports"})
+        .rename(columns={"total_exports": "exports"})
         .loc[:, ["country", "product", "exports", "etr"]]
         .sort_values(["country", "product"])
         .reset_index(drop=True)
@@ -236,14 +274,14 @@ def add_etr_column(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def read_format_df() -> pd.DataFrame:
-    """Load, clean, annotate, and compute ETR on the raw import data."""
-    raw_df = pd.read_csv(PATHS.EXPORTS_2024)
-    df = clean_columns(raw_df)
+    """Load, clean, annotate, and compute ETR on the raw export data."""
+
+    df = load_data()
     df = add_product_group_column(df)
     df = add_rate_columns(df)
     df = add_etr_column(df)
     df = normalize_country_names(df)
-    df = add_gdp_column(df)
+    df = add_denominator_column(df)
 
     ordered_columns = ["country", "iso3", "product", "exports", "etr", "gdp"]
 

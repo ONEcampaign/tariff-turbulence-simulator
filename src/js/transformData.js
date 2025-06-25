@@ -1,4 +1,4 @@
-import { formatCurrency, formatPercentage } from "./format.js";
+import { formatCurrency, formatPercentage, formatETR } from "./format.js";
 
 export function generateCrossData(data, geoData) {
     // Unique products from the dataset
@@ -85,7 +85,7 @@ export function generateMapData(data, geoData, clickedSector) {
                 ...feat,
                 properties: {
                     ...feat.properties,
-                    etr: row?.etr ?? null
+                    etr: formatETR(row?.etr)
                 }
             };
         })
@@ -120,11 +120,11 @@ export function generateExposureCardData(selectedData, selectedTariff) {
         product: selectedData.product.toLowerCase(),
         tariff: `${selectedTariff}%`,
         exports: selectedData.exports != null
-            ? formatCurrency(selectedData.exports / 100)
-            : null,
+            ? formatCurrency(selectedData.exports)
+            : "N/A",
         impact_usd: selectedData.exports != null
-            ? formatCurrency(selectedData.exports * selectedTariff / 100)
-            : null
+            ? formatCurrency(selectedData.exports * selectedTariff)
+            : "N/A"
     };
 }
 
@@ -135,19 +135,19 @@ export function generateTooltipData(hoveredData, selectedTariff) {
             : hoveredData?.country,
         iso2: hoveredData?.iso2 != null
             ? hoveredData.iso2
-            : null,
+            : "N/A",
         product: hoveredData?.product.toLowerCase(),
-        etr: hoveredData?.etr,
+        etr: formatETR(hoveredData?.etr),
         tariff: `${selectedTariff}%`,
         exports: hoveredData?.exports != null
             ? formatCurrency(hoveredData.exports)
-            : null,
+            : "N/A",
         impact_usd: hoveredData?.exports != null && hoveredData?.etr !== null
-            ? formatCurrency(hoveredData.exports * hoveredData.etr / 100)
-            : null,
+            ? formatCurrency(hoveredData.exports * hoveredData.etr)
+            : "N/A",
         impact_pct: hoveredData?.exports != null && hoveredData.gdp != null && hoveredData?.etr !== null
-            ? formatPercentage((hoveredData.exports * hoveredData.etr / 100) / hoveredData.gdp)
-            : null
+            ? formatPercentage((hoveredData.exports * hoveredData.etr) / hoveredData.gdp)
+            : "N/A"
     };
 }
 
@@ -157,13 +157,13 @@ export function generateCarouselData(data, selectedSector, selectedIndividualTar
         .map(d => ({
             country: d.country,
             iso2: d.iso2,
-            etr: d.etr,
+            etr: formatETR(d.etr),
             impact_usd: selectedIndividualTariff === "ETR" ?
-                d.exports * d.etr / 100:
-                d.exports * selectedIndividualTariff/ 100,
+                d.exports * d.etr:
+                d.exports * selectedIndividualTariff,
             impact_pct: selectedIndividualTariff === "ETR" ?
-                (d.exports * d.etr / 100) / d.gdp :
-                (d.exports * selectedIndividualTariff / 100) / d.gdp,
+                (d.exports * d.etr) / d.gdp :
+                (d.exports * selectedIndividualTariff) / d.gdp,
         }));
 }
 
@@ -187,12 +187,12 @@ export function generateSelectionCardData(data, selectedCountry, selectedSector,
             country: d.country,
             iso2: d.iso2,
             product: d.product,
-            etr: d.etr,
+            etr: formatETR(d.etr),
             impact_usd: selectedIndividualTariff === "ETR" ?
-                d.exports * d.etr * 10e-3 :
-                d.exports * selectedIndividualTariff * 10e-3,
+                d.exports * d.etr :
+                d.exports * selectedIndividualTariff,
             impact_pct: selectedIndividualTariff === "ETR" ?
-                (d.exports * d.etr * 10e-3) / d.gdp :
-                (d.exports * selectedIndividualTariff * 10e-3) / d.gdp,
+                (d.exports * d.etr) / d.gdp :
+                (d.exports * selectedIndividualTariff) / d.gdp,
         }));
 }

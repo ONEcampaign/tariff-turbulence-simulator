@@ -1,6 +1,14 @@
 import * as React from "npm:react";
+import { formatETR } from "../js/format.js";
 
-export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTariff, setSelectedIndividualTariff, setIsManualTariff, etr = 0}) {
+export function Slider({
+                           selectedTariff,
+                           setSelectedTariff,
+                           selectedIndividualTariff,
+                           setSelectedIndividualTariff,
+                           setIsManualTariff,
+                           etr = 0
+}) {
     const trackRef = React.useRef(null);
 
     // Get a selectedTariff based on x position
@@ -9,9 +17,11 @@ export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTa
         const rect = trackRef.current.getBoundingClientRect();
         const x = clientX - rect.left;
         const pct = Math.max(0, Math.min(100, (x / rect.width) * 100));
-        setSelectedTariff(Math.round(pct));
+        const roundedPCT = Math.round(pct);
+
+        setSelectedTariff(roundedPCT);
         if (selectedIndividualTariff !== "ETR") {
-            setSelectedIndividualTariff(Math.round(pct));
+            setSelectedIndividualTariff(roundedPCT);
         }
     };
 

@@ -56,7 +56,7 @@ export function Dropdown({
         if (setETR && getETRForOption) {
             const etr = getETRForOption(option);
             if (Number.isFinite(etr)) {
-                setETR(etr);
+                setETR(Math.round(etr * 100));
             }
         }
     };
