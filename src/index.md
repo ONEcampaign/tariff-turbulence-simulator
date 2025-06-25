@@ -26,6 +26,7 @@ import {ToggleButton} from "./components/ToggleButton.js";
 import {CountryCarousel} from "./components/CountryCarousel.js"
 import {SelectionCard} from "./components/SelectionCard.js";
 import {MutualExclusion} from "./components/MutualExclusion.js";
+import {formatETR} from "./js/format.js"
 import {
     generateCrossData,
     generateMapData,
@@ -41,8 +42,8 @@ import {
     headline, deck, introText, legendTitle, legendSubtitle, subsectionTitle, subsectionText
 } from "./js/copyText.js";
 
-const recentData = FileAttachment("./data/africa_exports_to_us_2024.csv").csv({typed: true});
-const historicalData = FileAttachment("./data/africa_exports_to_us_2002_2023.csv").csv({typed: true});
+const recentData = FileAttachment("./data/africa_exports_to_us_recent.csv").csv({typed: true});
+const historicalData = FileAttachment("./data/africa_exports_to_us_historical.csv").csv({typed: true});
 const geoData = FileAttachment("./data/africa_hexmap.geojson").json({typed: true});
 ```
 
@@ -111,7 +112,10 @@ function App() {
     const productGroups = generateProductGroups(crossData);
 
     // Determine the ETR for all countries
-    const allETR = crossData.find(d => d.iso3 === 'ALL' && d.product === selectedSector)?.etr ?? null;
+    const allETR = formatETR(crossData.find(d => d.iso3 === 'ALL' && d.product === selectedSector)?.etr);
+    
+    // Dtermine the ETR for selected data
+    const selectedETR = formatETR(selectedRecentData?.etr);
 
     return (
         <div className="wrapper">
@@ -125,7 +129,7 @@ function App() {
                     setETR={setSelectedTariff}
                     getETRForOption={(iso3) => {
                         const etr = crossData.find(d => d.iso3 === iso3 && d.product === selectedSector)?.etr
-                        return Number.isFinite(etr) ? etr : null;
+                        return formatETR(etr);
                     }}
                     isInactive={selectedCountry === "ALL" && selectedSector !== "All products"}
                 />
@@ -138,7 +142,7 @@ function App() {
                     setETR={setSelectedTariff}
                     getETRForOption={(product) => {
                         const etr = crossData.find(d => d.iso3 === selectedCountry && d.product === product)?.etr;
-                        return Number.isFinite(etr) ? etr : null;
+                        return formatETR(etr);
                     }}
                     isInactive={selectedCountry !== "ALL" && selectedSector === "All products"}
                 />
@@ -150,7 +154,7 @@ function App() {
                     selectedIndividualTariff={selectedIndividualTariff}
                     setSelectedIndividualTariff={setSelectedIndividualTariff}
                     setIsManualTariff={setIsManualTariff}
-                    etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
+                    etr={selectedETR}
                 />
             </div>
             <div className="main-block">
@@ -168,7 +172,7 @@ function App() {
                     clickedCountry={selectedCountry}
                     setCountry={setSelectedCountry}
                     setETR={setSelectedTariff}
-                    allETR={Number.isFinite(allETR) ? allETR : null}
+                    allETR={allETR}
                     setTooltip={setTooltipContent}
                 />
                 <Tooltip

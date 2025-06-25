@@ -17,3 +17,8 @@ export function formatPercentage(value) {
     const rounded = Number.parseFloat(value.toPrecision(1));
     return `${rounded}%`;
 }
+
+export function formatETR(value) {
+    if (typeof value !== 'number' || isNaN(value)) return 'N/A';
+    return Math.round(value * 100);
+}
