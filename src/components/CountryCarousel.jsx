@@ -20,8 +20,28 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
     );
     const sorted = [...cleaned].sort((a, b) => b[sortKey] - a[sortKey]);
 
+    const carouselRef = React.useRef(null);
+
+    React.useEffect(() => {
+        function updateCarouselWidth() {
+            const container = carouselRef.current;
+            if (container) {
+                const left = container.getBoundingClientRect().left;
+                container.style.width = `calc(${window.innerWidth - left}px - 1rem)`;
+            }
+        }
+
+        updateCarouselWidth(); // Run on mount
+
+        window.addEventListener("resize", updateCarouselWidth); // Re-run on resize
+        return () => window.removeEventListener("resize", updateCarouselWidth); // Cleanup
+    }, []);
+
     return (
-        <div className="carousel-container">
+        <div
+            className="carousel-container"
+            ref={carouselRef}
+        >
             <div className="carousel-track">
                 {sorted.map((countryData, index) => (
                     <div className="tariff-card carousel-card" key={countryData.iso2 || index}>
