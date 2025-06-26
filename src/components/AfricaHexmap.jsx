@@ -77,7 +77,7 @@ export function AfricaHexmap({
                                     } else {
                                         setCountry(iso3);
                                         if (Number.isFinite(etr)) {
-                                            setETR(Math.round(etr * 100));
+                                            setETR(etr);
                                         }
                                     }
                                 }

@@ -30,7 +30,7 @@ export function MutualExclusion({
 
         const entry = crossData.find(d => d.iso3 === selectedCountry && d.product === selectedSector);
         if (entry?.etr != null) {
-            setSelectedTariff(Math.round(entry.etr * 100));
+            setSelectedTariff(entry.etr);
         } else {
             setSelectedTariff(null); // fallback if no data available
         }
