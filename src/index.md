@@ -67,6 +67,7 @@ function App() {
     })
     const isTooltipVisible = tooltipContent.country !== null;
     const [selectedUnits, setSelectedUnits] = React.useState("usd")
+    const [hideMenu, setHideMenu] = React.useState(false);
 
     // Crossed data between csv and geojson to make sure all countries are present
     const crossData = generateCrossData(recentData, geoData)
@@ -115,8 +116,14 @@ function App() {
 
     return (
         <div className="wrapper">
-            <div className="sticky-controls">
-                <div className="sticky-tab">
+            <div className={`sticky-controls ${hideMenu === true ? "hidden" : ""}`}>
+                <div 
+                    className="sticky-tab"
+                    onClick={() => {
+                        console.log(hideMenu);
+                        setHideMenu(!hideMenu)
+                    }}
+                >
                     Show/Hide controls ^
                 </div>
                 <div className='sticky-wrapper'>
