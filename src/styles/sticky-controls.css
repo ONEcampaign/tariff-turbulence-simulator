@@ -13,6 +13,17 @@
     gap: var(--margin-small);
 }
 
+.sticky-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin-small);
+}
+
+.sticky-tab {
+    display: none;
+}
+
 .text-support-medium.center-aligned {
     text-align: center;
 }

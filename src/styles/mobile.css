@@ -5,17 +5,35 @@
         left: 0;
         margin: 0;
         bottom: 0 !important;
-        background-color: white;
         transform: translate(0,0);
         z-index: 10;
         width: 100%;
-        padding: 20px 0;
         text-align: center;
     }
 
     .sticky-wrapper {
+        width: 100%;
+        background-color: white;
+        border-top: 1px solid black;
+        padding: 20px 0;
+    }
+
+    .sticky-content {
         width: 250px;
         margin: 0 auto;
+    }
+
+    .sticky-tab {
+        display: block;
+        border-radius: 20px 20px 0 0;
+        background-color: white;
+        padding: 10px; /* TODO */
+        float: right;
+        width: 200px;
+        margin-bottom: -1px;
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
     }
 
     .main-block svg {
