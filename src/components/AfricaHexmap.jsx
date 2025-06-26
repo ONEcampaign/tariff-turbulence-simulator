@@ -4,7 +4,14 @@ import {colorPalette} from "../js/colorPalette.js";
 import {riskThresholds} from "../js/riskThresholds.js";
 
 export function AfricaHexmap({
-    width, height, data, clickedCountry, setCountry, setETR, allETR, setTooltip
+                                 width,
+                                 height,
+                                 data,
+                                 clickedCountry,
+                                 setCountry,
+                                 setETR,
+                                 allETR,
+                                 setTooltip
 } = {}) {
     const [hoveredCountry, setHoveredCountry] = React.useState('NONE');
     const svgRef = React.useRef();

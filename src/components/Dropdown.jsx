@@ -1,5 +1,6 @@
 import * as React from "npm:react";
 import { useDropdownContext } from "./DropdownContext.js";
+import { ChevronDown } from "./Chevron.js";
 
 export function Dropdown({
                              dropdownId,
@@ -7,7 +8,8 @@ export function Dropdown({
                              selectedOption,
                              setOption,
                              setETR,
-                             getETRForOption
+                             getETRForOption,
+                             isInactive = false
                          } = {}) {
     const [searchText, setSearchText] = React.useState("");
     const [highlightedIndex, setHighlightedIndex] = React.useState(0);
@@ -94,7 +96,10 @@ export function Dropdown({
     return (
         <div className="dropdown">
             <div className="dropdown-menu">
-                <div className="dropdown-selected" onClick={toggleOpen}>
+                <div
+                    className={`dropdown-selected ${isInactive ? "inactive" : ""}`}
+                    onClick={toggleOpen}
+                >
                     <span className={`text-inputs ${!labelMap[selectedOption] ? "placeholder" : ""}`}>
                         {labelMap[selectedOption] === "All countries"
                             ? "Choose a country"
@@ -141,19 +146,4 @@ export function Dropdown({
     );
 }
 
-const ChevronDown = ({ className }) => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className={className}
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        strokeWidth="1"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-    >
-        <path d="M2 5l6 6 6-6" />
-    </svg>
-);
+
