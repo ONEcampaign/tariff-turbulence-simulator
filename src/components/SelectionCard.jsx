@@ -24,6 +24,7 @@ export function SelectionCard({
     const isAll = d => isCountryMode ? d.product === "All products" : d.country === "All countries";
     const isDetail = d => isCountryMode ? d.product !== "All products" : d.country !== "All countries";
     const isHistorical = d => isCountryMode ? d.product === "All products" : d.country === "All countries";
+    const showMoreText = isCountryMode ? "sectors" : "countries"
 
     const chunkSize = 5;
 
@@ -124,13 +125,31 @@ export function SelectionCard({
             {
                 (showMore === false && allItems.length > chunkSize) ? (
                     <div
-                        className='dropdown-selected show-more-button text-inputs'
+                        className='dropdown-selected show-more-button'
                         onClick={() => {setShowMore(!showMore)}}
                     >
-                        Show more
+                        <p className="text-inputs">{`Show more ${showMoreText}`}</p>
+                        <ChevronDown className="dropdown-chevron" />
                     </div>
                 ) : null
             }
         </div>
     );
 }
+
+const ChevronDown = ({ className }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className={className}
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        strokeWidth="2"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+    >
+        <path d="M2 5l6 6 6-6" />
+    </svg>
+);

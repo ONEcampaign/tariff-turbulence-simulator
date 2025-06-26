@@ -41,7 +41,7 @@
 }
 
 .dropdown-selected.show-more-button {
-    width: 150px;
+    width: auto;
     margin: 0 auto;
     font-weight: 700;
 }
