@@ -2,7 +2,7 @@ import * as React from "npm:react";
 import * as d3 from 'npm:d3';
 import {colorPalette} from "../js/colorPalette.js";
 import {riskThresholds} from "../js/riskThresholds.js";
-import {formatPercentage, formatCurrency} from "../js/format.js";
+import {formatPercentage, formatCurrency, formatTariff} from "../js/format.js";
 import {TariffButtons} from "./TariffButtons.js";
 
 const colorScale = d3.scaleThreshold(
@@ -20,25 +20,40 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
     );
     const sorted = [...cleaned].sort((a, b) => b[sortKey] - a[sortKey]);
 
+    const carouselRef = React.useRef(null);
+
+    React.useEffect(() => {
+        function updateCarouselWidth() {
+            const container = carouselRef.current;
+            if (container) {
+                const left = container.getBoundingClientRect().left;
+                container.style.width = `calc(${window.innerWidth - left}px - 1rem)`;
+            }
+        }
+
+        updateCarouselWidth(); // Run on mount
+
+        window.addEventListener("resize", updateCarouselWidth); // Re-run on resize
+        return () => window.removeEventListener("resize", updateCarouselWidth); // Cleanup
+    }, []);
+
     return (
-        <div className="carousel-container">
+        <div
+            className="carousel-container"
+            ref={carouselRef}
+        >
             <div className="carousel-track">
                 {sorted.map((countryData, index) => (
                     <div className="tariff-card carousel-card" key={countryData.iso2 || index}>
                         <div
-                            className="swatch"
+                            className={`swatch ${countryData.etr === null ? "na" : ""} ${formatTariff(countryData.etr) < riskThresholds[0] ? "light" : ""}`}
                             style={{
                                 backgroundColor:
-                                    countryData.etr != null ? colorScale(countryData.etr) : colorPalette.na
+                                    countryData.etr != null ? colorScale(formatTariff(countryData.etr)) : colorPalette.na
                             }}
                         >
-                            <p
-                                className="text-swatch"
-                                style={{
-                                    color: countryData.etr != null ? "white" : "black"
-                                }}
-                            >
-                                {countryData.etr != null ? `ETR: ${countryData.etr}%` : "No data"}
+                            <p className="text-swatch">
+                                {countryData.etr != null ? `ETR: ${formatPercentage(formatTariff(countryData.etr))}` : "No data"}
                             </p>
                         </div>
                         <div className="card-header carousel-card-header">
@@ -51,7 +66,7 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                         </div>
                         <div className="card-row carousel-card-row">
                             <h4 className="text-support-medium">% of GDP</h4>
-                            <p className="text-impact-large">{formatPercentage(countryData.impact_pct)}</p>
+                            <p className="text-impact-large">{formatPercentage(countryData.impact_pct, false)}</p>
                         </div>
                         <div className="card-row carousel-card-settings">
                             <h4 className="text-support-medium">Trade partner</h4>

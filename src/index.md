@@ -27,6 +27,7 @@ import {CountryCarousel} from "./components/CountryCarousel.js"
 import {SelectionCard} from "./components/SelectionCard.js";
 import {MutualExclusion} from "./components/MutualExclusion.js";
 import {ChevronDown} from "./components/Chevron.js";
+import {formatTariff} from "./js/format.js"
 import {
     generateCrossData,
     generateMapData,
@@ -42,8 +43,8 @@ import {
     headline, deck, introText, legendTitle, legendSubtitle, subsectionTitle, subsectionText
 } from "./js/copyText.js";
 
-const recentData = FileAttachment("./data/africa_exports_to_us_2024.csv").csv({typed: true});
-const historicalData = FileAttachment("./data/africa_exports_to_us_2002_2023.csv").csv({typed: true});
+const recentData = FileAttachment("./data/africa_exports_to_us_recent.csv").csv({typed: true});
+const historicalData = FileAttachment("./data/africa_exports_to_us_historical.csv").csv({typed: true});
 const geoData = FileAttachment("./data/africa_hexmap.geojson").json({typed: true});
 ```
 
@@ -100,11 +101,11 @@ function App() {
     );
 
     const exposureCardData = generateExposureCardData(selectedRecentData, selectedTariff);
-    const tooltipData = generateTooltipData(hoveredData, selectedTariff);
+    const tooltipData = generateTooltipData(hoveredData);
     const carouselData = generateCarouselData(crossData, selectedSector, selectedIndividualTariff)
     const selectionCardData = generateSelectionCardData(crossData, selectedCountry, selectedSector, selectedIndividualTariff)
     const selectedHistoricalData = binaryFilter(historicalData, selectedCountry, selectedSector)
-
+    
     // Generate iso3-country name map for dropdown menu
     const countryEntries = generateCountryEntries(crossData);
     const countryMap = Object.fromEntries(countryEntries);
@@ -113,7 +114,10 @@ function App() {
     const productGroups = generateProductGroups(crossData);
 
     // Determine the ETR for all countries
-    const allETR = crossData.find(d => d.iso3 === 'ALL' && d.product === selectedSector)?.etr ?? null;
+    const allETR = crossData.find(d => d.iso3 === 'ALL' && d.product === selectedSector)?.etr;
+
+    // Dtermine the ETR for selected data
+    const selectedETR = selectedRecentData?.etr;
 
     return (
         <div className="wrapper">
@@ -183,16 +187,16 @@ function App() {
                     clickedCountry={selectedCountry}
                     setCountry={setSelectedCountry}
                     setETR={setSelectedTariff}
-                    allETR={Number.isFinite(allETR) ? allETR : null}
+                    allETR={allETR}
                     setTooltip={setTooltipContent}
                 />
                 <Tooltip
                     x={tooltipContent.x}
                     y={tooltipContent.y}
-                    tooltipData={tooltipData}
+                    data={tooltipData}
                     isVisible={isTooltipVisible}
                 />
-                <ExposureCard countryData={exposureCardData}/>
+                <ExposureCard data={exposureCardData}/>
                 <SubsectionTitle content={subsectionTitle}/>
                 <SubsectionText content={subsectionText}/>
                 {

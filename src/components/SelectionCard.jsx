@@ -2,7 +2,7 @@ import * as React from "npm:react";
 import * as d3 from "npm:d3";
 import { ColumnPlot } from "./ColumnPlot.js";
 import { LinePlot} from "./LinePlot.js";
-import { formatPercentage, formatCurrency } from "../js/format.js";
+import {formatPercentage, formatCurrency, formatTariff} from "../js/format.js";
 import { colorPalette } from "../js/colorPalette.js";
 import { riskThresholds } from "../js/riskThresholds.js";
 import {TariffButtons} from "./TariffButtons.js";
@@ -39,22 +39,17 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
                 isCountryMode ? (
                     <div className={"card-header selection-card-header"}>
                         <div
-                            className="swatch"
+                            className={`swatch ${allData.etr === null ? "na" : ""} ${formatTariff(allData.etr) < riskThresholds[0] ? "light" : ""}`}
                             style={{
                                 backgroundColor:
                                     allData.etr != null
-                                        ? colorScale(allData.etr)
+                                        ? colorScale(formatTariff(allData.etr))
                                         : colorPalette.na,
                             }}
                         >
-                            <p
-                                className="text-swatch"
-                                style={{
-                                    color: allData.etr != null ? "white" : "black",
-                                }}
-                            >
+                            <p className="text-swatch">
                                 {allData.etr != null
-                                    ? `ETR: ${allData.etr}%`
+                                    ? `ETR: ${formatPercentage(formatTariff(allData.etr))}`
                                     : "No data"}
                             </p>
                         </div>
@@ -103,7 +98,7 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
                     <div className="card-row selection-card-row">
                         <h4 className="text-support-medium">% of GDP</h4>
                         <p className="text-impact-large">
-                            {formatPercentage(allData.impact_pct)}
+                            {formatPercentage(allData.impact_pct, false)}
                         </p>
                     </div>
                 ) : null

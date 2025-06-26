@@ -1,7 +1,7 @@
 .dropdown-menu {
     width: var(--filters-width);
-    background: white;
     position: relative;
+    background: white;
 }
 
 .dropdown-selected {
@@ -9,11 +9,17 @@
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+    background: white;
     padding: 0.25em .5em;
     border: 2px black solid;
     border-radius: 6px;
     min-width: 150px;
     height: 22px;
+}
+
+.dropdown-selected.inactive {
+    background: var(--color-grey);
+    opacity: 0.5;
 }
 
 .dropdown-selected > .text-inputs {

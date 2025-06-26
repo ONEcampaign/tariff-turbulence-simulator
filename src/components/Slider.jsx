@@ -1,21 +1,32 @@
 import * as React from "npm:react";
 
-export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTariff, setSelectedIndividualTariff, setIsManualTariff, etr = 0}) {
+import { formatTariff, formatPercentage } from "../js/format.js";
+
+
+export function Slider({
+                           selectedTariff, // number between 0 and 1
+                           setSelectedTariff,
+                           selectedIndividualTariff,
+                           setSelectedIndividualTariff,
+                           setIsManualTariff,
+                           etr = 0
+                       }) {
     const trackRef = React.useRef(null);
 
-    // Get a selectedTariff based on x position
+    // Convert clientX to a 0–1 number
     const updateselectedTariffFromClientX = (clientX) => {
         if (!trackRef.current) return;
         const rect = trackRef.current.getBoundingClientRect();
         const x = clientX - rect.left;
         const pct = Math.max(0, Math.min(100, (x / rect.width) * 100));
-        setSelectedTariff(Math.round(pct));
+        const tariffValue = pct / 100;
+
+        setSelectedTariff(tariffValue);
         if (selectedIndividualTariff !== "ETR") {
-            setSelectedIndividualTariff(Math.round(pct));
+            setSelectedIndividualTariff(tariffValue);
         }
     };
 
-    // Start dragging and attach listeners
     const startDrag = (e) => {
         e.preventDefault();
 
@@ -58,7 +69,7 @@ export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTa
     return (
         <div className="slider-wrapper">
             {/* ETR Marker */}
-            <div className="slider-marker-etr" style={{ left: `${etr}%` }}>
+            <div className="slider-marker-etr" style={{ left: `${formatPercentage(formatTariff(etr))}` }}>
                 <div
                     className="slider-marker-label-etr text-support-medium"
                     onClick={() => {
@@ -85,14 +96,16 @@ export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTa
             </div>
 
             {/* Selected Marker */}
-            <div className="slider-marker-selected" style={{ left: `${selectedTariff}%` }}>
+            <div className="slider-marker-selected" style={{ left: `${formatPercentage(formatTariff(selectedTariff))}` }}>
                 <div
                     className="slider-marker-line-selected"
                     onMouseDown={startDrag}
                     onTouchStart={startTouch}
                     style={{ cursor: "grab" }}
                 />
-                <div className="slider-marker-label-selected text-support-medium">{selectedTariff}%</div>
+                <div className="slider-marker-label-selected text-support-medium">
+                    {formatPercentage(formatTariff(selectedTariff))}
+                </div>
             </div>
 
             {/* Track */}
@@ -104,7 +117,7 @@ export function Slider({ selectedTariff, setSelectedTariff, selectedIndividualTa
                 <div className="slider-track-base" />
                 <div
                     className="slider-track-overlay"
-                    style={{ left: `${selectedTariff}%` }}
+                    style={{ left: `${formatPercentage(formatTariff(selectedTariff))}` }}
                 />
             </div>
         </div>

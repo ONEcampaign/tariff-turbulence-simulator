@@ -8,7 +8,8 @@ export function Dropdown({
                              selectedOption,
                              setOption,
                              setETR,
-                             getETRForOption
+                             getETRForOption,
+                             isInactive = false
                          } = {}) {
     const [searchText, setSearchText] = React.useState("");
     const [highlightedIndex, setHighlightedIndex] = React.useState(0);
@@ -95,7 +96,10 @@ export function Dropdown({
     return (
         <div className="dropdown">
             <div className="dropdown-menu">
-                <div className="dropdown-selected" onClick={toggleOpen}>
+                <div
+                    className={`dropdown-selected ${isInactive ? "inactive" : ""}`}
+                    onClick={toggleOpen}
+                >
                     <span className={`text-inputs ${!labelMap[selectedOption] ? "placeholder" : ""}`}>
                         {labelMap[selectedOption] === "All countries"
                             ? "Choose a country"
