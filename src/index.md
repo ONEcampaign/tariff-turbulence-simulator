@@ -55,7 +55,7 @@ function App() {
     const height = 600;
 
     // Reactive variables
-    const [selectedCountry, setSelectedCountry] = React.useState('LSO');
+    const [selectedCountry, setSelectedCountry] = React.useState('ALL');
     const [selectedSector, setSelectedSector] = React.useState('All products');
     const [selectedTariff, setSelectedTariff] = React.useState();
     const [selectedIndividualTariff, setSelectedIndividualTariff] = React.useState("ETR")
