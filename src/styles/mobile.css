@@ -1,18 +1,24 @@
 @media (max-width: 600px) {
     .sticky-controls {
-        bottom: 100vh;
+        position: fixed;
+        top: unset;
+        left: 0;
+        margin: 0;
+        bottom: 0 !important;
         background-color: white;
         transform: translate(0,0);
         z-index: 10;
         width: 100%;
         padding: 20px 0;
+        text-align: center;
     }
 
-    .visualizations {
-        top: 50px;
+    .sticky-wrapper {
+        width: 250px;
+        margin: 0 auto;
     }
 
-    .visualizations svg {
+    .main-block svg {
         width: 100%;
         height: auto;
     }
