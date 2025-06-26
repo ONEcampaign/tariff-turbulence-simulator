@@ -7,7 +7,7 @@ import {TariffButtons} from "./TariffButtons.js";
 
 const colorScale = d3.scaleThreshold(
     riskThresholds,
-    [colorPalette.low, colorPalette.medium, colorPalette.high]
+    [colorPalette.veryLow, colorPalette.low, colorPalette.medium, colorPalette.high]
 );
 
 export function CountryCarousel({data, selectedTariff, selectedIndividualTariff, setSelectedIndividualTariff, selectedUnits = "usd"}) {
@@ -46,7 +46,7 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                 {sorted.map((countryData, index) => (
                     <div className="tariff-card carousel-card" key={countryData.iso2 || index}>
                         <div
-                            className={`swatch ${countryData.etr === null ? "na" : ""} ${formatTariff(countryData.etr) < riskThresholds[0] ? "light" : ""}`}
+                            className={`swatch ${data.etr === null ? "na" : ""} ${formatTariff(data.etr) < riskThresholds[0] ? "very-low" : ""} ${formatTariff(data.etr) < riskThresholds[1] ? "low" : ""}`}
                             style={{
                                 backgroundColor:
                                     countryData.etr != null ? colorScale(formatTariff(countryData.etr)) : colorPalette.na

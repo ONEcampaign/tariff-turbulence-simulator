@@ -5,7 +5,7 @@ import { formatPercentage, formatCurrency, formatTariff } from "../js/format.js"
 
 const colorScale = d3.scaleThreshold(
     riskThresholds,
-    [colorPalette.low, colorPalette.medium, colorPalette.high]
+    [colorPalette.veryLow, colorPalette.low, colorPalette.medium, colorPalette.high]
 );
 
 export function Tooltip({ x, y, data, isVisible } ={}) {
@@ -16,7 +16,7 @@ export function Tooltip({ x, y, data, isVisible } ={}) {
             className="tariff-card tooltip"
             style={{"left": x, "top": y}}>
             <div
-                className={`swatch ${data.etr === null ? "na" : ""} ${formatTariff(data.etr) < riskThresholds[0] ? "light" : ""}`}
+                className={`swatch ${data.etr === null ? "na" : ""} ${formatTariff(data.etr) < riskThresholds[0] ? "very-low" : ""} ${formatTariff(data.etr) < riskThresholds[1] ? "low" : ""}`}
                 style={{
                     backgroundColor:
                         data.etr != null ? colorScale(formatTariff(data.etr)) : colorPalette.na
