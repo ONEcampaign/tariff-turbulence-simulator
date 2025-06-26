@@ -1,5 +1,6 @@
 .selection-card {
-    width: var(--main-block-width);
+    /* width: var(--main-block-width); */
+    max-width: 100%;
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;

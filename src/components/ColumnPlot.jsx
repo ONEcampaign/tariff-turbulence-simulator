@@ -13,7 +13,7 @@ export function ColumnPlot({ data, mode }) {
     const [width, setWidth] = React.useState(0);
 
     const height = 180;
-    const margin = { top: 10, right: 0, bottom: 40, left: 0 };
+    const margin = { top: 10, right: 0, bottom: 0, left: 0 };
 
     // Track container width for responsiveness
     React.useEffect(() => {
@@ -53,7 +53,7 @@ export function ColumnPlot({ data, mode }) {
             style={{ position: "relative", width: "100%" }}
         >
             <h4 className="text-support-medium">Most exposed {isCountryMode ? "sectors" : "countries"}</h4>
-            <svg width={width} height={height}>
+            <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
                 <g>
                     {data.map((d) => {
                         const barHeight = yScale(0) - yScale(d.impact_usd);
@@ -90,11 +90,11 @@ export function ColumnPlot({ data, mode }) {
             {/* HTML labels below bars */}
             <div
                 style={{
-                    position: "absolute",
-                    bottom: 0,
+                    position: "relative",
+                    top: 0,
                     left: margin.left,
                     right: margin.right,
-                    height: "40px",
+                    height: "auto",
                     display: "flex",
                     gap: `${xScale.step() - xScale.bandwidth()}px`,
                     justifyContent: "space-between",

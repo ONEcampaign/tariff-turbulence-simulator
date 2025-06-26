@@ -1,5 +1,6 @@
 .exposure-card {
-    width: var(--main-block-width);
+    /* width: var(--main-block-width); */
+    max-width: 100%;
     margin: var(--margin-extra-large) auto;
     display: flex;
     flex-direction: row;
