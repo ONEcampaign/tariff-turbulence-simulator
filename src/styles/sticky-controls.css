@@ -22,6 +22,11 @@
 
 .sticky-tab {
     display: none;
+    cursor: pointer;
+}
+
+.sticky-tab .text-inputs {
+    font-weight: 700;
 }
 
 .text-support-medium.center-aligned {

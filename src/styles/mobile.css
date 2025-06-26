@@ -22,7 +22,7 @@
     }
 
     .sticky-controls.hidden {
-        bottom: -320px !important;
+        bottom: -230px !important;
     }
 
     .sticky-wrapper {
@@ -63,12 +63,27 @@
         border-left: 1px solid black;
         border-right: 1px solid black;
     }
+
+    .dropdown-list {
+        max-height: 130px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .sticky-controls.hidden {
+        bottom: -220px !important;
+    }
 }
 
 @media (max-width: 680px) {
     .dropdowns-wrapper {
         flex-direction: column;
         gap: 0;
+    }
+
+    .sticky-controls.hidden {
+        bottom: -314px !important;
     }
 }
 

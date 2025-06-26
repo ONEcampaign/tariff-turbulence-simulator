@@ -26,6 +26,7 @@ import {ToggleButton} from "./components/ToggleButton.js";
 import {CountryCarousel} from "./components/CountryCarousel.js"
 import {SelectionCard} from "./components/SelectionCard.js";
 import {MutualExclusion} from "./components/MutualExclusion.js";
+import {ChevronDown} from "./components/Chevron.js";
 import {
     generateCrossData,
     generateMapData,
@@ -119,12 +120,12 @@ function App() {
             <div className={`sticky-controls ${hideMenu === true ? "hidden" : ""}`}>
                 <div 
                     className="sticky-tab"
-                    onClick={() => {
-                        console.log(hideMenu);
-                        setHideMenu(!hideMenu)
-                    }}
+                    onClick={() => setHideMenu(!hideMenu)}
                 >
-                    Show/Hide controls ^
+                    <span className="text-inputs">
+                        {`${hideMenu === true ? 'Show' : 'Hide'} controls`}
+                    </span>
+                    <ChevronDown className={`dropdown-chevron ${hideMenu == true ? "rotate" : ""}`} />
                 </div>
                 <div className='sticky-wrapper'>
                     <div className='sticky-content'>
