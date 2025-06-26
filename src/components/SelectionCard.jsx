@@ -26,7 +26,7 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
     topItems = data
         .filter(d => isDetail(d) && Number.isFinite(d.impact_usd))
         .sort((a, b) => b.impact_usd - a.impact_usd)
-        .slice(0, 5);
+        // .slice(0, 5);
 
     allHistoricalData = historicalData.filter(isHistorical);
 
