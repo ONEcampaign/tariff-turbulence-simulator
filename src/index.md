@@ -68,6 +68,7 @@ function App() {
     })
     const isTooltipVisible = tooltipContent.country !== null;
     const [selectedUnits, setSelectedUnits] = React.useState("usd")
+    const [showMore, setShowMore] = React.useState(false);
 
     // Crossed data between csv and geojson to make sure all countries are present
     const crossData = generateCrossData(recentData, geoData)
@@ -82,7 +83,8 @@ function App() {
         setSelectedSector,
         crossData,
         setSelectedTariff,
-        isManualTariff
+        isManualTariff,
+        setShowMore
     });
 
     // Data to use on hexMap
@@ -207,6 +209,8 @@ function App() {
                             selectedTariff={selectedTariff}
                             selectedIndividualTariff={selectedIndividualTariff}
                             setSelectedIndividualTariff={setSelectedIndividualTariff}
+                            showMore={showMore}
+                            setShowMore={setShowMore}
                         />
                     )
                 }

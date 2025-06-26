@@ -12,21 +12,26 @@ const colorScale = d3.scaleThreshold(
     [colorPalette.low, colorPalette.medium, colorPalette.high]
 );
 
-export function SelectionCard({ data, historicalData, mode, selectedTariff, selectedIndividualTariff, setSelectedIndividualTariff }) {
+export function SelectionCard({
+    data, historicalData, mode,
+    selectedTariff, selectedIndividualTariff, setSelectedIndividualTariff,
+    showMore, setShowMore
+}) {
 
-    let allData, topItems, allHistoricalData;
+    let allData, allItems, allHistoricalData;
     const isCountryMode = mode === "country";
 
     const isAll = d => isCountryMode ? d.product === "All products" : d.country === "All countries";
     const isDetail = d => isCountryMode ? d.product !== "All products" : d.country !== "All countries";
     const isHistorical = d => isCountryMode ? d.product === "All products" : d.country === "All countries";
 
+    const chunkSize = 5;
+
     allData = data.find(isAll);
 
-    topItems = data
+    allItems = data
         .filter(d => isDetail(d) && Number.isFinite(d.impact_usd))
-        .sort((a, b) => b.impact_usd - a.impact_usd)
-        // .slice(0, 5);
+        .sort((a, b) => b.impact_usd - a.impact_usd);
 
     allHistoricalData = historicalData.filter(isHistorical);
 
@@ -110,9 +115,22 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
             }
 
             <ColumnPlot
-                data={topItems}
+                data={allItems}
                 mode={mode}
+                showMore={showMore}
+                chunkSize={chunkSize}
             />
+
+            {
+                (showMore === false && allItems.length > chunkSize) ? (
+                    <div
+                        className='dropdown-selected show-more-button text-inputs'
+                        onClick={() => {setShowMore(!showMore)}}
+                    >
+                        Show more
+                    </div>
+                ) : null
+            }
         </div>
     );
 }

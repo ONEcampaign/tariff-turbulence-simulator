@@ -39,3 +39,9 @@
 .hide {
     display: none;
 }
+
+.dropdown-selected.show-more-button {
+    width: 150px;
+    margin: 0 auto;
+    font-weight: 700;
+}

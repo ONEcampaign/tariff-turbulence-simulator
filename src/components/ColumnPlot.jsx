@@ -9,7 +9,7 @@ const getChunks = (array, chunkSize) => {
     .map(begin => array.slice(begin, begin + chunkSize))
 };                                                                                              
 
-export function ColumnPlot({ data, mode }) {
+export function ColumnPlot({ data, mode, showMore, chunkSize }) {
 
     const isCountryMode = mode === "country";
 
@@ -39,8 +39,7 @@ export function ColumnPlot({ data, mode }) {
     if (width === 0) return <div ref={containerRef} style={{ width: "100%" }} />;
 
     // Chunks
-    const chunkSize = 5;
-    const dataChunks = getChunks(data, 5);
+    const dataChunks = showMore === true ? getChunks(data, chunkSize) : [data.slice(0, chunkSize)];
 
     // Scales
     const xScale = d3
