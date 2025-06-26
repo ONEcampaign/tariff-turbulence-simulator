@@ -30,12 +30,25 @@
 .legend-swatch {
     width: var(--swatch-width);
     height: var(--swatch-height);
+    box-sizing: border-box;
 }
 
-.legend-item:nth-child(4) {
+.legend-item:last-child {
     margin-left: var(--margin-small);
 }
 
-.legend-item:nth-child(4) > .legend-swatch {
+.legend-item:first-child > .legend-swatch{
     border: 1px #0000001A solid
+}
+
+.hatch-fill {
+    border: 1px #0000001A solid;
+    background-image: repeating-linear-gradient(
+            135deg,
+            #aaa,
+            #aaa 1px,
+            white 2px,
+            white 6px
+    );
+    background-clip: padding-box;
 }
