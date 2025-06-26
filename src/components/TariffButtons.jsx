@@ -1,4 +1,5 @@
 import * as React from "npm:react";
+import { formatPercentage, formatTariff } from "../js/format.js";
 
 export function TariffButtons({ selectedTariff, selectedIndividualTariff, setSelectedIndividualTariff }) {
 
@@ -14,7 +15,7 @@ export function TariffButtons({ selectedTariff, selectedIndividualTariff, setSel
                 className={`tariff-button text-support-small ${selectedIndividualTariff !== "ETR" ? "selected" : ""}`}
                 onClick={() => setSelectedIndividualTariff(selectedTariff)}
             >
-                {selectedTariff}%
+                {formatPercentage(formatTariff(selectedTariff))}
             </button>
         </div>
     );
