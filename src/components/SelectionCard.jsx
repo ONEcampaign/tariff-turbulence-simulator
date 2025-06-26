@@ -39,7 +39,7 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
                 isCountryMode ? (
                     <div className={"card-header selection-card-header"}>
                         <div
-                            className="swatch"
+                            className={`swatch ${allData.etr === null ? "na" : ""} ${formatTariff(allData.etr) < riskThresholds[0] ? "light" : ""}`}
                             style={{
                                 backgroundColor:
                                     allData.etr != null
@@ -47,12 +47,7 @@ export function SelectionCard({ data, historicalData, mode, selectedTariff, sele
                                         : colorPalette.na,
                             }}
                         >
-                            <p
-                                className="text-swatch"
-                                style={{
-                                    color: allData.etr != null ? "white" : "black",
-                                }}
-                            >
+                            <p className="text-swatch">
                                 {allData.etr != null
                                     ? `ETR: ${formatPercentage(formatTariff(allData.etr))}`
                                     : "No data"}
