@@ -134,8 +134,8 @@ function App() {
                 </div>
                 <div className='sticky-wrapper'>
                     <div className='sticky-content'>
+                        <h4 className="text-support-medium">Filter the data</h4>
                         <div className="dropdowns-wrapper">
-                            <h4 className="text-support-medium">Filter the data</h4>
                             <Dropdown
                                 dropdownId="countryMenu"
                                 options={countryMap}
