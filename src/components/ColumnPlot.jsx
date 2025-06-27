@@ -13,7 +13,7 @@ export function ColumnPlot({ data, mode, showMore, chunkSize }) {
 
     const isCountryMode = mode === "country";
 
-    const varName = isCountryMode ? "product" : "country"
+    const varName = isCountryMode ? "sector" : "country"
 
     const containerRef = React.useRef(null);
     const [width, setWidth] = React.useState(0);
@@ -95,7 +95,7 @@ function ColumnChartRow({ data, width, height, varName, xScale, yScale, margin, 
                                     y={yScale(d.impact_usd)}
                                     width={xScale.bandwidth()}
                                     height={barHeight}
-                                    fill={isCountryMode ? colorPalette.countryMode : colorPalette.productMode}
+                                    fill={isCountryMode ? colorPalette.countryMode : colorPalette.sectorMode}
                                 />
                                 <text
                                     className="column-plot-value text-support-medium"

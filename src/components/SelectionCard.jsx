@@ -21,9 +21,9 @@ export function SelectionCard({
     let allData, allItems, allHistoricalData;
     const isCountryMode = mode === "country";
 
-    const isAll = d => isCountryMode ? d.product === "All products" : d.country === "All countries";
-    const isDetail = d => isCountryMode ? d.product !== "All products" : d.country !== "All countries";
-    const isHistorical = d => isCountryMode ? d.product === "All products" : d.country === "All countries";
+    const isAll = d => isCountryMode ? d.sector === "All sectors" : d.country === "All countries";
+    const isDetail = d => isCountryMode ? d.sector !== "All sectors" : d.country !== "All countries";
+    const isHistorical = d => isCountryMode ? d.sector === "All sectors" : d.country === "All countries";
     const showMoreText = isCountryMode ? "sectors" : "countries"
 
     const chunkSize = 5;
@@ -36,7 +36,7 @@ export function SelectionCard({
 
     allHistoricalData = historicalData.filter(isHistorical);
 
-    const title = mode === "country" ? allData.country : allData.product;
+    const title = mode === "country" ? allData.country : allData.sector;
 
     return (
         <div className="tariff-card selection-card">

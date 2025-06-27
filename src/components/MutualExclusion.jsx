@@ -12,15 +12,15 @@ export function MutualExclusion({
                                     setShowMore
 }) {
     const updateCountry = (newCountry) => {
-        if (newCountry !== "ALL" && selectedSector !== "All products") {
-            setSelectedSector("All products");
+        if (newCountry !== "ALL" && selectedSector !== "All sectors") {
+            setSelectedSector("All sectors");
         }
         setSelectedCountry(newCountry);
         setShowMore(false);
     };
 
     const updateSector = (newSector) => {
-        if (newSector !== "All products" && selectedCountry !== "ALL") {
+        if (newSector !== "All sectors" && selectedCountry !== "ALL") {
             setSelectedCountry("ALL");
         }
         setSelectedSector(newSector);
@@ -31,7 +31,7 @@ export function MutualExclusion({
     React.useEffect(() => {
         if (isManualTariff) return;
 
-        const entry = crossData.find(d => d.iso3 === selectedCountry && d.product === selectedSector);
+        const entry = crossData.find(d => d.iso3 === selectedCountry && d.sector === selectedSector);
         if (entry?.etr != null) {
             setSelectedTariff(entry.etr);
         } else {

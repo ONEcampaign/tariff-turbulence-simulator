@@ -5,7 +5,7 @@ import {
 } from "./format.js";
 
 export function generateCrossData(data, geoData) {
-    const products = Array.from(new Set(data.map(d => d.product)));
+    const sectors = Array.from(new Set(data.map(d => d.sector)));
     const dataKeys = new Set(data.flatMap(d => Object.keys(d)));
     dataKeys.add("iso2");
 
@@ -21,14 +21,14 @@ export function generateCrossData(data, geoData) {
         country: f.properties.country
     }));
 
-    const dataMap = new Map(data.map(d => [`${d.iso3}|${d.product}`, d]));
+    const dataMap = new Map(data.map(d => [`${d.iso3}|${d.sector}`, d]));
 
     const crossData = [];
 
     for (const { iso3, iso2, country } of countries) {
-        for (const product of products) {
-            const keyIso3 = `${iso3}|${product}`;
-            const keyIso2 = `${iso2}|${product}`;
+        for (const sector of sectors) {
+            const keyIso3 = `${iso3}|${sector}`;
+            const keyIso2 = `${iso2}|${sector}`;
             const existing = dataMap.get(keyIso3) || dataMap.get(keyIso2);
 
             if (existing) {
@@ -37,7 +37,7 @@ export function generateCrossData(data, geoData) {
                     iso2,
                     iso3,
                     country,
-                    product
+                    sector
                 });
             } else {
                 const row = {};
@@ -45,7 +45,7 @@ export function generateCrossData(data, geoData) {
                 row.iso3 = iso3;
                 row.iso2 = iso2;
                 row.country = country;
-                row.product = product;
+                row.sector = sector;
                 crossData.push(row);
             }
         }
@@ -68,7 +68,7 @@ export function generateMapData(data, geoData, clickedSector) {
         type: "FeatureCollection",
         features: geoData.features.map(feat => {
             const iso3 = feat.properties.iso3;
-            const row = data.find(d => d.iso3 === iso3 && d.product === clickedSector);
+            const row = data.find(d => d.iso3 === iso3 && d.sector === clickedSector);
 
             return {
                 ...feat,
@@ -91,12 +91,12 @@ export function generateCountryEntries(crossData) {
     });
 }
 
-export function generateProductGroups(crossData) {
+export function generateSectorGroups(crossData) {
     return Array.from(
-        new Set(crossData.map(d => d.product))
+        new Set(crossData.map(d => d.sector))
     ).sort((a, b) => {
-        if (a === "All products") return -1;
-        if (b === "All products") return 1;
+        if (a === "All sectors") return -1;
+        if (b === "All sectors") return 1;
         return a.localeCompare(b);
     });
 }
@@ -108,7 +108,7 @@ export function generateExposureCardData(selectedData, selectedTariff) {
         country: selectedData.country === "All countries"
             ? "all countries"
             : selectedData.country,
-        product: selectedData.product.toLowerCase(),
+        sector: selectedData.sector.toLowerCase(),
         tariff: selectedTariff,
         exports: selectedData.exports,
         impact_usd: impact_usd
@@ -125,7 +125,7 @@ export function generateTooltipData(hoveredData) {
             ? "all countries"
             : hoveredData?.country,
         iso2: hoveredData?.iso2 ?? null,
-        product: hoveredData?.product?.toLowerCase(),
+        sector: hoveredData?.sector?.toLowerCase(),
         etr: hoveredData?.etr,
         exports: hoveredData?.exports,
         impact_usd: impactUsd,
@@ -135,7 +135,7 @@ export function generateTooltipData(hoveredData) {
 
 export function generateCarouselData(data, selectedSector, selectedIndividualTariff) {
     return data
-        .filter(d => d.product === selectedSector && d.country !== "All countries")
+        .filter(d => d.sector === selectedSector && d.country !== "All countries")
         .map(d => {
             const tariff = selectedIndividualTariff === "ETR" ? d.etr : selectedIndividualTariff;
             return {
@@ -151,8 +151,8 @@ export function generateCarouselData(data, selectedSector, selectedIndividualTar
 export function binaryFilter(data, selectedCountry, selectedSector) {
     if (selectedCountry !== "ALL") {
         return data.filter(d => d.iso3 === selectedCountry);
-    } else if (selectedSector !== "All products") {
-        return data.filter(d => d.product === selectedSector);
+    } else if (selectedSector !== "All sectors") {
+        return data.filter(d => d.sector === selectedSector);
     } else {
         return data;
     }
@@ -166,7 +166,7 @@ export function generateSelectionCardData(data, selectedCountry, selectedSector,
         return {
             country: d.country,
             iso2: d.iso2,
-            product: d.product,
+            sector: d.sector,
             etr: d.etr,
             impact_usd: computeImpactUSD(d.exports, tariff),
             impact_pct: computeImpactPCT(d.exports, tariff, d.gdp)

@@ -5,7 +5,7 @@ export function ExposureCard({data} = {}) {
         <div className="tariff-card exposure-card">
             <div className="left-column">
                 <h4
-                    className="text-impact-small">Exposure to US tariffs for {data.country} exports of {data.product}
+                    className="text-impact-small">Exposure to US tariffs for {data.country} exports of {data.sector}
                 </h4>
                 <p className="text-support-large">
                     Simulated tariff: <b>{formatPercentage(formatTariff(data.tariff))}</b>
