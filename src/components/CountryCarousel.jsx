@@ -10,7 +10,16 @@ const colorScale = d3.scaleThreshold(
     [colorPalette.low, colorPalette.medium, colorPalette.high]
 );
 
-export function CountryCarousel({data, selectedTariff, selectedIndividualTariff, setSelectedIndividualTariff, selectedUnits = "usd"}) {
+export function CountryCarousel(
+    {
+        data,
+        selectedTariff,
+        isETR,
+        editMode,
+        setEditMode,
+        selectedUnits = "usd"
+    }
+    ) {
     const sortKey = selectedUnits === "usd" ? "impact_usd" : "impact_pct";
     const cleaned = data.filter(
         (d) =>
@@ -78,8 +87,9 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                             <h4 className="text-support-medium">Individual tariff</h4>
                             <TariffButtons
                                 selectedTariff={selectedTariff}
-                                selectedIndividualTariff={selectedIndividualTariff}
-                                setSelectedIndividualTariff={setSelectedIndividualTariff}
+                                isETR={isETR}
+                                editMode={editMode}
+                                setEditMode={setEditMode}
                             />
                         </div>
                     </div>

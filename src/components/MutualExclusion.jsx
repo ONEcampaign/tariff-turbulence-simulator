@@ -8,7 +8,7 @@ export function MutualExclusion({
                                     setSelectedSector,
                                     crossData,
                                     setSelectedTariff,
-                                    isManualTariff,
+                                    isETR,
                                     setShowMore
 }) {
     const updateCountry = (newCountry) => {
@@ -29,7 +29,7 @@ export function MutualExclusion({
 
     // Sync ETR whenever the [selectedCountry, selectedSector] combo changes
     React.useEffect(() => {
-        if (isManualTariff) return;
+        if (!isETR) return;
 
         const entry = crossData.find(d => d.iso3 === selectedCountry && d.sector === selectedSector);
         if (entry?.etr != null) {

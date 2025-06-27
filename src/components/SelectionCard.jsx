@@ -12,10 +12,17 @@ const colorScale = d3.scaleThreshold(
     [colorPalette.low, colorPalette.medium, colorPalette.high]
 );
 
-export function SelectionCard({
-    data, historicalData, mode,
-    selectedTariff, selectedIndividualTariff, setSelectedIndividualTariff,
-    showMore, setShowMore
+export function SelectionCard(
+    {
+        data,
+        historicalData,
+        mode,
+        selectedTariff,
+        isETR,
+        editMode,
+        setEditMode,
+        showMore,
+        setShowMore
 }) {
 
     let allData, allItems, allHistoricalData;
@@ -81,8 +88,9 @@ export function SelectionCard({
                     <h4 className="text-support-medium">Individual tariff</h4>
                     <TariffButtons
                         selectedTariff={selectedTariff}
-                        selectedIndividualTariff={selectedIndividualTariff}
-                        setSelectedIndividualTariff={setSelectedIndividualTariff}
+                        isETR={isETR}
+                        editMode={editMode}
+                        setEditMode={setEditMode}
                     />
                 </div>
             </div>

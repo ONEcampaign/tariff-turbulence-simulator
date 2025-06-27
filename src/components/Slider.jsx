@@ -6,9 +6,7 @@ import { formatPercentage } from "../js/format.js";
 export function Slider({
                            selectedTariff, // number between 0 and 1
                            setSelectedTariff,
-                           selectedIndividualTariff,
-                           setSelectedIndividualTariff,
-                           setIsManualTariff,
+                           setIsETR,
                            etr = 0
                        }) {
     const trackRef = React.useRef(null);
@@ -22,9 +20,6 @@ export function Slider({
         const tariffValue = pct / 100;
 
         setSelectedTariff(tariffValue);
-        if (selectedIndividualTariff !== "ETR") {
-            setSelectedIndividualTariff(tariffValue);
-        }
     };
 
     const startDrag = (e) => {
@@ -32,7 +27,7 @@ export function Slider({
 
         const handleMouseMove = (e) => {
             updateselectedTariffFromClientX(e.clientX);
-            setIsManualTariff(true);
+            setIsETR(false);
         };
 
         const handleMouseUp = () => {
@@ -49,7 +44,7 @@ export function Slider({
 
         const handleMouseMove = (e) => {
             updateselectedTariffFromClientX(e.touches[0].clientX);
-            setIsManualTariff(true);
+            setIsETR(false);
         };
 
         const handleMouseUp = () => {
@@ -63,7 +58,7 @@ export function Slider({
 
     const handleTrackClick = (e) => {
         updateselectedTariffFromClientX(e.clientX);
-        setIsManualTariff(true);
+        setIsETR(false);
     };
 
     return (
@@ -74,10 +69,7 @@ export function Slider({
                     className="slider-marker-label-etr text-support-medium"
                     onClick={() => {
                         setSelectedTariff(etr);
-                        setIsManualTariff(false);
-                        if (selectedIndividualTariff !== "ETR") {
-                            setSelectedIndividualTariff(etr);
-                        }
+                        setIsETR(true);
                     }}
                     style={{ cursor: "pointer" }}
                 >
@@ -87,9 +79,7 @@ export function Slider({
                     className="slider-marker-line-etr"
                     onClick={() => {
                         setSelectedTariff(etr);
-                        if (selectedIndividualTariff !== "ETR") {
-                            setSelectedIndividualTariff(etr);
-                        }
+                        setIsETR(true);
                     }}
                     style={{ cursor: "pointer" }}
                 />
