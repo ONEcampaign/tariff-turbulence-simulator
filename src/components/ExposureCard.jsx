@@ -1,4 +1,4 @@
-import {formatCurrency, formatPercentage, formatTariff} from "../js/format.js";
+import {formatCurrency, formatPercentage} from "../js/format.js";
 
 export function ExposureCard({data} = {}) {
     return (
@@ -8,7 +8,7 @@ export function ExposureCard({data} = {}) {
                     className="text-impact-small">Exposure to US tariffs for {data.country} exports of {data.sector}
                 </h4>
                 <p className="text-support-large">
-                    Simulated tariff: <b>{formatPercentage(formatTariff(data.tariff))}</b>
+                    Simulated tariff: <b>{formatPercentage(data.tariff, {})}</b>
                 </p>
             </div>
             <div className="right-column">

@@ -2,7 +2,7 @@ import * as React from "npm:react";
 import * as d3 from 'npm:d3';
 import {colorPalette} from "../js/colorPalette.js";
 import {riskThresholds} from "../js/riskThresholds.js";
-import {formatPercentage, formatCurrency, formatTariff} from "../js/format.js";
+import {formatPercentage, formatCurrency} from "../js/format.js";
 import {TariffButtons} from "./TariffButtons.js";
 
 const colorScale = d3.scaleThreshold(
@@ -46,14 +46,14 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                 {sorted.map((countryData, index) => (
                     <div className="tariff-card carousel-card" key={countryData.iso2 || index}>
                         <div
-                            className={`swatch ${countryData.etr === null ? "na" : ""} ${formatTariff(countryData.etr) < riskThresholds[0] ? "light" : ""}`}
+                            className={`swatch ${countryData.etr === null ? "na" : ""} ${formatPercentage(countryData.etr, {display: false}) < riskThresholds[0] ? "light" : ""}`}
                             style={{
                                 backgroundColor:
-                                    countryData.etr != null ? colorScale(formatTariff(countryData.etr)) : colorPalette.na
+                                    countryData.etr != null ? colorScale(formatPercentage(countryData.etr, {display: false})) : colorPalette.na
                             }}
                         >
                             <p className="text-swatch">
-                                {countryData.etr != null ? `ETR: ${formatPercentage(formatTariff(countryData.etr))}` : "No data"}
+                                {countryData.etr != null ? `ETR: ${formatPercentage(countryData.etr, {})}` : "No data"}
                             </p>
                         </div>
                         <div className="card-header carousel-card-header">
@@ -66,7 +66,7 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                         </div>
                         <div className="card-row carousel-card-row">
                             <h4 className="text-support-medium">% of GDP</h4>
-                            <p className="text-impact-large">{formatPercentage(countryData.impact_pct, false)}</p>
+                            <p className="text-impact-large">{formatPercentage(countryData.impact_pct, {tariff: false})}</p>
                         </div>
                         <div className="card-row carousel-card-settings">
                             <h4 className="text-support-medium">Trade partner</h4>

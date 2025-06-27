@@ -1,6 +1,6 @@
 import * as React from "npm:react";
 
-import { formatTariff, formatPercentage } from "../js/format.js";
+import { formatPercentage } from "../js/format.js";
 
 
 export function Slider({
@@ -69,7 +69,7 @@ export function Slider({
     return (
         <div className="slider-wrapper">
             {/* ETR Marker */}
-            <div className="slider-marker-etr" style={{ left: `${formatPercentage(formatTariff(etr))}` }}>
+            <div className="slider-marker-etr" style={{ left: `${formatPercentage(etr, {})}` }}>
                 <div
                     className="slider-marker-label-etr text-support-medium"
                     onClick={() => {
@@ -96,7 +96,7 @@ export function Slider({
             </div>
 
             {/* Selected Marker */}
-            <div className="slider-marker-selected" style={{ left: `${formatPercentage(formatTariff(selectedTariff))}` }}>
+            <div className="slider-marker-selected" style={{ left: `${formatPercentage(selectedTariff, {})}` }}>
                 <div
                     className="slider-marker-line-selected"
                     onMouseDown={startDrag}
@@ -104,7 +104,7 @@ export function Slider({
                     style={{ cursor: "grab" }}
                 />
                 <div className="slider-marker-label-selected text-support-medium">
-                    {formatPercentage(formatTariff(selectedTariff))}
+                    {formatPercentage(selectedTariff,{})}
                 </div>
             </div>
 
@@ -117,7 +117,7 @@ export function Slider({
                 <div className="slider-track-base" />
                 <div
                     className="slider-track-overlay"
-                    style={{ left: `${formatPercentage(formatTariff(selectedTariff))}` }}
+                    style={{ left: `${formatPercentage(selectedTariff, {})}` }}
                 />
             </div>
         </div>
