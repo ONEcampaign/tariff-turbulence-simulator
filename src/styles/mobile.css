@@ -1,0 +1,116 @@
+@media (max-width: 1390px) {
+    .main-block {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 1120px) {
+    .main-block {
+        margin: auto;
+    }
+
+    .sticky-controls {
+        position: fixed;
+        top: unset;
+        left: 0;
+        margin: 0;
+        bottom: 0 !important;
+        z-index: 10;
+        width: 100%;
+        text-align: center;
+        transition: bottom 0.5s;
+    }
+
+    .sticky-controls.hidden {
+        bottom: -312px !important;
+    }
+
+    .sticky-wrapper {
+        width: 100%;
+        background-color: white;
+        border-top: 1px solid black;
+        padding: var(--margin-large) 0;
+    }
+
+    .sticky-content {
+        width: auto;
+        margin: 0 auto;
+    }
+
+    .slider-wrapper {
+        width: 250px;
+        margin: 0 auto;
+    }
+
+    .dropdowns-wrapper {
+        flex-direction: row;
+        gap: var(--margin-medium);
+    }
+
+    .dropdowns-wrapper > h4 {
+        line-height: calc(var(--lh-text-input) + 0.5em + 4px); /* line-height + padding + border of dropdown */
+    }
+
+    .sticky-tab {
+        display: block;
+        border-radius: 20px 20px 0 0;
+        background-color: white;
+        padding: 10px; /* TODO */
+        float: right;
+        width: 200px;
+        margin-bottom: -1px;
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+    }
+
+    .dropdown-list {
+        max-height: 130px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .sticky-controls.hidden {
+        bottom: -303px !important;
+    }
+}
+
+@media (max-width: 680px) {
+    .dropdowns-wrapper {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .sticky-controls.hidden {
+        bottom: -365px !important;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .main-block svg {
+        width: 100%;
+        height: auto;
+    }
+
+    .exposure-card {
+        flex-direction: column-reverse;
+    }
+
+    .legend-swatch {
+        width: var(--swatch-width-mobile);
+    }
+
+    .carousel-card {
+        min-width: 75%;
+    }
+
+    .selection-card-row-container {
+        flex-direction: column;
+    }
+
+    .tooltip {
+        display: none;
+    }
+}

@@ -5,7 +5,7 @@ from pathlib import Path
 import country_converter as coco
 from bblocks.data_importers import WEO
 
-from src.data.common import load_json, add_product_group_column
+from src.data.common import load_json, add_sector_group_column
 from src.data.config import PATHS
 
 YEAR_RANGE = range(2022, 2025)
@@ -22,7 +22,7 @@ def load_data() -> pd.DataFrame:
     """Load raw import data from CSV."""
     raw_dfs = []
     for y in YEAR_RANGE:
-        d = pd.read_csv(PATHS.INPUTS / f"africa_exports_to_us_{y}_raw.csv")
+        d = pd.read_csv(PATHS.INPUTS / f"africa_exports_to_us_{y}_ustrade_raw.csv")
         d = clean_columns(d)
         raw_dfs.append(d)
 
@@ -231,7 +231,7 @@ def compute_etr(df: pd.DataFrame) -> pd.Series:
     return etr_numerator / df["total_exports"]
 
 
-def compute_etr_by_group(df: pd.DataFrame, group_cols: list[str] = ["country", "product"]) -> pd.DataFrame:
+def compute_etr_by_group(df: pd.DataFrame, group_cols: list[str] = ["country", "sector"]) -> pd.DataFrame:
     """Compute ETR by grouping over specified columns (e.g., country, product_group)."""
     df_by_rate = (
         df.groupby(group_cols + ["rate"], observed=True, dropna=False)["exports"]
@@ -250,9 +250,9 @@ def compute_etr_by_group(df: pd.DataFrame, group_cols: list[str] = ["country", "
 def add_etr_column(df: pd.DataFrame) -> pd.DataFrame:
     variants = [
         {},
-        {"product": "All products"},
+        {"sector": "All sectors"},
         {"country": "All countries"},
-        {"country": "All countries", "product": "All products"},
+        {"country": "All countries", "sector": "All sectors"},
     ]
 
     frames = []
@@ -263,8 +263,8 @@ def add_etr_column(df: pd.DataFrame) -> pd.DataFrame:
     final_df = (
         pd.concat(frames, ignore_index=True)
         .rename(columns={"total_exports": "exports"})
-        .loc[:, ["country", "product", "exports", "etr"]]
-        .sort_values(["country", "product"])
+        .loc[:, ["country", "sector", "exports", "etr"]]
+        .sort_values(["country", "sector"])
         .reset_index(drop=True)
     )
     return final_df
@@ -277,13 +277,13 @@ def read_format_df() -> pd.DataFrame:
     """Load, clean, annotate, and compute ETR on the raw export data."""
 
     df = load_data()
-    df = add_product_group_column(df)
+    df = add_sector_group_column(df)
     df = add_rate_columns(df)
     df = add_etr_column(df)
     df = normalize_country_names(df)
     df = add_denominator_column(df)
 
-    ordered_columns = ["country", "iso3", "product", "exports", "etr", "gdp"]
+    ordered_columns = ["country", "iso3", "sector", "exports", "etr", "gdp"]
 
     return df[ordered_columns]
 

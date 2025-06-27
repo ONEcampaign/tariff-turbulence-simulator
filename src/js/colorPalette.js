@@ -6,5 +6,5 @@ export const colorPalette = {
     na: "#fff",
     naHatch: "#aaa",
     countryMode: "#A3DAF5",
-    productMode: "#F7CE5B"
+    sectorMode: "#F7CE5B"
 };

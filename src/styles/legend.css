@@ -1,6 +1,7 @@
 :root {
     --swatch-width: 82px;
     --swatch-height: 17px;
+    --swatch-width-mobile: 62px;
 }
 
 .legend {

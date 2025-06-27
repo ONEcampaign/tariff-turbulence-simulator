@@ -43,7 +43,7 @@ export function AfricaHexmap({
         });
     
     return (
-        <svg ref={svgRef} width={width} height={height}>
+        <svg ref={svgRef} width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
             <defs>
                 <pattern
                     id="diagonalHatch"

@@ -1,7 +1,7 @@
 import * as d3 from 'npm:d3';
 import { colorPalette } from "../js/colorPalette.js";
 import { riskThresholds } from "../js/riskThresholds.js";
-import { formatPercentage, formatCurrency, formatTariff } from "../js/format.js";
+import { formatPercentage, formatCurrency } from "../js/format.js";
 
 const colorScale = d3.scaleThreshold(
     riskThresholds,
@@ -19,11 +19,11 @@ export function Tooltip({ x, y, data, isVisible } ={}) {
                 className={`swatch ${data.etr === null ? "na" : ""} ${formatTariff(data.etr) < riskThresholds[0] ? "very-low" : ""} ${formatTariff(data.etr) < riskThresholds[1] ? "low" : ""}`}
                 style={{
                     backgroundColor:
-                        data.etr != null ? colorScale(formatTariff(data.etr)) : colorPalette.na
+                        data.etr != null ? colorScale(formatPercentage(data.etr), {display: false}) : colorPalette.na
                 }}
             >
                 <p className="text-swatch">
-                    {data.etr != null ? `ETR: ${formatPercentage(formatTariff(data.etr))}` : "No data"}
+                    {data.etr != null ? `ETR: ${formatPercentage(data.etr, {})}` : "No data"}
                 </p>
             </div>
             <div className="card-header tooltip-header">
@@ -36,7 +36,7 @@ export function Tooltip({ x, y, data, isVisible } ={}) {
             </div>
             <div className="card-row tooltip-row">
                 <h4 className="tooltip-var-name text-support-small">% of GDP</h4>
-                <p className="text-impact-medium">{formatPercentage(data.impact_pct, false)}</p>
+                <p className="text-impact-medium">{formatPercentage(data.impact_pct, {tariff: false})}</p>
             </div>
         </div>
     )

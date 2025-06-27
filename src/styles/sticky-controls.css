@@ -1,11 +1,38 @@
 .sticky-controls {
     position: fixed;
-    top: 20%;
+    width: 250px;
     left: 0;
     margin: 50px;
+    top: 20%;
+}
+
+.sticky-wrapper {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: var(--margin-small);
+}
+
+.sticky-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin-small);
+}
+
+.dropdowns-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: inherit;
+}
+
+.sticky-tab {
+    display: none;
+    cursor: pointer;
+}
+
+.sticky-tab .text-inputs {
+    font-weight: 700;
 }
 
 .text-support-medium.center-aligned {
@@ -14,8 +41,8 @@
 
 .controls-separator {
     height: 1px;
-    width: calc(var(--filters-width) - 34px);
-    margin: var(--margin-small) auto;
+    width: 75%;
+    margin: calc(var(--margin-small) * 1.5) auto var(--margin-small);
     border-bottom: 1px solid #CAC4D0;
 }
 

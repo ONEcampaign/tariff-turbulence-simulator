@@ -4,7 +4,7 @@ import pandas as pd
 from bblocks.data_importers import BACI
 import country_converter as coco
 
-from src.data.common import add_product_group_column
+from src.data.common import add_sector_group_column
 from src.data.config import PATHS
 
 def get_trade_data() -> pd.DataFrame:
@@ -19,8 +19,8 @@ def get_trade_data() -> pd.DataFrame:
         )
 
         df = raw_df.query("importer_iso3_code == 'USA'")
-        df = add_product_group_column(df)
-        df = group_data(df, ["year", "exporter_iso3_code", "product"])
+        df = add_sector_group_column(df)
+        df = group_data(df, ["year", "exporter_iso3_code", "sector"])
         df = filter_african_countries(df)
 
         df.to_csv(PATHS.EXPORTS_HIST, index=False)
@@ -67,7 +67,7 @@ def clean_df(df: pd.DataFrame) -> pd.DataFrame:
         "year": "year",
         "exporter_iso3_code": "iso3",
         "country": "country",
-        "product": "product",
+        "product": "sector",
         "value": "value",
     }
 
@@ -77,7 +77,7 @@ def clean_df(df: pd.DataFrame) -> pd.DataFrame:
 
 def add_all_countries(df: pd.DataFrame) -> pd.DataFrame:
 
-    df_all = group_data(df, ["year", "product"])
+    df_all = group_data(df, ["year", "sector"])
 
     df_all["iso3"] = "ALL"
     df_all["country"] = "All countries"
@@ -86,11 +86,11 @@ def add_all_countries(df: pd.DataFrame) -> pd.DataFrame:
 
     return combined_df
 
-def add_all_products(df: pd.DataFrame) -> pd.DataFrame:
+def add_all_sectors(df: pd.DataFrame) -> pd.DataFrame:
 
     df_all = group_data(df, ["year", "iso3", "country"])
 
-    df_all["product"] = "All products"
+    df_all["sector"] = "All sectors"
 
     combined_df = pd.concat([df, df_all])
 
@@ -100,6 +100,6 @@ if __name__ == "__main__":
     df = get_trade_data()
     df = clean_df(df)
     df = add_all_countries(df)
-    df = add_all_products(df)
+    df = add_all_sectors(df)
     df.to_csv(sys.stdout, index=False)
 
