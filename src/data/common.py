@@ -28,3 +28,18 @@ def add_sector_group_column(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     df["sector"] = df["product_code"].apply(map_sector_group)
     return df[df["sector"].notna()].reset_index(drop=True)
+
+def scale_values(df: pd.DataFrame, scale_column: str, value_column: str, output_column: str =None) -> pd.DataFrame:
+    """
+    Scales values in `value_column` based on multipliers specified in `scale_column`.
+    """
+    scale_map = {
+        "Millions": 1_000_000,
+        "Billions": 1_000_000_000
+    }
+
+    factor = df[scale_column].map(scale_map).fillna(1)
+    result_col = output_column or value_column
+    df[result_col] = df[value_column] * factor
+
+    return df

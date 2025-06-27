@@ -4,8 +4,9 @@ from pathlib import Path
 
 import country_converter as coco
 from bblocks.data_importers import WEO
+from pandas import DataFrame
 
-from src.data.common import load_json, add_sector_group_column
+from src.data.common import load_json, add_sector_group_column, scale_values
 from src.data.config import PATHS
 
 YEAR_RANGE = range(2022, 2025)
@@ -115,11 +116,9 @@ def assert_iso3_code_alignment(df1: pd.DataFrame, df2: pd.DataFrame) -> bool:
         )
 
 
-def add_denominator_column(df: pd.DataFrame) -> pd.DataFrame:
-    """Adds a value column to the dataframe which will be the denominator to compute exports to the US in relative terms.
-    If denominator is set to "gdp" the added column will contain GPD values.
-    If denominator is set to "exports" the added column will contain total exports values.
-
+def add_gdp_column(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Adds a GDP column to the dataframe.
     """
 
     gdp_df = get_africa_gdp_data()
@@ -135,6 +134,57 @@ def add_denominator_column(df: pd.DataFrame) -> pd.DataFrame:
         gdp_df_complete = pd.concat([gdp_df, gdp_df_all], ignore_index=True)
 
         return pd.merge(df, gdp_df_complete, on="iso3", how="left")
+
+
+# === Total imports data ===
+
+def load_format_total_exports_df() -> pd.DataFrame:
+    """
+    Loads total_exports data and formats it by cleaning and selecting columns, scaling values, and normalizing country names.
+    """
+
+    df_raw = pd.read_csv(PATHS.EXPORTS_TOTAL)
+
+    columns_dict = {
+        "COUNTRY": "country",
+        "TIME_PERIOD": "year",
+        "OBS_VALUE": "total_exports"
+    }
+
+    df = df_raw.rename(columns=columns_dict)[columns_dict.values()]
+
+    df = normalize_country_names(df)
+
+    groudped_df = (
+        df.groupby(
+            ["iso3"],
+            observed=True, dropna=False
+        )["total_exports"]
+        .mean()
+        .reset_index()
+    )
+
+    return groudped_df
+
+
+def add_total_exports_column(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Adds total_exports column to a dataframe.
+    """
+
+    total_exports_df = load_format_total_exports_df()
+
+    if assert_iso3_code_alignment(df, total_exports_df):
+
+        total_exports_df_all = pd.DataFrame(
+            {
+                "iso3": ["ALL"],
+                "total_exports": [total_exports_df["total_exports"].sum()]
+            },
+        )
+        total_exports_df_complete = pd.concat([total_exports_df, total_exports_df_all], ignore_index=True)
+
+    return  pd.merge(df, total_exports_df_complete, on="iso3", how="left")
 
 
 # === Tariff Rate Assignment ===
@@ -281,9 +331,10 @@ def read_format_df() -> pd.DataFrame:
     df = add_rate_columns(df)
     df = add_etr_column(df)
     df = normalize_country_names(df)
-    df = add_denominator_column(df)
+    df = add_gdp_column(df)
+    df = add_total_exports_column(df)
 
-    ordered_columns = ["country", "iso3", "sector", "exports", "etr", "gdp"]
+    ordered_columns = ["country", "iso3", "sector", "exports", "etr", "gdp", "total_exports"]
 
     return df[ordered_columns]
 
