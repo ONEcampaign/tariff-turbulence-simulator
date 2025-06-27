@@ -2,7 +2,7 @@ import * as React from "npm:react";
 import * as d3 from "npm:d3";
 import { ColumnPlot } from "./ColumnPlot.js";
 import { LinePlot} from "./LinePlot.js";
-import {formatPercentage, formatCurrency, formatTariff} from "../js/format.js";
+import {formatPercentage, formatCurrency} from "../js/format.js";
 import { colorPalette } from "../js/colorPalette.js";
 import { riskThresholds } from "../js/riskThresholds.js";
 import {TariffButtons} from "./TariffButtons.js";
@@ -45,17 +45,17 @@ export function SelectionCard({
                 isCountryMode ? (
                     <div className={"card-header selection-card-header"}>
                         <div
-                            className={`swatch ${allData.etr === null ? "na" : ""} ${formatTariff(allData.etr) < riskThresholds[0] ? "light" : ""}`}
+                            className={`swatch ${allData.etr === null ? "na" : ""} ${formatPercentage(allData.etr, {display: false}) < riskThresholds[0] ? "light" : ""}`}
                             style={{
                                 backgroundColor:
                                     allData.etr != null
-                                        ? colorScale(formatTariff(allData.etr))
+                                        ? colorScale(formatPercentage(allData.etr, {display: false}))
                                         : colorPalette.na,
                             }}
                         >
                             <p className="text-swatch">
                                 {allData.etr != null
-                                    ? `ETR: ${formatPercentage(formatTariff(allData.etr))}`
+                                    ? `ETR: ${formatPercentage(allData.etr, {})}`
                                     : "No data"}
                             </p>
                         </div>
@@ -104,7 +104,7 @@ export function SelectionCard({
                     <div className="card-row selection-card-row">
                         <h4 className="text-support-medium">% of GDP</h4>
                         <p className="text-impact-large">
-                            {formatPercentage(allData.impact_pct, false)}
+                            {formatPercentage(allData.impact_pct, {tariff: false})}
                         </p>
                     </div>
                 ) : null

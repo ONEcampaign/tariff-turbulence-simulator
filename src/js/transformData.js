@@ -1,5 +1,5 @@
 import {
-    formatTariff,
+    formatPercentage,
     computeImpactUSD,
     computeImpactPCT
 } from "./format.js";
@@ -74,7 +74,7 @@ export function generateMapData(data, geoData, clickedSector) {
                 ...feat,
                 properties: {
                     ...feat.properties,
-                    etr: formatTariff(row?.etr)
+                    etr: formatPercentage(row?.etr, {display: false})
                 }
             };
         })
