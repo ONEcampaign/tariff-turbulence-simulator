@@ -103,7 +103,7 @@ export function Dropdown({
                     <span className={`text-inputs ${!labelMap[selectedOption] ? "placeholder" : ""}`}>
                         {labelMap[selectedOption] === "All countries"
                             ? "Choose a country"
-                            : labelMap[selectedOption] === "All products"
+                            : labelMap[selectedOption] === "All sectors"
                                 ? "Choose a sector"
                                 : labelMap[selectedOption]}
                     </span>
