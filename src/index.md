@@ -161,7 +161,7 @@ function App() {
                             />
                         </div>
                         <div className="controls-separator"></div>
-                        <span className="text-support-medium extra-margin">Simulate tariff</span>
+                        <h4 className="text-support-medium extra-margin">Simulate tariff</h4>
                         <Slider
                             selectedTariff={selectedTariff ?? 0}
                             setSelectedTariff={setSelectedTariff}
