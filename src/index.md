@@ -59,7 +59,8 @@ function App() {
     const [selectedSector, setSelectedSector] = React.useState('All sectors');
     const [selectedTariff, setSelectedTariff] = React.useState();
     const [selectedIndividualTariff, setSelectedIndividualTariff] = React.useState("ETR")
-    const [isManualTariff, setIsManualTariff] = React.useState(false);
+    const [editMode, setEditMode] = React.useState(false)
+    const [isETR, setIsETR] = React.useState(true);
     const [tooltipContent, setTooltipContent] = React.useState({
         iso3: null,
         country: null,
@@ -84,7 +85,7 @@ function App() {
         setSelectedSector,
         crossData,
         setSelectedTariff,
-        isManualTariff,
+        isETR,
         setShowMore
     });
 
@@ -103,8 +104,40 @@ function App() {
 
     const exposureCardData = generateExposureCardData(selectedRecentData, selectedTariff);
     const tooltipData = generateTooltipData(hoveredData);
-    const carouselData = generateCarouselData(crossData, selectedSector, selectedIndividualTariff)
-    const selectionCardData = generateSelectionCardData(crossData, selectedCountry, selectedSector, selectedIndividualTariff)
+    
+    // Record previous editMode
+    const prevEditModeRef = React.useRef(editMode);
+    // Define initial carousel data
+    const [carouselData, setCarouselData] = React.useState(() =>
+        generateCarouselData(crossData, selectedSector, selectedTariff, isETR)
+    );
+    // Define initial selectionCard data
+    const [selectionCardData, setSelectionCardData] = React.useState(() =>
+        generateSelectionCardData(crossData, selectedCountry, selectedSector, selectedTariff, isETR)
+    );
+    // Update as edit/aplly are clicked
+    React.useEffect(() => {
+        const prev = prevEditModeRef.current;
+        const now = editMode;
+
+        if (prev && !now) {
+            const updatedCarousel = generateCarouselData(crossData, selectedSector, selectedTariff, isETR);
+            setCarouselData(updatedCarousel);
+
+            const updatedSelection = generateSelectionCardData(
+                crossData,
+                selectedCountry,
+                selectedSector,
+                selectedTariff,
+                isETR
+            );
+            setSelectionCardData(updatedSelection);
+        }
+
+        prevEditModeRef.current = now;
+    }, [editMode, crossData, selectedCountry, selectedSector, selectedTariff]);
+
+    
     const selectedHistoricalData = binaryFilter(historicalData, selectedCountry, selectedSector)
 
     // Generate iso3-country name map for dropdown menu
@@ -165,9 +198,7 @@ function App() {
                         <Slider
                             selectedTariff={selectedTariff ?? 0}
                             setSelectedTariff={setSelectedTariff}
-                            selectedIndividualTariff={selectedIndividualTariff}
-                            setSelectedIndividualTariff={setSelectedIndividualTariff}
-                            setIsManualTariff={setIsManualTariff}
+                            setIsETR={setIsETR}
                             etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
                         />
                     </div>
@@ -210,8 +241,9 @@ function App() {
                             <CountryCarousel
                                 data={carouselData}
                                 selectedTariff={selectedTariff}
-                                selectedIndividualTariff={selectedIndividualTariff}
-                                setSelectedIndividualTariff={setSelectedIndividualTariff}
+                                isETR={isETR}
+                                editMode={editMode}
+                                setEditMode={setEditMode}
                                 selectedUnits={selectedUnits}
                             />
                         </div>
@@ -221,8 +253,9 @@ function App() {
                             historicalData={selectedHistoricalData}
                             mode={selectedCountry === "ALL" ? "sector" : "country"}
                             selectedTariff={selectedTariff}
-                            selectedIndividualTariff={selectedIndividualTariff}
-                            setSelectedIndividualTariff={setSelectedIndividualTariff}
+                            isETR={isETR}
+                            editMode={editMode}
+                            setEditMode={setEditMode}
                             showMore={showMore}
                             setShowMore={setShowMore}
                         />
