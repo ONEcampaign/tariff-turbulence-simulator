@@ -45,7 +45,7 @@ export function SelectionCard({
                 isCountryMode ? (
                     <div className={"card-header selection-card-header"}>
                         <div
-                            className={`swatch ${data.etr === null ? "na" : ""} ${formatTariff(data.etr) < riskThresholds[0] ? "very-low" : ""} ${formatTariff(data.etr) < riskThresholds[1] ? "low" : ""}`}
+                            className={`swatch ${data.etr === null ? "na" : ""} ${formatPercentage(data.etr, {display: false}) < riskThresholds[0] ? "very-low" : ""} ${formatPercentage(data.etr, {display: false}) < riskThresholds[1] ? "low" : ""}`}
                             style={{
                                 backgroundColor:
                                     allData.etr != null

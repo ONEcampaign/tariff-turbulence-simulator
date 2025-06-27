@@ -46,7 +46,7 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                 {sorted.map((countryData, index) => (
                     <div className="tariff-card carousel-card" key={countryData.iso2 || index}>
                         <div
-                            className={`swatch ${data.etr === null ? "na" : ""} ${formatTariff(data.etr) < riskThresholds[0] ? "very-low" : ""} ${formatTariff(data.etr) < riskThresholds[1] ? "low" : ""}`}
+                            className={`swatch ${countryData.etr === null ? "na" : ""} ${formatPercentage(countryData.etr, {display: false}) < riskThresholds[0] ? "very-low" : ""} ${formatPercentage(countryData.etr, {display: false}) < riskThresholds[1] ? "low" : ""}`}
                             style={{
                                 backgroundColor:
                                     countryData.etr != null ? colorScale(formatPercentage(countryData.etr, {display: false})) : colorPalette.na

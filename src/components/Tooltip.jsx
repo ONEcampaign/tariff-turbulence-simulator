@@ -16,10 +16,10 @@ export function Tooltip({ x, y, data, isVisible } ={}) {
             className="tariff-card tooltip"
             style={{"left": x, "top": y}}>
             <div
-                className={`swatch ${data.etr === null ? "na" : ""} ${formatTariff(data.etr) < riskThresholds[0] ? "very-low" : ""} ${formatTariff(data.etr) < riskThresholds[1] ? "low" : ""}`}
+                className={`swatch ${data.etr === null ? "na" : ""} ${formatPercentage(data.etr, {display: false}) < riskThresholds[0] ? "very-low" : ""} ${formatPercentage(data.etr, {display: false}) < riskThresholds[1] ? "low" : ""}`}
                 style={{
                     backgroundColor:
-                        data.etr != null ? colorScale(formatPercentage(data.etr), {display: false}) : colorPalette.na
+                        data.etr != null ? colorScale(formatPercentage(data.etr, {display: false})) : colorPalette.na
                 }}
             >
                 <p className="text-swatch">
