@@ -65,7 +65,7 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                             <p className="text-impact-large">{formatCurrency(countryData.impact_usd)}</p>
                         </div>
                         <div className="card-row carousel-card-row">
-                            <h4 className="text-support-medium">% of GDP</h4>
+                            <h4 className="text-support-medium">% of all exports</h4>
                             <p className="text-impact-large">{formatPercentage(countryData.impact_pct, {tariff: false})}</p>
                         </div>
                         <div className="card-row carousel-card-settings">

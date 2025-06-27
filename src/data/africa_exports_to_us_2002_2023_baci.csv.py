@@ -9,8 +9,8 @@ from src.data.config import PATHS
 
 def get_trade_data() -> pd.DataFrame:
 
-    if PATHS.EXPORTS_HIST.exists():
-        return pd.read_csv(PATHS.EXPORTS_HIST)
+    if PATHS.EXPORTS_BACI.exists():
+        return pd.read_csv(PATHS.EXPORTS_BACI)
     else:
         baci = BACI()
         raw_df = baci.get_data(
@@ -23,7 +23,7 @@ def get_trade_data() -> pd.DataFrame:
         df = group_data(df, ["year", "exporter_iso3_code", "sector"])
         df = filter_african_countries(df)
 
-        df.to_csv(PATHS.EXPORTS_HIST, index=False)
+        df.to_csv(PATHS.EXPORTS_BACI, index=False)
 
         return df
 

@@ -39,12 +39,12 @@ export function computeImpactUSD(exports, tariff) {
     return exports * tariff;
 }
 
-export function computeImpactPCT(exports, tariff, gdp) {
+export function computeImpactPCT(exports, tariff, total_exports) {
     if (
-        exports == null || tariff == null || gdp == null ||
-        isNaN(exports) || isNaN(tariff) || isNaN(gdp) ||
-        gdp === 0
+        exports == null || tariff == null || total_exports == null ||
+        isNaN(exports) || isNaN(tariff) || isNaN(total_exports) ||
+        total_exports === 0
     ) return null;
 
-    return (exports * tariff) / gdp;
+    return (exports * tariff) / total_exports;
 }

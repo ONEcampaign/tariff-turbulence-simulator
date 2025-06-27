@@ -10,7 +10,8 @@ class PATHS:
 
     INPUTS = DATA / "inputs"
 
-    EXPORTS_HIST = INPUTS / "africa_exports_to_us_2002_2023_baci_raw.csv"
+    EXPORTS_BACI = INPUTS / "africa_exports_to_us_2002_2023_baci_raw.csv"
+    EXPORTS_TOTAL = INPUTS / "africa_exports_2022_2024_imf_raw.csv"
     HS_GROUPS = INPUTS / "hs_groups.json"
 
     TARIFFS = INPUTS / "tariffs"

@@ -102,7 +102,7 @@ export function SelectionCard({
             {
                 isCountryMode ? (
                     <div className="card-row selection-card-row">
-                        <h4 className="text-support-medium">% of GDP</h4>
+                        <h4 className="text-support-medium">% of all exports</h4>
                         <p className="text-impact-large">
                             {formatPercentage(allData.impact_pct, {tariff: false})}
                         </p>
