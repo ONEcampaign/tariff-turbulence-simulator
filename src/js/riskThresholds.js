@@ -1,1 +1,1 @@
-export const riskThresholds = [5, 11]
+export const riskThresholds = [1, 5, 11]

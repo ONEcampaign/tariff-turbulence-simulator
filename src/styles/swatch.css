@@ -11,13 +11,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
 }
 
+.swatch.very-low,
 .swatch.na {
     border: 1px #0000001A solid
 }
 
-.swatch.light > p,
+.swatch.very-low > p,
+.swatch.low > p,
 .swatch.na > p {
     color: black;
 }

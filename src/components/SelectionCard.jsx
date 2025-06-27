@@ -9,7 +9,7 @@ import {TariffButtons} from "./TariffButtons.js";
 
 const colorScale = d3.scaleThreshold(
     riskThresholds,
-    [colorPalette.low, colorPalette.medium, colorPalette.high]
+    [colorPalette.veryLow, colorPalette.low, colorPalette.medium, colorPalette.high]
 );
 
 export function SelectionCard({
@@ -45,7 +45,7 @@ export function SelectionCard({
                 isCountryMode ? (
                     <div className={"card-header selection-card-header"}>
                         <div
-                            className={`swatch ${allData.etr === null ? "na" : ""} ${formatPercentage(allData.etr, {display: false}) < riskThresholds[0] ? "light" : ""}`}
+                            className={`swatch ${allData.etr === null ? "na" : ""} ${formatPercentage(allData.etr, {display: false}) < riskThresholds[0] ? "very-low" : ""} ${formatPercentage(allData.etr, {display: false}) < riskThresholds[1] ? "low" : ""}`}
                             style={{
                                 backgroundColor:
                                     allData.etr != null

@@ -26,7 +26,7 @@ export function AfricaHexmap({
 
     const colorScale = d3.scaleThreshold(
         riskThresholds,
-        [colorPalette.low, colorPalette.medium, colorPalette.high]
+        [colorPalette.veryLow, colorPalette.low, colorPalette.medium, colorPalette.high]
     );
 
     // Reorder hexes so that clicked hex is above
@@ -44,6 +44,18 @@ export function AfricaHexmap({
     
     return (
         <svg ref={svgRef} width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+            <defs>
+                <pattern
+                    id="diagonalHatch"
+                    patternUnits="userSpaceOnUse"
+                    width="6"
+                    height="6"
+                    patternTransform="rotate(45)"
+                >
+                    <rect width="6" height="6" fill={colorPalette.na} />
+                    <line x1="0" y1="0" x2="0" y2="6" stroke={colorPalette.naHatch} strokeWidth="3" />
+                </pattern>
+            </defs>
             <g transform={`translate(0, ${verticalPadding})`}>
                 {reorderedFeatures.map(feature => {
                     const thisCountryIsClicked = clickedCountry === feature.properties.iso3;
@@ -52,7 +64,7 @@ export function AfricaHexmap({
                             fill={
                                 Number.isFinite(feature.properties.etr)
                                     ? colorScale(feature.properties.etr)
-                                    : colorPalette.na
+                                    : "url(#diagonalHatch)"
                             }
                             opacity={clickedCountry === 'ALL' ? 1 : (thisCountryIsClicked ? 1 : 0.2)}
                             stroke={
