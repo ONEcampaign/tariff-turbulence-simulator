@@ -56,6 +56,8 @@
 
 .dropdown-list-container {
     position: absolute;
+    background: white;
+    z-index: 10;
 }
 
 .dropdown-list-item {

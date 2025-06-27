@@ -22,14 +22,14 @@
     }
 
     .sticky-controls.hidden {
-        bottom: -230px !important;
+        bottom: -312px !important;
     }
 
     .sticky-wrapper {
         width: 100%;
         background-color: white;
         border-top: 1px solid black;
-        padding: 20px 0;
+        padding: var(--margin-large) 0;
     }
 
     .sticky-content {
@@ -44,7 +44,7 @@
 
     .dropdowns-wrapper {
         flex-direction: row;
-        gap: var(--margin-small);
+        gap: var(--margin-medium);
     }
 
     .dropdowns-wrapper > h4 {
@@ -72,7 +72,7 @@
 @media (max-width: 768px) {
 
     .sticky-controls.hidden {
-        bottom: -220px !important;
+        bottom: -303px !important;
     }
 }
 
@@ -83,7 +83,7 @@
     }
 
     .sticky-controls.hidden {
-        bottom: -314px !important;
+        bottom: -365px !important;
     }
 }
 

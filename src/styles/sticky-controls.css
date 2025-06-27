@@ -20,6 +20,12 @@
     gap: var(--margin-small);
 }
 
+.dropdowns-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: inherit;
+}
+
 .sticky-tab {
     display: none;
     cursor: pointer;
@@ -35,8 +41,8 @@
 
 .controls-separator {
     height: 1px;
-    width: calc(var(--filters-width) - 34px);
-    margin: var(--margin-small) auto;
+    width: 75%;
+    margin: calc(var(--margin-small) * 1.5) auto var(--margin-small);
     border-bottom: 1px solid #CAC4D0;
 }
 
