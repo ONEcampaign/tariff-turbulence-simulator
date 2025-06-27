@@ -12,20 +12,17 @@ export function Tooltip({ x, y, data, isVisible } ={}) {
     if (!isVisible) return (<div></div>);
 
     return (
-        <div className="tariff-card tooltip" style={{"left": x, "top": y}}>
+        <div
+            className="tariff-card tooltip"
+            style={{"left": x, "top": y}}>
             <div
-                className="swatch"
+                className={`swatch ${data.etr === null ? "na" : ""} ${formatTariff(data.etr) < riskThresholds[0] ? "light" : ""}`}
                 style={{
                     backgroundColor:
                         data.etr != null ? colorScale(formatTariff(data.etr)) : colorPalette.na
                 }}
             >
-                <p
-                    className="text-swatch"
-                    style={{
-                        color: data.etr != null ? "white" : "black"
-                    }}
-                >
+                <p className="text-swatch">
                     {data.etr != null ? `ETR: ${formatPercentage(formatTariff(data.etr))}` : "No data"}
                 </p>
             </div>

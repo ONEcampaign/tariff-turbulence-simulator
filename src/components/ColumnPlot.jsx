@@ -19,7 +19,7 @@ export function ColumnPlot({ data, mode, showMore, chunkSize }) {
     const [width, setWidth] = React.useState(0);
 
     const height = 180;
-    const margin = { top: 10, right: 0, bottom: 40, left: 0 };
+    const margin = { top: 10, right: 0, bottom: 0, left: 0 };
 
     // Track container width for responsiveness
     React.useEffect(() => {
@@ -124,7 +124,7 @@ function ColumnChartRow({ data, width, height, varName, xScale, yScale, margin, 
                     bottom: 0,
                     left: margin.left,
                     right: margin.right,
-                    height: "40px",
+                    height: "auto",
                     display: "flex",
                     gap: `${xScale.step() - xScale.bandwidth()}px`,
                     pointerEvents: "none",

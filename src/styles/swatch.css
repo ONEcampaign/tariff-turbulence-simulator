@@ -13,6 +13,15 @@
     justify-content: center;
 }
 
+.swatch.na {
+    border: 1px #0000001A solid
+}
+
+.swatch.light > p,
+.swatch.na > p {
+    color: black;
+}
+
 .tooltip > .swatch {
     width: var(--swatch-width-small);
     height: var(--swatch-height-small);

@@ -26,6 +26,7 @@ import {ToggleButton} from "./components/ToggleButton.js";
 import {CountryCarousel} from "./components/CountryCarousel.js"
 import {SelectionCard} from "./components/SelectionCard.js";
 import {MutualExclusion} from "./components/MutualExclusion.js";
+import {ChevronDown} from "./components/Chevron.js";
 import {formatTariff} from "./js/format.js"
 import {
     generateCrossData,
@@ -55,7 +56,7 @@ function App() {
     const height = 600;
 
     // Reactive variables
-    const [selectedCountry, setSelectedCountry] = React.useState('LSO');
+    const [selectedCountry, setSelectedCountry] = React.useState('ALL');
     const [selectedSector, setSelectedSector] = React.useState('All products');
     const [selectedTariff, setSelectedTariff] = React.useState();
     const [selectedIndividualTariff, setSelectedIndividualTariff] = React.useState("ETR")
@@ -69,6 +70,7 @@ function App() {
     const isTooltipVisible = tooltipContent.country !== null;
     const [selectedUnits, setSelectedUnits] = React.useState("usd")
     const [showMore, setShowMore] = React.useState(false);
+    const [hideMenu, setHideMenu] = React.useState(false);
 
     // Crossed data between csv and geojson to make sure all countries are present
     const crossData = generateCrossData(recentData, geoData)
@@ -121,43 +123,56 @@ function App() {
 
     return (
         <div className="wrapper">
-            <div className="sticky-controls">
-                <h4 className="text-support-medium">Filter the data</h4>
-                <Dropdown
-                    dropdownId="countryMenu"
-                    options={countryMap}
-                    selectedOption={selectedCountry}
-                    setOption={updateCountry}
-                    setETR={setSelectedTariff}
-                    getETRForOption={(iso3) => {
-                        const etr = crossData.find(d => d.iso3 === iso3 && d.product === selectedSector)?.etr
-                        return formatTariff(etr);
-                    }}
-                    isInactive={selectedCountry === "ALL" && selectedSector !== "All products"}
-                />
-                <h4 className="text-support-medium center-aligned">or</h4>
-                <Dropdown
-                    dropdownId="productMenu"
-                    options={productGroups}
-                    selectedOption={selectedSector}
-                    setOption={updateSector}
-                    setETR={setSelectedTariff}
-                    getETRForOption={(product) => {
-                        const etr = crossData.find(d => d.iso3 === selectedCountry && d.product === product)?.etr;
-                        return formatTariff(etr);
-                    }}
-                    isInactive={selectedCountry !== "ALL" && selectedSector === "All products"}
-                />
-                <div className="controls-separator"></div>
-                <span className="text-support-medium extra-margin">Simulate tariff</span>
-                <Slider
-                    selectedTariff={selectedTariff ?? 0}
-                    setSelectedTariff={setSelectedTariff}
-                    selectedIndividualTariff={selectedIndividualTariff}
-                    setSelectedIndividualTariff={setSelectedIndividualTariff}
-                    setIsManualTariff={setIsManualTariff}
-                    etr={selectedETR}
-                />
+            <div className={`sticky-controls ${hideMenu === true ? "hidden" : ""}`}>
+                <div 
+                    className="sticky-tab"
+                    onClick={() => setHideMenu(!hideMenu)}
+                >
+                    <span className="text-inputs">
+                        {`${hideMenu === true ? 'Show' : 'Hide'} controls`}
+                    </span>
+                    <ChevronDown className={`dropdown-chevron ${hideMenu == true ? "rotate" : ""}`} />
+                </div>
+                <div className='sticky-wrapper'>
+                    <div className='sticky-content'>
+                        <div className="dropdowns-wrapper">
+                            <h4 className="text-support-medium">Filter the data</h4>
+                            <Dropdown
+                                dropdownId="countryMenu"
+                                options={countryMap}
+                                selectedOption={selectedCountry}
+                                setOption={updateCountry}
+                                setETR={setSelectedTariff}
+                                getETRForOption={(iso3) => {
+                                    const etr = crossData.find(d => d.iso3 === iso3 && d.product === selectedSector)?.etr
+                                    return Number.isFinite(etr) ? etr : null;
+                                }}
+                            />
+                            <h4 className="text-support-medium center-aligned">or</h4>
+                            <Dropdown
+                                dropdownId="productMenu"
+                                options={productGroups}
+                                selectedOption={selectedSector}
+                                setOption={updateSector}
+                                setETR={setSelectedTariff}
+                                getETRForOption={(product) => {
+                                    const etr = crossData.find(d => d.iso3 === selectedCountry && d.product === product)?.etr;
+                                    return Number.isFinite(etr) ? etr : null;
+                                }}
+                            />
+                        </div>
+                        <div className="controls-separator"></div>
+                        <span className="text-support-medium extra-margin">Simulate tariff</span>
+                        <Slider
+                            selectedTariff={selectedTariff ?? 0}
+                            setSelectedTariff={setSelectedTariff}
+                            selectedIndividualTariff={selectedIndividualTariff}
+                            setSelectedIndividualTariff={setSelectedIndividualTariff}
+                            setIsManualTariff={setIsManualTariff}
+                            etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
+                        />
+                    </div>
+                </div>
             </div>
             <div className="main-block">
                 <Headline content={headline}/>
