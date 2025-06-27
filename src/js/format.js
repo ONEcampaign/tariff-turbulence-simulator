@@ -14,19 +14,22 @@ export function formatCurrency(value) {
     }
 }
 
-export function formatPercentage(value, round = true) {
-    if (value == null || typeof value !== 'number' || isNaN(value)) return "N/A";
+export function formatPercentage(value, { tariff = true, display = true } = {}) {
+    if (value == null || typeof value !== 'number' || isNaN(value)) {
+        return display ? "N/A" : null;
+    }
 
-    const pct = round
-        ? Math.round(value)
-        : Number.parseFloat(value.toPrecision(1));
+    let scaled = tariff ? value * 100 : value;
 
-    return `${pct}%`;
-}
+    if (display && tariff && scaled > 0 && scaled < 0.5) {
+        return "<1%";
+    }
 
-export function formatTariff(value) {
-    if (value == null || typeof value !== 'number' || isNaN(value)) return null;
-    return Math.round(value * 100);
+    const formatted = tariff
+        ? Math.round(scaled)
+        : Number.parseFloat(scaled.toPrecision(1));
+
+    return display ? `${formatted}%` : formatted;
 }
 
 export function computeImpactUSD(exports, tariff) {
