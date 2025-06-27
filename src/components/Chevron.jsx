@@ -5,7 +5,7 @@ export const ChevronDown = ({ className }) => (
         width="16"
         height="16"
         viewBox="0 0 16 16"
-        strokeWidth="2"
+        strokeWidth="1"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"

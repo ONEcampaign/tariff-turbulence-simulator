@@ -40,3 +40,9 @@
 .hide {
     display: none;
 }
+
+.dropdown-selected.show-more-button {
+    width: auto;
+    margin: 0 auto;
+    font-weight: 700;
+}

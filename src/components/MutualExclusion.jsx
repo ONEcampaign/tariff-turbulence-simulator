@@ -8,13 +8,15 @@ export function MutualExclusion({
                                     setSelectedSector,
                                     crossData,
                                     setSelectedTariff,
-                                    isManualTariff
+                                    isManualTariff,
+                                    setShowMore
 }) {
     const updateCountry = (newCountry) => {
         if (newCountry !== "ALL" && selectedSector !== "All products") {
             setSelectedSector("All products");
         }
         setSelectedCountry(newCountry);
+        setShowMore(false);
     };
 
     const updateSector = (newSector) => {
@@ -22,6 +24,7 @@ export function MutualExclusion({
             setSelectedCountry("ALL");
         }
         setSelectedSector(newSector);
+        setShowMore(false);
     };
 
     // Sync ETR whenever the [selectedCountry, selectedSector] combo changes
