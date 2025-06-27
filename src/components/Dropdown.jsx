@@ -1,5 +1,6 @@
 import * as React from "npm:react";
 import { useDropdownContext } from "./DropdownContext.js";
+import { ChevronDown } from "./Chevron.js";
 
 export function Dropdown({
                              dropdownId,
@@ -144,20 +145,3 @@ export function Dropdown({
         </div>
     );
 }
-
-const ChevronDown = ({ className }) => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className={className}
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        strokeWidth="1"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-    >
-        <path d="M2 5l6 6 6-6" />
-    </svg>
-);
