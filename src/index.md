@@ -134,8 +134,8 @@ function App() {
                 </div>
                 <div className='sticky-wrapper'>
                     <div className='sticky-content'>
+                        <h4 className="text-support-medium extra-margin">Filter the data</h4>
                         <div className="dropdowns-wrapper">
-                            <h4 className="text-support-medium">Filter the data</h4>
                             <Dropdown
                                 dropdownId="countryMenu"
                                 options={countryMap}
@@ -161,7 +161,7 @@ function App() {
                             />
                         </div>
                         <div className="controls-separator"></div>
-                        <span className="text-support-medium extra-margin">Simulate tariff</span>
+                        <h4 className="text-support-medium extra-margin">Simulate tariff</h4>
                         <Slider
                             selectedTariff={selectedTariff ?? 0}
                             setSelectedTariff={setSelectedTariff}
