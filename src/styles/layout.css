@@ -10,7 +10,6 @@ p, table, figure, figcaption, h1, h2, h3, h4, h5, h6, .katex-display {
     max-width: none !important;
 }
 
-.dropdowns-wrapper {
-    display: flex;
-    flex-direction: column;
+#observablehq-center #observablehq-main {
+    margin: 4em 1em;
 }
