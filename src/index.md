@@ -27,7 +27,6 @@ import {CountryCarousel} from "./components/CountryCarousel.js"
 import {SelectionCard} from "./components/SelectionCard.js";
 import {MutualExclusion} from "./components/MutualExclusion.js";
 import {ChevronDown} from "./components/Chevron.js";
-import {formatTariff} from "./js/format.js"
 import {
     generateCrossData,
     generateMapData,
@@ -101,8 +100,6 @@ function App() {
     const hoveredData = crossData.find(
         d => d.iso3 === tooltipContent.iso3 && d.sector === selectedSector
     );
-
-    console.log(recentData)
 
     const exposureCardData = generateExposureCardData(selectedRecentData, selectedTariff);
     const tooltipData = generateTooltipData(hoveredData);
