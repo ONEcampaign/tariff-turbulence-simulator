@@ -4,5 +4,5 @@ export const colorPalette = {
     high: "#17858C",
     na: "#F8F7F8",
     countryMode: "#A3DAF5",
-    productMode: "#F7CE5B"
+    sectorMode: "#F7CE5B"
 };
