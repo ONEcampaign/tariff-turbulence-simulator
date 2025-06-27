@@ -11,36 +11,35 @@
     gap: 0.5rem;
 }
 
-.tariff-button.text-support-small {
-    /*width: var(--tariff-button-width);*/
+.tariff-bubble,
+.tariff-button {
     height: var(--tariff-button-height);
     box-sizing: border-box;
 
     color: black;
-    background-color: white;
-
     line-height: initial;
     text-align: center;
     vertical-align: middle;
 
-    border: 2px solid black;
     border-radius: 6px;
+
     padding: 4px 8px;
 }
 
-.tariff-button.selected {
-    font-weight: 700;
-    color: white;
-    background-color: black;
+
+.tariff-bubble {
+    background-color: white;
+
     border: 2px solid black;
+}
+
+.tariff-button {
+    background-color: var(--color-grey);
 }
 
 .tariff-button:hover {
     cursor: pointer;
-    background-color: var(--color-grey);
-    transition: var(--tariff-button-transition);
+    background-color: lightgray;
 }
 
-.tariff-button.selected:hover {
-    background-color: black;
-}
+
