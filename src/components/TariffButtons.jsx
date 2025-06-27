@@ -1,21 +1,32 @@
 import * as React from "npm:react";
 import { formatPercentage } from "../js/format.js";
 
-export function TariffButtons({ selectedTariff, selectedIndividualTariff, setSelectedIndividualTariff }) {
+export function TariffButtons({
+                                  selectedTariff,
+                                  isETR,
+                                  editMode,
+                                  setEditMode,
+                              }) {
+    const [displayLabel, setDisplayLabel] = React.useState(
+        isETR ? "ETR" : formatPercentage(selectedTariff, {})
+    );
+
+    React.useEffect(() => {
+        if (editMode) {
+            setDisplayLabel(isETR ? "ETR" : formatPercentage(selectedTariff, {}));
+        }
+    }, [editMode, selectedTariff, isETR]);
 
     return (
-        <div className="tariff-buttons-wrapper">
+        <div className="tariff-buttons-wrapper ">
+            <div className="tariff-bubble text-support-small">
+                {displayLabel}
+            </div>
             <button
-                className={`tariff-button text-support-small ${selectedIndividualTariff === "ETR" ? "selected" : ""}`}
-                onClick={() => setSelectedIndividualTariff("ETR")}
+                className="tariff-button text-support-small"
+                onClick={() => setEditMode(!editMode)}
             >
-                ETR
-            </button>
-            <button
-                className={`tariff-button text-support-small ${selectedIndividualTariff !== "ETR" ? "selected" : ""}`}
-                onClick={() => setSelectedIndividualTariff(selectedTariff)}
-            >
-                {formatPercentage(selectedTariff, {})}
+                {editMode ? "Apply" : "Edit"}
             </button>
         </div>
     );
