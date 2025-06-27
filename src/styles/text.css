@@ -29,6 +29,7 @@
     --lh-swatch: 1.2rem;              /* 19.2px */
     --lh-impact-medium: 2.75rem;      /* 44px */
     --lh-impact-small: 2.09rem;       /* 33.44px */
+    --lh-support-xlarge: 2rem;
     --lh-support-medium: 1.32rem;     /* 21.12px */
     --lh-support-small: 1.21rem;      /* 19.36px */
 
@@ -154,7 +155,7 @@ html {
     font-family: var(--font-italian-plate);
     font-weight: 400;
     font-size: var(--font-support-xlarge);
-    line-height: var(--lh-support-medium);
+    line-height: var(--lh-support-xlarge);
     letter-spacing: var(--ls-none);
     text-align: left;
 }
