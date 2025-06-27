@@ -19,15 +19,17 @@ export function formatPercentage(value, { tariff = true, display = true } = {}) 
         return display ? "N/A" : null;
     }
 
-    let scaled = tariff ? value * 100 : value;
+    const scaled = tariff ? value * 100 : value;
 
     if (display && tariff && scaled > 0 && scaled < 0.5) {
         return "<1%";
     }
 
-    const formatted = tariff
-        ? Math.round(scaled)
-        : Number.parseFloat(scaled.toPrecision(1));
+    const formatted = display
+        ? (tariff
+            ? Math.round(scaled)
+            : Number.parseFloat(scaled.toPrecision(1)))
+        : scaled;
 
     return display ? `${formatted}%` : formatted;
 }
