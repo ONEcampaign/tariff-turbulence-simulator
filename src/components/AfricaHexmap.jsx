@@ -1,4 +1,4 @@
-import * as d3 from 'npm:d3';
+import * as d3 from "npm:d3";
 import * as React from "npm:react";
 import {colorPalette} from "../js/colorPalette.js";
 import {riskThresholds} from "../js/riskThresholds.js";
@@ -13,7 +13,7 @@ export function AfricaHexmap({
                                  allETR,
                                  setTooltip
 } = {}) {
-    const [hoveredCountry, setHoveredCountry] = React.useState('NONE');
+    const [hoveredCountry, setHoveredCountry] = React.useState("NONE");
     const svgRef = React.useRef();
 
     const verticalPadding = 20;
@@ -66,11 +66,11 @@ export function AfricaHexmap({
                                     ? colorScale(feature.properties.etr)
                                     : "url(#diagonalHatch)"
                             }
-                            opacity={clickedCountry === 'ALL' ? 1 : (thisCountryIsClicked ? 1 : 0.2)}
+                            opacity={clickedCountry === "ALL" ? 1 : (thisCountryIsClicked ? 1 : 0.2)}
                             stroke={
                                 hoveredCountry === feature.properties.iso3
                                     ? "black"
-                                    : (clickedCountry === 'ALL'
+                                    : (clickedCountry === "ALL"
                                         ? "white"
                                         : (thisCountryIsClicked ? "black" : "white"))
                             }
@@ -82,7 +82,7 @@ export function AfricaHexmap({
 
                                 if (etr != null) {
                                     if (clickedCountry === iso3) {
-                                        setCountry('ALL');
+                                        setCountry("ALL");
                                         if (Number.isFinite(allETR)) {
                                             setETR(allETR);
                                         }

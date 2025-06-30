@@ -124,10 +124,10 @@ export function SelectionCard(
             {
                 (allItems.length > chunkSize) ? (
                     <div
-                        className='dropdown-selected show-more-button'
+                        className="dropdown-selected show-more-button"
                         onClick={() => {setShowMore(!showMore)}}
                     >
-                        <p className="text-inputs">{`Show ${showMore === true ? 'less' : 'more'} ${showMoreText}`}</p>
+                        <p className="text-inputs">{`Show ${showMore === true ? "less" : "more"} ${showMoreText}`}</p>
                         <ChevronDown className={`dropdown-chevron ${showMore === true ? "rotate" : ""}`} />
                     </div>
                 ) : null
