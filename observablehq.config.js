@@ -1,6 +1,6 @@
 import {icon} from "@one-data/observable-themes/use-images";
 
-const projectTitle = "Tariff Simulator"
+const projectTitle = "Tariff Turbulence Simulator"
 
 export default {
 
