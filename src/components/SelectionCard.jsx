@@ -5,7 +5,7 @@ import { LinePlot} from "./LinePlot.js";
 import {formatPercentage, formatCurrency} from "../js/format.js";
 import { colorPalette } from "../js/colorPalette.js";
 import { riskThresholds } from "../js/riskThresholds.js";
-import {TariffButtons} from "./TariffButtons.js";
+import {TariffPills} from "./TariffPills.js";
 
 const colorScale = d3.scaleThreshold(
     riskThresholds,
@@ -19,8 +19,6 @@ export function SelectionCard(
         mode,
         selectedTariff,
         isETR,
-        editMode,
-        setEditMode,
         showMore,
         setShowMore
 }) {
@@ -86,11 +84,9 @@ export function SelectionCard(
                 </div>
                 <div className="card-row selection-card-row">
                     <h4 className="text-support-medium">Individual tariff</h4>
-                    <TariffButtons
-                        selectedTariff={selectedTariff}
+                    <TariffPills
                         isETR={isETR}
-                        editMode={editMode}
-                        setEditMode={setEditMode}
+                        selectedTariff={selectedTariff}
                     />
                 </div>
             </div>

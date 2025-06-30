@@ -3,7 +3,7 @@ import * as d3 from 'npm:d3';
 import {colorPalette} from "../js/colorPalette.js";
 import {riskThresholds} from "../js/riskThresholds.js";
 import {formatPercentage, formatCurrency} from "../js/format.js";
-import {TariffButtons} from "./TariffButtons.js";
+import {TariffPills} from "./TariffPills.js";
 
 const colorScale = d3.scaleThreshold(
     riskThresholds,
@@ -13,10 +13,8 @@ const colorScale = d3.scaleThreshold(
 export function CountryCarousel(
     {
         data,
-        selectedTariff,
         isETR,
-        editMode,
-        setEditMode,
+        selectedTariff,
         selectedUnits = "usd"
     }
     ) {
@@ -85,11 +83,9 @@ export function CountryCarousel(
                         </div>
                         <div className="card-row carousel-card-settings">
                             <h4 className="text-support-medium">Individual tariff</h4>
-                            <TariffButtons
-                                selectedTariff={selectedTariff}
+                            <TariffPills
                                 isETR={isETR}
-                                editMode={editMode}
-                                setEditMode={setEditMode}
+                                selectedTariff={selectedTariff}
                             />
                         </div>
                     </div>
