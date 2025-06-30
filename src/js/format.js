@@ -1,14 +1,16 @@
 import * as d3 from 'npm:d3';
 
-export function formatCurrency(value) {
+export function formatCurrency(value, {short = true} = {}) {
     if (value == null || isNaN(value)) return "N/A";
 
     const absValue = Math.abs(value);
 
     if (absValue >= 1e8) {
-        return `$${d3.format(",.1f")(value / 1e9)} B`;
+        const suffix = short ? "B" : "billion";
+        return `$${d3.format(",.1f")(value / 1e9)} ${suffix}`;
     } else if (absValue >= 1e5) {
-        return `$${d3.format(",.1f")(value / 1e6)} M`;
+        const suffix = short ? "M" : "million";
+        return `$${d3.format(",.1f")(value / 1e6)} ${suffix}`;
     } else {
         return `$${d3.format(",.0f")(value)}`;
     }
@@ -47,4 +49,8 @@ export function computeImpactPCT(exports, tariff, gdp) {
     ) return null;
 
     return (exports * tariff) / gdp;
+}
+
+export function possessive(name) {
+    return name.endsWith("s") ? `${name}'` : `${name}'s`;
 }
