@@ -152,6 +152,7 @@ function App() {
                                     const etr = crossData.find(d => d.iso3 === iso3 && d.sector === selectedSector)?.etr
                                     return Number.isFinite(etr) ? etr : null;
                                 }}
+                                isInactive={selectedSector !== "All sectors"}
                             />
                             <h4 className="text-support-medium center-aligned">or</h4>
                             <Dropdown
@@ -164,6 +165,7 @@ function App() {
                                     const etr = crossData.find(d => d.iso3 === selectedCountry && d.sector === sector)?.etr;
                                     return Number.isFinite(etr) ? etr : null;
                                 }}
+                                isInactive={selectedCountry !== "ALL"}
                             />
                         </div>
                         <div className="controls-separator"></div>
@@ -189,6 +191,7 @@ function App() {
                     width={width}
                     height={height}
                     data={mapData}
+                    selectedSector={selectedSector}
                     clickedCountry={selectedCountry}
                     setCountry={setSelectedCountry}
                     setETR={setSelectedTariff}

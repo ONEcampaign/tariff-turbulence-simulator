@@ -3,17 +3,19 @@ import * as React from "npm:react";
 import {colorPalette} from "../js/colorPalette.js";
 import {riskThresholds} from "../js/riskThresholds.js";
 
-export function AfricaHexmap({
-                                 width,
-                                 height,
-                                 data,
-                                 clickedCountry,
-                                 setCountry,
-                                 setETR,
-                                 allETR,
-                                 setTooltip
-} = {}) {
-    const [hoveredCountry, setHoveredCountry] = React.useState("NONE");
+export function AfricaHexmap(
+    {
+        width,
+        height,
+        data,
+        selectedSector,
+        clickedCountry,
+        setCountry,
+        setETR,
+        allETR,
+        setTooltip
+    } = {}) {
+    const [hoveredCountry, setHoveredCountry] = React.useState('NONE');
     const svgRef = React.useRef();
 
     const verticalPadding = 20;
@@ -79,17 +81,18 @@ export function AfricaHexmap({
                             onClick={() => {
                                 const iso3 = feature.properties.iso3;
                                 const etr = feature.properties.etr;
-
-                                if (etr != null) {
-                                    if (clickedCountry === iso3) {
-                                        setCountry("ALL");
-                                        if (Number.isFinite(allETR)) {
-                                            setETR(allETR);
-                                        }
-                                    } else {
-                                        setCountry(iso3);
-                                        if (Number.isFinite(etr)) {
-                                            setETR(etr);
+                                if (selectedSector === "All sectors") {
+                                    if (etr != null) {
+                                        if (clickedCountry === iso3) {
+                                            setCountry('ALL');
+                                            if (Number.isFinite(allETR)) {
+                                                setETR(allETR);
+                                            }
+                                        } else {
+                                            setCountry(iso3);
+                                            if (Number.isFinite(etr)) {
+                                                setETR(etr);
+                                            }
                                         }
                                     }
                                 }
