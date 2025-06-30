@@ -10,18 +10,18 @@ observer.observe(document.documentElement);
 ```
 
 ```js
-import {Headline} from './components/Headline.js';
-import {Deck} from './components/Deck.js';
-import {IntroText} from './components/IntroText.js'
-import {Legend} from './components/Legend.js';
-import {AfricaHexmap} from './components/AfricaHexmap.js';
-import {ExposureCard} from './components/ExposureCard.js';
+import {Headline} from "./components/Headline.js";
+import {Deck} from "./components/Deck.js";
+import {IntroText} from "./components/IntroText.js"
+import {Legend} from "./components/Legend.js";
+import {AfricaHexmap} from "./components/AfricaHexmap.js";
+import {ExposureCard} from "./components/ExposureCard.js";
 import {Dropdown} from "./components/Dropdown.js";
 import {DropdownProvider} from "./components/DropdownContext.js";
 import {Slider} from "./components/Slider.js";
 import {Tooltip} from "./components/Tooltip.js";
 import {SubsectionTitle} from "./components/SubsectionTitle.js";
-import {SubsectionText} from "./components/SubsectionText.js";
+import {DescriptionText} from "./components/DescriptionText.js";
 import {ToggleButton} from "./components/ToggleButton.js";
 import {CountryCarousel} from "./components/CountryCarousel.js"
 import {SelectionCard} from "./components/SelectionCard.js";
@@ -55,8 +55,8 @@ function App() {
     const height = 600;
 
     // Reactive variables
-    const [selectedCountry, setSelectedCountry] = React.useState('ALL');
-    const [selectedSector, setSelectedSector] = React.useState('All sectors');
+    const [selectedCountry, setSelectedCountry] = React.useState("ALL");
+    const [selectedSector, setSelectedSector] = React.useState("All sectors");
     const [selectedTariff, setSelectedTariff] = React.useState();
     const [isETR, setIsETR] = React.useState(true);
     const [tooltipContent, setTooltipContent] = React.useState({
@@ -114,10 +114,17 @@ function App() {
     const sectorGroups = generateSectorGroups(crossData);
 
     // Determine the ETR for all countries
-    const allETR = crossData.find(d => d.iso3 === 'ALL' && d.sector === selectedSector)?.etr;
+    const allETR = crossData.find(d => d.iso3 === "ALL" && d.sector === selectedSector)?.etr;
 
     // Dtermine the ETR for selected data
     const selectedETR = selectedRecentData?.etr;
+    
+    // Define card mode
+    const cardMode = selectedCountry === "ALL" && selectedSector === "All sectors" 
+        ? "carousel" 
+        : selectedCountry !== "ALL" && selectedSector === "All sectors" 
+            ? "country" 
+            : "sector"
 
     return (
         <div className="wrapper">
@@ -127,12 +134,12 @@ function App() {
                     onClick={() => setHideMenu(!hideMenu)}
                 >
                     <span className="text-inputs">
-                        {`${hideMenu === true ? 'Show' : 'Hide'} controls`}
+                        {`${hideMenu === true ? "Show" : "Hide"} controls`}
                     </span>
                     <ChevronDown className={`dropdown-chevron ${hideMenu == true ? "rotate" : ""}`}/>
                 </div>
-                <div className='sticky-wrapper'>
-                    <div className='sticky-content'>
+                <div className="sticky-wrapper">
+                    <div className="sticky-content">
                         <h4 className="text-support-medium extra-margin">Filter the data</h4>
                         <div className="dropdowns-wrapper">
                             <Dropdown
@@ -196,9 +203,15 @@ function App() {
                 />
                 <ExposureCard data={exposureCardData}/>
                 <SubsectionTitle content={subsectionTitle}/>
-                <SubsectionText content={subsectionText}/>
+                <DescriptionText 
+                    data={cardMode === "carousel" ? carouselData : selectionCardData}
+                    mode={cardMode}
+                    isERT={isETR}
+                    selectedTariff={selectedTariff}
+                    selectedUnits={selectedUnits}
+                />
                 {
-                    selectedCountry === "ALL" && selectedSector === "All sectors" ? (
+                    cardMode === "carousel" ? (
                         <div>
                             <ToggleButton
                                 selected={selectedUnits}
@@ -215,7 +228,7 @@ function App() {
                         <SelectionCard
                             data={selectionCardData}
                             historicalData={selectedHistoricalData}
-                            mode={selectedCountry === "ALL" ? "sector" : "country"}
+                            mode={cardMode}
                             isETR={isETR}
                             selectedTariff={selectedTariff}
                             showMore={showMore}
