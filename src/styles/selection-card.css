@@ -43,6 +43,6 @@
 
 .dropdown-selected.show-more-button {
     width: auto;
-    margin: 0 auto;
+    margin: var(--margin-large) auto var(--margin-medium);
     font-weight: 700;
 }

@@ -58,8 +58,7 @@ function App() {
     const [selectedCountry, setSelectedCountry] = React.useState('ALL');
     const [selectedSector, setSelectedSector] = React.useState('All sectors');
     const [selectedTariff, setSelectedTariff] = React.useState();
-    const [selectedIndividualTariff, setSelectedIndividualTariff] = React.useState("ETR")
-    const [isManualTariff, setIsManualTariff] = React.useState(false);
+    const [isETR, setIsETR] = React.useState(true);
     const [tooltipContent, setTooltipContent] = React.useState({
         iso3: null,
         country: null,
@@ -84,7 +83,7 @@ function App() {
         setSelectedSector,
         crossData,
         setSelectedTariff,
-        isManualTariff,
+        isETR,
         setShowMore
     });
 
@@ -103,8 +102,8 @@ function App() {
 
     const exposureCardData = generateExposureCardData(selectedRecentData, selectedTariff);
     const tooltipData = generateTooltipData(hoveredData);
-    const carouselData = generateCarouselData(crossData, selectedSector, selectedIndividualTariff)
-    const selectionCardData = generateSelectionCardData(crossData, selectedCountry, selectedSector, selectedIndividualTariff)
+    const carouselData = generateCarouselData(crossData, selectedSector, selectedTariff, isETR)
+    const selectionCardData = generateSelectionCardData(crossData, selectedCountry, selectedSector, selectedTariff, isETR)
     const selectedHistoricalData = binaryFilter(historicalData, selectedCountry, selectedSector)
 
     // Generate iso3-country name map for dropdown menu
@@ -165,9 +164,7 @@ function App() {
                         <Slider
                             selectedTariff={selectedTariff ?? 0}
                             setSelectedTariff={setSelectedTariff}
-                            selectedIndividualTariff={selectedIndividualTariff}
-                            setSelectedIndividualTariff={setSelectedIndividualTariff}
-                            setIsManualTariff={setIsManualTariff}
+                            setIsETR={setIsETR}
                             etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
                         />
                     </div>
@@ -209,9 +206,8 @@ function App() {
                             />
                             <CountryCarousel
                                 data={carouselData}
+                                isETR={isETR}
                                 selectedTariff={selectedTariff}
-                                selectedIndividualTariff={selectedIndividualTariff}
-                                setSelectedIndividualTariff={setSelectedIndividualTariff}
                                 selectedUnits={selectedUnits}
                             />
                         </div>
@@ -220,9 +216,8 @@ function App() {
                             data={selectionCardData}
                             historicalData={selectedHistoricalData}
                             mode={selectedCountry === "ALL" ? "sector" : "country"}
+                            isETR={isETR}
                             selectedTariff={selectedTariff}
-                            selectedIndividualTariff={selectedIndividualTariff}
-                            setSelectedIndividualTariff={setSelectedIndividualTariff}
                             showMore={showMore}
                             setShowMore={setShowMore}
                         />

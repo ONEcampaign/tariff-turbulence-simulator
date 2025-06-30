@@ -3,14 +3,21 @@ import * as d3 from 'npm:d3';
 import {colorPalette} from "../js/colorPalette.js";
 import {riskThresholds} from "../js/riskThresholds.js";
 import {formatPercentage, formatCurrency} from "../js/format.js";
-import {TariffButtons} from "./TariffButtons.js";
+import {TariffPills} from "./TariffPills.js";
 
 const colorScale = d3.scaleThreshold(
     riskThresholds,
     [colorPalette.veryLow, colorPalette.low, colorPalette.medium, colorPalette.high]
 );
 
-export function CountryCarousel({data, selectedTariff, selectedIndividualTariff, setSelectedIndividualTariff, selectedUnits = "usd"}) {
+export function CountryCarousel(
+    {
+        data,
+        isETR,
+        selectedTariff,
+        selectedUnits = "usd"
+    }
+    ) {
     const sortKey = selectedUnits === "usd" ? "impact_usd" : "impact_pct";
     const cleaned = data.filter(
         (d) =>
@@ -76,10 +83,9 @@ export function CountryCarousel({data, selectedTariff, selectedIndividualTariff,
                         </div>
                         <div className="card-row carousel-card-settings">
                             <h4 className="text-support-medium">Individual tariff</h4>
-                            <TariffButtons
+                            <TariffPills
+                                isETR={isETR}
                                 selectedTariff={selectedTariff}
-                                selectedIndividualTariff={selectedIndividualTariff}
-                                setSelectedIndividualTariff={setSelectedIndividualTariff}
                             />
                         </div>
                     </div>

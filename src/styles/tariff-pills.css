@@ -1,0 +1,86 @@
+:root {
+    --tariff-button-width: 46px;
+    --tariff-button-height: 27px;
+
+    --tariff-button-transition: all 0.2s ease-in-out;
+}
+
+.tariff-pills-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.tariff-pill.text-support-small {
+    height: var(--tariff-button-height);
+    box-sizing: border-box;
+
+    color: black;
+    line-height: initial;
+    text-align: center;
+    vertical-align: middle;
+
+    border-radius: 6px;
+
+    padding: 4px 8px;
+}
+
+.tariff-pill.display {
+    background-color: white;
+    border: 2px solid black;
+}
+
+.tariff-pill.hover {
+    background-color: var(--color-grey);
+    border: 2px solid var(--color-grey);
+}
+
+.tariff-pill.hover:hover {
+    cursor: pointer;
+    background-color: lightgray;
+    transition: var(--tariff-button-transition);
+}
+
+.tariff-pill-tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.tariff-pill-tooltip {
+    visibility: hidden;
+    width: 225px;
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+
+    /* Positioning */
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+
+    /* Transition for fade-in */
+    opacity: 0;
+    transition: var(--tariff-button-transition);
+}
+
+.tariff-pill-tooltip-wrapper:hover .tariff-pill-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tariff-pill-tooltip > .text-support-small {
+    font-size: 0.8rem;
+    margin-bottom: .25rem;
+}
+
+.tariff-pill-tooltip > .text-support-small:last-of-type {
+    margin-bottom: 0;
+}
+
+
+
+

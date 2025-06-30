@@ -133,11 +133,11 @@ export function generateTooltipData(hoveredData) {
     };
 }
 
-export function generateCarouselData(data, selectedSector, selectedIndividualTariff) {
+export function generateCarouselData(data, selectedSector, selectedTariff, isETR) {
     return data
         .filter(d => d.sector === selectedSector && d.country !== "All countries")
         .map(d => {
-            const tariff = selectedIndividualTariff === "ETR" ? d.etr : selectedIndividualTariff;
+            const tariff = isETR ? d.etr : selectedTariff;
             return {
                 country: d.country,
                 iso2: d.iso2,
@@ -158,11 +158,11 @@ export function binaryFilter(data, selectedCountry, selectedSector) {
     }
 }
 
-export function generateSelectionCardData(data, selectedCountry, selectedSector, selectedIndividualTariff) {
+export function generateSelectionCardData(data, selectedCountry, selectedSector, selectedTariff, isETR) {
     data = binaryFilter(data, selectedCountry, selectedSector);
 
     return data.map(d => {
-        const tariff = selectedIndividualTariff === "ETR" ? d.etr : selectedIndividualTariff;
+        const tariff = isETR ? d.etr : selectedTariff;
         return {
             country: d.country,
             iso2: d.iso2,

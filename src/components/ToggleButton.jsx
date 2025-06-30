@@ -1,11 +1,12 @@
 import * as React from "npm:react";
 
-export function ToggleButton({
-                                         leftLabel = "sort by $ value",
-                                         rightLabel = "sort by % of GDP",
-                                         selected,
-                                         setSelected
-                                     }) {
+export function ToggleButton(
+    {
+        leftLabel = "sort by $ value",
+        rightLabel = "sort by % of GDP",
+        selected,
+        setSelected
+    }) {
     const isUsd = selected === "usd";
 
     const handleClick = () => {
