@@ -1,0 +1,29 @@
+.methodology-container {
+    margin-top: var(--margin-extra-large);
+}
+
+.methodology-header{
+    display: flex;
+    align-items:center;
+    cursor: pointer;
+    margin-bottom: var(--margin-medium);
+}
+
+.methodology-container .text-body {
+    margin-bottom: var(--margin-small);
+}
+
+.methodology-body-wrapper{
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.methodology-container .tariff-card {
+    width: 90%;
+    margin: var(--margin-large) auto;
+}
+
+.tariff-card pre {
+    width: 90%;
+    margin: var(--margin-small) auto;
+}
