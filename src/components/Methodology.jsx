@@ -44,24 +44,24 @@ export function Methodology() {
                         <p className="text-body"><b>Example:</b></p>
                         <p className="text-body">Country A exports the following to the United States:</p>
                         <ul className="text-body">
-                            <li>Aluminum: US$10 million (subject to 50% tariff)</li>
-                            <li>Auto parts: US$5 million (subject to 25% tariff)</li>
-                            <li>Semiconductors: US$2 million (exempt from tariffs)</li>
+                            <li>Aluminum: $10 million (subject to a 50% tariff)</li>
+                            <li>Auto parts: $5 million (subject to a 25% tariff)</li>
+                            <li>Semiconductors: $2 million (exempt from tariffs)</li>
                         </ul>
                         <p className="text-body">The ETR is calculated as follows:</p>
                         <pre>ETR = [(10 × 0.5) + (5 × 0.25) + (2 × 0)] / (10 + 5 + 2) = 0.38</pre>
-                        <p className="text-body">So, Country A faces an effective tariff rate of 38% on its exports to the US</p>
+                        <p className="text-body">So, Country A faces an effective tariff rate of 38% on its exports to the US.</p>
                     </div>
 
                     <p className="text-body">To calculate the ETR, we rely on the following data:</p>
 
                     <ul className="text-body">
-                        <li>US import values from African countries (<a href="https://usatrade.census.gov/index.php" target="_blank">USA Trade Online</a>)</li>
-                        <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03596/..." target="">Tariffs on aluminum</a></li>
-                        <li><a href="https://www.federalregister.gov/documents/2025/03/05/..." target="">Tariffs on steel</a></li>
-                        <li><a href="https://www.federalregister.gov/documents/2025/04/03/..." target="">Tariffs on automobiles and auto parts</a></li>
+                        <li>US import values from African countries in (<a href="https://usatrade.census.gov/index.php" target="_blank">USA Trade Online</a>)</li>
+                        <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03596/implementation-of-duties-on-aluminum-pursuant-to-proclamation-10895-adjusting-imports-of-aluminum" target="_blank">Tariffs on aluminum</a></li>
+                        <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03598/implementation-of-duties-on-steel-pursuant-to-proclamation-10896-adjusting-imports-of-steel-into-the" target="_blank">Tariffs on steel</a></li>
+                        <li><a href="https://www.federalregister.gov/documents/2025/04/03/2025-05930/adjusting-imports-of-automobiles-and-automobile-parts-into-the-united-states" target="_blank">Tariffs on automobiles and auto parts</a></li>
                         <li>Tariff exemptions (<a href="https://www.whitehouse.gov/wp-content/uploads/2025/04/Annex-II.pdf" target="_blank">April 2, 2025</a>)</li>
-                        <li>Tariff exemptions (<a href="https://www.whitehouse.gov/presidential-actions/2025/04/..." target="_blank">April 11, 2025</a>)</li>
+                        <li>Tariff exemptions (<a href="https://www.whitehouse.gov/presidential-actions/2025/04/clarification-of-exceptions-under-executive-order-14257-of-april-2-2025-as-amended/" target="_blank">April 11, 2025</a>)</li>
                     </ul>
 
                     <p className="text-body">
@@ -90,7 +90,7 @@ export function Methodology() {
                     </ul>
 
                     <p className="text-body">
-                        Historical exports from African countries to the US are sourced from the BACI trade database via <a href="https://docs.one.org/tools/bblocks/data-importers/" target="_blank">bblocks.data-importers</a>.
+                        Historical exports from African countries to the US are sourced from the <a href="https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37" target="_blank">BACI</a> trade database.
                     </p>
                 </div>
             </div>
