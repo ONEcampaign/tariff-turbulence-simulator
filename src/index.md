@@ -205,7 +205,9 @@ function App() {
                     data={tooltipData}
                     isVisible={isTooltipVisible}
                 />
-                <ExposureCard data={exposureCardData}/>
+                <ExposureCard 
+                    data={exposureCardData}
+                />
                 <SubsectionTitle content={subsectionTitle}/>
                 <DescriptionText
                     data={cardMode === "carousel" ? carouselData : selectionCardData}
