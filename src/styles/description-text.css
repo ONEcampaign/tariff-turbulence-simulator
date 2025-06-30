@@ -1,0 +1,7 @@
+.description-container {
+    margin-bottom: var(--margin-large);
+}
+
+.text-body.description-text {
+    margin-bottom: var(--margin-small);
+}
