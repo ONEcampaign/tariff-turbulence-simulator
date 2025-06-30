@@ -1,5 +1,5 @@
 import * as React from "npm:react";
-import * as d3 from 'npm:d3';
+import * as d3 from "npm:d3";
 import {colorPalette} from "../js/colorPalette.js";
 import {riskThresholds} from "../js/riskThresholds.js";
 import {formatPercentage, formatCurrency} from "../js/format.js";

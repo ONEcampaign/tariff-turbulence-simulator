@@ -13,7 +13,7 @@
 @import url("./styles/headline.css");
 @import url("./styles/deck.css");
 @import url("./styles/intro-text.css");
-@import url("./styles/subsection-text.css");
+@import url("styles/description-text.css");
 
 @import url("./styles/sticky-controls.css");
 @import url("./styles/dropdown.css");
