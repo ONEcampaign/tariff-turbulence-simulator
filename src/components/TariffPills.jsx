@@ -19,7 +19,7 @@ export function TariffPills({ isETR, selectedTariff }) {
                         Use the slider to adjust individual tariffs.
                     </p>
                     <p className="text-support-small">
-                        ETR sets the simulated tariff to the effective tariff rate of each country and sector.
+                        ETR sets the tariff to the effective tariff rate of each country and sector.
                     </p>
                     <p className="text-support-small">
                         Any other tariff simulates the same tariff for each country/sector.
