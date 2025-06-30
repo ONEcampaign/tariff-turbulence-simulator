@@ -2,15 +2,16 @@ import * as React from "npm:react";
 import { useDropdownContext } from "./DropdownContext.js";
 import { ChevronDown } from "./Chevron.js";
 
-export function Dropdown({
-                             dropdownId,
-                             options,
-                             selectedOption,
-                             setOption,
-                             setETR,
-                             getETRForOption,
-                             isInactive = false
-                         } = {}) {
+export function Dropdown(
+    {
+        dropdownId,
+        options,
+        selectedOption,
+        setOption,
+        setETR,
+        getETRForOption,
+        isInactive = false
+    } = {}) {
     const [searchText, setSearchText] = React.useState("");
     const [highlightedIndex, setHighlightedIndex] = React.useState(0);
     const inputRef = React.useRef(null);
