@@ -25,6 +25,7 @@ import {DescriptionText} from "./components/DescriptionText.js";
 import {ToggleButton} from "./components/ToggleButton.js";
 import {CountryCarousel} from "./components/CountryCarousel.js"
 import {SelectionCard} from "./components/SelectionCard.js";
+import {Methodology} from "./components/Methodology.js";
 import {MutualExclusion} from "./components/MutualExclusion.js";
 import {ChevronDown} from "./components/Chevron.js";
 import {
@@ -39,7 +40,7 @@ import {
     binaryFilter
 } from "./js/transformData.js";
 import {
-    headline, deck, introText, legendTitle, legendSubtitle, subsectionTitle, subsectionText
+    headline, deck, introText, legendTitle, legendSubtitle, subsectionTitle
 } from "./js/copyText.js";
 
 const recentData = FileAttachment("./data/africa_exports_to_us_2022_2024_ustrade.csv").csv({typed: true});
@@ -118,12 +119,12 @@ function App() {
 
     // Dtermine the ETR for selected data
     const selectedETR = selectedRecentData?.etr;
-    
+
     // Define card mode
-    const cardMode = selectedCountry === "ALL" && selectedSector === "All sectors" 
-        ? "carousel" 
-        : selectedCountry !== "ALL" && selectedSector === "All sectors" 
-            ? "country" 
+    const cardMode = selectedCountry === "ALL" && selectedSector === "All sectors"
+        ? "carousel"
+        : selectedCountry !== "ALL" && selectedSector === "All sectors"
+            ? "country"
             : "sector"
 
     return (
@@ -206,7 +207,7 @@ function App() {
                 />
                 <ExposureCard data={exposureCardData}/>
                 <SubsectionTitle content={subsectionTitle}/>
-                <DescriptionText 
+                <DescriptionText
                     data={cardMode === "carousel" ? carouselData : selectionCardData}
                     mode={cardMode}
                     isERT={isETR}
@@ -239,6 +240,7 @@ function App() {
                         />
                     )
                 }
+                <Methodology />
             </div>
         </div>
     )
