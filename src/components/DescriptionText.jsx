@@ -20,7 +20,7 @@ export function DescriptionText(
             .slice(0, 3)
             .map(d => ({
                 country: d.country,
-                value: selectedUnits === "usd" ? formatCurrency(d[sortKey]) : formatPercentage(d[sortKey], {tariff: false})
+                value: selectedUnits === "usd" ? formatCurrency(d[sortKey], {short: false}) : formatPercentage(d[sortKey], {tariff: false})
             }));
 
         const totalImpactUSD = data.reduce((sum, d) => {
@@ -28,7 +28,7 @@ export function DescriptionText(
         }, 0);
 
         const tariffText = isERT ? (
-            <>Using each country's <b>ETR as simulated tariff</b>, </>
+            <>Using <b>each country's ETR</b>, </>
         ) : (
             <>Using a <b>{formatPercentage(selectedTariff)} simulated tariff</b>, </>
         );
@@ -41,10 +41,10 @@ export function DescriptionText(
         return (
             <div className="description-container">
                 <p className="text-body description-text">
-                    {tariffText} the total exposure of all African countries to US tariffs is <b>{formatCurrency(totalImpactUSD)}</b>.
+                    {tariffText} the total exposure of all African countries to US tariffs is <b>{formatCurrency(totalImpactUSD, {short: false})}</b>.
                 </p>
                 <p className="text-body description-text">
-                    The countries with the highest exposure in {unitText} are <b>{topThree[0].country}</b> ({topThree[0].value}), followed by <b>{topThree[1].country}</b> ({topThree[1].value}) and <b>{topThree[2].country}</b> ({topThree[2].value}).
+                    The countries with the highest exposure {unitText} are <b>{topThree[0].country}</b> ({topThree[0].value}), <b>{topThree[1].country}</b> ({topThree[1].value}) and <b>{topThree[2].country}</b> ({topThree[2].value}).
                 </p>
             </div>
         )
@@ -57,7 +57,7 @@ export function DescriptionText(
             const country = data[0].country;
 
             const tariffText = isERT ? (
-                <>Using <b>sector-specific ETRs</b> as simulated tariffs, </>
+                <>Using <b>sector-specific ETRs</b>, </>
             ) : (
                 <>Using a <b>{formatPercentage(selectedTariff)} simulated tariff</b> for all sectors, </>
             );
@@ -77,16 +77,16 @@ export function DescriptionText(
                 .slice(0, 3)
                 .map(d => ({
                     sector: d.sector,
-                    value: formatCurrency(d.impact_usd)
+                    value: formatCurrency(d.impact_usd, {short: false})
                 }));
 
             return (
                 <div className="description-container">
                     <p className="text-body description-text">
-                        {tariffText} {country}'s total exposure to US tariffs is <b>{formatCurrency(totalImpactUSD)}</b>{impactPCTText}.
+                        {tariffText} {country}'s total exposure to US tariffs is <b>{formatCurrency(totalImpactUSD, {short: false})}</b>{impactPCTText}.
                     </p>
                     <p className="text-body description-text">
-                        The most exposed sectors are <b>{topSectors[0].sector}</b> ({topSectors[0].value}), followed by <b>{topSectors[1].sector}</b> ({topSectors[1].value}) and <b>{topSectors[2].sector}</b> ({topSectors[2].value}).
+                        The most exposed sectors are <b>{topSectors[0].sector}</b> ({topSectors[0].value}), <b>{topSectors[1].sector}</b> ({topSectors[1].value}) and <b>{topSectors[2].sector}</b> ({topSectors[2].value}).
                     </p>
                 </div>
             )
@@ -96,7 +96,7 @@ export function DescriptionText(
             const sector = data[0].sector;
 
             const tariffText = isERT ? (
-                <>Using <b>country-specific ETRs</b> as simulated tariffs, </>
+                <>Using <b>country-specific ETRs</b>, </>
             ) : (
                 <>Using a <b>{formatPercentage(selectedTariff)} simulated tariff</b> for all countries, </>
             );
@@ -110,16 +110,16 @@ export function DescriptionText(
                 .slice(0, 3)
                 .map(d => ({
                     country: d.country,
-                    value: formatCurrency(d.impact_usd)
+                    value: formatCurrency(d.impact_usd, {short: false})
                 }));
 
             return (
                 <div className="description-container">
                     <p className="text-body description-text">
-                        {tariffText} the total exposure of Africa's {sector.toLowerCase()} sector to US tariffs is <b>{formatCurrency(totalImpactUSD)}</b>.
+                        {tariffText} the total exposure of Africa's {sector.toLowerCase()} sector to US tariffs is <b>{formatCurrency(totalImpactUSD, {short: false})}</b>.
                     </p>
                     <p className="text-body description-text">
-                        The most exposed countries are <b>{topSectors[0].country}</b> ({topSectors[0].value}), followed by <b>{topSectors[1].country}</b> ({topSectors[1].value}) and <b>{topSectors[2].country}</b> ({topSectors[2].value}).
+                        The most exposed countries are <b>{topSectors[0].country}</b> ({topSectors[0].value}), <b>{topSectors[1].country}</b> ({topSectors[1].value}) and <b>{topSectors[2].country}</b> ({topSectors[2].value}).
                     </p>
                 </div>
             )
