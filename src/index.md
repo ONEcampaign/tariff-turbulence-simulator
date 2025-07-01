@@ -5,7 +5,14 @@ footer: false
 pager: false
 ---
 ```js
-const observer = new ResizeObserver(([entry]) => parent.postMessage({height: entry.target.offsetHeight}, "*"));
+const observer = new ResizeObserver(([entry]) => {
+    try {
+        window.top.postMessage({ height: entry.target.offsetHeight }, "*");
+    } catch (e) {
+        // Fails silently in cross-origin or CSP-restricted embeds
+        console.warn("Unable to postMessage to parent window:", e);
+    }
+});
 observer.observe(document.documentElement);
 ```
 
