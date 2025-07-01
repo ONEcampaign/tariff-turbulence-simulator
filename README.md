@@ -12,10 +12,10 @@ This is an [Observable Framework](https://observablehq.com/framework/) app.
 ```ini
 .
 ├─ src
-│  ├─ components               # React.js components 
-│  ├─ data                     # Input data files and loaders
-│  ├─ js                       # JavaScript modules
-│  ├─ styles                   # CSS stylesheets
+│  ├─ components/              # React.js components 
+│  ├─ data/                    # Input data files and loaders
+│  ├─ js/                      # JavaScript modules
+│  ├─ styles/                  # CSS stylesheets
 │  ├─ index.md                 # Home page
 │  └─ styles.css               # Main CSS module
 ├─ .gitignore
