@@ -4,8 +4,9 @@ header: false
 footer: false
 pager: false
 ---
+
 ```js
-const observer = new ResizeObserver(([entry]) => parent.postMessage({height: entry.target.offsetHeight}, "https://data.one.org"));
+const observer = new ResizeObserver(([entry]) => window.parent.postMessage({height: entry.target.offsetHeight}, "https://data.one.org"));
 observer.observe(document.documentElement);
 ```
 

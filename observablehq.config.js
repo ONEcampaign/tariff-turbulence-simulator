@@ -16,8 +16,4 @@ export default {
 
   root: "src",
   style: "style.css",
-
-  toc: false,
-  sidebar: false,
-  pager: false,
 };
