@@ -6,6 +6,7 @@
 /* Wrapper for the whole component, allows marker freedom */
 .slider-wrapper {
     position: relative;
+    width: var(--filters-width);
     height: calc(var(--marker-height) + 2rem); /* enough vertical space */
     user-select: none;
 }

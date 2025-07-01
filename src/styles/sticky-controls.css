@@ -1,23 +1,19 @@
-.sticky-controls {
-    position: fixed;
-    width: 250px;
-    left: 0;
-    margin: 50px;
-    top: 20%;
-}
-
 .sticky-wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: var(--margin-small);
+    position: fixed;
+    top: 20%;
+    margin-left: calc((((100vw - var(--main-block-width)) / 2) - var(--filters-width)) / 2 - 1em);
 }
 
-.sticky-content {
-    width: 100%;
+.sticky-wrapper.hidden {
+    right: calc( -1 * (var(--filters-width) + var(--margin-medium) * 2));
+}
+
+.controls-wrapper {
     display: flex;
     flex-direction: column;
     gap: var(--margin-small);
+    box-sizing: border-box;
+    border: none;
 }
 
 .dropdowns-wrapper {
@@ -26,12 +22,12 @@
     gap: inherit;
 }
 
-.sticky-tab {
+.show-hide-tab {
     display: none;
     cursor: pointer;
 }
 
-.sticky-tab .text-inputs {
+.show-hide-tab .text-inputs {
     font-weight: 700;
 }
 
