@@ -1,10 +1,9 @@
 import {icon} from "@one-data/observable-themes/use-images";
-
-const projectTitle = "Tariff Turbulence Simulator"
+import {title} from "./src/js/copyText.js"
 
 export default {
 
-  title: projectTitle,
+  title: title,
   head: `<link rel="icon" href=${icon} type="image/png" sizes="32x32">
          <link
            rel="stylesheet"
