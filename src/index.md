@@ -3,6 +3,7 @@ sidebar: false
 header: false
 footer: false
 pager: false
+toc: false
 ---
 
 ```js
