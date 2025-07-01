@@ -40,7 +40,7 @@ import {
     binaryFilter
 } from "./js/transformData.js";
 import {
-    headline, deck, introText, legendTitle, legendSubtitle, subsectionTitle
+    title, deck, introText, legendTitle, legendSubtitle, subsectionTitle
 } from "./js/copyText.js";
 
 const recentData = FileAttachment("./data/africa_exports_to_us_2022_2024_ustrade.csv").csv({typed: true});
@@ -181,7 +181,7 @@ function App() {
                 </div>
             </div>
             <div className="main-block">
-                <Headline content={headline}/>
+                <Headline content={title}/>
                 <Deck content={deck}/>
                 <IntroText content={introText}/>
                 <Legend
@@ -205,7 +205,7 @@ function App() {
                     data={tooltipData}
                     isVisible={isTooltipVisible}
                 />
-                <ExposureCard 
+                <ExposureCard
                     data={exposureCardData}
                 />
                 <SubsectionTitle content={subsectionTitle}/>
@@ -242,7 +242,7 @@ function App() {
                         />
                     )
                 }
-                <Methodology />
+                <Methodology/>
             </div>
         </div>
     )
