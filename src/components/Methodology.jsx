@@ -56,7 +56,7 @@ export function Methodology() {
                     <p className="text-body">To calculate the ETR, we rely on the following data:</p>
 
                     <ul className="text-body">
-                        <li>US import values from African countries in (<a href="https://usatrade.census.gov/index.php" target="_blank">USA Trade Online</a>)</li>
+                        <li>US import values from African countries (<a href="https://usatrade.census.gov/index.php" target="_blank">USA Trade Online</a>)</li>
                         <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03596/implementation-of-duties-on-aluminum-pursuant-to-proclamation-10895-adjusting-imports-of-aluminum" target="_blank">Tariffs on aluminum</a></li>
                         <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03598/implementation-of-duties-on-steel-pursuant-to-proclamation-10896-adjusting-imports-of-steel-into-the" target="_blank">Tariffs on steel</a></li>
                         <li><a href="https://www.federalregister.gov/documents/2025/04/03/2025-05930/adjusting-imports-of-automobiles-and-automobile-parts-into-the-united-states" target="_blank">Tariffs on automobiles and auto parts</a></li>
