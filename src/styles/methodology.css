@@ -2,11 +2,18 @@
     margin-top: var(--margin-extra-large);
 }
 
-.methodology-header{
+.methodology-header {
     display: flex;
     align-items:center;
     cursor: pointer;
     margin-bottom: var(--margin-medium);
+}
+
+.methodology-header > .dropdown-chevron {
+    flex-shrink: 0;
+    flex-grow: 0;
+    height: 16px;
+    width: 16px;
 }
 
 .methodology-container .text-body {

@@ -52,6 +52,7 @@
     border-bottom-left-radius: 6px;
     z-index: 10;
     box-sizing: border-box;
+    text-align: left;
 }
 
 .dropdown-list-container {

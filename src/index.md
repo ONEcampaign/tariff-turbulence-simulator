@@ -71,7 +71,36 @@ function App() {
     const isTooltipVisible = tooltipContent.country !== null;
     const [selectedUnits, setSelectedUnits] = React.useState("usd")
     const [showMore, setShowMore] = React.useState(false);
-    const [hideMenu, setHideMenu] = React.useState(false);
+    const [hideMenu, setHideMenu] = React.useState(true);
+    const [screenIsLarge, setScreenIsLarge] = React.useState(window.innerWidth > 1120);
+
+    React.useEffect(() => {
+        const handleResize = () => {
+            const isLarge = window.innerWidth > 1120;
+            setScreenIsLarge(isLarge);
+
+            if (isLarge) {
+                setHideMenu(false); // Always show on large screens
+            }
+        };
+
+        const handleScroll = () => {
+            if (!screenIsLarge && window.scrollY > 250) {
+                setHideMenu(false);
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+        window.addEventListener("scroll", handleScroll);
+
+        // Initial run
+        handleResize();
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [screenIsLarge]);
 
     // Crossed data between csv and geojson to make sure all countries are present
     const crossData = generateCrossData(recentData, geoData)
@@ -131,55 +160,50 @@ function App() {
 
     return (
         <div className="wrapper">
-            <div className={`sticky-controls ${hideMenu === true ? "hidden" : ""}`}>
+            <div className={`sticky-wrapper ${hideMenu === true ? "hidden" : ""}`}>
                 <div
-                    className="sticky-tab"
+                    className="show-hide-tab"
                     onClick={() => setHideMenu(!hideMenu)}
                 >
-                    <span className="text-inputs">
-                        {`${hideMenu === true ? "Show" : "Hide"} controls`}
-                    </span>
                     <ChevronDown className={`dropdown-chevron ${hideMenu == true ? "rotate" : ""}`}/>
                 </div>
-                <div className="sticky-wrapper">
-                    <div className="sticky-content">
-                        <h4 className="text-support-medium extra-margin">Filter the data</h4>
-                        <div className="dropdowns-wrapper">
-                            <Dropdown
-                                dropdownId="countryMenu"
-                                options={countryMap}
-                                selectedOption={selectedCountry}
-                                setOption={updateCountry}
-                                setETR={setSelectedTariff}
-                                getETRForOption={(iso3) => {
-                                    const etr = crossData.find(d => d.iso3 === iso3 && d.sector === selectedSector)?.etr
-                                    return Number.isFinite(etr) ? etr : null;
-                                }}
-                                isInactive={selectedSector !== "All sectors"}
-                            />
-                            <h4 className="text-support-medium center-aligned">or</h4>
-                            <Dropdown
-                                dropdownId="sectorMenu"
-                                options={sectorGroups}
-                                selectedOption={selectedSector}
-                                setOption={updateSector}
-                                setETR={setSelectedTariff}
-                                getETRForOption={(sector) => {
-                                    const etr = crossData.find(d => d.iso3 === selectedCountry && d.sector === sector)?.etr;
-                                    return Number.isFinite(etr) ? etr : null;
-                                }}
-                                isInactive={selectedCountry !== "ALL"}
-                            />
-                        </div>
-                        <div className="controls-separator"></div>
-                        <h4 className="text-support-medium extra-margin">Simulate tariff</h4>
-                        <Slider
-                            selectedTariff={selectedTariff ?? 0}
-                            setSelectedTariff={setSelectedTariff}
-                            setIsETR={setIsETR}
-                            etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
+                <div className="controls-wrapper">
+                    <h4 className="text-support-medium extra-margin">Filter the data</h4>
+                    <div className="dropdowns-wrapper">
+                        <Dropdown
+                            dropdownId="countryMenu"
+                            options={countryMap}
+                            selectedOption={selectedCountry}
+                            setOption={updateCountry}
+                            setETR={setSelectedTariff}
+                            getETRForOption={(iso3) => {
+                                const etr = crossData.find(d => d.iso3 === iso3 && d.sector === selectedSector)?.etr
+                                return Number.isFinite(etr) ? etr : null;
+                            }}
+                            isInactive={selectedSector !== "All sectors"}
+                        />
+                        <h4 className="text-support-medium center-aligned">or</h4>
+                        <Dropdown
+                            dropdownId="sectorMenu"
+                            options={sectorGroups}
+                            selectedOption={selectedSector}
+                            setOption={updateSector}
+                            setETR={setSelectedTariff}
+                            getETRForOption={(sector) => {
+                                const etr = crossData.find(d => d.iso3 === selectedCountry && d.sector === sector)?.etr;
+                                return Number.isFinite(etr) ? etr : null;
+                            }}
+                            isInactive={selectedCountry !== "ALL"}
                         />
                     </div>
+                    <div className="controls-separator"></div>
+                    <h4 className="text-support-medium extra-margin">Simulate tariff</h4>
+                    <Slider
+                        selectedTariff={selectedTariff ?? 0}
+                        setSelectedTariff={setSelectedTariff}
+                        setIsETR={setIsETR}
+                        etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
+                    />
                 </div>
             </div>
             <div className="main-block">
