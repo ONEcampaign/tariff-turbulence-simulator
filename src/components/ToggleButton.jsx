@@ -2,8 +2,8 @@ import * as React from "npm:react";
 
 export function ToggleButton(
     {
-        leftLabel = "sort by $ value",
-        rightLabel = "sort by ETR",
+        leftLabel = "$ value",
+        rightLabel = "ETR",
         selected,
         setSelected
     }) {
@@ -14,7 +14,8 @@ export function ToggleButton(
     };
 
     return (
-        <div className="toggle-wrapper">
+        <div className="toggle-buttons-wrapper">
+            <h4 className="text-inputs toggle-title">Sort countries by:</h4>
             <span className={`text-toggle-button text-inputs ${isUsd ? "on" : ""}`}>{leftLabel}</span>
             <button
                 className={`toggle-button ${isUsd ? "on" : "off"}`}

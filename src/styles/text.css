@@ -116,6 +116,7 @@ html {
     line-height: var(--lh-text-input);
     letter-spacing: var(--ls-text-input);
     text-transform: uppercase;
+    margin: 0;
 }
 
 /* Impact styles */

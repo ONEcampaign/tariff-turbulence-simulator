@@ -1,17 +1,19 @@
 :root {
     --toggle-button-width: 52px;
     --toggle-button-height: 32px;
-
     --toggle-knob-size: 24px;
-
     --toggle-button-transition: all 0.2s ease-in-out;
 }
 
-.toggle-wrapper {
+.toggle-buttons-wrapper {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-bottom: var(--margin-large);
+    gap: var(--margin-small);
+    margin-bottom: var(--margin-small);
+}
+
+.text-inputs.toggle-title {
+    padding-right: var(--margin-medium);
 }
 
 .text-toggle-button.text-inputs {
