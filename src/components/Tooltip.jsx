@@ -34,10 +34,10 @@ export function Tooltip({ x, y, data, isVisible } ={}) {
                 <h4 className="tooltip-var-name text-support-small">Total exposure</h4>
                 <p className="text-impact-medium">{formatCurrency(data.impact_usd)}</p>
             </div>
-            <div className="card-row tooltip-row">
-                <h4 className="tooltip-var-name text-support-small">% of GDP</h4>
-                <p className="text-impact-medium">{formatPercentage(data.impact_pct, {tariff: false})}</p>
-            </div>
+            {/*<div className="card-row tooltip-row">*/}
+            {/*    <h4 className="tooltip-var-name text-support-small">% of GDP</h4>*/}
+            {/*    <p className="text-impact-medium">{formatPercentage(data.impact_pct, {tariff: false})}</p>*/}
+            {/*</div>*/}
         </div>
     )
 }

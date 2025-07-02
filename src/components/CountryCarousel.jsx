@@ -71,10 +71,10 @@ export function CountryCarousel(
                             <h4 className="text-support-medium">Total exposure</h4>
                             <p className="text-impact-large">{formatCurrency(countryData.impact_usd)}</p>
                         </div>
-                        <div className="card-row carousel-card-row">
-                            <h4 className="text-support-medium">% of GDP</h4>
-                            <p className="text-impact-large">{formatPercentage(countryData.impact_pct, {tariff: false})}</p>
-                        </div>
+                        {/*<div className="card-row carousel-card-row">*/}
+                        {/*    <h4 className="text-support-medium">% of GDP</h4>*/}
+                        {/*    <p className="text-impact-large">{formatPercentage(countryData.impact_pct, {tariff: false})}</p>*/}
+                        {/*</div>*/}
                         <div className="card-row carousel-card-settings">
                             <h4 className="text-support-medium">Trade partner</h4>
                             <div className="swatch us-swatch">
