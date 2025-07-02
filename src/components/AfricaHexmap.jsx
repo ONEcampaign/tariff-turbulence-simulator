@@ -132,6 +132,11 @@ export function AfricaHexmap({
                                             if (Number.isFinite(etr)) {
                                                 setETR(etr);
                                             }
+                                            // Scroll to exposure card
+                                            const card = document.querySelector("#exposure-card");
+                                            if (card) {
+                                                card.scrollIntoView({ behavior: "smooth", block: "start" });
+                                            }
                                         }
                                     }
                                 }}
