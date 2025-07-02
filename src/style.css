@@ -33,7 +33,7 @@
 
 :root {
     --main-block-width:  768px;
-    --filters-width: 250px;
+    --controls-width: 250px;
 
     --margin-small: 10px;
     --margin-medium: 20px;
@@ -42,10 +42,4 @@
 
     --color-grey: #E5E7EB;
     --color-teal: #17858C;
-}
-
-@media (max-width: 680px) {
-    :root {
-        --filters-width: 200px;
-    }
 }
