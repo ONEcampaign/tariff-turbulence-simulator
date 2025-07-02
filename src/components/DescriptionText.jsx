@@ -13,7 +13,7 @@ export function DescriptionText({
     const formatValue = (val) =>
         selectedUnits === "usd"
             ? formatCurrency(val, { short: false })
-            : formatPercentage(val, { tariff: false });
+            : formatPercentage(val, { tariff: true });
 
     const getTariffText = (context) => {
         const tariff = formatPercentage(selectedTariff);
