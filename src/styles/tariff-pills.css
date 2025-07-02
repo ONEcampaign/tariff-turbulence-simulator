@@ -70,6 +70,7 @@
 .tariff-pill-tooltip-wrapper:hover .tariff-pill-tooltip {
     visibility: visible;
     opacity: 1;
+    pointer-events: auto;
 }
 
 .tariff-pill-tooltip > .text-support-small {
@@ -82,5 +83,10 @@
 }
 
 
+.tariff-pill-tooltip.visible-tooltip {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
 
 
