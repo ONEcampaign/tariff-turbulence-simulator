@@ -33,11 +33,11 @@ export function Methodology() {
             >
                 <div ref={contentRef}>
                     <p className="text-body">
-                        The <em>Tariff Turbulence Simulator</em> estimates the impact of US tariffs on African countries and sectors by calculating an Effective Tariff Rate (ETR).
+                        The <em>Tariff Turbulence Simulator</em> estimates the impact of US tariffs on African countries and sectors using country- and sector-specific Effective Tariff Rates (ETR) as well as trade data.
                     </p>
 
                     <p className="text-body">
-                        The ETR for each country is computed as a weighted average of the tariff rates applied to US imports from that country across the products that make up a sector.
+                        The ETR for each country is computed as a weighted average of the tariff rates applied to U.S. imports from that country across the products in a sector, using trade values from 2022 to 2024
                     </p>
 
                     <div className="tariff-card">
@@ -71,7 +71,7 @@ export function Methodology() {
 
                     <p className="text-body">
                         To calculate the impact as a share of GDP, the result in US dollars is divided by the average GDP from 2022 to 2024.
-                        GDP data is sourced from the IMF's <em>World Economic Outlook</em> via <a href="https://docs.one.org/tools/bblocks/data-importers/importers/weo/" target="_blank">blocks.data-importers</a>.
+                        GDP data is sourced from the IMF's <em>World Economic Outlook</em> via <a href="https://docs.one.org/tools/bblocks/data-importers/importers/weo/" target="_blank"> our <code>blocks.data-importers</code> package</a>.
                     </p>
 
                     <p className="text-body">
@@ -90,7 +90,7 @@ export function Methodology() {
                     </ul>
 
                     <p className="text-body">
-                        Historical exports from African countries to the US are sourced from the <a href="https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37" target="_blank">BACI</a> trade database.
+                        Historical exports from African countries to the US between 2002 and 2023 are sourced from the <a href="https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37" target="_blank">BACI</a> trade database.
                     </p>
                 </div>
             </div>
