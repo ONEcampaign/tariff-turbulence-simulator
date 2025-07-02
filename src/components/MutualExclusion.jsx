@@ -12,16 +12,31 @@ export function MutualExclusion({
                                     setShowMore
 }) {
     const updateCountry = (newCountry) => {
-        if (newCountry !== "ALL" && selectedSector !== "All sectors") {
-            setSelectedSector("All sectors");
+        if (newCountry !== "ALL") {
+            // Scroll to exposure card
+            const card = document.querySelector("#exposure-card");
+            if (card) {
+                card.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+            if (selectedSector !== "All sectors") {
+                setSelectedSector("All sectors");
+            }
         }
+
         setSelectedCountry(newCountry);
         setShowMore(false);
     };
 
     const updateSector = (newSector) => {
-        if (newSector !== "All sectors" && selectedCountry !== "ALL") {
-            setSelectedCountry("ALL");
+        if (newSector !== "All sectors") {
+            // Scroll to exposure card
+            const card = document.querySelector("#exposure-card");
+            if (card) {
+                card.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+            if (selectedCountry !== "ALL") {
+                setSelectedCountry("ALL");
+            }
         }
         setSelectedSector(newSector);
         setShowMore(false);
