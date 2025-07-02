@@ -4,22 +4,20 @@ import { formatPercentage } from "../js/format.js";
 import { colorPalette } from "../js/colorPalette.js";
 import { riskThresholds } from "../js/riskThresholds.js";
 
-export function AfricaHexmap(
-    {
-        width,
-        height,
-        data,
-        selectedSector,
-        clickedCountry,
-        setCountry,
-        setETR,
-        allETR,
-        setTooltip
-    } = {}) {
-
+export function AfricaHexmap({
+                                 width,
+                                 height,
+                                 data,
+                                 selectedSector,
+                                 clickedCountry,
+                                 setCountry,
+                                 setETR,
+                                 allETR,
+                                 setTooltip
+                             } = {}) {
     const [hoveredCountry, setHoveredCountry] = React.useState('NONE');
     const svgRef = React.useRef();
-    const wrapperRef = React.useRef();
+    const hexmapWrapperRef = React.useRef();
 
     const verticalPadding = 20;
     const marginBottom = 240;
@@ -34,7 +32,7 @@ export function AfricaHexmap(
         [colorPalette.veryLow, colorPalette.low, colorPalette.medium, colorPalette.high]
     );
 
-    // Reorder hexes so that clicked or hovered hexes appear on top
+    // Reorder so clicked/hovered countries are drawn last (on top)
     const reorderedFeatures = data.features
         .slice()
         .sort((a, b) => {
@@ -45,42 +43,38 @@ export function AfricaHexmap(
             return aIsFocused - bIsFocused;
         });
 
-    // Handle clicks outside the wrapper to reset country
-    React.useEffect(() => {
-        function handleClickOutside(event) {
-            if (
-                wrapperRef.current &&
-                !wrapperRef.current.contains(event.target) &&
-                clickedCountry !== "ALL"
-            ) {
-                setCountry("ALL");
-                if (Number.isFinite(allETR)) {
-                    setETR(allETR);
-                }
-            }
-        }
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [clickedCountry, setCountry, setETR, allETR]);
-
     return (
-        <div ref={wrapperRef}
-             style={{ display: "inline-block", width: "fit-content", height: "fit-content" }}
+        <div
+            ref={hexmapWrapperRef}
+            onClick={(e) => {
+                // Reset if click is *not* inside the svg (e.g. on padding/background area)
+                if (
+                    clickedCountry !== "ALL" &&
+                    !svgRef.current?.contains(e.target)
+                ) {
+                    setCountry("ALL");
+                    if (Number.isFinite(allETR)) {
+                        setETR(allETR);
+                    }
+                }
+            }}
+            style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center"
+            }}
         >
             <svg
                 ref={svgRef}
                 width={width}
                 height={height}
                 viewBox={`0 0 ${width} ${height}`}
-                onClick={(event) => {
-                    // Reset if click target is the <svg> or the <g> but not a <path>
+                onClick={(e) => {
+                    // Clicking empty parts of the SVG (not a hex) should reset
                     if (
                         clickedCountry !== "ALL" &&
-                        event.target instanceof SVGElement &&
-                        event.target.tagName !== "path"
+                        e.target instanceof SVGElement &&
+                        e.target.tagName !== "path"
                     ) {
                         setCountry("ALL");
                         if (Number.isFinite(allETR)) {
@@ -126,10 +120,7 @@ export function AfricaHexmap(
                                 strokeWidth="2px"
                                 d={path(feature)}
                                 onClick={(e) => {
-                                    e.stopPropagation(); // Prevent svg-level click reset
-                                    const iso3 = feature.properties.iso3;
-                                    const etr = feature.properties.etr;
-
+                                    e.stopPropagation(); // Prevents triggering outer div/svg click
                                     if (selectedSector === "All sectors" && etr != null) {
                                         if (clickedCountry === iso3) {
                                             setCountry("ALL");
@@ -141,12 +132,6 @@ export function AfricaHexmap(
                                             if (Number.isFinite(etr)) {
                                                 setETR(etr);
                                             }
-
-                                            // Scroll to #exposure-card
-                                            const target = document.querySelector("#exposure-card");
-                                            if (target) {
-                                                target.scrollIntoView({ behavior: "smooth", block: "start" });
-                                            }
                                         }
                                     }
                                 }}
@@ -157,7 +142,7 @@ export function AfricaHexmap(
                                             y: event.clientY + marginBottom > window.innerHeight
                                                 ? event.pageY - marginBottom
                                                 : event.pageY - 50,
-                                            iso3: iso3
+                                            iso3
                                         });
                                     }
                                 }}
@@ -167,7 +152,9 @@ export function AfricaHexmap(
                                     }
                                 }}
                                 onMouseLeave={() => setHoveredCountry(null)}
-                                onMouseOut={() => setTooltip({ x: null, y: null, country: null })}
+                                onMouseOut={() => {
+                                    setTooltip({ x: null, y: null, country: null });
+                                }}
                                 style={{ cursor: "pointer" }}
                             />
                         );
