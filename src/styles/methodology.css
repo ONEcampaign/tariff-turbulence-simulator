@@ -34,3 +34,7 @@
     width: 90%;
     margin: var(--margin-small) auto;
 }
+
+.text-body code {
+    font-size: inherit;
+}
