@@ -71,36 +71,7 @@ function App() {
     const isTooltipVisible = tooltipContent.country !== null;
     const [selectedUnits, setSelectedUnits] = React.useState("usd")
     const [showMore, setShowMore] = React.useState(false);
-    const [hideMenu, setHideMenu] = React.useState(true);
-    const [screenIsLarge, setScreenIsLarge] = React.useState(window.innerWidth > 1120);
-
-    React.useEffect(() => {
-        const handleResize = () => {
-            const isLarge = window.innerWidth > 1120;
-            setScreenIsLarge(isLarge);
-
-            if (isLarge) {
-                setHideMenu(false); // Always show on large screens
-            }
-        };
-
-        const handleScroll = () => {
-            if (!screenIsLarge && window.scrollY > 250) {
-                setHideMenu(false);
-            }
-        };
-
-        window.addEventListener("resize", handleResize);
-        window.addEventListener("scroll", handleScroll);
-
-        // Initial run
-        handleResize();
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, [screenIsLarge]);
+    const [hideMenu, setHideMenu] = React.useState(false);
 
     // Crossed data between csv and geojson to make sure all countries are present
     const crossData = generateCrossData(recentData, geoData)
@@ -160,12 +131,13 @@ function App() {
 
     return (
         <div className="wrapper">
-            <div className={`sticky-wrapper ${hideMenu === true ? "hidden" : ""}`}>
+            <div className={`sticky-wrapper ${hideMenu ? "hidden" : ""}`}>
                 <div
                     className="show-hide-tab"
                     onClick={() => setHideMenu(!hideMenu)}
                 >
-                    <ChevronDown className={`dropdown-chevron ${hideMenu == true ? "rotate" : ""}`}/>
+                    <h4 className="text-inputs">{hideMenu ? "Show" : "Hide"} controls</h4>
+                    <ChevronDown className={`dropdown-chevron ${hideMenu ? "rotate" : ""}`}/>
                 </div>
                 <div className="controls-wrapper">
                     <h4 className="text-support-medium extra-margin">Filter the data</h4>

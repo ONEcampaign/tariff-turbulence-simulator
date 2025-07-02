@@ -1,5 +1,5 @@
 .dropdown-menu {
-    width: var(--filters-width);
+    width: var(--controls-width);
     position: relative;
     background: white;
 }
@@ -39,7 +39,7 @@
 }
 
 .dropdown-list {
-    width: var(--filters-width);
+    width: var(--controls-width);
     display: flex;
     flex-direction: column;
     padding: 0.25em .5em;
@@ -75,7 +75,7 @@
 }
 
 .dropdown-search {
-    width: calc(var(--filters-width) - 16px) !important;
+    width: calc(var(--controls-width) - 16px) !important;
     box-sizing: border-box;
     padding: 4px 6px;
     margin: 10px 8px;

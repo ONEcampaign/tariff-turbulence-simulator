@@ -1,11 +1,7 @@
 .sticky-wrapper {
     position: fixed;
     top: 20%;
-    margin-left: calc((((100vw - var(--main-block-width)) / 2) - var(--filters-width)) / 2 - 1em);
-}
-
-.sticky-wrapper.hidden {
-    right: calc( -1 * (var(--filters-width) + var(--margin-medium) * 2));
+    margin-left: calc((((100vw - var(--main-block-width)) / 2) - var(--controls-width)) / 2 - 1em);
 }
 
 .controls-wrapper {
