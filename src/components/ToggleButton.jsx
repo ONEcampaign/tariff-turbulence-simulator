@@ -3,14 +3,14 @@ import * as React from "npm:react";
 export function ToggleButton(
     {
         leftLabel = "sort by $ value",
-        rightLabel = "sort by % of GDP",
+        rightLabel = "sort by ETR",
         selected,
         setSelected
     }) {
     const isUsd = selected === "usd";
 
     const handleClick = () => {
-        setSelected(isUsd ? "pct" : "usd");
+        setSelected(isUsd ? "etr" : "usd");
     };
 
     return (

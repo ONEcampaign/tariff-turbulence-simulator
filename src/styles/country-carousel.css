@@ -19,6 +19,7 @@
 }
 
 .carousel-card-header {
+    gap: var(--margin-small);
     margin-bottom: var(--margin-medium);
 }
 

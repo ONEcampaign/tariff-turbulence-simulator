@@ -18,7 +18,7 @@ export function CountryCarousel(
         selectedUnits = "usd"
     }
     ) {
-    const sortKey = selectedUnits === "usd" ? "impact_usd" : "impact_pct";
+    const sortKey = selectedUnits === "usd" ? "impact_usd" : "etr";
     const cleaned = data.filter(
         (d) =>
             typeof d[sortKey] === "number" &&
