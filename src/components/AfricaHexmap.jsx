@@ -1,5 +1,6 @@
 import * as d3 from "npm:d3";
 import * as React from "npm:react";
+import {formatPercentage} from "../js/format.js";
 import {colorPalette} from "../js/colorPalette.js";
 import {riskThresholds} from "../js/riskThresholds.js";
 
@@ -65,7 +66,7 @@ export function AfricaHexmap(
                         <path
                             fill={
                                 Number.isFinite(feature.properties.etr)
-                                    ? colorScale(feature.properties.etr)
+                                    ? colorScale(formatPercentage(feature.properties.etr, {tariff: true, display: false}))
                                     : "url(#diagonalHatch)"
                             }
                             opacity={clickedCountry === "ALL" ? 1 : (thisCountryIsClicked ? 1 : 0.2)}
@@ -81,6 +82,7 @@ export function AfricaHexmap(
                             onClick={() => {
                                 const iso3 = feature.properties.iso3;
                                 const etr = feature.properties.etr;
+                                feature.properties
                                 if (selectedSector === "All sectors") {
                                     if (etr != null) {
                                         if (clickedCountry === iso3) {
