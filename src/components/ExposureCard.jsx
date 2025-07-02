@@ -11,7 +11,7 @@ export function ExposureCard({data} = {}) {
         : `${impactText} for ${data.sector} sector`;
 
     return (
-        <div className="tariff-card exposure-card">
+        <div className="tariff-card exposure-card" id="exposure-card">
             <div className="left-column">
                 <h4 className="text-impact-small">
                     {impactText}
