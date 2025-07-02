@@ -6,7 +6,7 @@
 /* Wrapper for the whole component, allows marker freedom */
 .slider-wrapper {
     position: relative;
-    width: var(--filters-width);
+    width: var(--controls-width);
     height: calc(var(--marker-height) + 2rem); /* enough vertical space */
     user-select: none;
 }
@@ -15,7 +15,7 @@
 .slider-track {
     position: relative;
     height: var(--slider-height);
-    width: var(--filters-width);
+    width: var(--controls-width);
     background: black; /* base color */
     border-radius: 12px;
     overflow: hidden;
