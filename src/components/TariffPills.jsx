@@ -22,7 +22,7 @@ export function TariffPills({ isETR, selectedTariff }) {
                         ETR sets country- and sector-specific effective tariff rates.
                     </p>
                     <p className="text-support-small">
-                        Any other tariff simulates the same tariff all countries/sectors.
+                        Any other tariff simulates the same tariff for all countries/sectors.
                     </p>
 
                 </div>

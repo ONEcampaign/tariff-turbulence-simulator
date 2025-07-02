@@ -36,7 +36,7 @@
 }
 
 .tariff-pill.hover:hover {
-    cursor: pointer;
+    cursor: help;
     background-color: lightgray;
     transition: var(--tariff-button-transition);
 }
