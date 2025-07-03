@@ -74,6 +74,22 @@ function App() {
     const [hideMenu, setHideMenu] = React.useState(false);
     const [initialScroll, setInitialScroll] = React.useState(false);
 
+    const cardRef = React.useRef();
+    const [showSlider, setShowSlider] = React.useState(false);
+    const handleScroll = () => {
+        const y = cardRef.current.getBoundingClientRect().top;
+        setShowSlider(y <= 100); 
+    };
+
+    React.useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+
     // Crossed data between csv and geojson to make sure all countries are present
     const crossData = generateCrossData(recentData, geoData)
 
@@ -171,14 +187,16 @@ function App() {
                             isInactive={selectedCountry !== "ALL"}
                         />
                     </div>
-                    <div className="controls-separator"></div>
-                    <h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>
-                    <Slider
-                        selectedTariff={selectedTariff ?? 0}
-                        setSelectedTariff={setSelectedTariff}
-                        setIsETR={setIsETR}
-                        etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
-                    />
+                    <div style={{"opacity":  `${showSlider === true ? 1 : 0}`}}>
+                        <div className="controls-separator"></div>
+                        <h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>
+                        <Slider
+                            selectedTariff={selectedTariff ?? 0}
+                            setSelectedTariff={setSelectedTariff}
+                            setIsETR={setIsETR}
+                            etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
+                        />
+                    </div>
                 </div>
             </div>
             <div className="main-block">
@@ -210,6 +228,7 @@ function App() {
                 />
                 <ExposureCard
                     data={exposureCardData}
+                    ref={cardRef}
                 />
                 <SubsectionTitle content={subsectionTitle}/>
                 <DescriptionText
