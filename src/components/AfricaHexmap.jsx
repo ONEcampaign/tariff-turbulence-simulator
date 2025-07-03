@@ -13,7 +13,9 @@ export function AfricaHexmap({
                                  setCountry,
                                  setETR,
                                  allETR,
-                                 setTooltip
+                                 setTooltip,
+                                 initialScroll,
+                                 setInitialScroll
                              } = {}) {
     const [hoveredCountry, setHoveredCountry] = React.useState('NONE');
     const svgRef = React.useRef();
@@ -133,9 +135,12 @@ export function AfricaHexmap({
                                                 setETR(etr);
                                             }
                                             // Scroll to exposure card
-                                            const card = document.querySelector("#exposure-card");
-                                            if (card) {
-                                                card.scrollIntoView({ behavior: "smooth", block: "start" });
+                                            if (!initialScroll) {
+                                                const card = document.querySelector("#exposure-card");
+                                                if (card) {
+                                                    card.scrollIntoView({ behavior: "smooth", block: "start" });
+                                                }
+                                                setInitialScroll(true);
                                             }
                                         }
                                     }

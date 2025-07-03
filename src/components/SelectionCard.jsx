@@ -64,9 +64,10 @@ export function SelectionCard(
                                     : "No data"}
                             </p>
                         </div>
-                        <span
-                            className={`flag-icon fi fi-${allData.iso2.toLowerCase()} fis`}
-                        ></span>
+
+                        <div className="flag-icon-container">
+                            <span className={`flag-icon fi fi-${allData.iso2.toLowerCase()} fis`}/>
+                        </div>
                     </div>
                 ) : null
             }
@@ -93,7 +94,7 @@ export function SelectionCard(
 
             <div className="card-row selection-card-row-container">
                 <div className="card-row selection-card-row">
-                    <h4 className="text-support-medium">Total exposure</h4>
+                    <h4 className="text-support-medium">Total cost</h4>
                     <p className="text-impact-large">
                         {formatCurrency(allData.impact_usd)}
                     </p>

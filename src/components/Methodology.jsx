@@ -71,7 +71,7 @@ export function Methodology() {
 
                     <p className="text-body">
                         To calculate the impact as a share of GDP, the result in US dollars is divided by the average GDP from 2022 to 2024.
-                        GDP data is sourced from the IMF's <em>World Economic Outlook</em> via <a href="https://docs.one.org/tools/bblocks/data-importers/importers/weo/" target="_blank"> our <code>blocks.data-importers</code> package</a>.
+                        GDP data is sourced from the IMF's <em>World Economic Outlook</em> via <a href="https://docs.one.org/tools/bblocks/data-importers/importers/weo/" target="_blank"> our <code>bblocks.data-importers</code> package</a>.
                     </p>
 
                     <p className="text-body">

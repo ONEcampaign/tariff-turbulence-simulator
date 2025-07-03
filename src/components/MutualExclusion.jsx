@@ -9,14 +9,19 @@ export function MutualExclusion({
                                     crossData,
                                     setSelectedTariff,
                                     isETR,
-                                    setShowMore
+                                    setShowMore,
+                                    initialScroll,
+                                    setInitialScroll
 }) {
     const updateCountry = (newCountry) => {
         if (newCountry !== "ALL") {
             // Scroll to exposure card
-            const card = document.querySelector("#exposure-card");
-            if (card) {
-                card.scrollIntoView({ behavior: "smooth", block: "start" });
+            if (!initialScroll) {
+                const card = document.querySelector("#exposure-card");
+                if (card) {
+                    card.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+                setInitialScroll(true);
             }
             if (selectedSector !== "All sectors") {
                 setSelectedSector("All sectors");
@@ -30,9 +35,12 @@ export function MutualExclusion({
     const updateSector = (newSector) => {
         if (newSector !== "All sectors") {
             // Scroll to exposure card
-            const card = document.querySelector("#exposure-card");
-            if (card) {
-                card.scrollIntoView({ behavior: "smooth", block: "start" });
+            if (!initialScroll) {
+                const card = document.querySelector("#exposure-card");
+                if (card) {
+                    card.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+                setInitialScroll(true);
             }
             if (selectedCountry !== "ALL") {
                 setSelectedCountry("ALL");

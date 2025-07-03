@@ -65,10 +65,12 @@ export function CountryCarousel(
                         </div>
                         <div className="card-header carousel-card-header">
                             <h3 className="text-heading">{countryData.country}</h3>
-                            <span className={`flag-icon fi fi-${countryData.iso2.toLowerCase()} fis`}></span>
+                            <div className="flag-icon-container">
+                                <span className={`flag-icon fi fi-${countryData.iso2.toLowerCase()} fis`}/>
+                            </div>
                         </div>
                         <div className="card-row carousel-card-row">
-                            <h4 className="text-support-medium">Total exposure</h4>
+                            <h4 className="text-support-medium">Total cost</h4>
                             <p className="text-impact-large">{formatCurrency(countryData.impact_usd)}</p>
                         </div>
                         {/*<div className="card-row carousel-card-row">*/}

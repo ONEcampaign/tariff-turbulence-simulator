@@ -28,10 +28,12 @@ export function Tooltip({ x, y, data, isVisible } ={}) {
             </div>
             <div className="card-header tooltip-header">
                 <h3 className="text-heading">{data.country}</h3>
-                <span className={`flag-icon fi fi-${data.iso2.toLowerCase()} fis`}></span>
+                <div className="flag-icon-container">
+                    <span className={`flag-icon fi fi-${data.iso2.toLowerCase()} fis`}/>
+                </div>
             </div>
             <div className="card-row tooltip-row">
-                <h4 className="tooltip-var-name text-support-small">Total exposure</h4>
+                <h4 className="tooltip-var-name text-support-small">Total cost</h4>
                 <p className="text-impact-medium">{formatCurrency(data.impact_usd)}</p>
             </div>
             {/*<div className="card-row tooltip-row">*/}

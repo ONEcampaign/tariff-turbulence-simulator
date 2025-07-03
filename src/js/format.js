@@ -52,5 +52,5 @@ export function computeImpactPCT(exports, tariff, gdp) {
 }
 
 export function possessive(name) {
-    return name.endsWith("s") ? `${name}'` : `${name}'s`;
+    return `${name}'s`;
 }

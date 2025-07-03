@@ -3,20 +3,32 @@
     --flag-icon-size-large: 52px;
 }
 
-.flag-icon {
+.flag-icon-container {
     display: inline-block;
-    aspect-ratio: 1 / 1;
     border-radius: 50%;
+    border: 1px #0000001C solid;
     overflow: hidden;
-    padding: 0 !important;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.flag-icon.fi.fis {
+    display: block;
+    width: 100%;
+    height: 100%;
     background-size: cover !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
-    vertical-align: middle;
 }
 
-/*!* Make Sao Tome & principe and Central African Republic flag-icons larger as they are smaller by default *!*/
-/*.flag-icon.fi-st,*/
-/*.flag-icon.fi-cf{*/
-/*    transform: scale(1.3);*/
+/*.flag-icon {*/
+/*    display: inline-block;*/
+/*    aspect-ratio: 1 / 1;*/
+/*    border-radius: 50%;*/
+/*    overflow: hidden;*/
+/*    padding: 0 !important;*/
+/*    background-size: cover !important;*/
+/*    background-position: center center !important;*/
+/*    background-repeat: no-repeat !important;*/
+/*    vertical-align: middle;*/
 /*}*/
