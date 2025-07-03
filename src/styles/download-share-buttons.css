@@ -1,0 +1,21 @@
+:root {
+    --ds-icon-size: 18px;
+}
+
+.download-share-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: var(--margin-medium);
+}
+
+.download-button,
+.share-button {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.ds-icon {
+    width: var(--ds-icon-size);
+}
