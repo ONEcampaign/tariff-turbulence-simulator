@@ -45,6 +45,10 @@
     align-items: center;
 }
 
+.carousel-card > .download-share-buttons {
+    margin-top: var(--margin-medium);
+}
+
 .carousel-scroll-message.text-support-small {
     margin-top: var(--margin-small);
 }

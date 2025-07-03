@@ -1,4 +1,5 @@
 import {formatCurrency, formatPercentage} from "../js/format.js";
+import {DownloadShareButtons} from "./DownloadShareButtons.js";
 
 export function ExposureCard({data} = {}) {
 
@@ -24,6 +25,9 @@ export function ExposureCard({data} = {}) {
                 <p className="tariff-text text-impact-large">
                     {formatCurrency(data.impact_usd, {short: false})}
                 </p>
+                <DownloadShareButtons
+                    targetId="exposure-card"
+                />
             </div>
         </div>
     )
