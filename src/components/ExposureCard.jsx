@@ -1,14 +1,14 @@
-import {formatCurrency, formatPercentage, possessive} from "../js/format.js";
+import {formatCurrency, formatPercentage} from "../js/format.js";
 
 export function ExposureCard({data} = {}) {
 
     const country = data.country === "all countries" ? "Africa" : data.country;
 
-    let impactText = `${possessive(country)} exposure to US tariffs`
+    let impactText = `Potential cost of US tariffs on ${country}`
 
     impactText = data.sector === "all sectors"
         ? impactText
-        : `${impactText} for ${data.sector} sector`;
+        : `${impactText}'s ${data.sector} sector`;
 
     return (
         <div className="tariff-card exposure-card" id="exposure-card">

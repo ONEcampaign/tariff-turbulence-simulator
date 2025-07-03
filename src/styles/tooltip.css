@@ -14,8 +14,9 @@
     margin-bottom: var(--margin-small);
 }
 
-.tooltip .flag-icon.fi.fis {
+.tooltip .flag-icon-container {
     width: var(--flag-icon-size-small);
+    height: var(--flag-icon-size-small);
     flex-shrink: 0;
 }
 

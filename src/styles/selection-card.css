@@ -12,8 +12,9 @@
     margin-bottom: var(--margin-medium);
 }
 
-.selection-card .flag-icon.fi.fis {
+.selection-card .flag-icon-container {
     width: var(--flag-icon-size-large);
+    height: var(--flag-icon-size-large);
     flex-shrink: 0;
 }
 
