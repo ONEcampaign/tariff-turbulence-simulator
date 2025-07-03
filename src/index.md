@@ -72,6 +72,7 @@ function App() {
     const [selectedUnits, setSelectedUnits] = React.useState("usd")
     const [showMore, setShowMore] = React.useState(false);
     const [hideMenu, setHideMenu] = React.useState(false);
+    const [initialScroll, setInitialScroll] = React.useState(false);
 
     // Crossed data between csv and geojson to make sure all countries are present
     const crossData = generateCrossData(recentData, geoData)
@@ -87,7 +88,9 @@ function App() {
         crossData,
         setSelectedTariff,
         isETR,
-        setShowMore
+        setShowMore,
+        initialScroll,
+        setInitialScroll
     });
 
     // Data to use on hexMap
@@ -140,7 +143,7 @@ function App() {
                     <ChevronDown className={`dropdown-chevron ${hideMenu ? "rotate" : ""}`}/>
                 </div>
                 <div className="controls-wrapper">
-                    <h4 className="text-support-medium extra-margin">Filter the data</h4>
+                    <h4 className="text-support-medium extra-margin"><b>Filter</b> the data</h4>
                     <div className="dropdowns-wrapper">
                         <Dropdown
                             dropdownId="countryMenu"
@@ -169,7 +172,7 @@ function App() {
                         />
                     </div>
                     <div className="controls-separator"></div>
-                    <h4 className="text-support-medium extra-margin">Simulate tariff</h4>
+                    <h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>
                     <Slider
                         selectedTariff={selectedTariff ?? 0}
                         setSelectedTariff={setSelectedTariff}
@@ -196,6 +199,8 @@ function App() {
                     setETR={setSelectedTariff}
                     allETR={allETR}
                     setTooltip={setTooltipContent}
+                    initialScroll={initialScroll}
+                    setInitialScroll={setInitialScroll}
                 />
                 <Tooltip
                     x={tooltipContent.x}
