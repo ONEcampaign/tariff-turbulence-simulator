@@ -29,7 +29,7 @@ import {CountryCarousel} from "./components/CountryCarousel.js"
 import {SelectionCard} from "./components/SelectionCard.js";
 import {Methodology} from "./components/Methodology.js";
 import {MutualExclusion} from "./components/MutualExclusion.js";
-import {ChevronDown} from "./components/Chevron.js";
+import {ChevronDown} from "./components/ChevronDown.js";
 import {
     generateCrossData,
     generateMapData,
