@@ -53,10 +53,10 @@ export function DescriptionText({
         return (
             <div className="description-container">
                 <p className="text-body description-text">
-                    {getTariffText("carousel")} Africa's total exposure to US tariffs is <b>{formatCurrency(totalImpactUSD, { short: false })}</b>.
+                    {getTariffText("carousel")} the cost of US tariffs for Africa is <b>{formatCurrency(totalImpactUSD, { short: false })}</b>.
                 </p>
                 <p className="text-body description-text">
-                    The countries with the highest exposure {selectedUnits === "usd" ? "in dollar terms" : "in terms of ETR"} are{" "}
+                    The countries with the highest {selectedUnits === "usd" ? "cost" : "ETR"} are{" "}
                     <b>{topThree[0].label}</b> ({topThree[0].value}), <b>{topThree[1].label}</b> ({topThree[1].value}) and <b>{topThree[2].label}</b> ({topThree[2].value}).
                 </p>
             </div>
@@ -74,7 +74,7 @@ export function DescriptionText({
         return (
             <div className="description-container">
                 <p className="text-body description-text">
-                    {getTariffText("country")} {country}'s total exposure to US tariffs is <b>{formatCurrency(totalImpactUSD, { short: false })}</b>.
+                    {getTariffText("country")} the cost of US tariffs for {country} is <b>{formatCurrency(totalImpactUSD, { short: false })}</b>.
                 </p>
                 <p className="text-body description-text">
                     {renderTopThree("sectors", topSectors)}
@@ -92,7 +92,7 @@ export function DescriptionText({
         return (
             <div className="description-container">
                 <p className="text-body description-text">
-                    {getTariffText("sector")} the total exposure of Africa's {sector.toLowerCase()} sector to US tariffs is <b>{formatCurrency(totalImpactUSD, { short: false })}</b>.
+                    {getTariffText("sector")} the cost of US tariffs for Africa's {sector.toLowerCase()} sector is <b>{formatCurrency(totalImpactUSD, { short: false })}</b>.
                 </p>
                 <p className="text-body description-text">
                     {renderTopThree("countries", topCountries)}
