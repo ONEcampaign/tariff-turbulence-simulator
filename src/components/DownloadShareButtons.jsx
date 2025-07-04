@@ -1,4 +1,4 @@
-import * as React from "npm:react@19";
+import * as React from "npm:react";
 import html2canvas from "npm:html2canvas";
 import {
     FacebookShareButton,
