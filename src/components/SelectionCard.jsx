@@ -148,6 +148,11 @@ export function SelectionCard(
                 }
                 <DownloadShareButtons
                     targetId={`section-card-${idString}`}
+                    selectedCountry={allData.country}
+                    selectedCountryISO3={allData.iso3}
+                    selectedSector={allData.sector}
+                    selectedTariff={selectedTariff}
+                    isETR={isETR}
                 />
             </div>
         </div>

@@ -104,6 +104,11 @@ export function CountryCarousel(
                             </div>
                             <DownloadShareButtons
                                 targetId={cardId}
+                                selectedCountry={countryData.country}
+                                selectedCountryISO3={countryData.iso3}
+                                selectedSector={countryData.sector}
+                                selectedTariff={selectedTariff}
+                                isETR={isETR}
                             />
                         </div>
 
