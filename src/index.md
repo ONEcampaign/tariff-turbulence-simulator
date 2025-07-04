@@ -13,9 +13,7 @@ observer.observe(document.documentElement);
 
 ```js
 import * as React from "npm:react";
-import {Headline} from "./components/Headline.js";
-import {Deck} from "./components/Deck.js";
-import {IntroText} from "./components/IntroText.js"
+import {Intro} from "./components/Intro.js"
 import {Legend} from "./components/Legend.js";
 import {AfricaHexmap} from "./components/AfricaHexmap.js";
 import {ExposureCard} from "./components/ExposureCard.js";
@@ -259,9 +257,7 @@ function App() {
                 </div>
             </div>
             <div className="main-block">
-                <Headline content={title}/>
-                <Deck content={deck}/>
-                <IntroText content={introText}/>
+                <Intro />
                 <Legend
                     title={legendTitle}
                     subtitle={legendSubtitle}

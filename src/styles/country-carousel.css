@@ -3,11 +3,18 @@
     --country-card-height: 400px;
 }
 
+.carousel-container {
+    position: relative;
+    overflow: visible;
+}
+
 .carousel-track {
     overflow-x: auto;
+    overflow-y: hidden;
     padding: 1rem 0;
     display: flex;
     gap: 1rem;
+    position: relative;
 }
 
 .carousel-card {
@@ -16,6 +23,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--margin-medium);
+    overflow: visible;
 }
 
 .carousel-card-header {
