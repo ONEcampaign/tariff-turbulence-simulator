@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "@observablehq/framework": "^1.13.3",
-    "@one-data/observable-themes": "^0.6.7"
+    "@one-data/observable-themes": "^0.6.7",
+    "react-share": "^5.2.2"
   },
   "devDependencies": {
     "rimraf": "^5.0.5"
