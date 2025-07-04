@@ -10,9 +10,7 @@
 @import url("styles/flag-icon.css");
 @import url("styles/swatch.css");
 
-@import url("./styles/headline.css");
-@import url("./styles/deck.css");
-@import url("./styles/intro-text.css");
+@import url("./styles/intro.css");
 @import url("styles/description-text.css");
 @import url("./styles/methodology.css");
 
