@@ -107,7 +107,8 @@ export function generateExposureCardData(selectedData, selectedTariff) {
         country: selectedData.country === "All countries"
             ? "all countries"
             : selectedData.country,
-        sector: selectedData.sector.toLowerCase(),
+        iso3: selectedData.iso3,
+        sector: selectedData.sector,
         tariff: selectedTariff,
         exports: selectedData.exports,
         impact_usd: impact_usd
@@ -132,14 +133,17 @@ export function generateTooltipData(hoveredData) {
     };
 }
 
-export function generateCarouselData(data, selectedSector, selectedTariff, isETR) {
+export function generateCarouselData(data, selectedTariff, isETR) {
+    const sector = "All sectors";
     return data
-        .filter(d => d.sector === selectedSector && d.country !== "All countries")
+        .filter(d => d.sector === sector && d.country !== "All countries")
         .map(d => {
             const tariff = isETR ? d.etr : selectedTariff;
             return {
                 country: d.country,
                 iso2: d.iso2,
+                iso3: d.iso3,
+                sector: sector,
                 etr: d.etr,
                 impact_usd: computeImpactUSD(d.exports, tariff),
                 impact_pct: computeImpactPCT(d.exports, tariff, d.gdp)
@@ -165,6 +169,7 @@ export function generateSelectionCardData(data, selectedCountry, selectedSector,
         return {
             country: d.country,
             iso2: d.iso2,
+            iso3: d.iso3,
             sector: d.sector,
             etr: d.etr,
             impact_usd: computeImpactUSD(d.exports, tariff),

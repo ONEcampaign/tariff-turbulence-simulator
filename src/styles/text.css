@@ -1,4 +1,6 @@
 :root {
+    --font-color: black;
+
     /* Font families */
     --font-colfax: Colfax, sans-serif;
     --font-italian-plate: Italian Plate, sans-serif;
@@ -59,6 +61,7 @@ html {
 
 .text-hero {
     font-family: var(--font-colfax);
+    color: var(--font-color);
     font-weight: 900;
     font-size: var(--font-hero);
     line-height: var(--lh-hero);
@@ -68,6 +71,7 @@ html {
 
 .text-heading {
     font-family: var(--font-colfax);
+    color: var(--font-color);
     font-weight: 700;
     font-size: var(--font-heading);
     line-height: var(--lh-heading);
@@ -79,6 +83,7 @@ html {
 
 .text-subsection-heading {
     font-family: var(--font-colfax);
+    color: var(--font-color);
     font-weight: 700;
     font-size: var(--font-section-heading);
     line-height: var(--lh-section-heading);
@@ -89,6 +94,7 @@ html {
 
 .text-body {
     font-family: var(--font-colfax);
+    color: var(--font-color);
     font-weight: 400;
     font-size: var(--font-body);
     line-height: var(--lh-body);
@@ -99,6 +105,7 @@ html {
 
 .text-swatch {
     font-family: var(--font-colfax);
+    color: var(--font-color);
     font-weight: 700;
     font-size: var(--font-swatch);
     line-height: var(--lh-swatch);
@@ -111,6 +118,7 @@ html {
 
 .text-inputs {
     font-family: var(--font-colfax);
+    color: var(--font-color);
     font-weight: 400;
     font-size: var(--font-text-input);
     line-height: var(--lh-text-input);
@@ -123,6 +131,7 @@ html {
 
 .text-impact-large {
     font-family: var(--font-italian-plate);
+    color: var(--font-color);
     font-weight: 700;
     font-size: var(--font-impact-large);
     line-height: 100%;
@@ -132,6 +141,7 @@ html {
 
 .text-impact-medium {
     font-family: var(--font-italian-plate);
+    color: var(--font-color);
     font-weight: 700;
     font-size: var(--font-impact-medium);
     line-height: var(--lh-impact-medium);
@@ -142,6 +152,7 @@ html {
 
 .text-impact-small {
     font-family: var(--font-italian-plate);
+    color: var(--font-color);
     font-weight: 700;
     font-size: var(--font-impact-small);
     line-height: var(--lh-impact-small);
@@ -154,6 +165,7 @@ html {
 
 .text-support-xlarge {
     font-family: var(--font-italian-plate);
+    color: var(--font-color);
     font-weight: 400;
     font-size: var(--font-support-xlarge);
     line-height: var(--lh-support-xlarge);
@@ -163,6 +175,7 @@ html {
 
 .text-support-large {
     font-family: var(--font-italian-plate);
+    color: var(--font-color);
     font-weight: 400;
     font-size: var(--font-support-large);
     line-height: 1.25; /* 125% */
@@ -173,6 +186,7 @@ html {
 
 .text-support-medium {
     font-family: var(--font-italian-plate);
+    color: var(--font-color);
     font-weight: 400;
     font-size: var(--font-support-medium);
     line-height: var(--lh-support-medium);
@@ -183,6 +197,7 @@ html {
 
 .text-support-small {
     font-family: var(--font-italian-plate);
+    color: var(--font-color);
     font-weight: 400;
     font-size: var(--font-support-small);
     line-height: var(--lh-support-small);

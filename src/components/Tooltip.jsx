@@ -29,7 +29,12 @@ export function Tooltip({ x, y, data, isVisible } ={}) {
             <div className="card-header tooltip-header">
                 <h3 className="text-heading">{data.country}</h3>
                 <div className="flag-icon-container">
-                    <span className={`flag-icon fi fi-${data.iso2.toLowerCase()} fis`}/>
+                    <img
+                        className="flag-icon"
+                        src={`https://cdn.jsdelivr.net/npm/flag-icons/flags/1x1/${data.iso2.toLowerCase()}.svg`}
+                        alt={`${data.country} flag`}
+                        crossOrigin="anonymous"
+                    />
                 </div>
             </div>
             <div className="card-row tooltip-row">

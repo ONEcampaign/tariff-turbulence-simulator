@@ -42,8 +42,16 @@
     display: none;
 }
 
+.selection-card-footer {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: var(--margin-large);
+    margin-bottom: var(--margin-medium);
+    gap: 10%;
+}
+
 .dropdown-selected.show-more-button {
-    width: auto;
-    margin: var(--margin-large) auto var(--margin-medium);
     font-weight: 700;
 }

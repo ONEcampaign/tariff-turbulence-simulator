@@ -6,6 +6,8 @@ import {formatPercentage, formatCurrency} from "../js/format.js";
 import { colorPalette } from "../js/colorPalette.js";
 import { riskThresholds } from "../js/riskThresholds.js";
 import {TariffPills} from "./TariffPills.js";
+import {ChevronDown} from "./ChevronDown.js";
+import {DownloadShareButtons} from "./DownloadShareButtons.js";
 
 const colorScale = d3.scaleThreshold(
     riskThresholds,
@@ -41,10 +43,15 @@ export function SelectionCard(
 
     allHistoricalData = historicalData.filter(isHistorical);
 
-    const title = mode === "country" ? allData.country : allData.sector;
+    const title = isCountryMode ? allData.country : allData.sector;
+
+    const idString = title
+        .toLowerCase()
+        .replace(/ /g, "-")
+        .replace(/&/g, "");
 
     return (
-        <div className="tariff-card selection-card">
+        <div className="tariff-card selection-card" id={`section-card-${idString}`}>
 
             {
                 isCountryMode ? (
@@ -66,7 +73,12 @@ export function SelectionCard(
                         </div>
 
                         <div className="flag-icon-container">
-                            <span className={`flag-icon fi fi-${allData.iso2.toLowerCase()} fis`}/>
+                            <img
+                                className="flag-icon"
+                                src={`https://cdn.jsdelivr.net/npm/flag-icons/flags/1x1/${allData.iso2.toLowerCase()}.svg`}
+                                alt={`${allData.country} flag`}
+                                crossOrigin="anonymous"
+                            />
                         </div>
                     </div>
                 ) : null
@@ -122,34 +134,27 @@ export function SelectionCard(
                 chunkSize={chunkSize}
             />
 
-            {
-                (allItems.length > chunkSize) ? (
-                    <div
-                        className="dropdown-selected show-more-button"
-                        onClick={() => {setShowMore(!showMore)}}
-                    >
-                        <p className="text-inputs">{`Show ${showMore === true ? "less" : "more"} ${showMoreText}`}</p>
-                        <ChevronDown className={`dropdown-chevron ${showMore === true ? "rotate" : ""}`} />
-                    </div>
-                ) : null
-            }
+            <div className="selection-card-footer">
+                {
+                    (allItems.length > chunkSize) ? (
+                        <div
+                            className="dropdown-selected show-more-button"
+                            onClick={() => {setShowMore(!showMore)}}
+                        >
+                            <p className="text-inputs">{`Show ${showMore === true ? "less" : "more"} ${showMoreText}`}</p>
+                            <ChevronDown className={`dropdown-chevron ${showMore === true ? "rotate" : ""}`} />
+                        </div>
+                    ) : null
+                }
+                <DownloadShareButtons
+                    targetId={`section-card-${idString}`}
+                    selectedCountry={allData.country}
+                    selectedCountryISO3={allData.iso3}
+                    selectedSector={allData.sector}
+                    selectedTariff={selectedTariff}
+                    isETR={isETR}
+                />
+            </div>
         </div>
     );
 }
-
-const ChevronDown = ({ className }) => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className={className}
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        strokeWidth="2"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-    >
-        <path d="M2 5l6 6 6-6" />
-    </svg>
-);

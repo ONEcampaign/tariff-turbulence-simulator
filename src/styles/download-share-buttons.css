@@ -1,0 +1,69 @@
+:root {
+    --ds-icon-size: 18px;
+    --social-media-icon-size: 28px;
+}
+
+.download-share-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: var(--margin-medium);
+    position: relative;
+}
+
+.download-button,
+.share-button {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.share-button {
+    position: relative;
+}
+
+.ds-icon {
+    width: var(--ds-icon-size);
+}
+
+.share-options-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background: white;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 6px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    margin-top: 6px;
+    z-index: 999;
+}
+
+.share-options-tooltip > button {
+    height: var(--social-media-icon-size);
+    transition: all 100ms ease-in-out;
+}
+
+.share-options-tooltip > button:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.copy-link-button {
+    width: var(--social-media-icon-size);
+    height: var(--social-media-icon-size);
+    border-radius: 50%;
+    border: 1px solid black;
+    padding: 0;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
