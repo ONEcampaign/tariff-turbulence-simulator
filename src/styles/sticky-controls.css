@@ -40,4 +40,5 @@
 
 .text-support-medium.extra-margin {
     margin-bottom: var(--margin-small);
+    font-size: calc(var(--font-support-medium) * 1.15);
 }
