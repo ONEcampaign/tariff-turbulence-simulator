@@ -269,16 +269,16 @@ function App() {
                             etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
                         />
                     </div>
-                    <div className="controls-separator"></div>
-                    <h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>
-                    <Slider
-                        selectedTariff={selectedTariff ?? 0}
-                        setSelectedTariff={setSelectedTariff}
-                        isETR={isETR}
-                        setIsETR={setIsETR}
-                        etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
-                        setUserSetTariff={setUserSetTariff}
-                    />
+                    {/*<div className="controls-separator"></div>*/}
+                    {/*<h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>*/}
+                    {/*<Slider*/}
+                    {/*    selectedTariff={selectedTariff ?? 0}*/}
+                    {/*    setSelectedTariff={setSelectedTariff}*/}
+                    {/*    isETR={isETR}*/}
+                    {/*    setIsETR={setIsETR}*/}
+                    {/*    etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}*/}
+                    {/*    setUserSetTariff={setUserSetTariff}*/}
+                    {/*/>*/}
                 </div>
             </div>
             <div className="main-block">
