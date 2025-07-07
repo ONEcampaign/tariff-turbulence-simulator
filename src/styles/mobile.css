@@ -53,8 +53,12 @@
         gap: var(--margin-medium);
     }
 
+    .controls-wrapper .text-support-medium.extra-margin:nth-child(2) {
+        margin-top: var(--margin-medium);
+    }
+
     .slider-wrapper {
-        margin: 0 auto;
+        margin: 30px auto 0;
     }
 
     .sticky-wrapper.hidden {
@@ -108,7 +112,7 @@
     }
 
     .sticky-wrapper.hidden {
-        bottom: -374px !important;
+        bottom: -354px !important;
     }
 }
 

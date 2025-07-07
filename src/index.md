@@ -75,6 +75,21 @@ function App() {
     const [hasParsedURL, setHasParsedURL] = React.useState(false);
     const [userSetTariff, setUserSetTariff] = React.useState(false);
 
+    const cardRef = React.useRef();
+    const [showSlider, setShowSlider] = React.useState(false);
+    const handleScroll = () => {
+        const y = cardRef.current.getBoundingClientRect().top;
+        setShowSlider(y <= 100); 
+    };
+
+    React.useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     React.useEffect(() => {
         const hash = window.location.hash;
         let parsedTariff = null;
@@ -244,6 +259,16 @@ function App() {
                             isInactive={selectedCountry !== "ALL"}
                         />
                     </div>
+                    <div className="slider-opacity-container" style={{"opacity":  `${showSlider === true ? 1 : 0}`}}>
+                        <div className="controls-separator"></div>
+                        <h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>
+                        <Slider
+                            selectedTariff={selectedTariff ?? 0}
+                            setSelectedTariff={setSelectedTariff}
+                            setIsETR={setIsETR}
+                            etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
+                        />
+                    </div>
                     <div className="controls-separator"></div>
                     <h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>
                     <Slider
@@ -283,6 +308,7 @@ function App() {
                 />
                 <ExposureCard
                     data={exposureCardData}
+                    ref={cardRef}
                     isETR={isETR}
                 />
                 <SubsectionTitle content={subsectionTitle}/>
