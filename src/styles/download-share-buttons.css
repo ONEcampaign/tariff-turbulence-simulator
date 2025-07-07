@@ -30,7 +30,7 @@
     position: absolute;
     top: auto;
     bottom: calc(100% + 8px); /* show above the share button */
-    left: 50%;
+    /*left: 50%;*/
     transform: translateX(-50%);
     background: white;
     border: 1px solid #ccc;
@@ -38,10 +38,13 @@
     border-radius: 6px;
     z-index: 999;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     gap: 8px;
-    white-space: nowrap;
+    align-items: first baseline;
+    justify-content: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 140px;
+
 }
 
 .share-options-tooltip > button {
