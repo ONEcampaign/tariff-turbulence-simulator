@@ -111,8 +111,22 @@
         height: auto;
     }
 
-    .exposure-card {
-        flex-direction: column-reverse;
+    .tariff-card.exposure-card {
+        gap: var(--margin-small);
+    }
+
+    .exposure-card-block {
+        flex-direction: column;
+        align-items: unset;
+        gap: var(--margin-small);
+    }
+
+    .exposure-card-block > :first-child {
+        align-self: flex-start; /* aligns to left */
+    }
+
+    .exposure-card-block > :last-child {
+        align-self: flex-end;   /* aligns to right */
     }
 
     .legend-swatch {
