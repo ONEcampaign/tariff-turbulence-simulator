@@ -15,6 +15,13 @@
     gap: 30px
 }
 
+.right-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+}
+
 .tariff-text {
     letter-spacing: 1%;
     width: max-content;

@@ -1,0 +1,11 @@
+.headline {
+    margin: 0 0 var(--margin-medium);
+}
+
+.deck.text-heading {
+    margin-bottom: var(--margin-medium);
+}
+
+.text-body.intro-text {
+    margin-bottom: var(--margin-extra-large);
+}

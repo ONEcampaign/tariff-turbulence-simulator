@@ -1,6 +1,6 @@
 import * as React from "npm:react";
 import { useDropdownContext } from "./DropdownContext.js";
-import { ChevronDown } from "./Chevron.js";
+import { ChevronDown } from "./ChevronDown.js";
 
 export function Dropdown(
     {

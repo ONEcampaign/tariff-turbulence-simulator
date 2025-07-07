@@ -1,6 +1,11 @@
 import * as React from "npm:react";
-
 import {formatCurrency, formatPercentage} from "../js/format.js";
+import {DownloadShareButtons} from "./DownloadShareButtons.js";
+
+export function ExposureCard({
+                                 data,
+                                 isETR,
+} = {}) {
 
 export const ExposureCard = React.forwardRef(function ({
     data
@@ -9,9 +14,9 @@ export const ExposureCard = React.forwardRef(function ({
 
     let impactText = `Potential cost of US tariffs on ${country}`
 
-    impactText = data.sector === "all sectors"
+    impactText = data.sector === "All sectors"
         ? impactText
-        : `${impactText}'s ${data.sector} sector`;
+        : `${impactText}'s ${data.sector.toLowerCase()} sector`;
 
     return (
         <div className="tariff-card exposure-card" id="exposure-card" ref={ref}>
@@ -27,6 +32,14 @@ export const ExposureCard = React.forwardRef(function ({
                 <p className="tariff-text text-impact-large">
                     {formatCurrency(data.impact_usd, {short: false})}
                 </p>
+                <DownloadShareButtons
+                    targetId="exposure-card"
+                    selectedCountry={data.country}
+                    selectedCountryISO3={data.iso3}
+                    selectedSector={data.sector}
+                    selectedTariff={data.tariff}
+                    isETR={isETR}
+                />
             </div>
         </div>
     )

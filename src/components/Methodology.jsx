@@ -1,5 +1,5 @@
 import * as React from "npm:react";
-import { ChevronDown } from "./Chevron.js";
+import { ChevronDown } from "./ChevronDown.js";
 
 export function Methodology() {
     const [isOpen, setIsOpen] = React.useState(false);
@@ -37,7 +37,7 @@ export function Methodology() {
                     </p>
 
                     <p className="text-body">
-                        The ETR for each country is computed as a weighted average of the tariff rates applied to U.S. imports from that country across the products in a sector, using trade values from 2022 to 2024
+                        The ETR for each country is computed as a weighted average of the tariff rates applied to US imports from that country across the products in a sector, using trade values from 2022 to 2024
                     </p>
 
                     <div className="tariff-card">

@@ -1,4 +1,4 @@
-import React from "npm:react";
+import * as React from "npm:react";
 
 const DropdownContext = React.createContext();
 

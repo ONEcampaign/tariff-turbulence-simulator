@@ -12,9 +12,8 @@ observer.observe(document.documentElement);
 ```
 
 ```js
-import {Headline} from "./components/Headline.js";
-import {Deck} from "./components/Deck.js";
-import {IntroText} from "./components/IntroText.js"
+import * as React from "npm:react";
+import {Intro} from "./components/Intro.js"
 import {Legend} from "./components/Legend.js";
 import {AfricaHexmap} from "./components/AfricaHexmap.js";
 import {ExposureCard} from "./components/ExposureCard.js";
@@ -29,7 +28,7 @@ import {CountryCarousel} from "./components/CountryCarousel.js"
 import {SelectionCard} from "./components/SelectionCard.js";
 import {Methodology} from "./components/Methodology.js";
 import {MutualExclusion} from "./components/MutualExclusion.js";
-import {ChevronDown} from "./components/Chevron.js";
+import {ChevronDown} from "./components/ChevronDown.js";
 import {
     generateCrossData,
     generateMapData,
@@ -73,6 +72,8 @@ function App() {
     const [showMore, setShowMore] = React.useState(false);
     const [hideMenu, setHideMenu] = React.useState(false);
     const [initialScroll, setInitialScroll] = React.useState(false);
+    const [hasParsedURL, setHasParsedURL] = React.useState(false);
+    const [userSetTariff, setUserSetTariff] = React.useState(false);
 
     const cardRef = React.useRef();
     const [showSlider, setShowSlider] = React.useState(false);
@@ -89,9 +90,77 @@ function App() {
         };
     }, []);
 
+    React.useEffect(() => {
+        const hash = window.location.hash;
+        let parsedTariff = null;
+        let parsedIsETR = true;
 
+        if (hash.includes("?")) {
+            const queryString = hash.split("?")[1];
+            const query = new URLSearchParams(queryString);
+
+            const country = query.get("country");
+            const sector = query.get("sector");
+            const tariff = query.get("tariff");
+            const isETRParam = query.get("isETR");
+
+            if (country) setSelectedCountry(country);
+            if (sector) setSelectedSector(sector);
+
+            parsedIsETR = isETRParam === "true";
+            setIsETR(parsedIsETR);
+
+            if (!parsedIsETR && tariff !== null) {
+                const parsed = parseFloat(tariff);
+                if (!isNaN(parsed)) {
+                    parsedTariff = parsed;
+                    setSelectedTariff(parsedTariff);
+                    setUserSetTariff(true);
+                }
+            }
+        }
+        
+        setHasParsedURL(true);
+    }, []);
+
+    React.useEffect(() => {
+        if (!hasParsedURL) return;
+
+        const query = new URLSearchParams();
+
+        if (selectedSector !== "All sectors") {
+            query.set("country", "ALL");
+            query.set("sector", selectedSector);
+        } else {
+            query.set("country", selectedCountry);
+            query.set("sector", "All sectors");
+        }
+
+        if (isETR) {
+            query.set("isETR", "true");
+        } else if (selectedTariff !== undefined) {
+            query.set("tariff", selectedTariff.toString());
+            query.set("isETR", "false");
+        }
+
+        window.history.replaceState(null, "", `#view?${query.toString()}`);
+    }, [selectedCountry, selectedSector, selectedTariff, isETR, hasParsedURL]);
+    
     // Crossed data between csv and geojson to make sure all countries are present
     const crossData = generateCrossData(recentData, geoData)
+
+    // Ensure ETR is applied on first load (if not overridden via URL)
+    React.useEffect(() => {
+        if (!hasParsedURL) return;
+
+        // Don't override if a custom tariff was set by the user
+        if (!isETR || userSetTariff) return;
+
+        const entry = crossData.find(d => d.iso3 === selectedCountry && d.sector === selectedSector);
+        if (entry?.etr != null) {
+            setSelectedTariff(entry.etr);
+        }
+    }, [hasParsedURL, isETR, userSetTariff, selectedCountry, selectedSector, crossData]);
 
     const {
         updateCountry,
@@ -104,9 +173,12 @@ function App() {
         crossData,
         setSelectedTariff,
         isETR,
+        setIsETR,
         setShowMore,
         initialScroll,
-        setInitialScroll
+        setInitialScroll,
+        hasParsedURL,
+        userSetTariff
     });
 
     // Data to use on hexMap
@@ -124,7 +196,7 @@ function App() {
 
     const exposureCardData = generateExposureCardData(selectedRecentData, selectedTariff);
     const tooltipData = generateTooltipData(hoveredData);
-    const carouselData = generateCarouselData(crossData, selectedSector, selectedTariff, isETR)
+    const carouselData = generateCarouselData(crossData, selectedTariff, isETR)
     const selectionCardData = generateSelectionCardData(crossData, selectedCountry, selectedSector, selectedTariff, isETR)
     const selectedHistoricalData = binaryFilter(historicalData, selectedCountry, selectedSector)
 
@@ -197,12 +269,20 @@ function App() {
                             etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
                         />
                     </div>
+                    <div className="controls-separator"></div>
+                    <h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>
+                    <Slider
+                        selectedTariff={selectedTariff ?? 0}
+                        setSelectedTariff={setSelectedTariff}
+                        isETR={isETR}
+                        setIsETR={setIsETR}
+                        etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
+                        setUserSetTariff={setUserSetTariff}
+                    />
                 </div>
             </div>
             <div className="main-block">
-                <Headline content={title}/>
-                <Deck content={deck}/>
-                <IntroText content={introText}/>
+                <Intro />
                 <Legend
                     title={legendTitle}
                     subtitle={legendSubtitle}
@@ -229,6 +309,7 @@ function App() {
                 <ExposureCard
                     data={exposureCardData}
                     ref={cardRef}
+                    isETR={isETR}
                 />
                 <SubsectionTitle content={subsectionTitle}/>
                 <DescriptionText

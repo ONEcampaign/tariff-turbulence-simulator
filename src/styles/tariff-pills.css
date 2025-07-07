@@ -76,6 +76,7 @@
 .tariff-pill-tooltip > .text-support-small {
     margin-bottom: .25rem;
     text-align: center;
+    color: white;
 }
 
 .tariff-pill-tooltip.visible-tooltip {
