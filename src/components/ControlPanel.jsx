@@ -113,7 +113,9 @@ export function ControlPanel({
                         isInactive={selectedCountry !== "ALL"}
                     />
                 </div>
-                <div className="slider-opacity-container" style={{"display": `${showSlider === true ? "block" : "none"}`}}>
+                <div
+                    className={`slider-opacity-container ${showSlider ? "" : "hidden"}`}
+                >
                     <div className="controls-separator"></div>
                     <h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>
                     <Slider
