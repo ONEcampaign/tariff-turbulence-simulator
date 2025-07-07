@@ -2,13 +2,9 @@ import * as React from "npm:react";
 import {formatCurrency, formatPercentage} from "../js/format.js";
 import {DownloadShareButtons} from "./DownloadShareButtons.js";
 
-export function ExposureCard({
-                                 data,
-                                 isETR,
-} = {}) {
-
 export const ExposureCard = React.forwardRef(function ({
-    data
+                                                           data,
+                                                           isETR
 } = {}, ref) {
     const country = data.country === "all countries" ? "Africa" : data.country;
 
