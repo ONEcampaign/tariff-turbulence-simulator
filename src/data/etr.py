@@ -5,7 +5,9 @@ from __future__ import annotations
 import pandas as pd
 
 RATE_SUFFIX_MAP = {0.00: "00", 0.10: "01", 0.25: "025", 0.50: "05"}
-RATE_VALUE_MAP = {suffix: rate for rate, suffix in RATE_SUFFIX_MAP.items() if rate != 0.00}
+RATE_VALUE_MAP = {
+    suffix: rate for rate, suffix in RATE_SUFFIX_MAP.items() if rate != 0.00
+}
 
 
 def label_rate_column(df: pd.DataFrame, rate_col: str) -> pd.Series:
@@ -46,11 +48,15 @@ def compute_etr(df: pd.DataFrame) -> pd.Series:
     return etr_numerator / df["total_exports"]
 
 
-def compute_etr_by_group(df: pd.DataFrame, group_cols: list[str] | None = None) -> pd.DataFrame:
+def compute_etr_by_group(
+    df: pd.DataFrame, group_cols: list[str] | None = None
+) -> pd.DataFrame:
     if group_cols is None:
         group_cols = ["country", "sector"]
     df_by_rate = (
-        df.groupby(group_cols + ["rate"], observed=True, dropna=False)["exports"].sum().reset_index()
+        df.groupby(group_cols + ["rate"], observed=True, dropna=False)["exports"]
+        .sum()
+        .reset_index()
     )
     df_by_rate_wide = pivot_tariff_values(df_by_rate, idx_cols=group_cols)
     total_exports = compute_total_exports(df, group_cols)

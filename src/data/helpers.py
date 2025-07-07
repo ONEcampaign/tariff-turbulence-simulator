@@ -32,7 +32,9 @@ def add_sector_group_column(df: pd.DataFrame) -> pd.DataFrame:
     return df[df["sector"].notna()].reset_index(drop=True)
 
 
-def group_data(df: pd.DataFrame, group_cols: list[str], value_col: str = "value") -> pd.DataFrame:
+def group_data(
+    df: pd.DataFrame, group_cols: list[str], value_col: str = "value"
+) -> pd.DataFrame:
     """Group a DataFrame by the given columns and sum the values."""
     grouped = (
         df.groupby(group_cols, observed=True, dropna=False)[value_col]
