@@ -68,17 +68,17 @@ def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-# === GDP Data ===
+# === Population Data ===
 
-def get_africa_gdp_data() -> pd.DataFrame:
-    """Retrieve GDP data for African countries"""
+def get_africa_population_data() -> pd.DataFrame:
+    """Retrieve population data for African countries"""
 
     cc = coco.CountryConverter()
 
     weo = WEO()
     data = weo.get_data()
 
-    filtered_df = data.query("`indicator_code` == 'NGDPD' and `year` in @YEAR_RANGE").copy()
+    filtered_df = data.query("`indicator_code` == 'LP' and `year` in @YEAR_RANGE").copy()
     groudped_df = (
         filtered_df.groupby(
             ["entity_name", "scale_code"],
@@ -88,12 +88,12 @@ def get_africa_gdp_data() -> pd.DataFrame:
         .reset_index()
     )
 
-    groudped_df["gdp"] = groudped_df["value"] * groudped_df["scale_code"]
+    groudped_df["population"] = groudped_df["value"] * groudped_df["scale_code"]
     groudped_df["region"] = cc.pandas_convert(groudped_df["entity_name"], to="continent")
     africa_df = groudped_df.query("`region` == 'Africa'")
     africa_df["iso3"] = cc.pandas_convert(africa_df["entity_name"], to="ISO3")
 
-    return africa_df[["iso3", "gdp"]]
+    return africa_df[["iso3", "population"]]
 
 
 def assert_iso3_code_alignment(df1: pd.DataFrame, df2: pd.DataFrame) -> bool:
@@ -115,26 +115,25 @@ def assert_iso3_code_alignment(df1: pd.DataFrame, df2: pd.DataFrame) -> bool:
         )
 
 
-def add_denominator_column(df: pd.DataFrame) -> pd.DataFrame:
-    """Adds a value column to the dataframe which will be the denominator to compute exports to the US in relative terms.
-    If denominator is set to "gdp" the added column will contain GPD values.
-    If denominator is set to "exports" the added column will contain total exports values.
-
+def add_population_column(df: pd.DataFrame) -> pd.DataFrame:
+    """Adds a population column to the dataframe.
     """
 
-    gdp_df = get_africa_gdp_data()
+    pop_df = get_africa_population_data()
 
-    if assert_iso3_code_alignment(df, gdp_df):
+    if not assert_iso3_code_alignment(df, pop_df):
+        raise ValueError("ISO3 code mismatch between dataframes")
+    pop_df_all = pd.DataFrame(
+        {
+            "iso3": ["ALL"],
+            "population": [pop_df["population"].sum()]
+        },
+    )
+    pop_df_complete = pd.concat([pop_df, pop_df_all], ignore_index=True)
 
-        gdp_df_all = pd.DataFrame(
-            {
-                "iso3": ["ALL"],
-                "gdp": [gdp_df["gdp"].sum()]
-            },
-        )
-        gdp_df_complete = pd.concat([gdp_df, gdp_df_all], ignore_index=True)
+    combined_df = pd.merge(df, pop_df_complete, on="iso3", how="left")
 
-        return pd.merge(df, gdp_df_complete, on="iso3", how="left")
+    return combined_df
 
 
 # === Tariff Rate Assignment ===
@@ -281,9 +280,9 @@ def read_format_df() -> pd.DataFrame:
     df = add_rate_columns(df)
     df = add_etr_column(df)
     df = normalize_country_names(df)
-    df = add_denominator_column(df)
+    df = add_population_column(df)
 
-    ordered_columns = ["country", "iso3", "sector", "exports", "etr", "gdp"]
+    ordered_columns = ["country", "iso3", "sector", "exports", "etr", "population"]
 
     return df[ordered_columns]
 

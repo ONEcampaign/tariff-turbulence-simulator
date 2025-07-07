@@ -13,7 +13,7 @@ export function DescriptionText({
     const formatValue = (val) =>
         selectedUnits === "usd"
             ? formatCurrency(val, { short: false })
-            : formatPercentage(val, { tariff: true });
+            : formatCurrency(val, { perCapita: true });
 
     const getTariffText = (context) => {
         const tariff = formatPercentage(selectedTariff);
@@ -46,7 +46,7 @@ export function DescriptionText({
     };
 
     if (mode === "carousel") {
-        const sortKey = selectedUnits === "usd" ? "impact_usd" : "etr";
+        const sortKey = selectedUnits === "usd" ? "impact_usd" : "impact_pc";
         const totalImpactUSD = data.reduce((sum, d) => sum + (Number.isFinite(d.impact_usd) ? d.impact_usd : 0), 0);
         const topThree = getTopItems(data, sortKey, "country");
 
@@ -56,7 +56,7 @@ export function DescriptionText({
                     {getTariffText("carousel")} the cost of US tariffs for Africa is <b>{formatCurrency(totalImpactUSD, { short: false })}</b>.
                 </p>
                 <p className="text-body description-text">
-                    The countries with the highest {selectedUnits === "usd" ? "cost" : "ETR"} are{" "}
+                    The countries with the highest {selectedUnits === "usd" ? "total cost" : "cost per capita"} are{" "}
                     <b>{topThree[0].label}</b> ({topThree[0].value}), <b>{topThree[1].label}</b> ({topThree[1].value}) and <b>{topThree[2].label}</b> ({topThree[2].value}).
                 </p>
             </div>
