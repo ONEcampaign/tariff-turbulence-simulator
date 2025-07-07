@@ -3,14 +3,14 @@ import * as React from "npm:react";
 export function ToggleButton(
     {
         leftLabel = "$ value",
-        rightLabel = "ETR",
+        rightLabel = "$ per capita",
         selected,
         setSelected
     }) {
     const isUsd = selected === "usd";
 
     const handleClick = () => {
-        setSelected(isUsd ? "etr" : "usd");
+        setSelected(isUsd ? "pc" : "usd");
     };
 
     return (
