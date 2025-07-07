@@ -259,7 +259,7 @@ function App() {
                             isInactive={selectedCountry !== "ALL"}
                         />
                     </div>
-                    <div className="slider-opacity-container" style={{"opacity":  `${showSlider === true ? 1 : 0}`}}>
+                    <div className="slider-opacity-container" style={{"opacity":  `${showSlider ? 1 : 0}`}}>
                         <div className="controls-separator"></div>
                         <h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>
                         <Slider
@@ -269,16 +269,6 @@ function App() {
                             etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
                         />
                     </div>
-                    {/*<div className="controls-separator"></div>*/}
-                    {/*<h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>*/}
-                    {/*<Slider*/}
-                    {/*    selectedTariff={selectedTariff ?? 0}*/}
-                    {/*    setSelectedTariff={setSelectedTariff}*/}
-                    {/*    isETR={isETR}*/}
-                    {/*    setIsETR={setIsETR}*/}
-                    {/*    etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}*/}
-                    {/*    setUserSetTariff={setUserSetTariff}*/}
-                    {/*/>*/}
                 </div>
             </div>
             <div className="main-block">
@@ -328,6 +318,7 @@ function App() {
                             />
                             <CountryCarousel
                                 data={carouselData}
+                                mode={cardMode}
                                 isETR={isETR}
                                 selectedTariff={selectedTariff}
                                 selectedUnits={selectedUnits}
