@@ -6,7 +6,6 @@ import { formatPercentage } from "../js/format.js";
 export function Slider({
                            selectedTariff, // number between 0 and 1
                            setSelectedTariff,
-                           isETR,
                            setIsETR,
                            etr,
                            setUserSetTariff
