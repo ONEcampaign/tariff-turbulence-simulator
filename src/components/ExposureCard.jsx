@@ -16,17 +16,17 @@ export const ExposureCard = React.forwardRef(function ({
 
     return (
         <div className="tariff-card exposure-card" id="exposure-card" ref={ref}>
-            <div className="left-column">
+            <div className="exposure-card-block">
                 <h4 className="text-impact-small">
                     {impactText}
                 </h4>
-                <p className="text-support-large">
-                    Simulated tariff: <b>{formatPercentage(data.tariff, {})}</b>
-                </p>
-            </div>
-            <div className="right-column">
                 <p className="tariff-text text-impact-large">
                     {formatCurrency(data.impact_usd, {short: false})}
+                </p>
+            </div>
+            <div className="exposure-card-block">
+                <p className="text-support-large">
+                    Simulated tariff: <b>{formatPercentage(data.tariff, {})}</b>
                 </p>
                 <DownloadShareButtons
                     targetId="exposure-card"
