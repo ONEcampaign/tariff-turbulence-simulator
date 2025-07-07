@@ -48,7 +48,7 @@
 
 .tariff-pill-tooltip {
     visibility: hidden;
-    width: 225px;
+    width: 150px;
     background-color: #333;
     color: #fff;
     text-align: left;
@@ -74,14 +74,9 @@
 }
 
 .tariff-pill-tooltip > .text-support-small {
-    font-size: 0.8rem;
     margin-bottom: .25rem;
+    text-align: center;
 }
-
-.tariff-pill-tooltip > .text-support-small:last-of-type {
-    margin-bottom: 0;
-}
-
 
 .tariff-pill-tooltip.visible-tooltip {
     visibility: visible;

@@ -7,6 +7,8 @@ export function TariffPills({ isETR, selectedTariff }) {
     const [showTooltip, setShowTooltip] = React.useState(false);
     const wrapperRef = React.useRef(null);
 
+    const isMenuCollapsible = window.innerWidth <= 1120;
+
     React.useEffect(() => {
         const checkScreenSize = () => {
             setIsSmallScreen(window.innerWidth <= 768);
@@ -57,13 +59,7 @@ export function TariffPills({ isETR, selectedTariff }) {
                     }`}
                 >
                     <p className="text-support-small">
-                        Use the slider to adjust individual tariffs.
-                    </p>
-                    <p className="text-support-small">
-                        ETR sets country- and sector-specific effective tariff rates.
-                    </p>
-                    <p className="text-support-small">
-                        Any other tariff simulates the same tariff for all countries/sectors.
+                        Adjust the tariff with the slider {isMenuCollapsible ? "in the controls tab" : "to the left"}.
                     </p>
                 </div>
             </div>
