@@ -25,19 +25,14 @@
     padding: 4px 8px;
 }
 
-.tariff-pill.display {
+.tariff-pill {
     background-color: white;
     border: 2px solid black;
 }
 
-.tariff-pill.hover {
-    background-color: var(--color-grey);
-    border: 2px solid var(--color-grey);
-}
-
-.tariff-pill.hover:hover {
+.tariff-pill:hover {
     cursor: help;
-    background-color: lightgray;
+    background-color: var(--color-grey);
     transition: var(--tariff-button-transition);
 }
 
@@ -74,7 +69,6 @@
 }
 
 .tariff-pill-tooltip > .text-support-small {
-    margin-bottom: .25rem;
     text-align: center;
     color: white;
 }

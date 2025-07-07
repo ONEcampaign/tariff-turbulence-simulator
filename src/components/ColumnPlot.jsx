@@ -39,7 +39,7 @@ export function ColumnPlot({ data, mode, showMore, chunkSize }) {
     if (width === 0) return <div ref={containerRef} style={{ width: "100%" }} />;
 
     // Chunks
-    const dataChunks = showMore === true ? getChunks(data, chunkSize) : [data.slice(0, chunkSize)];
+    const dataChunks = showMore ? getChunks(data, chunkSize) : [data.slice(0, chunkSize)];
 
     // Scales
     const xScale = d3

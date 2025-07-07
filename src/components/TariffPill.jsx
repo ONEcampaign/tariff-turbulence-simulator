@@ -1,11 +1,20 @@
 import * as React from "npm:react";
 import { formatPercentage } from "../js/format.js";
 
-export function TariffPills({ isETR, selectedTariff }) {
-    const displayLabel = isETR ? "ETR" : formatPercentage(selectedTariff, {});
+export function TariffPill({ isETR, selectedTariff, mode, individualTariff = null }) {
+
     const [isSmallScreen, setIsSmallScreen] = React.useState(window.innerWidth <= 768);
     const [showTooltip, setShowTooltip] = React.useState(false);
     const wrapperRef = React.useRef(null);
+
+    let displayLabel;
+    if (mode === "carousel") {
+        displayLabel = isETR ? individualTariff : formatPercentage(selectedTariff, {});
+    } else {
+        displayLabel = isETR ? "ETR" : formatPercentage(selectedTariff, {});
+    }
+
+    console.log(mode);
 
     const isMenuCollapsible = window.innerWidth <= 1120;
 
@@ -41,17 +50,13 @@ export function TariffPills({ isETR, selectedTariff }) {
 
     return (
         <div className="tariff-pills-wrapper">
-            <div className="tariff-pill display text-support-small">
-                {displayLabel}
-            </div>
-
             <div
                 className="tariff-pill-tooltip-wrapper"
                 onClick={handleClick}
                 ref={wrapperRef}
             >
-                <div className="tariff-pill hover text-support-small">
-                    Edit
+                <div className="tariff-pill text-support-small">
+                    {displayLabel}
                 </div>
                 <div
                     className={`tariff-pill-tooltip ${
