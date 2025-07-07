@@ -23,7 +23,8 @@ export function ControlPanel({
                                  setShowMore,
                                  initialScroll,
                                  setInitialScroll,
-                                 setUserSetTariff
+                                 setUserSetTariff,
+                                 showSlider
 }) {
 
     const {
@@ -43,6 +44,18 @@ export function ControlPanel({
     });
 
     const [hideMenu, setHideMenu] = React.useState(false);
+    const stickyRef = React.useRef(null);
+    const [stickyBottom, setStickyBottom] = React.useState(0);
+
+    React.useEffect(() => {
+        if (!hideMenu || !stickyRef.current) return;
+
+        const wrapper = stickyRef.current;
+        const tabHeight = wrapper.querySelector(".show-hide-tab")?.offsetHeight ?? 0;
+        const fullHeight = wrapper.scrollHeight;
+
+        setStickyBottom(fullHeight - tabHeight);
+    }, [hideMenu, showSlider]);
 
     const selectedData = crossData.find(
         d => d.iso3 === selectedCountry && d.sector === selectedSector
@@ -56,7 +69,14 @@ export function ControlPanel({
     const sectorGroups = generateSectorGroups(crossData);
 
     return (
-        <div className={`sticky-wrapper ${hideMenu ? "hidden" : ""}`}>
+        <div
+            ref={stickyRef}
+            className={`sticky-wrapper ${hideMenu ? "hidden" : ""}`}
+            style={{
+                bottom: hideMenu ? `-${stickyBottom + 5 }px` : "0px",
+                transition: "bottom 0.5s ease-in-out"
+            }}
+        >
             <div
                 className="show-hide-tab"
                 onClick={() => setHideMenu(!hideMenu)}
@@ -93,16 +113,18 @@ export function ControlPanel({
                         isInactive={selectedCountry !== "ALL"}
                     />
                 </div>
-                <div className="controls-separator"></div>
-                <h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>
-                <Slider
-                    selectedTariff={selectedTariff ?? 0}
-                    setSelectedTariff={setSelectedTariff}
-                    isETR={isETR}
-                    setIsETR={setIsETR}
-                    etr={Number.isFinite(selectedData.etr) ? selectedData.etr : null}
-                    setUserSetTariff={setUserSetTariff}
-                />
+                <div className="slider-opacity-container" style={{"display": `${showSlider === true ? "block" : "none"}`}}>
+                    <div className="controls-separator"></div>
+                    <h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>
+                    <Slider
+                        selectedTariff={selectedTariff ?? 0}
+                        setSelectedTariff={setSelectedTariff}
+                        isETR={isETR}
+                        setIsETR={setIsETR}
+                        etr={Number.isFinite(selectedData.etr) ? selectedData.etr : null}
+                        setUserSetTariff={setUserSetTariff}
+                    />
+                </div>
             </div>
         </div>
     )

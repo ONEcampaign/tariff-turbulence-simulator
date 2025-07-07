@@ -206,6 +206,7 @@ function App() {
                 initialScroll={initialScroll}
                 setInitialScroll={setInitialScroll}
                 setUserSetTariff={setUserSetTariff}
+                showSlider={showSlider}
             />
             <div className="main-block">
                 <Intro />
