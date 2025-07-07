@@ -5,7 +5,7 @@ import { LinePlot} from "./LinePlot.js";
 import {formatPercentage, formatCurrency} from "../js/format.js";
 import { colorPalette } from "../js/colorPalette.js";
 import { riskThresholds } from "../js/riskThresholds.js";
-import {TariffPills} from "./TariffPills.js";
+import {TariffPill} from "./TariffPill.js";
 import {ChevronDown} from "./ChevronDown.js";
 import {DownloadShareButtons} from "./DownloadShareButtons.js";
 
@@ -97,9 +97,10 @@ export function SelectionCard(
                 </div>
                 <div className="card-row selection-card-row">
                     <h4 className="text-support-medium">Individual tariff</h4>
-                    <TariffPills
+                    <TariffPill
                         isETR={isETR}
                         selectedTariff={selectedTariff}
+                        mode={mode}
                     />
                 </div>
             </div>
@@ -141,8 +142,8 @@ export function SelectionCard(
                             className="dropdown-selected show-more-button"
                             onClick={() => {setShowMore(!showMore)}}
                         >
-                            <p className="text-inputs">{`Show ${showMore === true ? "less" : "more"} ${showMoreText}`}</p>
-                            <ChevronDown className={`dropdown-chevron ${showMore === true ? "rotate" : ""}`} />
+                            <p className="text-inputs">{`Show ${showMore ? "less" : "more"} ${showMoreText}`}</p>
+                            <ChevronDown className={`dropdown-chevron ${showMore ? "rotate" : ""}`} />
                         </div>
                     ) : null
                 }
