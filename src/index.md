@@ -187,7 +187,7 @@ function App() {
                             isInactive={selectedCountry !== "ALL"}
                         />
                     </div>
-                    <div style={{"opacity":  `${showSlider === true ? 1 : 0}`}}>
+                    <div className="slider-opacity-container" style={{"opacity":  `${showSlider === true ? 1 : 0}`}}>
                         <div className="controls-separator"></div>
                         <h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>
                         <Slider
