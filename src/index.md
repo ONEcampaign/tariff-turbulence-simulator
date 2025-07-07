@@ -13,13 +13,12 @@ observer.observe(document.documentElement);
 
 ```js
 import * as React from "npm:react";
-import {Intro} from "./components/Intro.js"
+import {ControlPanel} from "./components/ControlPanel.js";
+import {Intro} from "./components/Intro.js";
 import {Legend} from "./components/Legend.js";
 import {AfricaHexmap} from "./components/AfricaHexmap.js";
 import {ExposureCard} from "./components/ExposureCard.js";
-import {Dropdown} from "./components/Dropdown.js";
 import {DropdownProvider} from "./components/DropdownContext.js";
-import {Slider} from "./components/Slider.js";
 import {Tooltip} from "./components/Tooltip.js";
 import {SubsectionTitle} from "./components/SubsectionTitle.js";
 import {DescriptionText} from "./components/DescriptionText.js";
@@ -32,8 +31,6 @@ import {ChevronDown} from "./components/ChevronDown.js";
 import {
     generateCrossData,
     generateMapData,
-    generateCountryEntries,
-    generateSectorGroups,
     generateExposureCardData,
     generateTooltipData,
     generateCarouselData,
@@ -70,7 +67,6 @@ function App() {
     const isTooltipVisible = tooltipContent.country !== null;
     const [selectedUnits, setSelectedUnits] = React.useState("usd")
     const [showMore, setShowMore] = React.useState(false);
-    const [hideMenu, setHideMenu] = React.useState(false);
     const [initialScroll, setInitialScroll] = React.useState(false);
     const [hasParsedURL, setHasParsedURL] = React.useState(false);
     const [userSetTariff, setUserSetTariff] = React.useState(false);
@@ -162,25 +158,6 @@ function App() {
         }
     }, [hasParsedURL, isETR, userSetTariff, selectedCountry, selectedSector, crossData]);
 
-    const {
-        updateCountry,
-        updateSector
-    } = MutualExclusion({
-        selectedCountry,
-        selectedSector,
-        setSelectedCountry,
-        setSelectedSector,
-        crossData,
-        setSelectedTariff,
-        isETR,
-        setIsETR,
-        setShowMore,
-        initialScroll,
-        setInitialScroll,
-        hasParsedURL,
-        userSetTariff
-    });
-
     // Data to use on hexMap
     const mapData = generateMapData(crossData, geoData, selectedSector)
 
@@ -200,13 +177,6 @@ function App() {
     const selectionCardData = generateSelectionCardData(crossData, selectedCountry, selectedSector, selectedTariff, isETR)
     const selectedHistoricalData = binaryFilter(historicalData, selectedCountry, selectedSector)
 
-    // Generate iso3-country name map for dropdown menu
-    const countryEntries = generateCountryEntries(crossData);
-    const countryMap = Object.fromEntries(countryEntries);
-
-    // Generate a list of unique sector groups fro dropdown menu
-    const sectorGroups = generateSectorGroups(crossData);
-
     // Determine the ETR for all countries
     const allETR = crossData.find(d => d.iso3 === "ALL" && d.sector === selectedSector)?.etr;
 
@@ -222,55 +192,22 @@ function App() {
 
     return (
         <div className="wrapper">
-            <div className={`sticky-wrapper ${hideMenu ? "hidden" : ""}`}>
-                <div
-                    className="show-hide-tab"
-                    onClick={() => setHideMenu(!hideMenu)}
-                >
-                    <h4 className="text-inputs">{hideMenu ? "Show" : "Hide"} controls</h4>
-                    <ChevronDown className={`dropdown-chevron ${hideMenu ? "rotate" : ""}`}/>
-                </div>
-                <div className="controls-wrapper">
-                    <h4 className="text-support-medium extra-margin"><b>Filter</b> the data</h4>
-                    <div className="dropdowns-wrapper">
-                        <Dropdown
-                            dropdownId="countryMenu"
-                            options={countryMap}
-                            selectedOption={selectedCountry}
-                            setOption={updateCountry}
-                            setETR={setSelectedTariff}
-                            getETRForOption={(iso3) => {
-                                const etr = crossData.find(d => d.iso3 === iso3 && d.sector === selectedSector)?.etr
-                                return Number.isFinite(etr) ? etr : null;
-                            }}
-                            isInactive={selectedSector !== "All sectors"}
-                        />
-                        <h4 className="text-support-medium center-aligned">or</h4>
-                        <Dropdown
-                            dropdownId="sectorMenu"
-                            options={sectorGroups}
-                            selectedOption={selectedSector}
-                            setOption={updateSector}
-                            setETR={setSelectedTariff}
-                            getETRForOption={(sector) => {
-                                const etr = crossData.find(d => d.iso3 === selectedCountry && d.sector === sector)?.etr;
-                                return Number.isFinite(etr) ? etr : null;
-                            }}
-                            isInactive={selectedCountry !== "ALL"}
-                        />
-                    </div>
-                    <div className="slider-opacity-container" style={{"opacity":  `${showSlider ? 1 : 0}`}}>
-                        <div className="controls-separator"></div>
-                        <h4 className="text-support-medium extra-margin"><b>Adjust</b> the tariff</h4>
-                        <Slider
-                            selectedTariff={selectedTariff ?? 0}
-                            setSelectedTariff={setSelectedTariff}
-                            setIsETR={setIsETR}
-                            etr={Number.isFinite(selectedRecentData.etr) ? selectedRecentData.etr : null}
-                        />
-                    </div>
-                </div>
-            </div>
+            <ControlPanel
+                crossData={crossData}
+                selectedCountry={selectedCountry}
+                setSelectedCountry={setSelectedCountry}
+                selectedSector={selectedSector}
+                setSelectedSector={setSelectedSector}
+                setSelectedTariff={setSelectedTariff}
+                selectedTariff={selectedTariff}
+                setIsETR={setIsETR}
+                isETR={isETR}
+                setShowMore={setShowMore}
+                initialScroll={initialScroll}
+                setInitialScroll={setInitialScroll}
+                setUserSetTariff={setUserSetTariff}
+                showSlider={showSlider}
+            />
             <div className="main-block">
                 <Intro />
                 <Legend
