@@ -4,7 +4,7 @@
 }
 
 .slider-opacity-container {
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out, display 1s 0s ease;
 }
 
 
@@ -109,5 +109,10 @@
 .slider-marker-label-selected {
     top: calc(100% + 4px); /* below the line */
     background-color: black;
+}
 
+.text-support-small.slider-label {
+    position: absolute;
+    transition: left 0.5s ease-in-out;
+    line-height: 1.5;
 }
