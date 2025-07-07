@@ -1,6 +1,6 @@
 import {
     computeImpactUSD,
-    computeImpactPCT
+    computeImpactPerCapita
 } from "./format.js";
 
 export function generateCrossData(data, geoData) {
@@ -118,7 +118,7 @@ export function generateExposureCardData(selectedData, selectedTariff) {
 export function generateTooltipData(hoveredData) {
 
     const impactUsd = computeImpactUSD(hoveredData?.exports, hoveredData?.etr);
-    const impactPct = computeImpactPCT(hoveredData?.exports, hoveredData?.etr, hoveredData?.gdp);
+    const impactPC = computeImpactPerCapita(hoveredData?.exports, hoveredData?.etr, hoveredData?.population);
 
     return {
         country: hoveredData?.country === "All countries"
@@ -129,7 +129,7 @@ export function generateTooltipData(hoveredData) {
         etr: hoveredData?.etr,
         exports: hoveredData?.exports,
         impact_usd: impactUsd,
-        impact_pct: impactPct
+        impact_pc: impactPC
     };
 }
 
@@ -146,7 +146,7 @@ export function generateCarouselData(data, selectedTariff, isETR) {
                 sector: sector,
                 etr: d.etr,
                 impact_usd: computeImpactUSD(d.exports, tariff),
-                impact_pct: computeImpactPCT(d.exports, tariff, d.gdp)
+                impact_pc: computeImpactPerCapita(d.exports, tariff, d.population)
             };
         });
 }
@@ -173,7 +173,7 @@ export function generateSelectionCardData(data, selectedCountry, selectedSector,
             sector: d.sector,
             etr: d.etr,
             impact_usd: computeImpactUSD(d.exports, tariff),
-            impact_pct: computeImpactPCT(d.exports, tariff, d.gdp)
+            impact_pc: computeImpactPerCapita(d.exports, tariff, d.population)
         };
     });
 }

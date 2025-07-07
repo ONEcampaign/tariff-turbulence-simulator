@@ -3,7 +3,7 @@ import * as d3 from "npm:d3";
 import {colorPalette} from "../js/colorPalette.js";
 import {riskThresholds} from "../js/riskThresholds.js";
 import {formatPercentage, formatCurrency} from "../js/format.js";
-import {TariffPills} from "./TariffPills.js";
+import {TariffPill} from "./TariffPill.js";
 import {DownloadShareButtons} from "./DownloadShareButtons.js";
 
 const colorScale = d3.scaleThreshold(
@@ -14,12 +14,13 @@ const colorScale = d3.scaleThreshold(
 export function CountryCarousel(
     {
         data,
+        mode,
         isETR,
         selectedTariff,
         selectedUnits = "usd"
     }
     ) {
-    const sortKey = selectedUnits === "usd" ? "impact_usd" : "etr";
+    const sortKey = selectedUnits === "usd" ? "impact_usd" : "impact_pc";
     const cleaned = data.filter(
         (d) =>
             typeof d[sortKey] === "number" &&
@@ -85,10 +86,10 @@ export function CountryCarousel(
                                 <h4 className="text-support-medium">Total cost</h4>
                                 <p className="text-impact-large">{formatCurrency(countryData.impact_usd)}</p>
                             </div>
-                            {/*<div className="card-row carousel-card-row">*/}
-                            {/*    <h4 className="text-support-medium">% of GDP</h4>*/}
-                            {/*    <p className="text-impact-large">{formatPercentage(countryData.impact_pct, {tariff: false})}</p>*/}
-                            {/*</div>*/}
+                            <div className="card-row carousel-card-row">
+                                <h4 className="text-support-medium">Cost per capita</h4>
+                                <p className="text-impact-large">{formatCurrency(countryData.impact_pc, {perCapita: true})}</p>
+                            </div>
                             <div className="card-row carousel-card-settings">
                                 <h4 className="text-support-medium">Trade partner</h4>
                                 <div className="swatch us-swatch">
@@ -97,9 +98,11 @@ export function CountryCarousel(
                             </div>
                             <div className="card-row carousel-card-settings">
                                 <h4 className="text-support-medium">Individual tariff</h4>
-                                <TariffPills
+                                <TariffPill
                                     isETR={isETR}
                                     selectedTariff={selectedTariff}
+                                    individualTariff={formatPercentage(countryData.etr, {})}
+                                    mode={mode}
                                 />
                             </div>
                             <DownloadShareButtons

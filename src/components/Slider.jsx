@@ -111,9 +111,49 @@ export function Slider({
                 <div className="slider-track-base" />
                 <div
                     className="slider-track-overlay"
-                    style={{ left: `${selectedTariff * 100}%` }}
-                />
+                    style={{ left: `${selectedTariff * 100}%`, position: "relative" }}
+                >
+                    <SlidingLabel />
+                </div>
             </div>
         </div>
     );
 }
+
+
+function SlidingLabel() {
+    const [left, setLeft] = React.useState("10px");
+    const [visible, setVisible] = React.useState(true);
+
+    React.useEffect(() => {
+        if (!visible) return;
+
+        const interval = setInterval(() => {
+            setLeft(prev => (prev === "10px" ? "30px" : "10px"));
+        }, 500);
+
+        return () => clearInterval(interval);
+    }, [visible]);
+
+    React.useEffect(() => {
+        const stopViewing = () => setVisible(false);
+        const wrapper = document.querySelector(".slider-wrapper");
+        wrapper?.addEventListener("click", stopViewing);
+
+        return () => wrapper?.removeEventListener("click", stopViewing);
+    }, []);
+
+    if (!visible) return null;
+
+    return (
+        <span
+            className="text-support-small slider-label"
+            style={{
+                left,
+            }}
+        >
+      ↔ slide
+    </span>
+    );
+}
+

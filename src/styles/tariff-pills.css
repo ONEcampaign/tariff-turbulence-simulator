@@ -25,19 +25,14 @@
     padding: 4px 8px;
 }
 
-.tariff-pill.display {
+.tariff-pill {
     background-color: white;
     border: 2px solid black;
 }
 
-.tariff-pill.hover {
-    background-color: var(--color-grey);
-    border: 2px solid var(--color-grey);
-}
-
-.tariff-pill.hover:hover {
+.tariff-pill:hover {
     cursor: help;
-    background-color: lightgray;
+    background-color: var(--color-grey);
     transition: var(--tariff-button-transition);
 }
 
@@ -48,7 +43,7 @@
 
 .tariff-pill-tooltip {
     visibility: hidden;
-    width: 225px;
+    width: 150px;
     background-color: #333;
     color: #fff;
     text-align: left;
@@ -74,15 +69,9 @@
 }
 
 .tariff-pill-tooltip > .text-support-small {
-    font-size: 0.8rem;
-    margin-bottom: .25rem;
+    text-align: center;
     color: white;
 }
-
-.tariff-pill-tooltip > .text-support-small:last-of-type {
-    margin-bottom: 0;
-}
-
 
 .tariff-pill-tooltip.visible-tooltip {
     visibility: visible;

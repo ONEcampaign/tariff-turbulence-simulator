@@ -37,7 +37,7 @@ export function Methodology() {
                     </p>
 
                     <p className="text-body">
-                        The ETR for each country is computed as a weighted average of the tariff rates applied to U.S. imports from that country across the products in a sector, using trade values from 2022 to 2024
+                        The ETR for each country is computed as a weighted average of the tariff rates applied to US imports from that country across the products in a sector, using trade values from 2022 to 2024
                     </p>
 
                     <div className="tariff-card">
@@ -49,8 +49,8 @@ export function Methodology() {
                             <li>Semiconductors: $2 million (exempt from tariffs)</li>
                         </ul>
                         <p className="text-body">The ETR is calculated as follows:</p>
-                        <pre>ETR = [(10 × 0.5) + (5 × 0.25) + (2 × 0)] / (10 + 5 + 2) = 0.38</pre>
-                        <p className="text-body">So, Country A faces an effective tariff rate of 38% on its exports to the US.</p>
+                        <pre>ETR = [(10 × 0.5) + (5 × 0.25) + (2 × 0)] / (10 + 5 + 2) = 0.37</pre>
+                        <p className="text-body">So, Country A faces an effective tariff rate of 37% on its exports to the US.</p>
                     </div>
 
                     <p className="text-body">To calculate the ETR, we rely on the following data:</p>

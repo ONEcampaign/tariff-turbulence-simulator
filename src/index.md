@@ -71,6 +71,21 @@ function App() {
     const [hasParsedURL, setHasParsedURL] = React.useState(false);
     const [userSetTariff, setUserSetTariff] = React.useState(false);
 
+    const cardRef = React.useRef();
+    const [showSlider, setShowSlider] = React.useState(false);
+    const handleScroll = () => {
+        const y = cardRef.current.getBoundingClientRect().top;
+        setShowSlider(y <= 100); 
+    };
+
+    React.useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     React.useEffect(() => {
         const hash = window.location.hash;
         let parsedTariff = null;
@@ -219,6 +234,7 @@ function App() {
                 />
                 <ExposureCard
                     data={exposureCardData}
+                    ref={cardRef}
                     isETR={isETR}
                 />
                 <SubsectionTitle content={subsectionTitle}/>
@@ -238,6 +254,7 @@ function App() {
                             />
                             <CountryCarousel
                                 data={carouselData}
+                                mode={cardMode}
                                 isETR={isETR}
                                 selectedTariff={selectedTariff}
                                 selectedUnits={selectedUnits}

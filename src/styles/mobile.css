@@ -54,7 +54,7 @@
     }
 
     .slider-wrapper {
-        margin: 0 auto;
+        margin: 30px auto 0;
     }
 
     .sticky-wrapper.hidden {
@@ -108,7 +108,7 @@
     }
 
     .sticky-wrapper.hidden {
-        bottom: -374px !important;
+        bottom: -354px !important;
     }
 }
 

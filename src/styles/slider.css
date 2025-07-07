@@ -3,12 +3,18 @@
     --marker-height: 44px;
 }
 
+.slider-opacity-container {
+    transition: opacity 0.2s ease-in-out, display 1s 0s ease;
+}
+
+
 /* Wrapper for the whole component, allows marker freedom */
 .slider-wrapper {
     position: relative;
     width: var(--controls-width);
     height: calc(var(--marker-height) + 2rem); /* enough vertical space */
     user-select: none;
+    margin-top: 30px;
 }
 
 /* The track itself */
@@ -103,5 +109,10 @@
 .slider-marker-label-selected {
     top: calc(100% + 4px); /* below the line */
     background-color: black;
+}
 
+.text-support-small.slider-label {
+    position: absolute;
+    transition: left 0.5s ease-in-out;
+    line-height: 1.5;
 }
