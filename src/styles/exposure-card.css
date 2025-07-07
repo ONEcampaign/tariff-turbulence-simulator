@@ -8,21 +8,31 @@
     gap: var(--margin-medium);
 }
 
-.left-column {
+.tariff-card.exposure-card {
     display: flex;
     flex-direction: column;
+    gap: var(--margin-medium);
+}
+
+.exposure-card-block {
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     gap: 30px
 }
 
-.right-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: end;
+.exposure-card-block:first-child {
+    align-items: flex-start;
+}
+.exposure-card-block:last-child {
+    align-items: flex-end;
 }
 
 .tariff-text {
     letter-spacing: 1%;
     width: max-content;
+    white-space: nowrap;       /* prevents line break */
+    overflow: hidden;          /* hides overflow if it doesn't fit */
+    text-overflow: ellipsis;   /* optional: adds "…" if text overflows */
+    flex-shrink: 0;            /* prevents the item from shrinking */
 }
