@@ -53,10 +53,6 @@
         gap: var(--margin-medium);
     }
 
-    .controls-wrapper .text-support-medium.extra-margin:nth-child(2) {
-        margin-top: var(--margin-medium);
-    }
-
     .slider-wrapper {
         margin: 30px auto 0;
     }
