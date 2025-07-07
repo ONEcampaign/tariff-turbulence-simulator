@@ -1,4 +1,4 @@
-from __future__ import annotations
+# from __future__ import annotations
 
 from pathlib import Path
 
@@ -29,9 +29,7 @@ class UStradeLoader:
     def load_data(self) -> pd.DataFrame:
         raw_dfs = []
         for y in YEAR_RANGE:
-            d = pd.read_csv(
-                PATHS.INPUTS / f"africa_exports_to_us_{y}_ustrade_raw.csv"
-            )
+            d = pd.read_csv(PATHS.INPUTS / f"africa_exports_to_us_{y}_ustrade_raw.csv")
             d = self.clean_columns(d)
             raw_dfs.append(d)
         raw_df = pd.concat(raw_dfs)
