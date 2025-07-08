@@ -53,7 +53,7 @@ export function DownloadShareButtons({
             ? { isETR: "true" }
             : { isETR: "false", tariff: (Math.round(selectedTariff * 1000) / 1000).toString() }),
     });
-    const shareUrl = `${window.location.origin}${window.location.pathname}#view?${queryParams.toString()}`;
+    const shareUrl = `${window.location.origin}${window.location.pathname}?${queryParams.toString()}`;
 
     const shareTitle =
         isCountryMode
