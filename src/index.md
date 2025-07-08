@@ -38,7 +38,7 @@ import {
     binaryFilter
 } from "./js/transformData.js";
 import {
-    title, deck, introText, legendTitle, legendSubtitle, subsectionTitle
+    legendTitle, legendSubtitle, subsectionTitle
 } from "./js/copyText.js";
 
 const recentData = FileAttachment("./data/africa_exports_to_us_2022_2024_ustrade.csv").csv({typed: true});
@@ -68,8 +68,6 @@ function App() {
     const [selectedUnits, setSelectedUnits] = React.useState("usd")
     const [showMore, setShowMore] = React.useState(false);
     const [initialScroll, setInitialScroll] = React.useState(false);
-    const [hasParsedURL, setHasParsedURL] = React.useState(false);
-    const [userSetTariff, setUserSetTariff] = React.useState(false);
 
     const cardRef = React.useRef();
     const [showSlider, setShowSlider] = React.useState(false);
@@ -85,99 +83,18 @@ function App() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
-    React.useEffect(() => {
-        function extractQueryParamsFromURL(url) {
-            try {
-                const parsedUrl = new URL(url);
-                return new URLSearchParams(parsedUrl.search);
-            } catch {
-                return new URLSearchParams(); // fallback to empty
-            }
-        }
-
-        let query;
-
-        // Try standalone mode first
-        if (window.location.search && window.location.search.length > 1) {
-            query = new URLSearchParams(window.location.search);
-        } else if (document.referrer) {
-            // If embedded, extract from referrer
-            query = extractQueryParamsFromURL(document.referrer);
-        } else {
-            query = new URLSearchParams(); // nothing to parse
-        }
-
-        const country = query.get("country");
-        const sector = query.get("sector");
-        const tariff = query.get("tariff");
-        const isETRParam = query.get("isETR");
-
-        let parsedTariff = null;
-        let parsedIsETR = true;
-
-        if (country) setSelectedCountry(country);
-        if (sector) setSelectedSector(sector);
-
-        if (isETRParam !== null) {
-            parsedIsETR = isETRParam === "true";
-            setIsETR(parsedIsETR);
-        }
-
-        if (!parsedIsETR && tariff !== null) {
-            const parsed = parseFloat(tariff);
-            if (!isNaN(parsed)) {
-                parsedTariff = parsed;
-                setSelectedTariff(parsedTariff);
-                setUserSetTariff(true);
-            }
-        }
-
-        setHasParsedURL(true);
-    }, []);
-
-
-    React.useEffect(() => {
-        if (!hasParsedURL) return;
-
-        const query = new URLSearchParams();
-
-        if (selectedSector !== "All sectors") {
-            query.set("country", "ALL");
-            query.set("sector", selectedSector);
-        } else {
-            query.set("country", selectedCountry);
-            query.set("sector", "All sectors");
-        }
-
-        if (isETR) {
-            query.set("isETR", "true");
-        } else if (selectedTariff !== undefined) {
-            query.set("tariff", selectedTariff.toString());
-            query.set("isETR", "false");
-        }
-
-        // Only update URL if running standalone (not inside an iframe)
-        if (window.top === window.self) {
-            window.history.replaceState(null, "", `?${query.toString()}`);
-        }
-    }, [selectedCountry, selectedSector, selectedTariff, isETR, hasParsedURL]);
     
     // Crossed data between csv and geojson to make sure all countries are present
     const crossData = generateCrossData(recentData, geoData)
 
-    // Ensure ETR is applied on first load (if not overridden via URL)
     React.useEffect(() => {
-        if (!hasParsedURL) return;
-
-        // Don't override if a custom tariff was set by the user
-        if (!isETR || userSetTariff) return;
+        if (!isETR) return;
 
         const entry = crossData.find(d => d.iso3 === selectedCountry && d.sector === selectedSector);
         if (entry?.etr != null) {
             setSelectedTariff(entry.etr);
         }
-    }, [hasParsedURL, isETR, userSetTariff, selectedCountry, selectedSector, crossData]);
+    }, [isETR, selectedCountry, selectedSector, crossData]);
 
     // Data to use on hexMap
     const mapData = generateMapData(crossData, geoData, selectedSector)
@@ -226,7 +143,6 @@ function App() {
                 setShowMore={setShowMore}
                 initialScroll={initialScroll}
                 setInitialScroll={setInitialScroll}
-                setUserSetTariff={setUserSetTariff}
                 showSlider={showSlider}
             />
             <div className="main-block">
@@ -242,7 +158,7 @@ function App() {
                     selectedSector={selectedSector}
                     clickedCountry={selectedCountry}
                     setCountry={setSelectedCountry}
-                    setETR={setSelectedTariff}
+                    setSelectedTariff={setSelectedTariff}
                     allETR={allETR}
                     setTooltip={setTooltipContent}
                     initialScroll={initialScroll}
