@@ -15,16 +15,14 @@ import {
     EmailIcon
 } from "react-share";
 
-export function DownloadShareButtons({
-                                         targetId,
-                                         selectedCountry,
-                                         selectedCountryISO3,
-                                         selectedSector,
-                                         selectedTariff,
-                                         isETR
-                                     }) {
+export function DownloadShareButtons({ targetId }) {
+
     const [showShareOptions, setShowShareOptions] = React.useState(false);
     const hideTimeoutRef = React.useRef(null);
+    const shareRef = React.useRef(null);
+
+    const shareUrl = "https://data.one.org/analysis/tariff-turbulence-simulator";
+    const shareTitle = "Check out the cost of US tariffs on Africa:";
 
     const handleMouseEnter = () => {
         if (hideTimeoutRef.current) {
@@ -38,31 +36,10 @@ export function DownloadShareButtons({
         if (window.matchMedia("(hover: hover)").matches) {
             hideTimeoutRef.current = setTimeout(() => {
                 setShowShareOptions(false);
-            }, 300); // ⏱ 300ms delay before hiding
+            }, 200);
         }
     };
 
-    const shareRef = React.useRef(null);
-
-    const isCountryMode = selectedSector === "All sectors";
-
-    const queryParams = new URLSearchParams({
-        country: selectedCountryISO3,
-        sector: selectedSector,
-        ...(isETR
-            ? { isETR: "true" }
-            : { isETR: "false", tariff: (Math.round(selectedTariff * 1000) / 1000).toString() }),
-    });
-    const shareUrl = `${window.location.origin}${window.location.pathname}?${queryParams.toString()}`;
-
-    const shareTitle =
-        isCountryMode
-            ? (selectedCountryISO3 === "ALL"
-                ? "Check out the cost of US tariffs on Africa:"
-                : `Check out the cost of US tariffs on ${selectedCountry}:`)
-            : `Check out the cost of US tariffs on Africa's ${selectedSector.toLowerCase()} sector:`;
-
-    // Download logic
     const handleDownload = async () => {
         const element = document.getElementById(targetId);
         if (!element) return;
@@ -83,7 +60,6 @@ export function DownloadShareButtons({
         }
     };
 
-    // Share fallback for mobile
     const handleShare = async () => {
         const element = document.getElementById(targetId);
         if (!element) return;
@@ -91,7 +67,7 @@ export function DownloadShareButtons({
         try {
             const canvas = await html2canvas(element, {
                 backgroundColor: null,
-                useCORS: true,
+                useCORS: true
             });
 
             const dataUrl = canvas.toDataURL("image/png");
@@ -102,8 +78,7 @@ export function DownloadShareButtons({
             if (navigator.canShare?.({ files: [file] })) {
                 await navigator.share({
                     title: shareTitle,
-                    text: "Here’s the visual:",
-                    files: [file],
+                    files: [file]
                 });
                 return;
             }
@@ -133,7 +108,6 @@ export function DownloadShareButtons({
                 <p className="text-support-small">Share</p>
                 <ShareIcon className="ds-icon" />
 
-                {/* Tooltip bubble */}
                 {showShareOptions && (
                     <div
                         className="share-options-tooltip"
