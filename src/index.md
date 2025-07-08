@@ -87,37 +87,55 @@ function App() {
     }, []);
 
     React.useEffect(() => {
-        const hash = window.location.hash;
+        function extractQueryParamsFromURL(url) {
+            try {
+                const parsedUrl = new URL(url);
+                return new URLSearchParams(parsedUrl.search);
+            } catch {
+                return new URLSearchParams(); // fallback to empty
+            }
+        }
+
+        let query;
+
+        // Try standalone mode first
+        if (window.location.search && window.location.search.length > 1) {
+            query = new URLSearchParams(window.location.search);
+        } else if (document.referrer) {
+            // If embedded, extract from referrer
+            query = extractQueryParamsFromURL(document.referrer);
+        } else {
+            query = new URLSearchParams(); // nothing to parse
+        }
+
+        const country = query.get("country");
+        const sector = query.get("sector");
+        const tariff = query.get("tariff");
+        const isETRParam = query.get("isETR");
+
         let parsedTariff = null;
         let parsedIsETR = true;
 
-        if (hash.includes("?")) {
-            const queryString = hash.split("?")[1];
-            const query = new URLSearchParams(queryString);
+        if (country) setSelectedCountry(country);
+        if (sector) setSelectedSector(sector);
 
-            const country = query.get("country");
-            const sector = query.get("sector");
-            const tariff = query.get("tariff");
-            const isETRParam = query.get("isETR");
-
-            if (country) setSelectedCountry(country);
-            if (sector) setSelectedSector(sector);
-
+        if (isETRParam !== null) {
             parsedIsETR = isETRParam === "true";
             setIsETR(parsedIsETR);
+        }
 
-            if (!parsedIsETR && tariff !== null) {
-                const parsed = parseFloat(tariff);
-                if (!isNaN(parsed)) {
-                    parsedTariff = parsed;
-                    setSelectedTariff(parsedTariff);
-                    setUserSetTariff(true);
-                }
+        if (!parsedIsETR && tariff !== null) {
+            const parsed = parseFloat(tariff);
+            if (!isNaN(parsed)) {
+                parsedTariff = parsed;
+                setSelectedTariff(parsedTariff);
+                setUserSetTariff(true);
             }
         }
-        
+
         setHasParsedURL(true);
     }, []);
+
 
     React.useEffect(() => {
         if (!hasParsedURL) return;
@@ -139,7 +157,10 @@ function App() {
             query.set("isETR", "false");
         }
 
-        window.history.replaceState(null, "", `#view?${query.toString()}`);
+        // Only update URL if running standalone (not inside an iframe)
+        if (window.top === window.self) {
+            window.history.replaceState(null, "", `?${query.toString()}`);
+        }
     }, [selectedCountry, selectedSector, selectedTariff, isETR, hasParsedURL]);
     
     // Crossed data between csv and geojson to make sure all countries are present
