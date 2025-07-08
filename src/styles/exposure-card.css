@@ -30,9 +30,5 @@
 
 .tariff-text {
     letter-spacing: 1%;
-    width: max-content;
-    white-space: nowrap;       /* prevents line break */
-    overflow: hidden;          /* hides overflow if it doesn't fit */
-    text-overflow: ellipsis;   /* optional: adds "…" if text overflows */
-    flex-shrink: 0;            /* prevents the item from shrinking */
+    flex-shrink: 0;
 }
