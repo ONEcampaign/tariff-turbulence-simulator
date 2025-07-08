@@ -23,7 +23,6 @@ export function ControlPanel({
                                  setShowMore,
                                  initialScroll,
                                  setInitialScroll,
-                                 setUserSetTariff,
                                  showSlider
 }) {
 
@@ -122,7 +121,6 @@ export function ControlPanel({
                         isETR={isETR}
                         setIsETR={setIsETR}
                         etr={Number.isFinite(selectedData.etr) ? selectedData.etr : null}
-                        setUserSetTariff={setUserSetTariff}
                     />
                 </div>
             </div>

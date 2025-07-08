@@ -7,8 +7,7 @@ export function Slider({
                            selectedTariff, // number between 0 and 1
                            setSelectedTariff,
                            setIsETR,
-                           etr,
-                           setUserSetTariff
+                           etr
                        }) {
     const trackRef = React.useRef(null);
 
@@ -71,7 +70,6 @@ export function Slider({
                     onClick={() => {
                         setSelectedTariff(etr);
                         setIsETR(true);
-                        setUserSetTariff(false);
                     }}
                     style={{ cursor: "pointer" }}
                 >
@@ -82,7 +80,6 @@ export function Slider({
                     onClick={() => {
                         setSelectedTariff(etr);
                         setIsETR(true);
-                        setUserSetTariff(false);
                     }}
                     style={{ cursor: "pointer" }}
                 />
