@@ -66,12 +66,13 @@ export function Methodology() {
 
                     <p className="text-body">
                         Country- and sector-level ETRs are calculated based on the average export values between 2022 and 2024.
-                        To compute the impact in US dollars, the country-sector ETR is multiplied by the corresponding average export value.
+                        The total cost results from multiplying country-sector ETRs by the corresponding average export value.
+                        This assumes that the full cost of US tariffs is passed onto exporting countries.
                     </p>
 
                     <p className="text-body">
-                        To calculate the impact as a share of GDP, the result in US dollars is divided by the average GDP from 2022 to 2024.
-                        GDP data is sourced from the IMF's <em>World Economic Outlook</em> via <a href="https://docs.one.org/tools/bblocks/data-importers/importers/weo/" target="_blank"> our <code>bblocks.data-importers</code> package</a>.
+                        To calculate the cost per capita, the result in US dollars is divided by the average population from 2022 to 2024.
+                        Population data is sourced from the IMF's <em>World Economic Outlook</em> via <a href="https://docs.one.org/tools/bblocks/data-importers/importers/weo/" target="_blank"> our <code>bblocks.data-importers</code> package</a>.
                     </p>
 
                     <p className="text-body">
