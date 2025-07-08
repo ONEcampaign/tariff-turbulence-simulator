@@ -7,13 +7,19 @@
 
 .toggle-buttons-wrapper {
     display: flex;
-    align-items: center;
-    gap: var(--margin-small);
+    flex-flow: row wrap;
+    align-items: baseline;
+    row-gap: var(--margin-small);
+    column-gap: var(--margin-large);
     margin-bottom: var(--margin-small);
 }
 
-.text-inputs.toggle-title {
-    padding-right: var(--margin-medium);
+.toggle-buttons-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: var(--margin-small);
+    margin-bottom: var(--margin-small);
 }
 
 .text-toggle-button.text-inputs {
