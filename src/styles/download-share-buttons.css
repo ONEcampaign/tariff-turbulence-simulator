@@ -30,7 +30,6 @@
     position: absolute;
     top: auto;
     bottom: calc(100% + 8px); /* show above the share button */
-    /*left: 50%;*/
     transform: translateX(-50%);
     background: white;
     border: 1px solid #ccc;
@@ -40,7 +39,6 @@
     display: flex;
     flex-flow: row wrap;
     gap: 8px;
-    align-items: first baseline;
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 140px;

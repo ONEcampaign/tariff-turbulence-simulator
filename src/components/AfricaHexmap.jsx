@@ -11,7 +11,7 @@ export function AfricaHexmap({
                                  selectedSector,
                                  clickedCountry,
                                  setCountry,
-                                 setETR,
+                                 setSelectedTariff,
                                  allETR,
                                  setTooltip,
                                  initialScroll,
@@ -56,7 +56,7 @@ export function AfricaHexmap({
                 ) {
                     setCountry("ALL");
                     if (Number.isFinite(allETR)) {
-                        setETR(allETR);
+                        setSelectedTariff(allETR);
                     }
                 }
             }}
@@ -80,7 +80,7 @@ export function AfricaHexmap({
                     ) {
                         setCountry("ALL");
                         if (Number.isFinite(allETR)) {
-                            setETR(allETR);
+                            setSelectedTariff(allETR);
                         }
                     }
                 }}
@@ -127,12 +127,12 @@ export function AfricaHexmap({
                                         if (clickedCountry === iso3) {
                                             setCountry("ALL");
                                             if (Number.isFinite(allETR)) {
-                                                setETR(allETR);
+                                                setSelectedTariff(allETR);
                                             }
                                         } else {
                                             setCountry(iso3);
                                             if (Number.isFinite(etr)) {
-                                                setETR(etr);
+                                                setSelectedTariff(etr);
                                             }
                                             // Scroll to exposure card
                                             if (!initialScroll) {

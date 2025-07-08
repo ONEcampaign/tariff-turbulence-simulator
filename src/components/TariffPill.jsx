@@ -14,8 +14,6 @@ export function TariffPill({ isETR, selectedTariff, mode, individualTariff = nul
         displayLabel = isETR ? "ETR" : formatPercentage(selectedTariff, {});
     }
 
-    console.log(mode);
-
     const isMenuCollapsible = window.innerWidth <= 1120;
 
     React.useEffect(() => {
