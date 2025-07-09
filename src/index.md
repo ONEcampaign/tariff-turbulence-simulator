@@ -13,21 +13,13 @@ observer.observe(document.documentElement);
 
 ```js
 import * as React from "npm:react";
-import {ControlPanel} from "./components/ControlPanel.js";
+import {DropdownProvider} from "./components/common/DropdownContext.js";
+import {ControlPanel} from "./components/control-panel/ControlPanel.js";
 import {Intro} from "./components/Intro.js";
-import {Legend} from "./components/Legend.js";
-import {AfricaHexmap} from "./components/AfricaHexmap.js";
+import {MainViz} from "./components/main-viz/MainViz.js";
 import {ExposureCard} from "./components/ExposureCard.js";
-import {DropdownProvider} from "./components/DropdownContext.js";
-import {Tooltip} from "./components/Tooltip.js";
-import {SubsectionTitle} from "./components/SubsectionTitle.js";
-import {DescriptionText} from "./components/DescriptionText.js";
-import {ToggleButton} from "./components/ToggleButton.js";
-import {CountryCarousel} from "./components/CountryCarousel.js"
-import {SelectionCard} from "./components/SelectionCard.js";
+import {BottomSection} from "./components/bottom-section/BottomSection.js"
 import {Methodology} from "./components/Methodology.js";
-import {MutualExclusion} from "./components/MutualExclusion.js";
-import {ChevronDown} from "./components/ChevronDown.js";
 import {
     generateCrossData,
     generateMapData,
@@ -37,9 +29,6 @@ import {
     generateSelectionCardData,
     binaryFilter
 } from "./js/transformData.js";
-import {
-    legendTitle, legendSubtitle, subsectionTitle
-} from "./js/copyText.js";
 
 const recentData = FileAttachment("./data/africa_exports_to_us_2022_2024_ustrade.csv").csv({typed: true});
 const historicalData = FileAttachment("./data/africa_exports_to_us_2002_2023_baci.csv").csv({typed: true});
@@ -48,11 +37,7 @@ const geoData = FileAttachment("./data/africa_hexmap.geojson").json({typed: true
 
 ```jsx
 function App() {
-
-    // Hexmap dimensions
-    const width = 600;
-    const height = 600;
-
+    
     // Reactive variables
     const [selectedCountry, setSelectedCountry] = React.useState("ALL");
     const [selectedSector, setSelectedSector] = React.useState("All sectors");
@@ -73,17 +58,17 @@ function App() {
     const [showSlider, setShowSlider] = React.useState(false);
     const handleScroll = () => {
         const y = cardRef.current.getBoundingClientRect().top;
-        setShowSlider(y <= 100); 
+        setShowSlider(y <= 100);
     };
 
     React.useEffect(() => {
-        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('scroll', handleScroll, {passive: true});
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-    
+
     // Crossed data between csv and geojson to make sure all countries are present
     const crossData = generateCrossData(recentData, geoData)
 
@@ -146,70 +131,38 @@ function App() {
                 showSlider={showSlider}
             />
             <div className="main-block">
-                <Intro />
-                <Legend
-                    title={legendTitle}
-                    subtitle={legendSubtitle}
-                />
-                <AfricaHexmap
-                    width={width}
-                    height={height}
-                    data={mapData}
+                <Intro/>
+                <MainViz
+                    mapData={mapData}
                     selectedSector={selectedSector}
-                    clickedCountry={selectedCountry}
-                    setCountry={setSelectedCountry}
+                    selectedCountry={selectedCountry}
+                    setSelectedCountry={setSelectedCountry}
                     setSelectedTariff={setSelectedTariff}
                     allETR={allETR}
-                    setTooltip={setTooltipContent}
+                    setTooltipContent={setTooltipContent}
                     initialScroll={initialScroll}
                     setInitialScroll={setInitialScroll}
-                />
-                <Tooltip
-                    x={tooltipContent.x}
-                    y={tooltipContent.y}
-                    data={tooltipData}
-                    isVisible={isTooltipVisible}
+                    tooltipData={tooltipData}
+                    isTooltipVisible={isTooltipVisible}
+                    tooltipContent={tooltipContent}
                 />
                 <ExposureCard
                     data={exposureCardData}
                     ref={cardRef}
                     isETR={isETR}
                 />
-                <SubsectionTitle content={subsectionTitle}/>
-                <DescriptionText
-                    data={cardMode === "carousel" ? carouselData : selectionCardData}
-                    mode={cardMode}
-                    isERT={isETR}
+                <BottomSection
+                    cardMode={cardMode}
+                    carouselData={carouselData}
+                    selectionCardData={selectionCardData}
+                    selectedHistoricalData={selectedHistoricalData}
+                    isETR={isETR}
                     selectedTariff={selectedTariff}
                     selectedUnits={selectedUnits}
+                    setSelectedUnits={setSelectedUnits}
+                    showMore={showMore}
+                    setShowMore={setShowMore}
                 />
-                {
-                    cardMode === "carousel" ? (
-                        <div>
-                            <ToggleButton
-                                selected={selectedUnits}
-                                setSelected={setSelectedUnits}
-                            />
-                            <CountryCarousel
-                                data={carouselData}
-                                mode={cardMode}
-                                isETR={isETR}
-                                selectedTariff={selectedTariff}
-                                selectedUnits={selectedUnits}
-                            />
-                        </div>
-                    ) : (
-                        <SelectionCard
-                            data={selectionCardData}
-                            historicalData={selectedHistoricalData}
-                            mode={cardMode}
-                            isETR={isETR}
-                            selectedTariff={selectedTariff}
-                            showMore={showMore}
-                            setShowMore={setShowMore}
-                        />
-                    )
-                }
                 <Methodology/>
             </div>
         </div>

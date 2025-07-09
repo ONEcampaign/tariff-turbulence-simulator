@@ -1,7 +1,7 @@
 import * as React from "npm:react";
 import * as d3 from "npm:d3";
-import { colorPalette } from "../js/colorPalette.js";
-import { riskThresholds } from "../js/riskThresholds.js";
+import { colorPalette } from "../../js/colorPalette.js";
+import { riskThresholds } from "../../js/riskThresholds.js";
 
 // Match your color scale thresholds
 const colorScale = d3.scaleThreshold(
@@ -17,12 +17,12 @@ const legendItems = [
     { label: "No data", color: colorPalette.na }
 ];
 
-export function Legend({ title, subtitle} = {}) {
+export function VizHeader({ title, subtitle} = {}) {
     return (
-        <div className="legend">
-            <h3 className="legend-title text-impact-medium">{title}</h3>
-            <h4 className="legend-subtitle text-support-xlarge">{subtitle}</h4>
-            <div className="legend-items">
+        <div className="viz-header-wrapper">
+            <h3 className="viz-title text-impact-medium">{title}</h3>
+            <h4 className="viz-subtitle text-support-xlarge">{subtitle}</h4>
+            <div className="legend-wrapper">
                 {legendItems.map(({ label, color }) => (
                     <div className="legend-item" key={label}>
                         <div

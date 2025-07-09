@@ -1,13 +1,13 @@
 import * as React from "npm:react";
 import * as d3 from "npm:d3";
-import { ColumnPlot } from "./ColumnPlot.js";
-import { LinePlot} from "./LinePlot.js";
-import {formatPercentage, formatCurrency} from "../js/format.js";
-import { colorPalette } from "../js/colorPalette.js";
-import { riskThresholds } from "../js/riskThresholds.js";
 import {TariffPill} from "./TariffPill.js";
-import {ChevronDown} from "./ChevronDown.js";
-import {DownloadShareButtons} from "./DownloadShareButtons.js";
+import {ColumnPlot} from "./ColumnPlot.js";
+import {LinePlot} from "./LinePlot.js";
+import {DownloadShareButtons} from "../common/DownloadShareButtons.js";
+import {ChevronDown} from "../svgs/ChevronDown.js";
+import {formatPercentage, formatCurrency} from "../../js/format.js";
+import {colorPalette} from "../../js/colorPalette.js";
+import {riskThresholds} from "../../js/riskThresholds.js";
 
 const colorScale = d3.scaleThreshold(
     riskThresholds,

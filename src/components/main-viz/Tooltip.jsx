@@ -1,7 +1,7 @@
 import * as d3 from "npm:d3";
-import { colorPalette } from "../js/colorPalette.js";
-import { riskThresholds } from "../js/riskThresholds.js";
-import { formatPercentage, formatCurrency } from "../js/format.js";
+import { colorPalette } from "../../js/colorPalette.js";
+import { riskThresholds } from "../../js/riskThresholds.js";
+import { formatPercentage, formatCurrency } from "../../js/format.js";
 
 const colorScale = d3.scaleThreshold(
     riskThresholds,

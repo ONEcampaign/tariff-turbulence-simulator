@@ -1,7 +1,7 @@
 import * as React from "npm:react";
 import * as d3 from "npm:d3";
-import { formatCurrency } from "../js/format.js";
-import { colorPalette } from "../js/colorPalette.js";
+import { formatCurrency } from "../../js/format.js";
+import { colorPalette } from "../../js/colorPalette.js";
 
 const getChunks = (array, chunkSize) => {
     return Array(Math.ceil(array.length / chunkSize)).fill()

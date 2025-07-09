@@ -1,5 +1,5 @@
 import * as React from "npm:react";
-import { formatPercentage } from "../js/format.js";
+import { formatPercentage } from "../../js/format.js";
 
 export function TariffPill({ isETR, selectedTariff, mode, individualTariff = null }) {
 

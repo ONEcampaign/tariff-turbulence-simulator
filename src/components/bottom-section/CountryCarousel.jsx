@@ -1,10 +1,10 @@
 import * as React from "npm:react";
 import * as d3 from "npm:d3";
-import {colorPalette} from "../js/colorPalette.js";
-import {riskThresholds} from "../js/riskThresholds.js";
-import {formatPercentage, formatCurrency} from "../js/format.js";
 import {TariffPill} from "./TariffPill.js";
-import {DownloadShareButtons} from "./DownloadShareButtons.js";
+import {DownloadShareButtons} from "../common/DownloadShareButtons.js";
+import {formatPercentage, formatCurrency} from "../../js/format.js";
+import {colorPalette} from "../../js/colorPalette.js";
+import {riskThresholds} from "../../js/riskThresholds.js";
 
 const colorScale = d3.scaleThreshold(
     riskThresholds,
