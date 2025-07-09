@@ -13,7 +13,7 @@ observer.observe(document.documentElement);
 
 ```js
 import * as React from "npm:react";
-import {DropdownProvider} from "./components/DropdownContext.js";
+import {DropdownProvider} from "./components/common/DropdownContext.js";
 import {ControlPanel} from "./components/control-panel/ControlPanel.js";
 import {Intro} from "./components/Intro.js";
 import {MainViz} from "./components/main-viz/MainViz.js";

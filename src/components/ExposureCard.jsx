@@ -1,6 +1,6 @@
 import * as React from "npm:react";
 import {formatCurrency, formatPercentage} from "../js/format.js";
-import {DownloadShareButtons} from "./DownloadShareButtons.js";
+import {DownloadShareButtons} from "./common/DownloadShareButtons.js";
 
 export const ExposureCard = React.forwardRef(function ({
                                                            data,

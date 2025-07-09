@@ -3,7 +3,7 @@ import * as d3 from "npm:d3";
 import {TariffPill} from "./TariffPill.js";
 import {ColumnPlot} from "./ColumnPlot.js";
 import {LinePlot} from "./LinePlot.js";
-import {DownloadShareButtons} from "../DownloadShareButtons.js";
+import {DownloadShareButtons} from "../common/DownloadShareButtons.js";
 import {ChevronDown} from "../svgs/ChevronDown.js";
 import {formatPercentage, formatCurrency} from "../../js/format.js";
 import {colorPalette} from "../../js/colorPalette.js";

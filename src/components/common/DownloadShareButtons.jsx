@@ -1,8 +1,8 @@
 import * as React from "npm:react";
 import html2canvas from "npm:html2canvas";
-import {DownloadIcon} from "./svgs/DownloadIcon.js";
-import {ShareIcon} from "./svgs/ShareIcon.js";
-import {LinkIcon} from "./svgs/LinkIcon.js";
+import {DownloadIcon} from "../svgs/DownloadIcon.js";
+import {ShareIcon} from "../svgs/ShareIcon.js";
+import {LinkIcon} from "../svgs/LinkIcon.js";
 import {
     FacebookShareButton,
     TwitterShareButton,
