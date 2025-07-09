@@ -1,3 +1,4 @@
+// Container for the detailed exposure section below the map.
 import {SectionTitle} from "./SectionTitle.js";
 import {DescriptionText} from "./DescriptionText.js";
 import {ToggleButton} from "./ToggleButton.js";

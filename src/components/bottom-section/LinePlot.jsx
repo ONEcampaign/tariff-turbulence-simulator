@@ -1,3 +1,4 @@
+// Minimal line chart used in the selection card for historical exports.
 import * as React from "npm:react";
 import * as d3 from "npm:d3";
 

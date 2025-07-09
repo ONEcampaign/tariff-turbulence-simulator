@@ -1,3 +1,11 @@
+"""Loader for USA Trade Online data and tariff simulations.
+
+This module fetches recent US import data and combines it with tariff
+information to compute Effective Tariff Rates. It is used by the CLI
+scripts in ``src/data`` to produce the CSV outputs consumed by the
+visualisation components.
+"""
+
 from pathlib import Path
 
 import pandas as pd
@@ -111,6 +119,7 @@ class UStradeLoader:
 
     @staticmethod
     def build_code_rate_map(json_paths: list[Path]) -> dict:
+        # Combine multiple JSON tariff files into a single prefix map
         rate_map: dict[str, float] = {}
         for path in json_paths:
             data = load_json(path)
@@ -126,6 +135,9 @@ class UStradeLoader:
     ) -> pd.DataFrame:
         def lookup_rate(code: str) -> float:
             code_str = str(code)
+            # Walk backwards through the code string and look for the
+            # longest matching prefix in ``rate_map``. This allows
+            # product codes of varying length to share a rate.
             for length in range(len(code_str), 3, -1):
                 prefix = code_str[:length]
                 if prefix in rate_map:
@@ -148,6 +160,7 @@ class UStradeLoader:
         return self.assign_tariff_rate(df, rate_map)
 
     def add_etr_column(self, df: pd.DataFrame) -> pd.DataFrame:
+        # Compute ETR for individual and aggregate combinations
         variants = [
             {},
             {"sector": "All sectors"},

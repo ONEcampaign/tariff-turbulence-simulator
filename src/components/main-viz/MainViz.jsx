@@ -1,3 +1,4 @@
+// Wrapper that combines the map, header and tooltip components.
 import {VizHeader} from "./VizHeader.js";
 import {AfricaHexmap} from "./AfricaHexmap.js";
 import {Tooltip} from "./Tooltip.js";

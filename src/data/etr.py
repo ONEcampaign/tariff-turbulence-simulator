@@ -1,4 +1,9 @@
-"""Utilities for computing effective tariff rates."""
+"""Utilities for computing Effective Tariff Rates (ETR).
+
+The functions here are used by loaders in :mod:`src.data.loaders` to
+aggregate trade values and apply tariff schedules when simulating the
+impact of US tariffs.
+"""
 
 from __future__ import annotations
 
@@ -35,6 +40,7 @@ def pivot_tariff_values(
 
 
 def compute_total_exports(df: pd.DataFrame, idx_cols: list[str]) -> pd.DataFrame:
+    # Sum export values across all tariff rates for each group
     totals = (
         df.groupby(idx_cols, observed=True, dropna=False)["exports"].sum().reset_index()
     )
@@ -53,6 +59,7 @@ def compute_etr_by_group(
 ) -> pd.DataFrame:
     if group_cols is None:
         group_cols = ["country", "sector"]
+    # First aggregate exports by rate for each group
     df_by_rate = (
         df.groupby(group_cols + ["rate"], observed=True, dropna=False)["exports"]
         .sum()

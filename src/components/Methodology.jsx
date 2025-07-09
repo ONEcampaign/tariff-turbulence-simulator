@@ -1,3 +1,4 @@
+// Collapsible section describing how the ETR and cost figures are calculated.
 import * as React from "npm:react";
 import { ChevronDown } from "./svgs/ChevronDown.js";
 

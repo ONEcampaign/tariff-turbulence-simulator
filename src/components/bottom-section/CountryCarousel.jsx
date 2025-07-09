@@ -1,3 +1,4 @@
+// Horizontal card carousel comparing countries at a glance.
 import * as React from "npm:react";
 import * as d3 from "npm:d3";
 import {TariffPill} from "./TariffPill.js";
@@ -32,6 +33,7 @@ export function CountryCarousel(
     const carouselRef = React.useRef(null);
 
     React.useEffect(() => {
+        // Keep cards full width even when the sidebar is shown
         function updateCarouselWidth() {
             const container = carouselRef.current;
             if (container) {

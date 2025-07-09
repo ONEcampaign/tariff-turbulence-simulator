@@ -1,3 +1,4 @@
+// Widget for downloading a chart as PNG or sharing a link on social media.
 import * as React from "npm:react";
 import html2canvas from "npm:html2canvas";
 import {DownloadIcon} from "../svgs/DownloadIcon.js";

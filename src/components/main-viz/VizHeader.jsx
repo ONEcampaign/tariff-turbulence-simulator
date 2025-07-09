@@ -1,3 +1,4 @@
+// Title, subtitle and legend for the map visualisation.
 import * as React from "npm:react";
 import * as d3 from "npm:d3";
 import { colorPalette } from "../../js/colorPalette.js";

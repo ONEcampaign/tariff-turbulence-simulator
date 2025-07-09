@@ -1,3 +1,4 @@
+// Generates explanatory text for the bottom section based on current state.
 import * as React from "npm:react";
 import { formatPercentage, formatCurrency } from "../../js/format.js";
 

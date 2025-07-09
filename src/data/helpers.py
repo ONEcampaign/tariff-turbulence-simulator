@@ -1,3 +1,10 @@
+"""Helper functions used across the data pipeline.
+
+These utilities handle JSON loading, product sector mapping and
+country filtering. They are imported by the loaders to prepare raw data
+for Effective Tariff Rate calculations.
+"""
+
 import json
 import pandas as pd
 
@@ -46,6 +53,7 @@ def group_data(
 
 def filter_african_countries(df: pd.DataFrame, iso_col: str) -> pd.DataFrame:
     """Filter a DataFrame to African countries based on an ISO column."""
+    # ``country_converter`` maps ISO codes to regions and names
     import country_converter as coco
 
     cc = coco.CountryConverter()

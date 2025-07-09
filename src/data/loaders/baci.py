@@ -1,3 +1,10 @@
+"""Load and clean historical trade data from the BACI database.
+
+This loader feeds preprocessed trade values into the ETR calculations.
+It relies on :mod:`src.data.config` for file locations and
+:mod:`src.data.helpers` for common data wrangling tasks.
+"""
+
 import pandas as pd
 from bblocks.data_importers import BACI
 
@@ -19,6 +26,7 @@ class BaciLoader:
         else:
             baci = BACI()
             raw_df = baci.get_data(hs_version="HS02", incl_country_labels=True)
+            # Keep US imports only and summarise by year/country/sector
             df = raw_df.query("importer_iso3_code == 'USA'")
             df = add_sector_group_column(df)
             df = group_data(df, ["year", "exporter_iso3_code", "sector"])
