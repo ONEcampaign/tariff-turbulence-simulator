@@ -1,3 +1,4 @@
+// Accessible dropdown menu used in the control panel.
 import * as React from "npm:react";
 import { useDropdownContext } from "../common/DropdownContext.js";
 import { ChevronDown } from "../svgs/ChevronDown.js";

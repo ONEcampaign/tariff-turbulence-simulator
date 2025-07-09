@@ -1,3 +1,4 @@
+// Card summarising the impact for a single country or sector.
 import * as React from "npm:react";
 import * as d3 from "npm:d3";
 import {TariffPill} from "./TariffPill.js";

@@ -1,3 +1,4 @@
+// Context used by dropdown menus to close each other when opened.
 import * as React from "npm:react";
 
 const DropdownContext = React.createContext();

@@ -1,3 +1,4 @@
+// Custom slider for adjusting the simulated tariff.
 import * as React from "npm:react";
 
 import { formatPercentage } from "../../js/format.js";

@@ -1,3 +1,4 @@
+// Small pill showing the active tariff value with a tooltip on mobile.
 import * as React from "npm:react";
 import { formatPercentage } from "../../js/format.js";
 

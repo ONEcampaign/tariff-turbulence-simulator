@@ -1,3 +1,4 @@
+// Sidebar with dropdowns and slider controlling the visualisation state.
 import * as React from "npm:react";
 import {ChevronDown} from "../svgs/ChevronDown.js";
 import {Dropdown} from "./Dropdown.js";

@@ -1,3 +1,4 @@
+// Interactive hexagonal map showing country ETR values.
 import * as d3 from "npm:d3";
 import * as React from "npm:react";
 import { formatPercentage } from "../../js/format.js";

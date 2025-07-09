@@ -1,8 +1,15 @@
+"""Centralised paths used throughout the data loaders.
+
+This module exposes a ``PATHS`` class with directories to input files.
+Loaders in :mod:`src.data.loaders` rely on these paths to locate raw
+trade files and tariff definitions.
+"""
+
 from pathlib import Path
 
 
 class PATHS:
-    """Class to store the paths to the inputs."""
+    """Collection of project data locations."""
 
     SRC = Path(__file__).resolve().parent.parent
 

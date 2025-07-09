@@ -1,3 +1,5 @@
+"""Command line interface to export recent USA Trade data as CSV."""
+
 import sys
 from src.data.loaders import UStradeLoader
 
