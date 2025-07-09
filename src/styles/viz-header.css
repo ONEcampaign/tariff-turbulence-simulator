@@ -4,19 +4,19 @@
     --swatch-width-mobile: 62px;
 }
 
-.legend {
+.viz-header-wrapper {
     margin-bottom: var(--margin-large);
 }
 
-.legend-title.text-impact-medium {
+.viz-title.text-impact-medium {
     margin-bottom: var(--margin-small);
 }
 
-.legend-subtitle.text-support-xlarge {
+.viz-subtitle.text-support-xlarge {
     margin-bottom: var(--margin-medium);
 }
 
-.legend-items {
+.legend-wrapper {
     display: flex;
     flex-wrap: wrap;
     align-items: center;

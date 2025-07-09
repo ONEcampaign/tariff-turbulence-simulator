@@ -1,12 +1,12 @@
 import * as React from "npm:react";
-import {ChevronDown} from "./ChevronDown.js";
+import {ChevronDown} from "../svgs/ChevronDown.js";
 import {Dropdown} from "./Dropdown.js";
 import {Slider} from "./Slider.js";
 import {MutualExclusion} from "./MutualExclusion.js";
 import {
     generateCountryEntries,
     generateSectorGroups
-} from "../js/transformData.js";
+} from "../../js/transformData.js";
 
 
 

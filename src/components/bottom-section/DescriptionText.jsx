@@ -1,10 +1,10 @@
 import * as React from "npm:react";
-import { formatPercentage, formatCurrency } from "../js/format.js";
+import { formatPercentage, formatCurrency } from "../../js/format.js";
 
 export function DescriptionText({
                                     data,
                                     mode,
-                                    isERT,
+                                    isETR,
                                     selectedTariff,
                                     selectedUnits
                                 } = {}) {
@@ -17,7 +17,7 @@ export function DescriptionText({
 
     const getTariffText = (context) => {
         const tariff = formatPercentage(selectedTariff);
-        if (isERT) {
+        if (isETR) {
             return {
                 carousel: <>Using <b>each country's ETR</b>, </>,
                 country: <>Using <b>sector-specific ETRs</b>, </>,

@@ -1,5 +1,3 @@
-import * as React from "npm:react";
-
 export function MutualExclusion({
                                     selectedCountry,
                                     selectedSector,

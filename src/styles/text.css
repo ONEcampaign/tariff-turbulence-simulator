@@ -81,7 +81,7 @@ html {
     margin: 0;
 }
 
-.text-subsection-heading {
+.text-section-heading {
     font-family: var(--font-colfax);
     color: var(--font-color);
     font-weight: 700;

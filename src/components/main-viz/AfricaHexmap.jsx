@@ -1,8 +1,8 @@
 import * as d3 from "npm:d3";
 import * as React from "npm:react";
-import { formatPercentage } from "../js/format.js";
-import { colorPalette } from "../js/colorPalette.js";
-import { riskThresholds } from "../js/riskThresholds.js";
+import { formatPercentage } from "../../js/format.js";
+import { colorPalette } from "../../js/colorPalette.js";
+import { riskThresholds } from "../../js/riskThresholds.js";
 
 export function AfricaHexmap({
                                  width,
@@ -13,7 +13,7 @@ export function AfricaHexmap({
                                  setCountry,
                                  setSelectedTariff,
                                  allETR,
-                                 setTooltip,
+                                 setTooltipContent,
                                  initialScroll,
                                  setInitialScroll
                              } = {}) {
@@ -147,7 +147,7 @@ export function AfricaHexmap({
                                 }}
                                 onMouseMove={(event) => {
                                     if (clickedCountry === "ALL") {
-                                        setTooltip({
+                                        setTooltipContent({
                                             x: event.pageX,
                                             y: event.clientY + marginBottom > window.innerHeight
                                                 ? event.pageY - marginBottom
@@ -163,7 +163,7 @@ export function AfricaHexmap({
                                 }}
                                 onMouseLeave={() => setHoveredCountry(null)}
                                 onMouseOut={() => {
-                                    setTooltip({ x: null, y: null, country: null });
+                                    setTooltipContent({ x: null, y: null, country: null });
                                 }}
                                 style={{ cursor: "pointer" }}
                             />

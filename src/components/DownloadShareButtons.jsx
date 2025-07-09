@@ -1,5 +1,8 @@
 import * as React from "npm:react";
 import html2canvas from "npm:html2canvas";
+import {DownloadIcon} from "./svgs/DownloadIcon.js";
+import {ShareIcon} from "./svgs/ShareIcon.js";
+import {LinkIcon} from "./svgs/LinkIcon.js";
 import {
     FacebookShareButton,
     TwitterShareButton,
@@ -146,43 +149,6 @@ export function DownloadShareButtons({ targetId }) {
                 )}
             </div>
         </div>
-    );
-}
-
-function DownloadIcon() {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="18" height="18" fill="none">
-            <rect x="64" y="64" width="384" height="384" rx="48" fill="black" />
-            <rect x="96" y="96" width="320" height="320" rx="24" fill="white" />
-            <rect x="144" y="208" width="48" height="160" fill="black" />
-            <rect x="232" y="160" width="48" height="208" fill="black" />
-            <rect x="320" y="256" width="48" height="112" fill="black" />
-        </svg>
-    )
-}
-
-function ShareIcon() {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="125 80 360 360" width="20" height="18" fill="none">
-            <circle cx="180" cy="250" r="45" fill="black" />
-            <circle cx="350" cy="140" r="45" fill="black" />
-            <circle cx="350" cy="360" r="45" fill="black" />
-            <line x1="180" y1="250" x2="350" y2="140" stroke="black" stroke-width="25" />
-            <line x1="180" y1="250" x2="350" y2="360" stroke="black" stroke-width="25" />
-        </svg>
-    )
-}
-
-function LinkIcon() {
-    return (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="20"
-            height="20"
-        >
-            <path d="M3.9,12C3.9,10.29 5.29,8.9 7,8.9H11V7H7A5,5 0 0,0 2,12A5,5 0 0,0 7,17H11V15.1H7C5.29,15.1 3.9,13.71 3.9,12M8,13H16V11H8V13M17,7H13V8.9H17C18.71,8.9 20.1,10.29 20.1,12C20.1,13.71 18.71,15.1 17,15.1H13V17H17A5,5 0 0,0 22,12A5,5 0 0,0 17,7Z" />
-        </svg>
     );
 }
 

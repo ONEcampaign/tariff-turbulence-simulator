@@ -3,32 +3,41 @@
 
 @import url("observablehq:theme-air.css");
 
-@import url("./styles/layout.css");
+/* General styles */
 @import url("./styles/text.css");
+@import url("./styles/layout.css");
+@import url("./styles/mobile.css");
 
 @import url("styles/tariff-card.css");
 @import url("styles/flag-icon.css");
 @import url("styles/swatch.css");
+@import url("./styles/download-share-buttons.css");
 
-@import url("./styles/intro.css");
-@import url("styles/description-text.css");
-@import url("./styles/methodology.css");
-
+/* Control panel */
 @import url("./styles/sticky-controls.css");
 @import url("./styles/dropdown.css");
 @import url("./styles/slider.css");
+
+/* Intro */
+@import url("./styles/intro.css");
+
+/* Main viz */
+@import url("styles/viz-header.css");
 @import url("./styles/tooltip.css");
+
+/* Exposure card */
+@import url("./styles/exposure-card.css");
+
+/* Bottom section */
+@import url("styles/description-text.css");
 @import url("./styles/toggle-button.css");
 @import url("styles/tariff-pills.css");
-@import url("./styles/download-share-buttons.css");
-
-@import url("./styles/legend.css");
-@import url("./styles/exposure-card.css");
 @import url("./styles/country-carousel.css");
 @import url("styles/selection-card.css");
-
 @import url("./styles/column-plot.css");
-@import url("./styles/mobile.css");
+
+/* Methodology */
+@import url("./styles/methodology.css");
 
 :root {
     --main-block-width:  768px;

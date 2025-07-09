@@ -1,5 +1,5 @@
 import * as React from "npm:react";
-import { ChevronDown } from "./ChevronDown.js";
+import { ChevronDown } from "./svgs/ChevronDown.js";
 
 export function Methodology() {
     const [isOpen, setIsOpen] = React.useState(false);
