@@ -23,6 +23,8 @@ class UStradeLoader:
     """Loader for recent US trade data and tariff calculations."""
 
     def load(self) -> pd.DataFrame:
+        """Return fully processed trade data ready for export."""
+
         df = self.load_data()
         df = add_sector_group_column(df)
         df = self.add_rate_columns(df)
@@ -33,6 +35,7 @@ class UStradeLoader:
         return df[ordered_columns]
 
     def load_data(self) -> pd.DataFrame:
+        """Load raw CSV files and average values across months."""
         raw_dfs = []
         for y in YEAR_RANGE:
             d = pd.read_csv(PATHS.INPUTS / f"africa_exports_to_us_{y}_ustrade_raw.csv")
@@ -50,6 +53,7 @@ class UStradeLoader:
 
     @staticmethod
     def clean_columns(df: pd.DataFrame) -> pd.DataFrame:
+        """Standardize column names and convert types."""
         column_dict = {
             "Country": "country",
             "Time": "year",
@@ -65,6 +69,7 @@ class UStradeLoader:
 
     @staticmethod
     def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
+        """Convert country names to a consistent short form and add ISO3."""
         cc = coco.CountryConverter()
         df["country"] = cc.pandas_convert(
             df["country"], to="name_short", not_found="All countries"
@@ -74,6 +79,7 @@ class UStradeLoader:
 
     @staticmethod
     def get_africa_population_data() -> pd.DataFrame:
+        """Retrieve population figures for African countries from the WEO."""
         cc = coco.CountryConverter()
         weo = WEO()
         data = weo.get_data()
@@ -97,6 +103,7 @@ class UStradeLoader:
 
     @staticmethod
     def assert_iso3_code_alignment(df1: pd.DataFrame, df2: pd.DataFrame) -> bool:
+        """Ensure the same set of ISO3 codes exists in both DataFrames."""
         set1 = set(df1["iso3"].unique()) - {"ALL"}
         set2 = set(df2["iso3"].unique()) - {"ALL"}
         if set1 == set2:
@@ -108,6 +115,7 @@ class UStradeLoader:
         )
 
     def add_population_column(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Merge Africa population data, including an aggregate row."""
         pop_df = self.get_africa_population_data()
         if not self.assert_iso3_code_alignment(df, pop_df):
             raise ValueError("ISO3 code mismatch between dataframes")
@@ -119,7 +127,7 @@ class UStradeLoader:
 
     @staticmethod
     def build_code_rate_map(json_paths: list[Path]) -> dict:
-        # Combine multiple JSON tariff files into a single prefix map
+        """Combine multiple JSON tariff files into a single prefix map."""
         rate_map: dict[str, float] = {}
         for path in json_paths:
             data = load_json(path)
@@ -133,6 +141,7 @@ class UStradeLoader:
     def assign_tariff_rate(
         self, df: pd.DataFrame, rate_map: dict, default_rate: float = 0.1
     ) -> pd.DataFrame:
+        """Assign a tariff rate to each product_code by prefix lookup."""
         def lookup_rate(code: str) -> float:
             code_str = str(code)
             # Walk backwards through the code string and look for the
@@ -149,6 +158,7 @@ class UStradeLoader:
         return df
 
     def add_rate_columns(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Look up tariff rates for each product using local JSON files."""
         json_paths = [
             PATHS.ALUMINUM,
             PATHS.STEEL,
@@ -160,6 +170,7 @@ class UStradeLoader:
         return self.assign_tariff_rate(df, rate_map)
 
     def add_etr_column(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Add Effective Tariff Rate columns for multiple aggregates."""
         # Compute ETR for individual and aggregate combinations
         variants = [
             {},

@@ -20,7 +20,7 @@ class BaciLoader:
     """Loader for historical BACI trade data."""
 
     def load(self) -> pd.DataFrame:
-        """Load or download trade data."""
+        """Load or download trade data from BACI and cache it locally."""
         if PATHS.EXPORTS_HIST.exists():
             df = pd.read_csv(PATHS.EXPORTS_HIST)
         else:
@@ -36,6 +36,7 @@ class BaciLoader:
 
     @staticmethod
     def clean_df(df: pd.DataFrame) -> pd.DataFrame:
+        """Rename columns and keep the minimal set needed downstream."""
         cols_dict = {
             "year": "year",
             "exporter_iso3_code": "iso3",
@@ -47,6 +48,7 @@ class BaciLoader:
 
     @staticmethod
     def add_all_countries(df: pd.DataFrame) -> pd.DataFrame:
+        """Append an aggregated row representing all countries."""
         df_all = group_data(df, ["year", "sector"])
         df_all["iso3"] = "ALL"
         df_all["country"] = "All countries"
@@ -54,6 +56,7 @@ class BaciLoader:
 
     @staticmethod
     def add_all_sectors(df: pd.DataFrame) -> pd.DataFrame:
+        """Append an aggregated row representing all product sectors."""
         df_all = group_data(df, ["year", "iso3", "country"])
         df_all["sector"] = "All sectors"
         return pd.concat([df, df_all])
