@@ -34,7 +34,7 @@ export function Methodology() {
             >
                 <div ref={contentRef}>
                     <p className="text-body">
-                        The <em>Tariff Turbulence Simulator</em> estimates the impact of US tariffs on African countries and sectors using country- and sector-specific Effective Tariff Rates (ETR) as well as trade data.
+                        The <em>Tariff Turbulence Simulator</em> is an <a href="https://github.com/ONEcampaign/tariff-turbulence-simulator" target="_blank">open-source</a> project that estimates the impact of US tariffs on African economies using country- and sector-specific Effective Tariff Rates (ETR) as well as trade data.
                     </p>
 
                     <p className="text-body">
