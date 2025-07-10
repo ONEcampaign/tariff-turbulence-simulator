@@ -14,7 +14,7 @@ export function DescriptionText({
     const formatValue = (val) =>
         selectedUnits === "usd"
             ? formatCurrency(val, { short: false })
-            : formatCurrency(val, { perCapita: true });
+            : formatCurrency(val, { perPerson: true });
 
     const getTariffText = (context) => {
         const tariff = formatPercentage(selectedTariff);
@@ -47,7 +47,7 @@ export function DescriptionText({
     };
 
     if (mode === "carousel") {
-        const sortKey = selectedUnits === "usd" ? "impact_usd" : "impact_pc";
+        const sortKey = selectedUnits === "usd" ? "impact_usd" : "impact_pp";
         const totalImpactUSD = data.reduce((sum, d) => sum + (Number.isFinite(d.impact_usd) ? d.impact_usd : 0), 0);
         const topThree = getTopItems(data, sortKey, "country");
 
@@ -57,7 +57,7 @@ export function DescriptionText({
                     {getTariffText("carousel")} the cost of US tariffs for Africa is <b>{formatCurrency(totalImpactUSD, { short: false })}</b>.
                 </p>
                 <p className="text-body description-text">
-                    The countries with the highest {selectedUnits === "usd" ? "total cost" : "cost per capita"} are{" "}
+                    The countries with the highest {selectedUnits === "usd" ? "total cost" : "cost per person"} are{" "}
                     <b>{topThree[0].label}</b> ({topThree[0].value}), <b>{topThree[1].label}</b> ({topThree[1].value}) and <b>{topThree[2].label}</b> ({topThree[2].value}).
                 </p>
             </div>
@@ -68,8 +68,6 @@ export function DescriptionText({
         const country = data[0].country;
         const allSectors = data.find(d => d.sector === "All sectors");
         const totalImpactUSD = allSectors?.impact_usd;
-        // const totalImpactPCT = allSectors?.impact_pct;
-        // const impactPCTText = totalImpactPCT != null ? `, equivalent to ${formatPercentage(totalImpactPCT, { tariff: false })} of GDP` : "";
         const topSectors = getTopItems(data.filter(d => d.sector !== "All sectors"), "impact_usd", "sector");
 
         return (

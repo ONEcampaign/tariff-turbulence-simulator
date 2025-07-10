@@ -22,8 +22,8 @@ export function CountryCarousel(
     }
     ) {
 
-    // Short cards in by total or per capita USD depending on ToggleButton
-    const sortKey = selectedUnits === "usd" ? "impact_usd" : "impact_pc";
+    // Short cards in by total or per person USD depending on ToggleButton
+    const sortKey = selectedUnits === "usd" ? "impact_usd" : "impact_pp";
     const cleaned = data.filter(
         (d) =>
             typeof d[sortKey] === "number" &&
@@ -91,8 +91,8 @@ export function CountryCarousel(
                                 <p className="text-impact-large">{formatCurrency(countryData.impact_usd)}</p>
                             </div>
                             <div className="card-row carousel-card-row">
-                                <h4 className="text-support-medium">Cost per capita</h4>
-                                <p className="text-impact-large">{formatCurrency(countryData.impact_pc, {perCapita: true})}</p>
+                                <h4 className="text-support-medium">Cost per person</h4>
+                                <p className="text-impact-large">{formatCurrency(countryData.impact_pp, {perPerson: true})}</p>
                             </div>
                             <div className="card-row carousel-card-settings">
                                 <h4 className="text-support-medium">Trade partner</h4>
