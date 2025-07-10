@@ -4,7 +4,7 @@ import * as React from "npm:react";
 export function ToggleButton(
     {
         leftLabel = "Total $",
-        rightLabel = "$ per capita",
+        rightLabel = "$ per person",
         selected,
         setSelected
     }) {

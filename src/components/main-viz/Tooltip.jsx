@@ -43,8 +43,8 @@ export function Tooltip({ x, y, data, isVisible } ={}) {
                 <p className="text-impact-medium">{formatCurrency(data.impact_usd)}</p>
             </div>
             <div className="card-row tooltip-row">
-                <h4 className="tooltip-var-name text-support-small">Cost per capita</h4>
-                <p className="text-impact-medium">{formatCurrency(data.impact_pc, {perCapita: true})}</p>
+                <h4 className="tooltip-var-name text-support-small">Cost per person</h4>
+                <p className="text-impact-medium">{formatCurrency(data.impact_pp, {perPerson: true})}</p>
             </div>
         </div>
     )

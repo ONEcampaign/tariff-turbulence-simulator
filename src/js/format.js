@@ -1,10 +1,10 @@
 // Currency and percentage formatting helpers
 import * as d3 from 'npm:d3';
 
-export function formatCurrency(value, {short = true, perCapita = false} = {}) {
+export function formatCurrency(value, {short = true, perPerson = false} = {}) {
     if (value == null || isNaN(value)) return "N/A";
 
-    if (perCapita) {
+    if (perPerson) {
         if (value < 0.01) {
             return `$${d3.format(",.3f")(value)}`;
         } else if (value < 0.1) {
@@ -52,7 +52,7 @@ export function computeImpactUSD(exports, tariff) {
     return exports * tariff;
 }
 
-export function computeImpactPerCapita(exports, tariff, population) {
+export function computeImpactPerPerson(exports, tariff, population) {
     if (
         exports == null || tariff == null || population == null ||
         isNaN(exports) || isNaN(tariff) || isNaN(population) ||

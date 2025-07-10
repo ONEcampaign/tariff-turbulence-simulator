@@ -122,9 +122,9 @@ export function SelectionCard(
             {
                 isCountryMode ? (
                     <div className="card-row selection-card-row">
-                        <h4 className="text-support-medium">Cost per capita</h4>
+                        <h4 className="text-support-medium">Cost per person</h4>
                         <p className="text-impact-large">
-                            {formatCurrency(allData.impact_pc, {perCapita: true})}
+                            {formatCurrency(allData.impact_pp, {perPerson: true})}
                         </p>
                     </div>
                 ) : null
