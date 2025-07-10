@@ -6,7 +6,7 @@ export function formatCurrency(value, {short = true, perPerson = false} = {}) {
 
     if (perPerson) {
         if (value < 0.01) {
-            return `$${d3.format(",.3f")(value)}`;
+            return `< $0.01`;
         } else if (value < 0.1) {
             return `$${d3.format(",.2f")(value)}`;
         } else {
