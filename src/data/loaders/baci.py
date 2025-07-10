@@ -1,8 +1,4 @@
 """Load and clean historical trade data from the BACI database.
-
-This loader feeds preprocessed trade values into the ETR calculations.
-It relies on :mod:`src.data.config` for file locations and
-:mod:`src.data.helpers` for common data wrangling tasks.
 """
 
 import pandas as pd
@@ -26,7 +22,7 @@ class BaciLoader:
         else:
             baci = BACI()
             raw_df = baci.get_data(hs_version="HS02", incl_country_labels=True)
-            # Keep US imports only and summarise by year/country/sector
+            # Keep US imports only and summarize by year/country/sector
             df = raw_df.query("importer_iso3_code == 'USA'")
             df = add_sector_group_column(df)
             df = group_data(df, ["year", "exporter_iso3_code", "sector"])
@@ -48,7 +44,7 @@ class BaciLoader:
 
     @staticmethod
     def add_all_countries(df: pd.DataFrame) -> pd.DataFrame:
-        """Append an aggregated row representing all countries."""
+        """Append an aggregated row representing all African countries."""
         df_all = group_data(df, ["year", "sector"])
         df_all["iso3"] = "ALL"
         df_all["country"] = "All countries"

@@ -1,9 +1,7 @@
-"""Loader for USA Trade Online data and tariff simulations.
+"""Loader which combines US trade data with ETR and population data.
 
 This module fetches recent US import data and combines it with tariff
-information to compute Effective Tariff Rates. It is used by the CLI
-scripts in ``src/data`` to produce the CSV outputs consumed by the
-visualisation components.
+information to compute Effective Tariff Rates (ETR) and population figures.
 """
 
 from pathlib import Path
@@ -35,7 +33,7 @@ class UStradeLoader:
         return df[ordered_columns]
 
     def load_data(self) -> pd.DataFrame:
-        """Load raw CSV files and average values across months."""
+        """Load raw CSV files with US trade data and compute mean values by exporter country and product."""
         raw_dfs = []
         for y in YEAR_RANGE:
             d = pd.read_csv(PATHS.INPUTS / f"africa_exports_to_us_{y}_ustrade_raw.csv")
@@ -79,33 +77,40 @@ class UStradeLoader:
 
     @staticmethod
     def get_africa_population_data() -> pd.DataFrame:
-        """Retrieve population figures for African countries from the WEO."""
+        """Retrieve population figures for African countries from the WEO and compute 2022-2024 mean values."""
         cc = coco.CountryConverter()
         weo = WEO()
         data = weo.get_data()
         filtered_df = data.query(
             "`indicator_code` == 'LP' and `year` in @YEAR_RANGE"
         ).copy()
+
+        filtered_df["population"] = filtered_df["value"] * filtered_df["scale_code"]
+        filtered_df["region"] = cc.pandas_convert(
+            filtered_df["entity_name"], to="continent"
+        )
+        africa_df = filtered_df.query("`region` == 'Africa'")
+        africa_df["iso3"] = cc.pandas_convert(africa_df["entity_name"], to="ISO3")
+
+        africa_df_all = pd.DataFrame(
+            {"iso3": ["ALL"], "population": [africa_df["population"].sum()]}
+        )
+
+        complete_df = pd.concat([africa_df, africa_df_all])
+
         grouped_df = (
-            filtered_df.groupby(
-                ["entity_name", "scale_code"], observed=True, dropna=False
-            )["value"]
+            complete_df.groupby(["iso3"], observed=True, dropna=False)["population"]
             .mean()
             .reset_index()
         )
-        grouped_df["population"] = grouped_df["value"] * grouped_df["scale_code"]
-        grouped_df["region"] = cc.pandas_convert(
-            grouped_df["entity_name"], to="continent"
-        )
-        africa_df = grouped_df.query("`region` == 'Africa'")
-        africa_df["iso3"] = cc.pandas_convert(africa_df["entity_name"], to="ISO3")
-        return africa_df[["iso3", "population"]]
+
+        return grouped_df
 
     @staticmethod
     def assert_iso3_code_alignment(df1: pd.DataFrame, df2: pd.DataFrame) -> bool:
-        """Ensure the same set of ISO3 codes exists in both DataFrames."""
-        set1 = set(df1["iso3"].unique()) - {"ALL"}
-        set2 = set(df2["iso3"].unique()) - {"ALL"}
+        """Ensure the same set of ISO3 codes exists between trade and population dataframes."""
+        set1 = set(df1["iso3"].unique())
+        set2 = set(df2["iso3"].unique())
         if set1 == set2:
             return True
         only_in_df1 = set1 - set2
@@ -115,19 +120,16 @@ class UStradeLoader:
         )
 
     def add_population_column(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Merge Africa population data, including an aggregate row."""
+        """Merge trade data with population data"""
         pop_df = self.get_africa_population_data()
         if not self.assert_iso3_code_alignment(df, pop_df):
             raise ValueError("ISO3 code mismatch between dataframes")
-        pop_df_all = pd.DataFrame(
-            {"iso3": ["ALL"], "population": [pop_df["population"].sum()]}
-        )
-        pop_df_complete = pd.concat([pop_df, pop_df_all], ignore_index=True)
-        return pd.merge(df, pop_df_complete, on="iso3", how="left")
+
+        return pd.merge(df, pop_df, on="iso3", how="left", validate="many_to_one")
 
     @staticmethod
     def build_code_rate_map(json_paths: list[Path]) -> dict:
-        """Combine multiple JSON tariff files into a single prefix map."""
+        """Create a tariff-to-product lookup table based on the JSON files in `src/data/inputs/tariffs/`"""
         rate_map: dict[str, float] = {}
         for path in json_paths:
             data = load_json(path)
@@ -142,6 +144,7 @@ class UStradeLoader:
         self, df: pd.DataFrame, rate_map: dict, default_rate: float = 0.1
     ) -> pd.DataFrame:
         """Assign a tariff rate to each product_code by prefix lookup."""
+
         def lookup_rate(code: str) -> float:
             code_str = str(code)
             # Walk backwards through the code string and look for the
@@ -158,7 +161,7 @@ class UStradeLoader:
         return df
 
     def add_rate_columns(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Look up tariff rates for each product using local JSON files."""
+        """Adds a rate column with the tariff rate assigned to each product_code in the DataFrame."""
         json_paths = [
             PATHS.ALUMINUM,
             PATHS.STEEL,
@@ -171,7 +174,6 @@ class UStradeLoader:
 
     def add_etr_column(self, df: pd.DataFrame) -> pd.DataFrame:
         """Add Effective Tariff Rate columns for multiple aggregates."""
-        # Compute ETR for individual and aggregate combinations
         variants = [
             {},
             {"sector": "All sectors"},
@@ -179,8 +181,8 @@ class UStradeLoader:
             {"country": "All countries", "sector": "All sectors"},
         ]
         frames = []
-        for overrides in variants:
-            df_variant = df.assign(**overrides)
+        for iter in variants:
+            df_variant = df.assign(**iter)
             frames.append(etr.compute_etr_by_group(df_variant))
         final_df = (
             pd.concat(frames, ignore_index=True)

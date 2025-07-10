@@ -20,7 +20,11 @@ def load_json(filepath: Path) -> dict:
 
 
 def add_sector_group_column(df: pd.DataFrame) -> pd.DataFrame:
-    """Assign each product_code to a product group, dropping unmapped rows."""
+    """Assign each product_code to a product group, dropping unmapped rows.
+
+    The sector mapping is loaded from ``src/data/inputs/hs_groups.json`` and uses the first two digits of the HS code
+    assigned to each traded product.
+    """
     sector_group_map = load_json(PATHS.HS_GROUPS)
 
     prefix_to_group = {
@@ -53,7 +57,6 @@ def group_data(
 
 def filter_african_countries(df: pd.DataFrame, iso_col: str) -> pd.DataFrame:
     """Filter a DataFrame to African countries based on an ISO column."""
-    # ``country_converter`` maps ISO codes to regions and names
     import country_converter as coco
 
     cc = coco.CountryConverter()

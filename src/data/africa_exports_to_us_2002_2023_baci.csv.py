@@ -1,4 +1,4 @@
-"""Export historical BACI trade data for use in Observable."""
+"""Export historical BACI trade data into the Framework app."""
 
 import sys
 from src.data.loaders import BaciLoader

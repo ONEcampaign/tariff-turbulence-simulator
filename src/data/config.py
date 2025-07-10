@@ -1,9 +1,4 @@
-"""Centralised paths used throughout the data loaders.
-
-This module exposes a ``PATHS`` class with directories to input files.
-Loaders in :mod:`src.data.loaders` rely on these paths to locate raw
-trade files and tariff definitions.
-"""
+"""Centralized paths used throughout the data loaders."""
 
 from pathlib import Path
 
