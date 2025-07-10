@@ -1,3 +1,4 @@
+// Text strings used in the user interface
 export const title = "Tariff Turbulence Simulator";
 export const deck = "What’s the potential impact of US tariffs on African economies? Use this simulation tool to find out.";
 export const vizTitle = "Effective tariff rates across Africa";

@@ -1,3 +1,4 @@
+// Currency and percentage formatting helpers
 import * as d3 from 'npm:d3';
 
 export function formatCurrency(value, {short = true, perCapita = false} = {}) {
