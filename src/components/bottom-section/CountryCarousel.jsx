@@ -21,6 +21,8 @@ export function CountryCarousel(
         selectedUnits = "usd"
     }
     ) {
+
+    // Short cards in by total or per capita USD depending on ToggleButton
     const sortKey = selectedUnits === "usd" ? "impact_usd" : "impact_pc";
     const cleaned = data.filter(
         (d) =>

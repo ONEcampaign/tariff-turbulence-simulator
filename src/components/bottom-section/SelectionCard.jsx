@@ -27,8 +27,9 @@ export function SelectionCard(
 }) {
 
     let allData, allItems, allHistoricalData;
-    const isCountryMode = mode === "country";
+    const isCountryMode = mode === "country"; // Either country or sector
 
+    // Filter data based on selection
     const isAll = d => isCountryMode ? d.sector === "All sectors" : d.country === "All countries";
     const isDetail = d => isCountryMode ? d.sector !== "All sectors" : d.country !== "All countries";
     const isHistorical = d => isCountryMode ? d.sector === "All sectors" : d.country === "All countries";

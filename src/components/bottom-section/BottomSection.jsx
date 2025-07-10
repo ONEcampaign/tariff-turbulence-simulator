@@ -1,4 +1,4 @@
-// Container for the detailed exposure section below the map.
+// Main component for the section below the hexmap, with country and sector cards based on selected data.
 import {SectionTitle} from "./SectionTitle.js";
 import {DescriptionText} from "./DescriptionText.js";
 import {ToggleButton} from "./ToggleButton.js";

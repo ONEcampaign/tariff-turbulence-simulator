@@ -1,5 +1,4 @@
 // Introductory text displayed above the visualisation.
-// Text strings are imported from the shared copy module.
 import {title, deck} from "../js/copyText.js"
 
 export function Intro({content} = {}) {

@@ -1,4 +1,4 @@
-// Wrapper that combines the map, header and tooltip components.
+// Main component for the hexmap of African cuntries.
 import {VizHeader} from "./VizHeader.js";
 import {AfricaHexmap} from "./AfricaHexmap.js";
 import {Tooltip} from "./Tooltip.js";

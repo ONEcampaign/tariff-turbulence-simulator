@@ -1,4 +1,4 @@
-// Collapsible section describing how the ETR and cost figures are calculated.
+// Collapsible section at the bottom of the app describing the tool's methodology
 import * as React from "npm:react";
 import { ChevronDown } from "./svgs/ChevronDown.js";
 
