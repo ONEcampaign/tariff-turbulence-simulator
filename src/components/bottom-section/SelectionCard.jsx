@@ -1,3 +1,4 @@
+// Card summarising the impact for a single country or sector.
 import * as React from "npm:react";
 import * as d3 from "npm:d3";
 import {TariffPill} from "./TariffPill.js";
@@ -26,8 +27,9 @@ export function SelectionCard(
 }) {
 
     let allData, allItems, allHistoricalData;
-    const isCountryMode = mode === "country";
+    const isCountryMode = mode === "country"; // Either country or sector
 
+    // Filter data based on selection
     const isAll = d => isCountryMode ? d.sector === "All sectors" : d.country === "All countries";
     const isDetail = d => isCountryMode ? d.sector !== "All sectors" : d.country !== "All countries";
     const isHistorical = d => isCountryMode ? d.sector === "All sectors" : d.country === "All countries";

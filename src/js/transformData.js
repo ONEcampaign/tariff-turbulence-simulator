@@ -1,3 +1,4 @@
+// Functions that convert raw trade data into structures used by UI elements
 import {
     computeImpactUSD,
     computeImpactPerCapita

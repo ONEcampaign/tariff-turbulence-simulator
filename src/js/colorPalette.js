@@ -1,3 +1,4 @@
+// Color palette used in hexmap, card swatches and barplot
 export const colorPalette = {
     veryLow: "#F8F7F8",
     low: "#9ACACD",

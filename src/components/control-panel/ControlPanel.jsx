@@ -1,3 +1,4 @@
+// Main component for the sidebar with dropdowns and slider controlling the app's state.
 import * as React from "npm:react";
 import {ChevronDown} from "../svgs/ChevronDown.js";
 import {Dropdown} from "./Dropdown.js";

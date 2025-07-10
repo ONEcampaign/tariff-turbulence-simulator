@@ -1,3 +1,4 @@
+// Small pill on tariff-cards showing the active tariff value with tooltip on hover/press.
 import * as React from "npm:react";
 import { formatPercentage } from "../../js/format.js";
 

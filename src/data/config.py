@@ -1,8 +1,10 @@
+"""Centralized paths used throughout the data loaders."""
+
 from pathlib import Path
 
 
 class PATHS:
-    """Class to store the paths to the inputs."""
+    """Collection of project data locations."""
 
     SRC = Path(__file__).resolve().parent.parent
 

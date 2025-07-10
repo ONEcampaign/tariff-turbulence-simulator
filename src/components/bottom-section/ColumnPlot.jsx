@@ -1,13 +1,15 @@
+// Small bar chart used inside the selection cards.
 import * as React from "npm:react";
 import * as d3 from "npm:d3";
 import { formatCurrency } from "../../js/format.js";
 import { colorPalette } from "../../js/colorPalette.js";
 
+// Split data into equally sized pages for the "show more" toggle
 const getChunks = (array, chunkSize) => {
     return Array(Math.ceil(array.length / chunkSize)).fill()
     .map((_, index) => index * chunkSize)
     .map(begin => array.slice(begin, begin + chunkSize))
-};                                                                                              
+};
 
 export function ColumnPlot({ data, mode, showMore, chunkSize }) {
 

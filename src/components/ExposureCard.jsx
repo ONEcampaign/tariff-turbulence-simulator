@@ -1,3 +1,4 @@
+// Summary card showing the cost of the currently selected tariff.
 import * as React from "npm:react";
 import {formatCurrency, formatPercentage} from "../js/format.js";
 import {DownloadShareButtons} from "./common/DownloadShareButtons.js";

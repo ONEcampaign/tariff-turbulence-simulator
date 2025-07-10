@@ -1,3 +1,4 @@
+// Switch between total impact and per-capita values in the carousel.
 import * as React from "npm:react";
 
 export function ToggleButton(

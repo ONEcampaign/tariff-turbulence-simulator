@@ -1,3 +1,10 @@
+"""Helper functions used across the data pipeline.
+
+These utilities handle JSON loading, product sector mapping and
+country filtering. They are imported by the loaders to prepare raw data
+for Effective Tariff Rate calculations.
+"""
+
 import json
 import pandas as pd
 
@@ -13,7 +20,11 @@ def load_json(filepath: Path) -> dict:
 
 
 def add_sector_group_column(df: pd.DataFrame) -> pd.DataFrame:
-    """Assign each product_code to a product group, dropping unmapped rows."""
+    """Assign each product_code to a product group, dropping unmapped rows.
+
+    The sector mapping is loaded from ``src/data/inputs/hs_groups.json`` and uses the first two digits of the HS code
+    assigned to each traded product.
+    """
     sector_group_map = load_json(PATHS.HS_GROUPS)
 
     prefix_to_group = {

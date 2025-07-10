@@ -1,3 +1,4 @@
+// Utility hook that keeps country and sector dropdowns in sync.
 export function MutualExclusion({
                                     selectedCountry,
                                     selectedSector,
