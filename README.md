@@ -1,6 +1,6 @@
 # Tariff Turbulence Simulator
 
-What’s the impact of US tariffs on African economies? The _Tariff Turbulence Simulator_ estimates the impact of US 
+What’s the impact of US tariffs on African economies? The [Tariff Turbulence Simulator](https://data.one.org/analysis/tariff-turbulence-simulator) estimates the impact of US 
 tariffs on African countries and sectors by calculating an Effective Tariff Rate (ETR). The ETR for each country is 
 computed as a weighted average of the tariff rates applied to US imports from that country across the products that 
 make up a sector.
