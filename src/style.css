@@ -8,6 +8,10 @@
 @import url("styles/swatch.css");
 @import url("./styles/download-share-buttons.css");
 
+/* General styles */
+@import url("./styles/text.css");
+@import url("./styles/layout.css");
+
 /* Control panel */
 @import url("./styles/sticky-controls.css");
 @import url("./styles/dropdown.css");
@@ -34,9 +38,7 @@
 /* Methodology */
 @import url("./styles/methodology.css");
 
-/* General styles */
-@import url("./styles/text.css");
-@import url("./styles/layout.css");
+/* Responsive design */
 @import url("./styles/mobile.css");
 
 :root {
