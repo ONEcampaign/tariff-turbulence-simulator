@@ -3,11 +3,6 @@
 
 @import url("observablehq:theme-air.css");
 
-/* General styles */
-@import url("./styles/text.css");
-@import url("./styles/layout.css");
-@import url("./styles/mobile.css");
-
 @import url("styles/tariff-card.css");
 @import url("styles/flag-icon.css");
 @import url("styles/swatch.css");
@@ -38,6 +33,11 @@
 
 /* Methodology */
 @import url("./styles/methodology.css");
+
+/* General styles */
+@import url("./styles/text.css");
+@import url("./styles/layout.css");
+@import url("./styles/mobile.css");
 
 :root {
     --main-block-width:  768px;
