@@ -3,15 +3,14 @@
 
 @import url("observablehq:theme-air.css");
 
-/* General styles */
-@import url("./styles/text.css");
-@import url("./styles/layout.css");
-@import url("./styles/mobile.css");
-
 @import url("styles/tariff-card.css");
 @import url("styles/flag-icon.css");
 @import url("styles/swatch.css");
 @import url("./styles/download-share-buttons.css");
+
+/* General styles */
+@import url("./styles/text.css");
+@import url("./styles/layout.css");
 
 /* Control panel */
 @import url("./styles/sticky-controls.css");
@@ -38,6 +37,9 @@
 
 /* Methodology */
 @import url("./styles/methodology.css");
+
+/* Responsive design */
+@import url("./styles/mobile.css");
 
 :root {
     --main-block-width:  768px;
