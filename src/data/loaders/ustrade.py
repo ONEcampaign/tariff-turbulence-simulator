@@ -25,9 +25,9 @@ class UStradeLoader:
 
         df = self.load_data()
         df = add_sector_group_column(df)
+        df = self.normalize_country_names(df)
         df = self.add_rate_columns(df)
         df = self.add_etr_column(df)
-        df = self.normalize_country_names(df)
         df = self.add_population_column(df)
         ordered_columns = ["country", "iso3", "sector", "exports", "etr", "population"]
         return df[ordered_columns]
@@ -69,10 +69,8 @@ class UStradeLoader:
     def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
         """Convert country names to a consistent short form and add ISO3."""
         cc = coco.CountryConverter()
-        df["country"] = cc.pandas_convert(
-            df["country"], to="name_short", not_found="All countries"
-        )
-        df["iso3"] = cc.pandas_convert(df["country"], to="ISO3", not_found="ALL")
+        df["country"] = cc.pandas_convert(df["country"], to="name_short")
+        df["iso3"] = cc.pandas_convert(df["country"], to="ISO3")
         return df
 
     @staticmethod
@@ -141,23 +139,32 @@ class UStradeLoader:
         return rate_map
 
     def assign_tariff_rate(
-        self, df: pd.DataFrame, rate_map: dict, default_rate: float = 0.1
+            self,
+            df: pd.DataFrame,
+            product_rate_map: dict,
+            country_rate_map: dict,
+            default_rate: float = 0.1
     ) -> pd.DataFrame:
-        """Assign a tariff rate to each product_code by prefix lookup."""
+        """
+        Assign tariff rate using the shortest matching prefix in product_rate_map,
+        falling back to country_rate_map, then default_rate.
+        """
 
-        def lookup_rate(code: str) -> float:
+        def lookup_rate(code: str, country: str) -> float:
             code_str = str(code)
-            # Walk backwards through the code string and look for the
-            # longest matching prefix in ``rate_map``. This allows
-            # product codes of varying length to share a rate.
-            for length in range(len(code_str), 3, -1):
-                prefix = code_str[:length]
-                if prefix in rate_map:
-                    return rate_map[prefix]
-            return default_rate
+            matching_prefixes = [
+                prefix for prefix in product_rate_map
+                if code_str.startswith(prefix)
+            ]
+            if matching_prefixes:
+                # Shortest matching prefix wins
+                shortest_prefix = min(matching_prefixes, key=len)
+                return product_rate_map[shortest_prefix]
+            # Fall back to country or default
+            return country_rate_map.get(country, default_rate)
 
         df = df.copy()
-        df["rate"] = df["product_code"].apply(lookup_rate)
+        df["rate"] = df.apply(lambda row: lookup_rate(row["product_code"], row["iso3"]), axis=1)
         return df
 
     def add_rate_columns(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -166,19 +173,21 @@ class UStradeLoader:
             PATHS.ALUMINUM,
             PATHS.STEEL,
             PATHS.AUTOS,
+            PATHS.COPPER,
             PATHS.EXEMPTIONS_1,
             PATHS.EXEMPTIONS_2,
         ]
-        rate_map = self.build_code_rate_map(json_paths)
-        return self.assign_tariff_rate(df, rate_map)
+        product_rate_map = self.build_code_rate_map(json_paths)
+        country_rate_map = load_json(PATHS.COUNTRY_RATES)
+        return self.assign_tariff_rate(df, product_rate_map, country_rate_map)
 
     def add_etr_column(self, df: pd.DataFrame) -> pd.DataFrame:
         """Add Effective Tariff Rate columns for multiple aggregates."""
         variants = [
             {},
             {"sector": "All sectors"},
-            {"country": "All countries"},
-            {"country": "All countries", "sector": "All sectors"},
+            {"country": "All countries", "iso3": "ALL"},
+            {"country": "All countries", "iso3": "ALL", "sector": "All sectors"},
         ]
         frames = []
         for iter in variants:
@@ -187,7 +196,7 @@ class UStradeLoader:
         final_df = (
             pd.concat(frames, ignore_index=True)
             .rename(columns={"total_exports": "exports"})
-            .loc[:, ["country", "sector", "exports", "etr"]]
+            .loc[:, ["country", "iso3", "sector", "exports", "etr"]]
             .sort_values(["country", "sector"])
             .reset_index(drop=True)
         )
