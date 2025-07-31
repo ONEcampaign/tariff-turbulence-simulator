@@ -23,11 +23,11 @@ The app contains of the following React components:
 ```text
 .
 ├─ src
-│  ├─ components/              # React.js components 
+│  ├─ components/              # React components 
 │  ├─ data/                    # Input data files and loaders
 │  ├─ js/                      # JavaScript modules
 │  ├─ styles/                  # CSS stylesheets
-│  ├─ index.md                 # Home page
+│  ├─ index.md                 # App interface
 │  └─ styles.css               # Main CSS module
 ├─ .gitignore
 ├─ observablehq.config.js      # the app config file
