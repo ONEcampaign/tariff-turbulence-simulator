@@ -61,8 +61,9 @@ export function Methodology() {
                         <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03596/implementation-of-duties-on-aluminum-pursuant-to-proclamation-10895-adjusting-imports-of-aluminum" target="_blank">Tariffs on aluminum</a></li>
                         <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03598/implementation-of-duties-on-steel-pursuant-to-proclamation-10896-adjusting-imports-of-steel-into-the" target="_blank">Tariffs on steel</a></li>
                         <li><a href="https://www.federalregister.gov/documents/2025/04/03/2025-05930/adjusting-imports-of-automobiles-and-automobile-parts-into-the-united-states" target="_blank">Tariffs on automobiles and auto parts</a></li>
-                        <li>Tariff exemptions (<a href="https://www.whitehouse.gov/wp-content/uploads/2025/04/Annex-II.pdf" target="_blank">April 2, 2025</a>)</li>
-                        <li>Tariff exemptions (<a href="https://www.whitehouse.gov/presidential-actions/2025/04/clarification-of-exceptions-under-executive-order-14257-of-april-2-2025-as-amended/" target="_blank">April 11, 2025</a>)</li>
+                        <li><a href="https://www.whitehouse.gov/fact-sheets/2025/07/fact-sheet-president-donald-j-trump-takes-action-to-address-the-threat-to-national-security-from-imports-of-copper/" target="_blank">Tariffs on copper</a></li>
+                        <li><a href="https://www.nytimes.com/2025/07/07/business/trump-tariffs-trade-deals-august-1.html" target="_blank">Country-specific reciprocal tariffs</a></li>
+                        <li>Tariff exemptions (<a href="https://www.whitehouse.gov/wp-content/uploads/2025/04/Annex-II.pdf" target="_blank">April 2, 2025</a>; <a href="https://www.whitehouse.gov/presidential-actions/2025/04/clarification-of-exceptions-under-executive-order-14257-of-april-2-2025-as-amended/" target="_blank">April 11, 2025</a>)</li>
                     </ul>
 
                     <p className="text-body">
