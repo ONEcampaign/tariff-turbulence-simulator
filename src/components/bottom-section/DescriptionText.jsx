@@ -11,10 +11,7 @@ export function DescriptionText({
                                 } = {}) {
     if (!data || !mode) return null;
 
-    const formatValue = (val) =>
-        selectedUnits === "usd"
-            ? formatCurrency(val, { short: false })
-            : formatCurrency(val, { perPerson: true });
+    const formatValue = (val)=> formatCurrency(val, { short: false });
 
     const getTariffText = (context) => {
         const tariff = formatPercentage(selectedTariff);
