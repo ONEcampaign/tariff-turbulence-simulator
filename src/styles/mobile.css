@@ -106,11 +106,6 @@
 
 @media (max-width: 600px) {
 
-    .main-block svg {
-        width: 100%;
-        height: auto;
-    }
-
     .tariff-card.exposure-card {
         gap: var(--margin-small);
     }
@@ -131,10 +126,6 @@
 
     .legend-swatch {
         width: var(--swatch-width-mobile);
-    }
-
-    .carousel-card {
-        min-width: 75%;
     }
 
     .selection-card-row-container {
