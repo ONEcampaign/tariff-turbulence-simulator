@@ -173,12 +173,19 @@ class UStradeLoader:
             PATHS.ALUMINUM,
             PATHS.STEEL,
             PATHS.AUTOS,
-            PATHS.COPPER,
             PATHS.EXEMPTIONS_1,
             PATHS.EXEMPTIONS_2,
         ]
         product_rate_map = self.build_code_rate_map(json_paths)
-        country_rate_map = load_json(PATHS.COUNTRY_RATES)
+
+        # Load and convert country rates from nested structure to flat iso3 -> rate
+        country_data = load_json(PATHS.COUNTRY_RATES)
+        country_rate_map = {
+            iso3: info["rate"]
+            for iso3, info in country_data.items()
+            if isinstance(info, dict) and "rate" in info
+        }
+
         return self.assign_tariff_rate(df, product_rate_map, country_rate_map)
 
     def add_etr_column(self, df: pd.DataFrame) -> pd.DataFrame:
