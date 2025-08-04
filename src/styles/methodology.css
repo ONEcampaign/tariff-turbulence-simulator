@@ -35,6 +35,12 @@
     margin: var(--margin-small) auto;
 }
 
+.text-body.update-note {
+    color: grey;
+    font-style: italic;
+    font-size: 75%
+}
+
 .text-body code {
     font-size: inherit;
 }

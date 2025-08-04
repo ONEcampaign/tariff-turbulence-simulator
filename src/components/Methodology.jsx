@@ -33,6 +33,11 @@ export function Methodology() {
                 style={{maxHeight}}
             >
                 <div ref={contentRef}>
+
+                    <p className="text-body update-note">
+                        Last updated: August 4, 2025
+                    </p>
+
                     <p className="text-body">
                         The <em>Tariff Turbulence Simulator</em> is an <a href="https://github.com/ONEcampaign/tariff-turbulence-simulator" target="_blank">open-source</a> project that estimates the impact of US tariffs on African economies using country- and sector-specific Effective Tariff Rates (ETR) as well as trade data.
                     </p>
@@ -54,22 +59,24 @@ export function Methodology() {
                         <p className="text-body">So, Country A faces an effective tariff rate of 37% on its exports to the US.</p>
                     </div>
 
-                    <p className="text-body">To calculate the ETR, we rely on the following data:</p>
+                    <p className="text-body">
+                        The recent evolution of US tariff policy has been marked by frequent reversals, escalations, and
+                        reciprocal measures, making the landscape challenging to track. <a href="https://www.congress.gov/crs_external_products/R/PDF/R48549/R48549.5.pdf" target="_blank">This document</a> provides
+                        an accurate summary of the current status quo. In addition, we rely on the following data sources to compute country- and sector-specific ETRs:</p>
 
                     <ul className="text-body">
                         <li>US import values from African countries (<a href="https://usatrade.census.gov/index.php" target="_blank">USA Trade Online</a>)</li>
                         <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03596/implementation-of-duties-on-aluminum-pursuant-to-proclamation-10895-adjusting-imports-of-aluminum" target="_blank">Tariffs on aluminum</a></li>
                         <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03598/implementation-of-duties-on-steel-pursuant-to-proclamation-10896-adjusting-imports-of-steel-into-the" target="_blank">Tariffs on steel</a></li>
                         <li><a href="https://www.federalregister.gov/documents/2025/04/03/2025-05930/adjusting-imports-of-automobiles-and-automobile-parts-into-the-united-states" target="_blank">Tariffs on automobiles and auto parts</a></li>
-                        <li><a href="https://www.whitehouse.gov/fact-sheets/2025/07/fact-sheet-president-donald-j-trump-takes-action-to-address-the-threat-to-national-security-from-imports-of-copper/" target="_blank">Tariffs on copper</a></li>
-                        <li><a href="https://www.nytimes.com/2025/07/07/business/trump-tariffs-trade-deals-august-1.html" target="_blank">Country-specific reciprocal tariffs</a></li>
+                        <li><a href="https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/" target="_blank">Country-specific reciprocal tariffs</a></li>
                         <li>Tariff exemptions (<a href="https://www.whitehouse.gov/wp-content/uploads/2025/04/Annex-II.pdf" target="_blank">April 2, 2025</a>; <a href="https://www.whitehouse.gov/presidential-actions/2025/04/clarification-of-exceptions-under-executive-order-14257-of-april-2-2025-as-amended/" target="_blank">April 11, 2025</a>)</li>
                     </ul>
 
                     <p className="text-body">
-                        Country- and sector-level ETRs are calculated based on the average export values between 2022 and 2024.
-                        The total cost results from multiplying country-sector ETRs by the corresponding average export value.
-                        This assumes that the full cost of US tariffs is passed onto exporting countries.
+                        ETRs are calculated based on the average export values between 2022 and 2024. The total cost
+                        results from multiplying country-sector ETRs by the corresponding average export value. This
+                        assumes that the full cost of US tariffs is passed onto exporting countries.
                     </p>
 
                     <p className="text-body">

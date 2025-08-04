@@ -1,6 +1,92 @@
 {
-  "DZA": 0.3,
-  "LBY": 0.3,
-  "ZAF": 0.3,
-  "TUN": 0.25
+  "name": "Further modifying the reciprocal tariff rates",
+  "source": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/",
+  "AGO": {
+    "rate": 0.15,
+    "country": "Angola"
+  },
+  "BWA": {
+    "rate": 0.15,
+    "country": "Botswana"
+  },
+  "CIV": {
+    "rate": 0.15,
+    "country": "Côte d`Ivoire"
+  },
+  "CMR": {
+    "rate": 0.15,
+    "country": "Cameroon"
+  },
+  "COD": {
+    "rate": 0.15,
+    "country": "Dem. Rep. of the Congo"
+  },
+  "DZA": {
+    "rate": 0.3,
+    "country": "Algeria"
+  },
+  "GHA": {
+    "rate": 0.15,
+    "country": "Ghana"
+  },
+  "GNQ": {
+    "rate": 0.15,
+    "country": "Equatorial Guinea"
+  },
+  "LBY": {
+    "rate": 0.3,
+    "country": "Libya"
+  },
+  "LSO": {
+    "rate": 0.15,
+    "country": "Lesotho"
+  },
+  "MDG": {
+    "rate": 0.15,
+    "country": "Madagascar"
+  },
+  "MOZ": {
+    "rate": 0.15,
+    "country": "Mozambique"
+  },
+  "MUS": {
+    "rate": 0.15,
+    "country": "Mauritius"
+  },
+  "MWI": {
+    "rate": 0.15,
+    "country": "Malawi"
+  },
+  "NAM": {
+    "rate": 0.15,
+    "country": "Namibia"
+  },
+  "NGA": {
+    "rate": 0.15,
+    "country": "Nigeria"
+  },
+  "TCD": {
+    "rate": 0.15,
+    "country": "Chad"
+  },
+  "TUN": {
+    "rate": 0.25,
+    "country": "Tunisia"
+  },
+  "UGA": {
+    "rate": 0.15,
+    "country": "Uganda"
+  },
+  "ZAF": {
+    "rate": 0.3,
+    "country": "South Africa"
+  },
+  "ZMB": {
+    "rate": 0.15,
+    "country": "Zambia"
+  },
+  "ZWE": {
+    "rate": 0.15,
+    "country": "Zimbabwe"
+  }
 }
