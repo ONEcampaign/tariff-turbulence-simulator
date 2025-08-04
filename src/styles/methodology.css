@@ -38,7 +38,8 @@
 .text-body.update-note {
     color: grey;
     font-style: italic;
-    font-size: 75%
+    font-size: 75%;
+    margin: 0 0 var(--margin-medium);
 }
 
 .text-body code {
