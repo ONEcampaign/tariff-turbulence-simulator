@@ -7,8 +7,7 @@
     "dev": "export PYTHONPATH=$(pwd) && observable preview",
     "deploy": "export PYTHONPATH=$(pwd) && observable deploy",
     "observable": "observable",
-    "preinstall": "pip install poetry --upgrade && pip uninstall opencv-python",
-    "install": "poetry install"
+    "install": "uv sync"
   },
   "dependencies": {
     "@observablehq/framework": "^1.13.3",
