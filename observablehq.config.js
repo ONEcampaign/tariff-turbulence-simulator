@@ -11,5 +11,6 @@ export default {
                       user-scalable=no, target-densitydpi=device-dpi">`,
 
   root: "src",
+  base: "/tariff-simulator",
   style: "style.css",
 };

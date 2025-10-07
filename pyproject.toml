@@ -1,19 +1,13 @@
 [project]
 name = "tariff-simulator"
 version = "0.1.0"
-readme = "README.md"
+description = "A simulator for calculating tariffs."
+requires-python = ">=3.13"
+dependencies = [
+    "bblocks-data-importers",
+    "bblocks-places>=0.0.4",
+    "pandas>=2.3.3",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.11,<4.0"
-pandas = "^2.2.3"
-black = "^25.1.0"
-bblocks-data-importers = {git = "https://github.com/ONEcampaign/bblocks_data_importers.git", rev = "baci-refactor"}
-bblocks-places = {git = "https://github.com/ONEcampaign/bblocks-places.git"}
-
-[tool.poetry]
-package-mode = false
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv.sources]
+bblocks-data-importers = { git = "https://github.com/ONEcampaign/bblocks_data_importers.git", rev = "baci-refactor" }
