@@ -65,7 +65,7 @@ jobs:
 
       - name: Deploy to GCS
         run: |
-          gsutil -m rsync -r -c -d dist/${{ env.APP_PATH }}/ gs://${{ env.BUCKET }}/${{ env.APP_PATH }}/
+          gsutil -m rsync -r -c -d dist/ gs://${{ env.BUCKET }}/${{ env.APP_PATH }}/
 
       - name: Purge Cloudflare cache
         if: env.CLOUDFLARE_ZONE_ID != '' && env.CLOUDFLARE_API_TOKEN != ''
