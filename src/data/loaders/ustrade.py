@@ -7,14 +7,7 @@ information to compute Effective Tariff Rates (ETR) and population figures.
 from pathlib import Path
 
 import pandas as pd
-
-# datacommons.one.org requires auth for the instance-validation probe that
-# datacommons_client fires at DataCommonsClient() init time — before any API key
-# can be injected. Patch the validator out first so bblocks.places can load.
-import datacommons_client.utils.request_handling as _dc_rh
-_dc_rh.check_instance_is_valid = lambda url: url
-
-from bblocks.places import resolve_places, filter_african_countries
+import country_converter as coco
 from bblocks.data_importers import WorldBank
 
 from src.data.config import PATHS
@@ -74,8 +67,10 @@ class UStradeLoader:
     @staticmethod
     def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
         """Convert country names to a consistent short form and add ISO3."""
-        df["iso3"] = resolve_places(df["country"], to_type="iso3_code")
-        df["country"] = resolve_places(df["iso3"], to_type="name_short")
+        cc = coco.CountryConverter()
+        df = df.copy()
+        df["iso3"] = cc.pandas_convert(df["country"], to="ISO3")
+        df["country"] = cc.pandas_convert(df["iso3"], to="name_short")
         return df
 
     @staticmethod
@@ -100,7 +95,10 @@ class UStradeLoader:
             .rename(columns=column_map)
         )
 
-        africa_codes = filter_african_countries(raw_df["iso3"])
+        cc = coco.CountryConverter()
+        africa_codes = raw_df["iso3"][
+            cc.pandas_convert(raw_df["iso3"], to="continent") == "Africa"
+        ].unique()
 
         africa_df = raw_df[raw_df["iso3"].isin(africa_codes)].groupby("iso3")["population"].mean().reset_index()
 
