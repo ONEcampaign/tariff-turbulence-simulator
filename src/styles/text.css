@@ -62,7 +62,7 @@ html {
 .text-hero {
     font-family: var(--font-colfax);
     color: var(--font-color);
-    font-weight: 900;
+    font-weight: 700;
     font-size: var(--font-hero);
     line-height: var(--lh-hero);
     letter-spacing: var(--ls-tight);
