@@ -7,6 +7,13 @@ information to compute Effective Tariff Rates (ETR) and population figures.
 from pathlib import Path
 
 import pandas as pd
+
+# datacommons.one.org requires auth for the instance-validation probe that
+# datacommons_client fires at DataCommonsClient() init time — before any API key
+# can be injected. Patch the validator out first so bblocks.places can load.
+import datacommons_client.utils.request_handling as _dc_rh
+_dc_rh.check_instance_is_valid = lambda url: url
+
 from bblocks.places import resolve_places, filter_african_countries
 from bblocks.data_importers import WorldBank
 
