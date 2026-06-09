@@ -5,3 +5,5 @@ yarn-error.log
 /.idea
 __pycache__/
 setup-deployment.sh
+
+/fact-check

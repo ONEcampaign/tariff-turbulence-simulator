@@ -13,4 +13,7 @@ export default {
   root: "src",
   base: "/tariff-simulator",
   style: "style.css",
+  interpreters: {
+    ".py": [".venv/bin/python3"],
+  },
 };

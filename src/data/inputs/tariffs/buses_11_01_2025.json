@@ -1,0 +1,26 @@
+{
+  "name": "Buses subject to 10% Section 232 duty (Proclamation 10984)",
+  "source": "https://www.federalregister.gov/documents/2025/10/22/2025-19639/adjusting-imports-of-medium-and-heavy-duty-vehicles-medium-and-heavy-duty-vehicle-parts-and-buses",
+  "cbp_guidance": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3f93b75",
+  "cbp_attachment": "https://content.govdelivery.com/attachments/USDHSCBP/2025/10/29/file_attachments/3441270/Section%20232%20MHDV%20Attachment.pdf",
+  "notes": [
+    "Proclamation 10984 (October 17, 2025, 90 FR 48451, effective November 1, 2025): 10% ad valorem duty on imports of buses and other vehicles classifiable in heading 8702, as enumerated in subdivision (c) of U.S. note 38 to subchapter III of chapter 99 (Chapter 99 heading 9903.74.02).",
+    "Buses 25 or more years old at date of entry: exempt (9903.74.07).",
+    "Buses are not subject to stacked duties from S232 steel/aluminum (9903.81 headings), S232 copper (9903.78.01), or IEEPA/reciprocal tariff headings (9903.01/9903.02 series).",
+    "See mhdv_11_01_2025.json for medium- and heavy-duty trucks/tractors and MHDV parts (heading 9903.74.01, 25%) under this same proclamation.",
+    "HTS codes verified from CBP CSMS #66665333 (October 29, 2025) and attached Section 232 MHDV Attachment.pdf."
+  ],
+  "rate": 0.10,
+  "codes": [
+    "87021031",
+    "87021061",
+    "87022031",
+    "87022061",
+    "87023031",
+    "87023061",
+    "87024031",
+    "87024061",
+    "87029031",
+    "87029061"
+  ]
+}

@@ -35,7 +35,7 @@ export function Methodology() {
                 <div ref={contentRef}>
 
                     <p className="text-body update-note">
-                        Last updated: August 4, 2025
+                        Last updated: June 9, 2026
                     </p>
 
                     <p className="text-body">
@@ -62,15 +62,18 @@ export function Methodology() {
                     <p className="text-body">
                         The recent evolution of US tariff policy has been marked by frequent reversals, escalations, and
                         reciprocal measures, making the landscape challenging to track. <a href="https://www.congress.gov/crs_external_products/R/PDF/R48549/R48549.5.pdf" target="_blank">This document</a> provides
-                        an accurate summary of the current status quo. In addition, we rely on the following data sources to compute country- and sector-specific ETRs:</p>
+                        a useful summary of the tariff landscape. In addition, we rely on the following data sources to compute country- and sector-specific ETRs:</p>
 
                     <ul className="text-body">
                         <li>US import values from African countries (<a href="https://usatrade.census.gov/index.php" target="_blank">USA Trade Online</a>)</li>
-                        <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03596/implementation-of-duties-on-aluminum-pursuant-to-proclamation-10895-adjusting-imports-of-aluminum" target="_blank">Tariffs on aluminum</a></li>
-                        <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03598/implementation-of-duties-on-steel-pursuant-to-proclamation-10896-adjusting-imports-of-steel-into-the" target="_blank">Tariffs on steel</a></li>
-                        <li><a href="https://www.federalregister.gov/documents/2025/04/03/2025-05930/adjusting-imports-of-automobiles-and-automobile-parts-into-the-united-states" target="_blank">Tariffs on automobiles and auto parts</a></li>
-                        <li><a href="https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/" target="_blank">Country-specific reciprocal tariffs</a></li>
+                        <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03596/implementation-of-duties-on-aluminum-pursuant-to-proclamation-10895-adjusting-imports-of-aluminum" target="_blank">Tariffs on aluminum</a> (Section 232, Proclamation 10895, effective March 12, 2025)</li>
+                        <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03598/implementation-of-duties-on-steel-pursuant-to-proclamation-10896-adjusting-imports-of-steel-into-the" target="_blank">Tariffs on steel</a> (Section 232, Proclamation 10896, effective March 12, 2025)</li>
+                        <li><a href="https://www.federalregister.gov/documents/2025/04/03/2025-05930/adjusting-imports-of-automobiles-and-automobile-parts-into-the-united-states" target="_blank">Tariffs on automobiles and auto parts</a> (Section 232, Proclamation 10908, effective April 3, 2025; amended by <a href="https://www.federalregister.gov/documents/2025/05/05/2025-07833/adjusting-imports-of-automobiles-and-automobile-parts-into-the-united-states" target="_blank">Proclamation 10925</a>, April 29, 2025)</li>
+                        <li><a href="https://www.federalregister.gov/documents/2025/08/05/2025-14893/adjusting-imports-of-copper-into-the-united-states" target="_blank">Tariffs on copper</a> (Section 232, Proclamation 10962, effective August 1, 2025; amended by <a href="https://www.federalregister.gov/documents/2026/04/09/2026-06960/strengthening-actions-taken-to-adjust-imports-of-aluminum-steel-and-copper-into-the-united-states" target="_blank">Proclamation 11021</a>, April 6, 2026)</li>
+                        <li><a href="https://www.federalregister.gov/documents/2025/10/22/2025-19639/adjusting-imports-of-medium-and-heavy-duty-vehicles-medium-and-heavy-duty-vehicle-parts-and-buses" target="_blank">Tariffs on medium- and heavy-duty vehicles, parts, and buses</a> (Section 232, Proclamation 10984, effective November 1, 2025)</li>
+                        <li><a href="https://www.federalregister.gov/documents/2026/02/25/2026-03824/imposing-a-temporary-import-surcharge-to-address-fundamental-international-payments-problems" target="_blank">Country-level import surcharge</a> (Section 122, Proclamation 11012, effective February 24, 2026; 10% uniform surcharge on all countries not otherwise exempt, replacing earlier IEEPA reciprocal tariffs struck down by the Supreme Court on February 20, 2026)</li>
                         <li>Tariff exemptions (<a href="https://www.whitehouse.gov/wp-content/uploads/2025/04/Annex-II.pdf" target="_blank">April 2, 2025</a>; <a href="https://www.whitehouse.gov/presidential-actions/2025/04/clarification-of-exceptions-under-executive-order-14257-of-april-2-2025-as-amended/" target="_blank">April 11, 2025</a>)</li>
+                        <li><a href="https://www.federalregister.gov/documents/2025/11/25/2025-21203/modifying-the-scope-of-the-reciprocal-tariff-with-respect-to-certain-agricultural-products" target="_blank">Agricultural and food product exemptions</a> from reciprocal tariffs (Executive Order 14360, effective November 13, 2025)</li>
                     </ul>
 
                     <p className="text-body">
@@ -80,8 +83,12 @@ export function Methodology() {
                     </p>
 
                     <p className="text-body">
+                        <strong>Limitations:</strong> Country-level rates are applied uniformly to all products from a given country that are not covered by a product-specific tariff. Morocco is assigned the standard 10% Section 122 surcharge, as the Section 122 proclamation does not explicitly exempt US free trade agreement partners other than USMCA. Goods qualifying under the US–Morocco Free Trade Agreement (general note 27 to the HTSUS) may in practice face lower duties, meaning Morocco's effective tariff rate may be slightly overestimated. The November 2025 agricultural exemptions order includes 11 subheadings that are only partially exempt — applying solely to specific product descriptions within those codes (e.g., etrogs, acai, goods for religious purposes). Because trade data contains HTS codes but not product descriptions, these partial exemptions cannot be distinguished from non-exempt trade in the same subheading and are treated as fully taxable. The affected goods are sufficiently niche that the impact on aggregate ETRs is negligible.
+                    </p>
+
+                    <p className="text-body">
                         To calculate the cost per person, the result in US dollars is divided by the average population from 2022 to 2024.
-                        Population data is sourced from the IMF's <em>World Economic Outlook</em> via <a href="https://docs.one.org/tools/bblocks/data-importers/importers/weo/" target="_blank"> our <code>bblocks.data-importers</code> package</a>.
+                        Population data is sourced from the <a href="https://data.worldbank.org/indicator/SP.POP.TOTL" target="_blank">World Bank</a> (indicator SP.POP.TOTL) via <a href="https://docs.one.org/tools/bblocks/data-importers/" target="_blank">our <code>bblocks.data-importers</code> package</a>.
                     </p>
 
                     <p className="text-body">
@@ -100,7 +107,7 @@ export function Methodology() {
                     </ul>
 
                     <p className="text-body">
-                        Historical exports from African countries to the US between 2002 and 2023 are sourced from the <a href="https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37" target="_blank">BACI</a> trade database.
+                        Historical exports from African countries to the US between 2002 and 2024 are sourced from the <a href="https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37" target="_blank">BACI</a> trade database.
                     </p>
                 </div>
             </div>

@@ -80,6 +80,19 @@ def compute_total_exports(df: pd.DataFrame, idx_cols: list[str]) -> pd.DataFrame
     return totals.rename(columns={"exports": "total_exports"})
 
 
+def _rate_from_label(label: str) -> float:
+    """Reconstruct the numeric rate from a column label produced by label_rate_column.
+
+    Examples: 'value_00' -> 0.0, 'value_01' -> 0.1, 'value_025' -> 0.25, 'value_05' -> 0.5.
+    Returns None for the 'value_unknown' sentinel (NaN rates).
+    """
+    suffix = label.replace("value_", "")
+    if not suffix.isdigit():
+        return None
+    digits = suffix.lstrip("0") or "0"
+    return float(digits) / (10 ** (len(suffix) - 1))
+
+
 def compute_etr(df: pd.DataFrame) -> pd.Series:
     """
     Calculate the Effective Tariff Rate (ETR) for each row.
@@ -88,15 +101,17 @@ def compute_etr(df: pd.DataFrame) -> pd.Series:
     - 'country', 'sector', 'total_exports'
     - columns like 'value_00', 'value_01', 'value_025', etc.
 
-    Returns a Series: etr_numerator / total_exports
+    Returns a Series: etr_numerator / total_exports.
+    Columns named 'value_unknown' (produced when rate is NaN) are skipped.
     """
-    # Select only columns that match the 'value_' prefix
+    # Select only columns that match the 'value_' prefix and represent numeric rates
     value_cols = [col for col in df.columns if col.startswith("value_")]
 
-    # Build the numerator dynamically
+    # Build the numerator dynamically; skip any 'value_unknown' columns
     etr_numerator = sum(
-        df[col] * float(col.replace("value_", "").lstrip("0") or "0") / (10 ** (len(col.replace("value_", "")) - 1))
+        df[col] * rate
         for col in value_cols
+        if (rate := _rate_from_label(col)) is not None
     )
 
     return etr_numerator / df["total_exports"]

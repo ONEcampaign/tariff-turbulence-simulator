@@ -109,7 +109,7 @@ export function AfricaHexmap({
                                 key={iso3}
                                 fill={
                                     Number.isFinite(etr)
-                                        ? colorScale(formatPercentage(etr, { tariff: true, display: false }))
+                                        ? colorScale(Math.round(formatPercentage(etr, { tariff: true, display: false })))
                                         : "url(#diagonalHatch)"
                                 }
                                 opacity={clickedCountry === "ALL" ? 1 : (thisCountryIsClicked ? 1 : 0.2)}

@@ -21,7 +21,7 @@ class BaciLoader:
             df = pd.read_csv(PATHS.EXPORTS_HIST)
         else:
             baci = BACI()
-            raw_df = baci.get_data(hs_version="HS02", incl_country_labels=True)
+            raw_df = baci.get_data(hs_version="HS02", include_country_labels=True)
             # Keep US imports only and summarize by year/country/sector
             df = raw_df.query("importer_iso3_code == 'USA'")
             df = add_sector_group_column(df)
