@@ -1,6 +1,16 @@
 {
-  "name": "Implementation of Duties on Steel Pursuant to Proclamation 10896 Adjusting Imports of Steel Into the United States",
-  "source": "https://www.federalregister.gov/documents/2025/03/05/2025-03598/implementation-of-duties-on-steel-pursuant-to-proclamation-10896-adjusting-imports-of-steel-into-the",
+  "name": "Steel articles subject to 50% Section 232 duty (Proclamation 10896 as amended by Proclamation 11021)",
+  "source": "https://www.federalregister.gov/documents/2026/04/09/2026-06960/strengthening-actions-taken-to-adjust-imports-of-aluminum-steel-and-copper-into-the-united-states",
+  "source_original": "https://www.federalregister.gov/documents/2025/03/05/2025-03598/implementation-of-duties-on-steel-pursuant-to-proclamation-10896-adjusting-imports-of-steel-into-the",
+  "notes": [
+    "Rate applies to articles entirely or almost entirely made of steel (Chapters 72–73), on full customs value.",
+    "Proclamation 11021 (April 2, 2026, effective April 6, 2026) restructured S232 tariffs into tiers:",
+    "  50% — articles entirely/almost entirely of steel (this file)",
+    "  25% — derivative steel articles substantially made of steel (see steel_aluminum_copper_derivatives_04_02_2026.json)",
+    "  15% — fixed industrial machinery, grid equipment, and (per Proclamation 11032 effective June 8, 2026) agricultural and mobile industrial equipment",
+    "  10% — articles using ≥85% US-melted and poured steel by weight (threshold lowered from 95% by Proclamation 11032)",
+    "Codes from Chapters 84, 85, 87, 94 that appeared in the original file have been reclassified as 25% derivative steel articles per Proclamation 11021."
+  ],
   "rate": 0.5,
   "codes": [
     "7208",
@@ -41,8 +51,6 @@
     "7317005560",
     "7317005580",
     "7317006560",
-    "87081030",
-    "87082921",
     "73012010",
     "73012050",
     "73023000",
@@ -196,19 +204,7 @@
     "73269035",
     "73269045",
     "73269060",
-    "73269086",
-    "84313100",
-    "84314200",
-    "84314910",
-    "84314990",
-    "84321000",
-    "84329000",
-    "85479000",
-    "94032000",
-    "94059920",
-    "94059940",
-    "94062000",
-    "94069001"
+    "73269086"
   ],
   "exceptions": [
     "72166100",

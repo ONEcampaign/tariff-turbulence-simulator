@@ -1,6 +1,15 @@
 {
   "name": "Adjusting Imports of Automobiles and Automobile Parts Into the United States",
   "source": "https://www.federalregister.gov/documents/2025/04/03/2025-05930/adjusting-imports-of-automobiles-and-automobile-parts-into-the-united-states",
+  "source_10925": "https://www.federalregister.gov/documents/2025/05/02/2025-07833/amendments-to-adjusting-imports-of-automobiles-and-automobile-parts-into-the-united-states",
+  "source_10984": "https://www.federalregister.gov/documents/2025/10/22/2025-19639/adjusting-imports-of-medium-and-heavy-duty-vehicles-medium-and-heavy-duty-vehicle-parts-and-buses",
+  "notes": [
+    "Proclamation 10908 (March 26, 2025, FR 2025-05930): 25% ad valorem duty on imports of automobiles (passenger vehicles) and automobile parts under Section 232. Effective April 3, 2025 for vehicles; May 3, 2025 for parts.",
+    "Proclamation 10925 (April 29, 2025, FR 2025-07833): amended Proclamation 10908 to introduce an import adjustment offset program. U.S.-based automobile manufacturers assembling vehicles domestically may offset S232 auto parts duties by an amount equal to 3.75% of the U.S. retail price (MSRP) of qualifying U.S.-assembled vehicles (April 3, 2025 – April 30, 2026), then 2.5% of MSRP (May 1, 2026 – April 30, 2027). No changes to HTS code coverage or the 25% rate.",
+    "Proclamation 10984 (October 17, 2025, FR 2025-19639, effective November 1, 2025): revised the offset to a flat rate of 3.75% of MSRP from April 5, 2025 through April 30, 2030 (eliminating the original 2.5% second-year tier).",
+    "HTS codes in this file are the auto parts enumerated in subdivision (g) of U.S. note 33 to subchapter III of chapter 99 (Chapter 99 heading 9903.94.05). Vehicles covered under headings 8703, 8704 (light trucks). See mhdv_11_01_2025.json for medium- and heavy-duty vehicles (Proclamation 10984, heading 9903.74.01).",
+    "Auto parts subject to S232 are not subject to stacked S232 steel/aluminum/copper duties. Reciprocal/IEEPA tariffs do not apply to auto parts covered under 9903.94.05."
+  ],
   "rate": 0.25,
   "codes": [
     "87032201",
