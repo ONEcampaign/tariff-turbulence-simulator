@@ -3,15 +3,16 @@
   "private": true,
   "scripts": {
     "clean": "rimraf src/.observablehq/cache",
-    "build": "export PYTHONPATH=$(pwd) && observable build",
-    "dev": "export PYTHONPATH=$(pwd) && observable preview",
-    "deploy": "export PYTHONPATH=$(pwd) && observable deploy",
+    "build": "export PYTHONPATH=$(pwd) && export PATH=$(pwd)/.venv/bin:$PATH && observable build",
+    "dev": "export PYTHONPATH=$(pwd) && export PATH=$(pwd)/.venv/bin:$PATH && observable preview",
+    "deploy": "export PYTHONPATH=$(pwd) && export PATH=$(pwd)/.venv/bin:$PATH && observable deploy",
     "observable": "observable",
+    "preinstall": "pip install uv --upgrade && pip uninstall opencv-python",
     "install": "uv sync"
   },
   "dependencies": {
     "@observablehq/framework": "^1.13.3",
-    "@one-data/observable-themes": "^0.6.7",
+    "@one-data/observable-themes": "^0.9.7",
     "react-share": "^5.2.2"
   },
   "devDependencies": {
