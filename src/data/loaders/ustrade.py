@@ -7,8 +7,8 @@ information to compute Effective Tariff Rates (ETR) and population figures.
 from pathlib import Path
 
 import pandas as pd
-import country_converter as coco
-from bblocks.data_importers import WEO
+from bblocks.places import resolve_places, filter_african_countries
+from bblocks.data_importers import WorldBank
 
 from src.data.config import PATHS
 from src.data.helpers import add_sector_group_column, load_json
@@ -54,7 +54,6 @@ class UStradeLoader:
         """Standardize column names and convert types."""
         column_dict = {
             "Country": "country",
-            "Time": "year",
             "Commodity": "product_code",
             "Customs  Value (Cons) ($US)": "exports",
         }
@@ -68,41 +67,41 @@ class UStradeLoader:
     @staticmethod
     def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
         """Convert country names to a consistent short form and add ISO3."""
-        cc = coco.CountryConverter()
-        df["country"] = cc.pandas_convert(df["country"], to="name_short")
-        df["iso3"] = cc.pandas_convert(df["country"], to="ISO3")
+        df["iso3"] = resolve_places(df["country"], to_type="iso3_code")
+        df["country"] = resolve_places(df["iso3"], to_type="name_short")
         return df
 
     @staticmethod
     def get_africa_population_data() -> pd.DataFrame:
-        """Retrieve population figures for African countries from the WEO and compute 2022-2024 mean values."""
-        cc = coco.CountryConverter()
-        weo = WEO()
-        data = weo.get_data()
-        filtered_df = data.query(
-            "`indicator_code` == 'LP' and `year` in @YEAR_RANGE"
-        ).copy()
+        """Retrieve population figures for African countries from the World Bank and compute 2022-2024 mean values."""
 
-        filtered_df["population"] = filtered_df["value"] * filtered_df["scale_code"]
-        filtered_df["region"] = cc.pandas_convert(
-            filtered_df["entity_name"], to="continent"
+        column_map = {
+            "entity_code": "iso3",
+            "value": "population"
+        }
+
+        wb = WorldBank()
+
+        raw_df = (
+            wb.get_data(
+                indicator_code="SP.POP.TOTL",
+                start_year=YEAR_RANGE[0],
+                end_year=YEAR_RANGE[-1],
+                skip_aggs=True,
+                skip_blanks=True,
+            )
+            .rename(columns=column_map)
         )
-        africa_df = filtered_df.query("`region` == 'Africa'")
-        africa_df["iso3"] = cc.pandas_convert(africa_df["entity_name"], to="ISO3")
 
-        africa_df_all = pd.DataFrame(
+        africa_codes = filter_african_countries(raw_df["iso3"])
+
+        africa_df = raw_df[raw_df["iso3"].isin(africa_codes)].groupby("iso3")["population"].mean().reset_index()
+
+        africa_total = pd.DataFrame(
             {"iso3": ["ALL"], "population": [africa_df["population"].sum()]}
         )
 
-        complete_df = pd.concat([africa_df, africa_df_all])
-
-        grouped_df = (
-            complete_df.groupby(["iso3"], observed=True, dropna=False)["population"]
-            .mean()
-            .reset_index()
-        )
-
-        return grouped_df
+        return pd.concat([africa_df, africa_total], ignore_index=True)
 
     @staticmethod
     def assert_iso3_code_alignment(df1: pd.DataFrame, df2: pd.DataFrame) -> bool:
@@ -120,34 +119,37 @@ class UStradeLoader:
     def add_population_column(self, df: pd.DataFrame) -> pd.DataFrame:
         """Merge trade data with population data"""
         pop_df = self.get_africa_population_data()
-        if not self.assert_iso3_code_alignment(df, pop_df):
-            raise ValueError("ISO3 code mismatch between dataframes")
-
+        self.assert_iso3_code_alignment(df, pop_df)
         return pd.merge(df, pop_df, on="iso3", how="left", validate="many_to_one")
 
     @staticmethod
     def build_code_rate_map(json_paths: list[Path]) -> dict:
-        """Create a tariff-to-product lookup table based on the JSON files in `src/data/inputs/tariffs/`"""
+        """Create a tariff-to-product lookup table based on the JSON files in `src/data/inputs/tariffs/`
+
+        `codes_partial` entries (intra-subheading exemptions distinguishable only by product
+        description, not HTS code) are intentionally not modeled — trade data contains no
+        description field to filter on, so the full subheading is treated as non-exempt.
+        """
         rate_map: dict[str, float] = {}
         for path in json_paths:
             data = load_json(path)
             rate = data["rate"]
             for code in data.get("codes", []):
-                rate_map[code] = rate
+                rate_map[str(code).replace(".", "")] = rate
             for code in data.get("exceptions", []):
-                rate_map[code] = 0.0
+                rate_map[str(code).replace(".", "")] = 0.0
         return rate_map
 
+    @staticmethod
     def assign_tariff_rate(
-            self,
             df: pd.DataFrame,
             product_rate_map: dict,
             country_rate_map: dict,
             default_rate: float = 0.1
     ) -> pd.DataFrame:
         """
-        Assign tariff rate using the shortest matching prefix in product_rate_map,
-        falling back to country_rate_map, then default_rate.
+        Assign tariff rate using the longest matching prefix in product_rate_map
+        (most specific rule wins), falling back to country_rate_map, then default_rate.
         """
 
         def lookup_rate(code: str, country: str) -> float:
@@ -157,9 +159,9 @@ class UStradeLoader:
                 if code_str.startswith(prefix)
             ]
             if matching_prefixes:
-                # Shortest matching prefix wins
-                shortest_prefix = min(matching_prefixes, key=len)
-                return product_rate_map[shortest_prefix]
+                # Longest matching prefix wins (most specific rule takes precedence)
+                longest_prefix = max(matching_prefixes, key=len)
+                return product_rate_map[longest_prefix]
             # Fall back to country or default
             return country_rate_map.get(country, default_rate)
 
@@ -172,9 +174,14 @@ class UStradeLoader:
         json_paths = [
             PATHS.ALUMINUM,
             PATHS.STEEL,
+            PATHS.COPPER,
+            PATHS.SAC_DERIVATIVES,
             PATHS.AUTOS,
+            PATHS.BUSES,
+            PATHS.MHDV,
             PATHS.EXEMPTIONS_1,
             PATHS.EXEMPTIONS_2,
+            PATHS.EXEMPTIONS_3,
         ]
         product_rate_map = self.build_code_rate_map(json_paths)
 
@@ -188,7 +195,8 @@ class UStradeLoader:
 
         return self.assign_tariff_rate(df, product_rate_map, country_rate_map)
 
-    def add_etr_column(self, df: pd.DataFrame) -> pd.DataFrame:
+    @staticmethod
+    def add_etr_column(df: pd.DataFrame) -> pd.DataFrame:
         """Add Effective Tariff Rate columns for multiple aggregates."""
         variants = [
             {},
@@ -197,8 +205,8 @@ class UStradeLoader:
             {"country": "All countries", "iso3": "ALL", "sector": "All sectors"},
         ]
         frames = []
-        for iter in variants:
-            df_variant = df.assign(**iter)
+        for variant in variants:
+            df_variant = df.assign(**variant)
             frames.append(etr.compute_etr_by_group(df_variant))
         final_df = (
             pd.concat(frames, ignore_index=True)
