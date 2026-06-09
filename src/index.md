@@ -1,16 +1,3 @@
----
-sidebar: false
-header: false
-footer: false
-pager: false
-toc: false
----
-
-```js
-const observer = new ResizeObserver(([entry]) => window.parent.postMessage({height: entry.target.offsetHeight}, "https://data.one.org"));
-observer.observe(document.documentElement);
-```
-
 ```js
 import * as React from "npm:react";
 import {DropdownProvider} from "./components/common/DropdownContext.js";
@@ -29,6 +16,7 @@ import {
     generateSelectionCardData,
     binaryFilter
 } from "./js/transformData.js";
+import {isEmbedded} from "npm:@one-data/observable-themes/utils"
 
 const recentData = FileAttachment("./data/africa_exports_to_us_2022_2024_ustrade.csv").csv({typed: true});
 const historicalData = FileAttachment("./data/africa_exports_to_us_2002_2023_baci.csv").csv({typed: true});
