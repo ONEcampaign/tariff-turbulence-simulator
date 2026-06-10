@@ -8,5 +8,6 @@ dependencies = [
     "bblocks-places>=0.0.4",
     "pandas>=2.3.3",
     "platformdirs>=4.10.0",
+    "pydeflate>=2.5.0",
 ]
 
