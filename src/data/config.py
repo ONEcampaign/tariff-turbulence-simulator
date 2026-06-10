@@ -2,6 +2,10 @@
 
 from pathlib import Path
 
+# Reference year for constant-price deflation (shared by all loaders).
+# Matches the base year used in trade_data_explorer.
+BASE_YEAR: int = 2024
+
 
 class PATHS:
     """Collection of project data locations."""
@@ -12,7 +16,10 @@ class PATHS:
 
     INPUTS = DATA / "inputs"
 
+    # Raw BACI cache (current USD) — kept for backward compatibility.
     EXPORTS_HIST = INPUTS / "africa_exports_to_us_2002_2024_baci_raw.csv"
+    # Constant-USD BACI cache (deflated to BASE_YEAR prices).
+    EXPORTS_HIST_CONST = INPUTS / "africa_exports_to_us_2002_2024_baci_const2024.csv"
     HS_GROUPS = INPUTS / "hs_groups.json"
 
     TARIFFS = INPUTS / "tariffs"

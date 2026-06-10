@@ -1,4 +1,8 @@
 """Load and clean historical trade data from the BACI database.
+
+Trade values are deflated to constant BASE_YEAR USD using each exporter's IMF
+GDP deflator (via pydeflate), matching the methodology in trade_data_explorer.
+The deflated cache is stored at PATHS.EXPORTS_HIST_CONST.
 """
 
 import pandas as pd
@@ -7,27 +11,46 @@ from bblocks.data_importers import BACI
 from src.data.config import PATHS
 from src.data.helpers import (
     add_sector_group_column,
+    deflate_to_constant_usd,
     filter_african_countries,
     group_data,
 )
 
 
 class BaciLoader:
-    """Loader for historical BACI trade data."""
+    """Loader for historical BACI trade data (constant BASE_YEAR USD)."""
 
     def load(self) -> pd.DataFrame:
-        """Load or download trade data from BACI and cache it locally."""
-        if PATHS.EXPORTS_HIST.exists():
-            df = pd.read_csv(PATHS.EXPORTS_HIST)
+        """Load or download BACI data, deflate to constant USD, and cache.
+
+        On first call the full pipeline runs:
+          1. Download HS02 BACI bilateral data.
+          2. Filter to US imports.
+          3. Map each product to a sector group (dropping unmapped codes).
+          4. Sum to (year, exporter, sector) granularity.
+          5. Filter to African exporters.
+          6. Deflate values to constant BASE_YEAR USD using each country's
+             IMF GDP deflator.
+          7. Cache the result to PATHS.EXPORTS_HIST_CONST.
+
+        Subsequent calls read the cached CSV directly.
+        """
+        if PATHS.EXPORTS_HIST_CONST.exists():
+            df = pd.read_csv(PATHS.EXPORTS_HIST_CONST)
         else:
             baci = BACI()
             raw_df = baci.get_data(hs_version="HS02", include_country_labels=True)
-            # Keep US imports only and summarize by year/country/sector
-            df = raw_df.query("importer_iso3_code == 'USA'")
+            # Keep US imports only
+            df = raw_df.query("importer_iso3_code == 'USA'").copy()
+            # Map products to sector groups (drops unmapped rows)
             df = add_sector_group_column(df)
+            # Aggregate to (year, exporter, sector) before deflating for efficiency
             df = group_data(df, ["year", "exporter_iso3_code", "sector"])
+            # Filter to African countries (adds "country" display column)
             df = filter_african_countries(df, "exporter_iso3_code")
-            df.to_csv(PATHS.EXPORTS_HIST, index=False)
+            # Deflate to constant BASE_YEAR USD using each exporter's IMF deflator
+            df = deflate_to_constant_usd(df, id_column="exporter_iso3_code")
+            df.to_csv(PATHS.EXPORTS_HIST_CONST, index=False)
         return df
 
     @staticmethod

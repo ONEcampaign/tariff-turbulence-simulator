@@ -10,7 +10,7 @@ import pandas as pd
 
 from pathlib import Path
 
-from src.data.config import PATHS
+from src.data.config import BASE_YEAR, PATHS
 
 
 def load_json(filepath: Path) -> dict:
@@ -53,6 +53,51 @@ def group_data(
         .reset_index()
     )
     return grouped
+
+
+def deflate_to_constant_usd(
+    df: pd.DataFrame,
+    id_column: str,
+    value_column: str = "value",
+    base_year: int = BASE_YEAR,
+) -> pd.DataFrame:
+    """Deflate a trade-value column from current to constant USD using IMF GDP deflators.
+
+    Uses each country's own IMF GDP deflator (via pydeflate), matching the
+    methodology in trade_data_explorer.  The DataFrame must contain a ``year``
+    column alongside ``id_column`` and ``value_column``.
+
+    Parameters
+    ----------
+    df:
+        DataFrame with at least ``id_column``, ``year``, and ``value_column``.
+    id_column:
+        Column holding ISO3 country codes (e.g. ``"exporter_iso3_code"`` for
+        BACI data, ``"iso3"`` for US Census Bureau data).
+    value_column:
+        Column holding the nominal trade value to deflate.  Defaults to
+        ``"value"`` (BACI convention); pass ``"exports"`` for US Census data.
+    base_year:
+        Target constant-price year.  Defaults to ``BASE_YEAR`` (2024).
+
+    Returns
+    -------
+    DataFrame with ``value_column`` replaced by constant-``base_year`` values
+    in the same unit as the input.
+    """
+    from pydeflate import imf_gdp_deflate
+
+    return imf_gdp_deflate(
+        data=df,
+        base_year=base_year,
+        source_currency="USA",
+        target_currency="USA",
+        id_column=id_column,
+        year_column="year",
+        value_column=value_column,
+        target_value_column=value_column,
+        update_deflators=False,
+    )
 
 
 def filter_african_countries(df: pd.DataFrame, iso_col: str) -> pd.DataFrame:

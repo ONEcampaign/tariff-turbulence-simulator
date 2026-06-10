@@ -2,6 +2,10 @@
 
 This module fetches recent US import data and combines it with tariff
 information to compute Effective Tariff Rates (ETR) and population figures.
+
+Trade values are deflated to constant BASE_YEAR USD using each exporter's IMF
+GDP deflator before averaging across years, ensuring multi-year comparisons
+are in real (inflation-adjusted) terms.
 """
 
 from pathlib import Path
@@ -10,8 +14,8 @@ import pandas as pd
 import country_converter as coco
 from bblocks.data_importers import WorldBank
 
-from src.data.config import PATHS
-from src.data.helpers import add_sector_group_column, load_json
+from src.data.config import BASE_YEAR, PATHS
+from src.data.helpers import add_sector_group_column, deflate_to_constant_usd, load_json
 from src.data import etr
 
 YEAR_RANGE = range(2022, 2025)
@@ -21,11 +25,19 @@ class UStradeLoader:
     """Loader for recent US trade data and tariff calculations."""
 
     def load(self) -> pd.DataFrame:
-        """Return fully processed trade data ready for export."""
+        """Return fully processed trade data ready for export.
 
+        Pipeline:
+          load_data  →  sector groups  →  normalize country names
+          →  deflate (constant BASE_YEAR USD)
+          →  average across years
+          →  tariff rates  →  ETR  →  population
+        """
         df = self.load_data()
         df = add_sector_group_column(df)
         df = self.normalize_country_names(df)
+        df = self.deflate(df)
+        df = self.average_years(df)
         df = self.add_rate_columns(df)
         df = self.add_etr_column(df)
         df = self.add_population_column(df)
@@ -33,21 +45,19 @@ class UStradeLoader:
         return df[ordered_columns]
 
     def load_data(self) -> pd.DataFrame:
-        """Load raw CSV files with US trade data and compute mean values by exporter country and product."""
+        """Load per-year CSV files and return one row per (year, country, product).
+
+        Callers that need a single average figure across years should call
+        ``deflate()`` (to convert to constant USD) followed by
+        ``average_years()`` before any further processing.
+        """
         raw_dfs = []
         for y in YEAR_RANGE:
             d = pd.read_csv(PATHS.INPUTS / f"africa_exports_to_us_{y}_ustrade_raw.csv")
             d = self.clean_columns(d)
+            d["year"] = y
             raw_dfs.append(d)
-        raw_df = pd.concat(raw_dfs)
-        df = (
-            raw_df.groupby(["country", "product_code"], observed=True, dropna=False)[
-                "exports"
-            ]
-            .mean()
-            .reset_index()
-        )
-        return df
+        return pd.concat(raw_dfs, ignore_index=True)
 
     @staticmethod
     def clean_columns(df: pd.DataFrame) -> pd.DataFrame:
@@ -72,6 +82,31 @@ class UStradeLoader:
         df["iso3"] = cc.pandas_convert(df["country"], to="ISO3")
         df["country"] = cc.pandas_convert(df["iso3"], to="name_short")
         return df
+
+    @staticmethod
+    def deflate(df: pd.DataFrame, base_year: int = BASE_YEAR) -> pd.DataFrame:
+        """Deflate ``exports`` from current to constant ``base_year`` USD.
+
+        Requires ``iso3`` and ``year`` columns (call ``normalize_country_names``
+        and ensure ``load_data`` has been called before this method).
+        """
+        return deflate_to_constant_usd(
+            df, id_column="iso3", value_column="exports", base_year=base_year
+        )
+
+    @staticmethod
+    def average_years(df: pd.DataFrame) -> pd.DataFrame:
+        """Average ``exports`` across years, collapsing the ``year`` column.
+
+        Groups by all non-year, non-exports columns and computes the mean
+        export value, producing one row per (country, product_code[, sector]).
+        """
+        group_cols = [c for c in df.columns if c not in ("year", "exports")]
+        return (
+            df.groupby(group_cols, observed=True, dropna=False)["exports"]
+            .mean()
+            .reset_index()
+        )
 
     @staticmethod
     def get_africa_population_data() -> pd.DataFrame:
