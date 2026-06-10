@@ -19,7 +19,7 @@ import {
 import {isEmbedded} from "npm:@one-data/observable-themes/utils"
 
 const recentData = FileAttachment("./data/africa_exports_to_us_2022_2024_ustrade.csv").csv({typed: true});
-const historicalData = FileAttachment("./data/africa_exports_to_us_2002_2023_baci.csv").csv({typed: true});
+const historicalData = FileAttachment("./data/africa_exports_to_us_2002_2024_baci.csv").csv({typed: true});
 const geoData = FileAttachment("./data/africa_hexmap.geojson").json({typed: true});
 ```
 
