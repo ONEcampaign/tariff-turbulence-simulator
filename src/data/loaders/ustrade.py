@@ -20,6 +20,15 @@ from src.data import etr
 
 YEAR_RANGE = range(2022, 2025)
 
+_cc = None
+
+
+def _get_cc() -> coco.CountryConverter:
+    global _cc
+    if _cc is None:
+        _cc = coco.CountryConverter()
+    return _cc
+
 
 class UStradeLoader:
     """Loader for recent US trade data and tariff calculations."""
@@ -69,6 +78,7 @@ class UStradeLoader:
         }
         df = df.rename(columns=column_dict)[column_dict.values()]
         df["product_code"] = df["product_code"].str.extract(r"^(\d{10})")
+        df = df.dropna(subset=["product_code"])
         df["exports"] = pd.to_numeric(
             df["exports"].str.replace(",", ""), errors="coerce"
         )
@@ -77,7 +87,7 @@ class UStradeLoader:
     @staticmethod
     def normalize_country_names(df: pd.DataFrame) -> pd.DataFrame:
         """Convert country names to a consistent short form and add ISO3."""
-        cc = coco.CountryConverter()
+        cc = _get_cc()
         df = df.copy()
         df["iso3"] = cc.pandas_convert(df["country"], to="ISO3")
         df["country"] = cc.pandas_convert(df["iso3"], to="name_short")
@@ -130,7 +140,7 @@ class UStradeLoader:
             .rename(columns=column_map)
         )
 
-        cc = coco.CountryConverter()
+        cc = _get_cc()
         africa_codes = raw_df["iso3"][
             cc.pandas_convert(raw_df["iso3"], to="continent") == "Africa"
         ].unique()
@@ -187,26 +197,34 @@ class UStradeLoader:
             country_rate_map: dict,
             default_rate: float = 0.1
     ) -> pd.DataFrame:
-        """
-        Assign tariff rate using the longest matching prefix in product_rate_map
+        """Assign tariff rate using the longest matching prefix in product_rate_map
         (most specific rule wins), falling back to country_rate_map, then default_rate.
-        """
 
-        def lookup_rate(code: str, country: str) -> float:
-            code_str = str(code)
-            matching_prefixes = [
-                prefix for prefix in product_rate_map
-                if code_str.startswith(prefix)
-            ]
-            if matching_prefixes:
-                # Longest matching prefix wins (most specific rule takes precedence)
-                longest_prefix = max(matching_prefixes, key=len)
-                return product_rate_map[longest_prefix]
-            # Fall back to country or default
-            return country_rate_map.get(country, default_rate)
+        Builds a per-unique-code lookup once, then uses vectorised map —
+        O(unique_codes × prefixes) rather than O(rows × prefixes).
+        """
+        sorted_prefixes = sorted(product_rate_map, key=len, reverse=True)
+
+        def _rate_for_code(code: str) -> float | None:
+            for prefix in sorted_prefixes:
+                if code.startswith(prefix):
+                    return product_rate_map[prefix]
+            return None
+
+        code_to_rate: dict[str, float | None] = {
+            str(code): _rate_for_code(str(code))
+            for code in df["product_code"].unique()
+        }
 
         df = df.copy()
-        df["rate"] = df.apply(lambda row: lookup_rate(row["product_code"], row["iso3"]), axis=1)
+        df["rate"] = df["product_code"].map(code_to_rate)
+        no_product_match = df["rate"].isna()
+        if no_product_match.any():
+            df.loc[no_product_match, "rate"] = (
+                df.loc[no_product_match, "iso3"]
+                .map(country_rate_map)
+                .fillna(default_rate)
+            )
         return df
 
     def add_rate_columns(self, df: pd.DataFrame) -> pd.DataFrame:

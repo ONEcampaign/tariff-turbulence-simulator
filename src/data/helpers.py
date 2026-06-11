@@ -100,11 +100,20 @@ def deflate_to_constant_usd(
     )
 
 
+_cc = None
+
+
+def _get_cc():
+    global _cc
+    if _cc is None:
+        import country_converter as coco
+        _cc = coco.CountryConverter()
+    return _cc
+
+
 def filter_african_countries(df: pd.DataFrame, iso_col: str) -> pd.DataFrame:
     """Filter a DataFrame to African countries based on an ISO column."""
-    import country_converter as coco
-
-    cc = coco.CountryConverter()
+    cc = _get_cc()
     df = df.copy()
     df["region"] = cc.pandas_convert(df[iso_col], to="continent")
     df = df.query("region == 'Africa'")
