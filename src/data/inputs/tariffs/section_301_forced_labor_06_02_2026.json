@@ -1,0 +1,33 @@
+{
+  "name": "Section 301 Forced Labor Investigation — Proposed Additional Duties (USTR, June 2, 2026)",
+  "source": "https://ustr.gov/sites/default/files/files/Press/Releases/2026/FRN%20-%20Section%20301%20Forced%20Labor%20Import%20Ban%20Actionabilty%20and%20Proposed%20Action%206-2-26%20FINAL.pdf",
+  "docket": ["USTR-2026-0265", "USTR-2026-0266"],
+  "AGO": {
+    "rate": 0.125,
+    "country": "Angola"
+  },
+  "DZA": {
+    "rate": 0.125,
+    "country": "Algeria"
+  },
+  "EGY": {
+    "rate": 0.125,
+    "country": "Egypt"
+  },
+  "LBY": {
+    "rate": 0.125,
+    "country": "Libya"
+  },
+  "MAR": {
+    "rate": 0.125,
+    "country": "Morocco"
+  },
+  "NGA": {
+    "rate": 0.125,
+    "country": "Nigeria"
+  },
+  "ZAF": {
+    "rate": 0.125,
+    "country": "South Africa"
+  }
+}

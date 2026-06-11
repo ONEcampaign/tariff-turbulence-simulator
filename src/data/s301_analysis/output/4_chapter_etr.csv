@@ -1,0 +1,455 @@
+Country,Chapter,Chapter Name,Total Exports (const. 2024 USD bn),Baseline ETR (%),S301 ETR (%),ETR Change (pp)
+Algeria,11,Milling products,0.0,10.0,22.5,12.5
+Algeria,38,Chemical products (misc),0.0,10.0,22.5,12.5
+Algeria,88,Aircraft & spacecraft,0.0,10.0,22.5,12.5
+Algeria,03,Fish & seafood,0.0,10.0,22.5,12.5
+Algeria,08,Edible fruit & nuts,0.02,10.0,22.5,12.5
+Algeria,12,Oil seeds & oleaginous fruits,0.0,10.0,22.5,12.5
+Algeria,15,Fats & oils,0.0,10.0,22.5,12.5
+Algeria,16,Prepared meat & fish,0.0,10.0,22.5,12.5
+Algeria,17,Sugars & confectionery,0.0,10.0,22.5,12.5
+Algeria,18,Cocoa & preparations,0.0,10.0,22.5,12.5
+Algeria,22,"Beverages, spirits & vinegar",0.0,10.0,22.5,12.5
+Algeria,25,"Salt, sulphur, stone & cement",0.07,10.0,22.5,12.5
+Algeria,29,Organic chemicals,0.03,10.0,22.5,12.5
+Algeria,31,Fertilisers,0.21,0.0,12.5,12.5
+Algeria,33,Essential oils & cosmetics,0.0,10.0,22.5,12.5
+Algeria,39,Plastics & articles,0.0,10.0,22.5,12.5
+Algeria,42,Leather goods & handbags,0.0,10.0,22.5,12.5
+Algeria,44,Wood & articles,0.0,10.0,22.5,12.5
+Algeria,48,Paper & paperboard,0.0,10.0,22.5,12.5
+Algeria,49,Books & printed matter,0.0,6.47,18.97,12.5
+Algeria,56,"Wadding, felt & special yarns",0.0,10.0,22.5,12.5
+Algeria,57,Carpets & floor coverings,0.0,10.0,22.5,12.5
+Algeria,58,Special woven fabrics,0.0,10.0,22.5,12.5
+Algeria,62,Woven apparel,0.0,10.0,22.5,12.5
+Algeria,63,Other textiles & worn clothing,0.0,10.0,22.5,12.5
+Algeria,64,Footwear,0.0,10.0,22.5,12.5
+Algeria,70,Glass & glassware,0.0,10.0,22.5,12.5
+Algeria,71,"Precious metals, stones & jewellery",0.01,0.01,12.51,12.5
+Algeria,81,Other base metals & cermets,0.0,0.0,12.5,12.5
+Algeria,86,Railway & tram equipment,0.0,10.0,22.5,12.5
+Algeria,90,"Optical, medical & precision instruments",0.0,10.0,22.5,12.5
+Algeria,93,Arms & ammunition,0.0,10.0,22.5,12.5
+Algeria,95,"Toys, games & sports equipment",0.0,10.0,22.5,12.5
+Algeria,97,Works of art & antiques,0.0,10.0,22.5,12.5
+Algeria,04,"Dairy, eggs & honey",0.0,10.0,22.5,12.5
+Algeria,10,Cereals,0.0,10.0,22.5,12.5
+Algeria,61,Knitted & crocheted apparel,0.0,10.0,22.5,12.5
+Algeria,69,Ceramic products,0.0,10.0,22.5,12.5
+Algeria,82,"Tools, cutlery & implements",0.0,10.0,22.5,12.5
+Algeria,20,Prepared vegetables & fruit,0.0,9.8,22.04,12.25
+Algeria,85,Electrical machinery & electronics,0.0,11.02,22.54,11.51
+Algeria,19,Bakery & cereal preparations,0.0,10.0,21.28,11.28
+Algeria,21,Miscellaneous food preparations,0.0,10.0,20.33,10.33
+Algeria,94,Furniture & bedding,0.0,12.67,22.95,10.27
+Algeria,28,Inorganic chemicals,0.04,7.37,16.59,9.21
+Algeria,83,Miscellaneous base metal articles,0.0,14.85,23.31,8.46
+Algeria,84,Industrial machinery & computers,0.0,15.91,21.67,5.76
+Algeria,40,Rubber & articles,0.0,24.97,25.0,0.02
+Algeria,09,"Coffee, tea & spices",0.0,0.0,0.0,0.0
+Algeria,27,Mineral fuels & oils,2.52,0.0,0.0,0.0
+Algeria,72,Iron & steel,0.26,50.0,50.0,0.0
+Algeria,73,Articles of iron or steel,0.0,50.0,50.0,0.0
+Algeria,76,Aluminium & articles,0.0,50.0,50.0,0.0
+Angola,03,Fish & seafood,0.0,10.0,22.5,12.5
+Angola,11,Milling products,0.0,10.0,22.5,12.5
+Angola,16,Prepared meat & fish,0.0,10.0,22.5,12.5
+Angola,22,"Beverages, spirits & vinegar",0.0,10.0,22.5,12.5
+Angola,28,Inorganic chemicals,0.0,10.0,22.5,12.5
+Angola,29,Organic chemicals,0.12,10.0,22.5,12.5
+Angola,38,Chemical products (misc),0.0,0.0,12.5,12.5
+Angola,39,Plastics & articles,0.0,10.0,22.5,12.5
+Angola,44,Wood & articles,0.0,0.0,12.5,12.5
+Angola,49,Books & printed matter,0.0,0.0,12.5,12.5
+Angola,62,Woven apparel,0.0,10.0,22.5,12.5
+Angola,68,"Stone, plaster & cement articles",0.0,10.0,22.5,12.5
+Angola,69,Ceramic products,0.0,10.0,22.5,12.5
+Angola,71,"Precious metals, stones & jewellery",0.06,10.0,22.5,12.5
+Angola,72,Iron & steel,0.01,9.75,22.25,12.5
+Angola,20,Prepared vegetables & fruit,0.0,10.0,22.5,12.5
+Angola,25,"Salt, sulphur, stone & cement",0.01,10.0,22.5,12.5
+Angola,97,Works of art & antiques,0.0,10.0,22.5,12.5
+Angola,85,Electrical machinery & electronics,0.0,1.35,13.34,11.99
+Angola,84,Industrial machinery & computers,0.0,16.91,23.65,6.74
+Angola,09,"Coffee, tea & spices",0.0,0.0,0.0,0.0
+Angola,27,Mineral fuels & oils,1.22,0.0,0.0,0.0
+Angola,73,Articles of iron or steel,0.01,50.0,50.0,0.0
+Angola,87,Vehicles (excl. railway),0.0,25.0,25.0,0.0
+Egypt,13,"Lac, gums & resins",0.0,10.0,22.5,12.5
+Egypt,24,Tobacco,0.0,10.0,22.5,12.5
+Egypt,34,"Soap, waxes & polishes",0.01,8.89,21.39,12.5
+Egypt,38,Chemical products (misc),0.0,9.36,21.86,12.5
+Egypt,04,"Dairy, eggs & honey",0.0,10.0,22.5,12.5
+Egypt,10,Cereals,0.0,10.0,22.5,12.5
+Egypt,11,Milling products,0.0,10.0,22.5,12.5
+Egypt,16,Prepared meat & fish,0.04,10.0,22.5,12.5
+Egypt,17,Sugars & confectionery,0.01,10.0,22.5,12.5
+Egypt,18,Cocoa & preparations,0.0,10.0,22.5,12.5
+Egypt,22,"Beverages, spirits & vinegar",0.0,10.0,22.5,12.5
+Egypt,30,Pharmaceutical products,0.0,8.42,20.92,12.5
+Egypt,31,Fertilisers,0.14,0.0,12.5,12.5
+Egypt,33,Essential oils & cosmetics,0.01,10.0,22.5,12.5
+Egypt,37,Photographic & cinematographic goods,0.0,10.0,22.5,12.5
+Egypt,41,Raw hides & skins,0.0,10.0,22.5,12.5
+Egypt,42,Leather goods & handbags,0.0,10.0,22.5,12.5
+Egypt,43,Furskins & artificial fur,0.0,10.0,22.5,12.5
+Egypt,44,Wood & articles,0.0,9.09,21.59,12.5
+Egypt,46,Basketwork & wickerwork,0.0,10.0,22.5,12.5
+Egypt,48,Paper & paperboard,0.01,10.0,22.5,12.5
+Egypt,49,Books & printed matter,0.0,5.54,18.04,12.5
+Egypt,50,Silk,0.0,10.0,22.5,12.5
+Egypt,51,Wool & fine animal hair,0.0,10.0,22.5,12.5
+Egypt,52,Cotton,0.0,10.0,22.5,12.5
+Egypt,53,Other vegetable fibres,0.0,10.0,22.5,12.5
+Egypt,55,Man-made staple fibres,0.0,10.0,22.5,12.5
+Egypt,56,"Wadding, felt & special yarns",0.01,10.0,22.5,12.5
+Egypt,57,Carpets & floor coverings,0.12,10.0,22.5,12.5
+Egypt,58,Special woven fabrics,0.0,10.0,22.5,12.5
+Egypt,59,Coated & laminated textiles,0.0,10.0,22.5,12.5
+Egypt,60,Knitted & crocheted fabrics,0.0,10.0,22.5,12.5
+Egypt,62,Woven apparel,0.5,10.0,22.5,12.5
+Egypt,64,Footwear,0.0,10.0,22.5,12.5
+Egypt,65,Headgear,0.0,10.0,22.5,12.5
+Egypt,66,Umbrellas & walking sticks,0.0,10.0,22.5,12.5
+Egypt,68,"Stone, plaster & cement articles",0.0,10.0,22.5,12.5
+Egypt,69,Ceramic products,0.0,10.0,22.5,12.5
+Egypt,71,"Precious metals, stones & jewellery",0.07,0.04,12.54,12.5
+Egypt,79,Zinc & articles,0.0,0.0,12.5,12.5
+Egypt,82,"Tools, cutlery & implements",0.0,10.0,22.5,12.5
+Egypt,86,Railway & tram equipment,0.0,10.0,22.5,12.5
+Egypt,88,Aircraft & spacecraft,0.0,10.0,22.5,12.5
+Egypt,89,Ships & boats,0.0,10.0,22.5,12.5
+Egypt,91,"Clocks, watches & parts",0.0,10.0,22.5,12.5
+Egypt,93,Arms & ammunition,0.0,10.0,22.5,12.5
+Egypt,97,Works of art & antiques,0.02,10.0,22.5,12.5
+Egypt,61,Knitted & crocheted apparel,0.69,10.0,22.5,12.5
+Egypt,63,Other textiles & worn clothing,0.01,10.0,22.5,12.5
+Egypt,01,Live animals,0.0,10.0,22.5,12.5
+Egypt,03,Fish & seafood,0.01,10.0,22.5,12.5
+Egypt,05,Other animal products,0.0,10.0,22.5,12.5
+Egypt,06,Live plants & cut flowers,0.0,10.0,22.5,12.5
+Egypt,23,Animal feed & residues,0.0,10.0,22.5,12.5
+Egypt,32,"Tanning, dyeing & paints",0.01,8.79,21.29,12.5
+Egypt,35,Albuminoidal substances & starches,0.01,10.0,22.5,12.5
+Egypt,39,Plastics & articles,0.09,5.78,18.28,12.5
+Egypt,54,Man-made filaments,0.0,10.0,22.5,12.5
+Egypt,70,Glass & glassware,0.05,10.0,22.5,12.5
+Egypt,81,Other base metals & cermets,0.0,10.0,22.5,12.5
+Egypt,92,Musical instruments,0.0,10.0,22.5,12.5
+Egypt,25,"Salt, sulphur, stone & cement",0.08,10.0,22.5,12.5
+Egypt,12,Oil seeds & oleaginous fruits,0.02,10.0,22.49,12.5
+Egypt,07,Vegetables,0.05,9.98,22.47,12.48
+Egypt,08,Edible fruit & nuts,0.09,9.99,22.45,12.46
+Egypt,90,"Optical, medical & precision instruments",0.0,10.05,22.51,12.46
+Egypt,15,Fats & oils,0.0,9.96,22.41,12.45
+Egypt,96,Miscellaneous manufactures,0.01,10.13,22.52,12.39
+Egypt,95,"Toys, games & sports equipment",0.0,10.29,22.55,12.26
+Egypt,28,Inorganic chemicals,0.0,9.7,21.84,12.13
+Egypt,84,Industrial machinery & computers,0.02,10.47,22.54,12.07
+Egypt,83,Miscellaneous base metal articles,0.0,11.04,22.67,11.63
+Egypt,19,Bakery & cereal preparations,0.01,10.0,21.21,11.21
+Egypt,20,Prepared vegetables & fruit,0.1,9.66,20.39,10.74
+Egypt,21,Miscellaneous food preparations,0.02,9.92,20.47,10.56
+Egypt,94,Furniture & bedding,0.01,12.75,22.96,10.2
+Egypt,29,Organic chemicals,0.01,8.01,18.03,10.02
+Egypt,85,Electrical machinery & electronics,0.01,12.9,22.29,9.4
+Egypt,40,Rubber & articles,0.0,16.55,23.59,7.04
+Egypt,87,Vehicles (excl. railway),0.0,20.39,24.23,3.84
+Egypt,26,"Ores, slag & ash",0.0,3.04,6.85,3.81
+Egypt,09,"Coffee, tea & spices",0.02,1.81,4.07,2.26
+Egypt,72,Iron & steel,0.18,48.73,49.1,0.37
+Egypt,76,Aluminium & articles,0.01,49.8,49.86,0.06
+Egypt,73,Articles of iron or steel,0.03,49.95,49.96,0.02
+Egypt,14,Vegetable materials (misc),0.0,10.0,10.0,0.0
+Egypt,27,Mineral fuels & oils,0.1,0.0,0.0,0.0
+Egypt,74,Copper & articles,0.0,0.0,0.0,0.0
+Libya,29,Organic chemicals,0.03,10.0,22.5,12.5
+Libya,34,"Soap, waxes & polishes",0.0,10.0,22.5,12.5
+Libya,48,Paper & paperboard,0.0,10.0,22.5,12.5
+Libya,61,Knitted & crocheted apparel,0.0,10.0,22.5,12.5
+Libya,62,Woven apparel,0.0,10.0,22.5,12.5
+Libya,64,Footwear,0.0,10.0,22.5,12.5
+Libya,70,Glass & glassware,0.0,10.0,22.5,12.5
+Libya,71,"Precious metals, stones & jewellery",0.0,10.0,22.5,12.5
+Libya,84,Industrial machinery & computers,0.0,10.0,22.5,12.5
+Libya,95,"Toys, games & sports equipment",0.0,10.0,22.5,12.5
+Libya,97,Works of art & antiques,0.0,10.0,22.5,12.5
+Libya,39,Plastics & articles,0.0,10.0,22.5,12.5
+Libya,49,Books & printed matter,0.0,4.16,16.66,12.5
+Libya,03,Fish & seafood,0.0,10.0,22.5,12.5
+Libya,63,Other textiles & worn clothing,0.0,10.0,22.5,12.5
+Libya,90,"Optical, medical & precision instruments",0.0,10.0,22.5,12.5
+Libya,94,Furniture & bedding,0.0,10.0,22.5,12.5
+Libya,25,"Salt, sulphur, stone & cement",0.0,9.96,22.42,12.45
+Libya,85,Electrical machinery & electronics,0.0,10.14,19.54,9.39
+Libya,28,Inorganic chemicals,0.0,5.06,11.39,6.33
+Libya,87,Vehicles (excl. railway),0.0,17.57,23.76,6.19
+Libya,08,Edible fruit & nuts,0.0,10.0,10.0,0.0
+Libya,14,Vegetable materials (misc),0.0,10.0,10.0,0.0
+Libya,27,Mineral fuels & oils,2.58,0.0,0.0,0.0
+Libya,83,Miscellaneous base metal articles,0.0,25.0,25.0,0.0
+Morocco,13,"Lac, gums & resins",0.01,10.0,22.5,12.5
+Morocco,22,"Beverages, spirits & vinegar",0.0,10.0,22.5,12.5
+Morocco,32,"Tanning, dyeing & paints",0.0,6.32,18.82,12.5
+Morocco,33,Essential oils & cosmetics,0.02,10.0,22.5,12.5
+Morocco,44,Wood & articles,0.0,8.67,21.17,12.5
+Morocco,50,Silk,0.0,10.0,22.5,12.5
+Morocco,55,Man-made staple fibres,0.0,10.0,22.5,12.5
+Morocco,68,"Stone, plaster & cement articles",0.01,10.0,22.5,12.5
+Morocco,69,Ceramic products,0.02,10.0,22.5,12.5
+Morocco,92,Musical instruments,0.0,10.0,22.5,12.5
+Morocco,01,Live animals,0.0,10.0,22.5,12.5
+Morocco,04,"Dairy, eggs & honey",0.01,10.0,22.5,12.5
+Morocco,05,Other animal products,0.0,10.0,22.5,12.5
+Morocco,06,Live plants & cut flowers,0.0,10.0,22.5,12.5
+Morocco,10,Cereals,0.0,10.0,22.5,12.5
+Morocco,12,Oil seeds & oleaginous fruits,0.01,10.0,22.5,12.5
+Morocco,15,Fats & oils,0.04,10.0,22.5,12.5
+Morocco,16,Prepared meat & fish,0.09,10.0,22.5,12.5
+Morocco,23,Animal feed & residues,0.0,10.0,22.5,12.5
+Morocco,30,Pharmaceutical products,0.0,0.0,12.5,12.5
+Morocco,31,Fertilisers,0.05,0.0,12.5,12.5
+Morocco,34,"Soap, waxes & polishes",0.0,10.0,22.5,12.5
+Morocco,38,Chemical products (misc),0.0,0.06,12.56,12.5
+Morocco,39,Plastics & articles,0.02,6.49,18.99,12.5
+Morocco,41,Raw hides & skins,0.0,10.0,22.5,12.5
+Morocco,42,Leather goods & handbags,0.01,10.0,22.5,12.5
+Morocco,45,Cork & articles,0.0,10.0,22.5,12.5
+Morocco,46,Basketwork & wickerwork,0.0,10.0,22.5,12.5
+Morocco,49,Books & printed matter,0.0,9.54,22.04,12.5
+Morocco,51,Wool & fine animal hair,0.0,10.0,22.5,12.5
+Morocco,53,Other vegetable fibres,0.0,10.0,22.5,12.5
+Morocco,54,Man-made filaments,0.0,10.0,22.5,12.5
+Morocco,56,"Wadding, felt & special yarns",0.0,10.0,22.5,12.5
+Morocco,57,Carpets & floor coverings,0.01,10.0,22.5,12.5
+Morocco,58,Special woven fabrics,0.0,10.0,22.5,12.5
+Morocco,59,Coated & laminated textiles,0.0,10.0,22.5,12.5
+Morocco,60,Knitted & crocheted fabrics,0.0,10.0,22.5,12.5
+Morocco,63,Other textiles & worn clothing,0.0,10.0,22.5,12.5
+Morocco,64,Footwear,0.01,10.0,22.5,12.5
+Morocco,66,Umbrellas & walking sticks,0.0,10.0,22.5,12.5
+Morocco,67,Feathers & artificial flowers,0.0,10.0,22.5,12.5
+Morocco,70,Glass & glassware,0.01,10.0,22.5,12.5
+Morocco,75,Nickel & articles,0.0,0.0,12.5,12.5
+Morocco,78,Lead & articles,0.0,10.0,22.5,12.5
+Morocco,80,Tin & articles,0.0,0.0,12.5,12.5
+Morocco,81,Other base metals & cermets,0.01,0.0,12.5,12.5
+Morocco,82,"Tools, cutlery & implements",0.0,10.0,22.5,12.5
+Morocco,91,"Clocks, watches & parts",0.0,10.0,22.5,12.5
+Morocco,96,Miscellaneous manufactures,0.0,10.0,22.5,12.5
+Morocco,03,Fish & seafood,0.01,10.0,22.5,12.5
+Morocco,11,Milling products,0.0,10.0,22.5,12.5
+Morocco,62,Woven apparel,0.23,10.0,22.5,12.5
+Morocco,71,"Precious metals, stones & jewellery",0.0,9.96,22.46,12.5
+Morocco,17,Sugars & confectionery,0.0,10.0,22.5,12.5
+Morocco,43,Furskins & artificial fur,0.0,10.0,22.5,12.5
+Morocco,48,Paper & paperboard,0.0,9.93,22.43,12.5
+Morocco,52,Cotton,0.0,10.0,22.5,12.5
+Morocco,61,Knitted & crocheted apparel,0.06,10.0,22.5,12.5
+Morocco,65,Headgear,0.0,10.0,22.5,12.5
+Morocco,86,Railway & tram equipment,0.0,10.0,22.5,12.5
+Morocco,97,Works of art & antiques,0.01,10.0,22.5,12.5
+Morocco,90,"Optical, medical & precision instruments",0.0,10.08,22.51,12.44
+Morocco,88,Aircraft & spacecraft,0.05,10.08,22.51,12.44
+Morocco,29,Organic chemicals,0.0,9.75,22.16,12.41
+Morocco,20,Prepared vegetables & fruit,0.04,9.69,21.79,12.1
+Morocco,28,Inorganic chemicals,0.03,9.64,21.68,12.05
+Morocco,40,Rubber & articles,0.0,10.74,22.62,11.88
+Morocco,19,Bakery & cereal preparations,0.0,10.0,21.41,11.41
+Morocco,84,Industrial machinery & computers,0.1,11.46,22.7,11.24
+Morocco,94,Furniture & bedding,0.01,12.94,22.99,10.05
+Morocco,07,Vegetables,0.0,7.95,17.89,9.94
+Morocco,08,Edible fruit & nuts,0.2,7.9,17.77,9.87
+Morocco,85,Electrical machinery & electronics,0.43,6.94,16.81,9.87
+Morocco,83,Miscellaneous base metal articles,0.0,15.93,23.49,7.56
+Morocco,95,"Toys, games & sports equipment",0.0,20.58,24.26,3.68
+Morocco,09,"Coffee, tea & spices",0.0,1.71,3.85,2.14
+Morocco,14,Vegetable materials (misc),0.0,10.0,11.4,1.4
+Morocco,21,Miscellaneous food preparations,0.0,9.89,11.12,1.23
+Morocco,25,"Salt, sulphur, stone & cement",0.05,0.92,2.07,1.15
+Morocco,76,Aluminium & articles,0.0,47.66,48.39,0.73
+Morocco,73,Articles of iron or steel,0.0,49.24,49.48,0.24
+Morocco,87,Vehicles (excl. railway),0.17,24.94,24.99,0.05
+Morocco,18,Cocoa & preparations,0.0,0.0,0.0,0.0
+Morocco,26,"Ores, slag & ash",0.0,0.0,0.0,0.0
+Morocco,27,Mineral fuels & oils,0.0,0.0,0.0,0.0
+Morocco,74,Copper & articles,0.0,0.0,0.0,0.0
+Nigeria,04,"Dairy, eggs & honey",0.0,10.0,22.5,12.5
+Nigeria,05,Other animal products,0.0,10.0,22.5,12.5
+Nigeria,12,Oil seeds & oleaginous fruits,0.02,10.0,22.5,12.5
+Nigeria,51,Wool & fine animal hair,0.0,10.0,22.5,12.5
+Nigeria,62,Woven apparel,0.0,10.0,22.5,12.5
+Nigeria,78,Lead & articles,0.04,10.0,22.5,12.5
+Nigeria,82,"Tools, cutlery & implements",0.0,10.0,22.5,12.5
+Nigeria,91,"Clocks, watches & parts",0.0,10.0,22.5,12.5
+Nigeria,96,Miscellaneous manufactures,0.0,10.0,22.5,12.5
+Nigeria,01,Live animals,0.0,10.0,22.5,12.5
+Nigeria,03,Fish & seafood,0.0,10.0,22.5,12.5
+Nigeria,06,Live plants & cut flowers,0.0,10.0,22.5,12.5
+Nigeria,10,Cereals,0.0,10.0,22.5,12.5
+Nigeria,15,Fats & oils,0.0,10.0,22.5,12.5
+Nigeria,16,Prepared meat & fish,0.0,10.0,22.5,12.5
+Nigeria,17,Sugars & confectionery,0.0,10.0,22.5,12.5
+Nigeria,23,Animal feed & residues,0.02,10.0,22.5,12.5
+Nigeria,24,Tobacco,0.0,10.0,22.5,12.5
+Nigeria,30,Pharmaceutical products,0.0,0.0,12.5,12.5
+Nigeria,31,Fertilisers,0.12,0.0,12.5,12.5
+Nigeria,32,"Tanning, dyeing & paints",0.0,10.0,22.5,12.5
+Nigeria,33,Essential oils & cosmetics,0.0,10.0,22.5,12.5
+Nigeria,34,"Soap, waxes & polishes",0.0,10.0,22.5,12.5
+Nigeria,35,Albuminoidal substances & starches,0.0,10.0,22.5,12.5
+Nigeria,37,Photographic & cinematographic goods,0.0,10.0,22.5,12.5
+Nigeria,38,Chemical products (misc),0.01,10.0,22.5,12.5
+Nigeria,39,Plastics & articles,0.01,9.3,21.8,12.5
+Nigeria,41,Raw hides & skins,0.0,10.0,22.5,12.5
+Nigeria,42,Leather goods & handbags,0.0,10.0,22.5,12.5
+Nigeria,43,Furskins & artificial fur,0.0,10.0,22.5,12.5
+Nigeria,44,Wood & articles,0.0,0.58,13.08,12.5
+Nigeria,46,Basketwork & wickerwork,0.0,10.0,22.5,12.5
+Nigeria,48,Paper & paperboard,0.0,10.0,22.5,12.5
+Nigeria,49,Books & printed matter,0.0,0.84,13.34,12.5
+Nigeria,50,Silk,0.0,10.0,22.5,12.5
+Nigeria,52,Cotton,0.0,10.0,22.5,12.5
+Nigeria,53,Other vegetable fibres,0.0,10.0,22.5,12.5
+Nigeria,54,Man-made filaments,0.0,10.0,22.5,12.5
+Nigeria,55,Man-made staple fibres,0.0,10.0,22.5,12.5
+Nigeria,56,"Wadding, felt & special yarns",0.0,10.0,22.5,12.5
+Nigeria,58,Special woven fabrics,0.0,10.0,22.5,12.5
+Nigeria,59,Coated & laminated textiles,0.0,10.0,22.5,12.5
+Nigeria,60,Knitted & crocheted fabrics,0.0,10.0,22.5,12.5
+Nigeria,61,Knitted & crocheted apparel,0.0,10.0,22.5,12.5
+Nigeria,63,Other textiles & worn clothing,0.0,10.0,22.5,12.5
+Nigeria,64,Footwear,0.0,10.0,22.5,12.5
+Nigeria,65,Headgear,0.0,10.0,22.5,12.5
+Nigeria,69,Ceramic products,0.0,10.0,22.5,12.5
+Nigeria,70,Glass & glassware,0.0,10.0,22.5,12.5
+Nigeria,71,"Precious metals, stones & jewellery",0.01,6.16,18.66,12.5
+Nigeria,79,Zinc & articles,0.0,0.0,12.5,12.5
+Nigeria,81,Other base metals & cermets,0.0,0.0,12.5,12.5
+Nigeria,92,Musical instruments,0.0,10.0,22.5,12.5
+Nigeria,95,"Toys, games & sports equipment",0.0,10.0,22.5,12.5
+Nigeria,97,Works of art & antiques,0.0,10.0,22.5,12.5
+Nigeria,13,"Lac, gums & resins",0.0,10.0,22.5,12.5
+Nigeria,40,Rubber & articles,0.01,0.31,12.81,12.5
+Nigeria,67,Feathers & artificial flowers,0.0,10.0,22.5,12.5
+Nigeria,22,"Beverages, spirits & vinegar",0.0,10.0,22.5,12.5
+Nigeria,66,Umbrellas & walking sticks,0.0,10.0,22.5,12.5
+Nigeria,76,Aluminium & articles,0.0,10.0,22.5,12.5
+Nigeria,29,Organic chemicals,0.02,9.97,22.44,12.46
+Nigeria,25,"Salt, sulphur, stone & cement",0.0,9.96,22.42,12.46
+Nigeria,90,"Optical, medical & precision instruments",0.0,10.18,22.53,12.35
+Nigeria,88,Aircraft & spacecraft,0.0,10.86,22.64,11.78
+Nigeria,84,Industrial machinery & computers,0.0,11.03,22.41,11.38
+Nigeria,07,Vegetables,0.0,9.05,20.37,11.32
+Nigeria,20,Prepared vegetables & fruit,0.0,9.1,20.14,11.04
+Nigeria,85,Electrical machinery & electronics,0.0,10.9,21.93,11.02
+Nigeria,94,Furniture & bedding,0.0,12.47,22.91,10.44
+Nigeria,19,Bakery & cereal preparations,0.0,8.12,18.09,9.97
+Nigeria,11,Milling products,0.0,4.8,10.79,6.0
+Nigeria,83,Miscellaneous base metal articles,0.0,18.89,23.98,5.09
+Nigeria,28,Inorganic chemicals,0.0,2.05,4.62,2.57
+Nigeria,87,Vehicles (excl. railway),0.0,22.83,24.64,1.81
+Nigeria,21,Miscellaneous food preparations,0.0,3.44,5.02,1.58
+Nigeria,73,Articles of iron or steel,0.0,45.26,46.74,1.48
+Nigeria,08,Edible fruit & nuts,0.0,0.17,0.32,0.15
+Nigeria,18,Cocoa & preparations,0.02,0.03,0.07,0.04
+Nigeria,09,"Coffee, tea & spices",0.0,0.01,0.03,0.02
+Nigeria,14,Vegetable materials (misc),0.0,10.0,10.0,0.0
+Nigeria,27,Mineral fuels & oils,3.47,0.0,0.0,0.0
+Nigeria,74,Copper & articles,0.0,0.0,0.0,0.0
+South Africa,11,Milling products,0.0,10.0,22.5,12.5
+South Africa,30,Pharmaceutical products,0.03,2.75,15.25,12.5
+South Africa,32,"Tanning, dyeing & paints",0.01,10.0,22.5,12.5
+South Africa,38,Chemical products (misc),0.17,9.86,22.36,12.5
+South Africa,49,Books & printed matter,0.0,2.8,15.3,12.5
+South Africa,52,Cotton,0.0,10.0,22.5,12.5
+South Africa,86,Railway & tram equipment,0.01,10.0,22.5,12.5
+South Africa,03,Fish & seafood,0.06,10.0,22.5,12.5
+South Africa,04,"Dairy, eggs & honey",0.0,10.0,22.5,12.5
+South Africa,06,Live plants & cut flowers,0.01,10.0,22.5,12.5
+South Africa,10,Cereals,0.0,10.0,22.5,12.5
+South Africa,13,"Lac, gums & resins",0.0,10.0,22.5,12.5
+South Africa,16,Prepared meat & fish,0.0,10.0,22.5,12.5
+South Africa,17,Sugars & confectionery,0.04,10.0,22.5,12.5
+South Africa,18,Cocoa & preparations,0.0,10.0,22.5,12.5
+South Africa,22,"Beverages, spirits & vinegar",0.09,10.0,22.5,12.5
+South Africa,23,Animal feed & residues,0.0,10.0,22.5,12.5
+South Africa,24,Tobacco,0.0,10.0,22.5,12.5
+South Africa,31,Fertilisers,0.02,0.0,12.5,12.5
+South Africa,33,Essential oils & cosmetics,0.05,10.0,22.5,12.5
+South Africa,35,Albuminoidal substances & starches,0.0,10.0,22.5,12.5
+South Africa,36,Explosives & pyrotechnics,0.01,10.0,22.5,12.5
+South Africa,37,Photographic & cinematographic goods,0.0,10.0,22.5,12.5
+South Africa,39,Plastics & articles,0.07,8.09,20.59,12.5
+South Africa,43,Furskins & artificial fur,0.0,10.0,22.5,12.5
+South Africa,44,Wood & articles,0.01,5.87,18.37,12.5
+South Africa,46,Basketwork & wickerwork,0.0,10.0,22.5,12.5
+South Africa,47,Wood pulp,0.02,10.0,22.5,12.5
+South Africa,50,Silk,0.0,10.0,22.5,12.5
+South Africa,51,Wool & fine animal hair,0.0,10.0,22.5,12.5
+South Africa,53,Other vegetable fibres,0.0,10.0,22.5,12.5
+South Africa,54,Man-made filaments,0.0,10.0,22.5,12.5
+South Africa,55,Man-made staple fibres,0.0,10.0,22.5,12.5
+South Africa,56,"Wadding, felt & special yarns",0.0,10.0,22.5,12.5
+South Africa,57,Carpets & floor coverings,0.0,10.0,22.5,12.5
+South Africa,58,Special woven fabrics,0.0,10.0,22.5,12.5
+South Africa,59,Coated & laminated textiles,0.0,10.0,22.5,12.5
+South Africa,60,Knitted & crocheted fabrics,0.0,10.0,22.5,12.5
+South Africa,63,Other textiles & worn clothing,0.01,10.0,22.5,12.5
+South Africa,64,Footwear,0.0,10.0,22.5,12.5
+South Africa,65,Headgear,0.0,10.0,22.5,12.5
+South Africa,67,Feathers & artificial flowers,0.0,10.0,22.5,12.5
+South Africa,68,"Stone, plaster & cement articles",0.03,10.0,22.5,12.5
+South Africa,69,Ceramic products,0.01,10.0,22.5,12.5
+South Africa,71,"Precious metals, stones & jewellery",8.31,3.95,16.45,12.5
+South Africa,75,Nickel & articles,0.14,10.0,22.5,12.5
+South Africa,78,Lead & articles,0.0,10.0,22.5,12.5
+South Africa,79,Zinc & articles,0.0,10.0,22.5,12.5
+South Africa,80,Tin & articles,0.0,10.0,22.5,12.5
+South Africa,81,Other base metals & cermets,0.03,0.0,12.5,12.5
+South Africa,82,"Tools, cutlery & implements",0.01,10.0,22.5,12.5
+South Africa,91,"Clocks, watches & parts",0.0,10.0,22.5,12.5
+South Africa,92,Musical instruments,0.0,10.0,22.5,12.5
+South Africa,93,Arms & ammunition,0.01,10.0,22.5,12.5
+South Africa,97,Works of art & antiques,0.04,10.0,22.5,12.5
+South Africa,41,Raw hides & skins,0.01,10.0,22.5,12.5
+South Africa,42,Leather goods & handbags,0.0,10.0,22.5,12.5
+South Africa,45,Cork & articles,0.0,10.0,22.5,12.5
+South Africa,61,Knitted & crocheted apparel,0.01,10.0,22.5,12.5
+South Africa,01,Live animals,0.0,10.0,22.5,12.5
+South Africa,07,Vegetables,0.0,10.0,22.5,12.5
+South Africa,12,Oil seeds & oleaginous fruits,0.02,10.0,22.5,12.5
+South Africa,34,"Soap, waxes & polishes",0.01,10.0,22.5,12.5
+South Africa,48,Paper & paperboard,0.01,10.0,22.5,12.5
+South Africa,62,Woven apparel,0.0,10.0,22.5,12.5
+South Africa,89,Ships & boats,0.1,10.0,22.5,12.5
+South Africa,15,Fats & oils,0.01,9.98,22.46,12.48
+South Africa,70,Glass & glassware,0.0,10.03,22.51,12.47
+South Africa,29,Organic chemicals,0.27,9.79,22.11,12.32
+South Africa,88,Aircraft & spacecraft,0.02,10.29,22.55,12.25
+South Africa,96,Miscellaneous manufactures,0.0,10.3,22.55,12.25
+South Africa,21,Miscellaneous food preparations,0.05,10.0,22.1,12.1
+South Africa,05,Other animal products,0.0,9.57,21.54,11.96
+South Africa,20,Prepared vegetables & fruit,0.1,9.36,20.82,11.46
+South Africa,90,"Optical, medical & precision instruments",0.04,11.32,22.72,11.4
+South Africa,85,Electrical machinery & electronics,0.12,11.56,22.74,11.17
+South Africa,94,Furniture & bedding,0.01,11.7,22.78,11.08
+South Africa,66,Umbrellas & walking sticks,0.0,12.13,22.85,10.73
+South Africa,72,Iron & steel,0.61,14.69,23.88,9.19
+South Africa,25,"Salt, sulphur, stone & cement",0.06,6.73,14.98,8.25
+South Africa,83,Miscellaneous base metal articles,0.0,15.21,23.37,8.16
+South Africa,28,Inorganic chemicals,0.18,5.55,12.33,6.78
+South Africa,84,Industrial machinery & computers,0.48,18.05,23.76,5.72
+South Africa,08,Edible fruit & nuts,0.32,4.35,9.79,5.44
+South Africa,19,Bakery & cereal preparations,0.0,10.0,15.31,5.31
+South Africa,95,"Toys, games & sports equipment",0.01,18.84,23.97,5.13
+South Africa,26,"Ores, slag & ash",0.37,3.46,7.79,4.33
+South Africa,40,Rubber & articles,0.04,20.94,24.31,3.38
+South Africa,14,Vegetable materials (misc),0.0,10.0,12.0,2.0
+South Africa,76,Aluminium & articles,0.18,47.89,48.55,0.66
+South Africa,73,Articles of iron or steel,0.09,48.45,48.93,0.48
+South Africa,74,Copper & articles,0.02,0.0,0.26,0.26
+South Africa,87,Vehicles (excl. railway),2.12,24.75,24.96,0.21
+South Africa,09,"Coffee, tea & spices",0.01,0.08,0.17,0.1
+South Africa,27,Mineral fuels & oils,0.1,0.0,0.0,0.0
