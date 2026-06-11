@@ -15,7 +15,7 @@ export function Tooltip({ x, y, data, isVisible } ={}) {
     return (
         <div
             className="tariff-card tooltip"
-            style={{"left": x, "top": y}}>
+            style={{"left": x, "top": y, "pointerEvents": "none"}}>
             <div
                 className={`swatch ${data.etr === null ? "na" : ""} ${formatPercentage(data.etr, {display: false}) < riskThresholds[0] ? "very-low" : ""} ${formatPercentage(data.etr, {display: false}) < riskThresholds[1] ? "low" : ""}`}
                 style={{
