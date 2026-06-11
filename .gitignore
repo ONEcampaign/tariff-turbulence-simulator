@@ -7,3 +7,5 @@ __pycache__/
 setup-deployment.sh
 
 /fact-check
+/.claude
+Claude.md

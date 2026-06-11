@@ -152,7 +152,7 @@ export function AfricaHexmap({
                                             x: event.pageX,
                                             y: event.clientY + marginBottom > window.innerHeight
                                                 ? event.pageY - marginBottom
-                                                : event.pageY - 50,
+                                                : event.pageY,
                                             iso3
                                         });
                                     }
