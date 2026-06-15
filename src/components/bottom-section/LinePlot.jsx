@@ -40,7 +40,7 @@ export function LinePlot({ data, height = 100 }) {
             style={{maxWidth: "400px"}}
         >
             <h4 className="text-support-medium">
-                Historical exports
+                Historical exports to the US
             </h4>
             <div ref={ref} style={{width: "100%"}}>
                 <svg width="100%" height={height} viewBox={`0 0 ${svgWidth} ${height}`}>

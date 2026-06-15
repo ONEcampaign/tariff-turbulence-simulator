@@ -131,7 +131,7 @@ export function Dropdown(
                                 <span
                                     key={option}
                                     ref={el => (itemRefs.current[i] = el)}
-                                    className={`text-inputs dropdown-list-item ${i === highlightedIndex ? "highlighted" : ""}`}
+                                    className={`text-inputs dropdown-list-item ${i === highlightedIndex ? "highlighted" : ""} ${option === selectedOption ? "selected" : ""}`}
                                     tabIndex="-1"
                                     onMouseEnter={() => setHighlightedIndex(i)}
                                     onClick={() => selectOption(option)}

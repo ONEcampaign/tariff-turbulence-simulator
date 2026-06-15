@@ -19,6 +19,11 @@
         margin: auto;
     }
 
+    .viz-wrapper svg {
+        width: 100%;
+        height: auto;
+    }
+
     .sticky-wrapper {
         position: fixed;
         top: unset;
@@ -87,6 +92,16 @@
 
     .dropdown-list {
         max-height: 130px;
+    }
+
+    .slider-opacity-container {
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .slider-opacity-container.slider-hidden {
+        display: block;
+        visibility: hidden;
+        opacity: 0;
     }
 }
 
