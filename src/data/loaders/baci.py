@@ -35,8 +35,8 @@ class BaciLoader:
 
         Subsequent calls read the cached CSV directly.
         """
-        if PATHS.EXPORTS_HIST_CONST.exists():
-            df = pd.read_csv(PATHS.EXPORTS_HIST_CONST)
+        if PATHS.EXPORTS_HIST.exists():
+            df = pd.read_csv(PATHS.EXPORTS_HIST)
         else:
             baci = BACI()
             raw_df = baci.get_data(hs_version="HS02", include_country_labels=True)
