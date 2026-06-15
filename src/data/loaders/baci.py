@@ -2,7 +2,7 @@
 
 Trade values are deflated to constant BASE_YEAR USD using each exporter's IMF
 GDP deflator (via pydeflate), matching the methodology in trade_data_explorer.
-The deflated cache is stored at PATHS.EXPORTS_HIST_CONST.
+The deflated cache is stored at PATHS.EXPORTS_HIST.
 """
 
 import pandas as pd
@@ -31,12 +31,12 @@ class BaciLoader:
           5. Filter to African exporters.
           6. Deflate values to constant BASE_YEAR USD using each country's
              IMF GDP deflator.
-          7. Cache the result to PATHS.EXPORTS_HIST_CONST.
+          7. Cache the result to PATHS.EXPORTS_HIST.
 
         Subsequent calls read the cached CSV directly.
         """
-        if PATHS.EXPORTS_HIST_CONST.exists():
-            df = pd.read_csv(PATHS.EXPORTS_HIST_CONST)
+        if PATHS.EXPORTS_HIST.exists():
+            df = pd.read_csv(PATHS.EXPORTS_HIST)
         else:
             baci = BACI()
             raw_df = baci.get_data(hs_version="HS02", include_country_labels=True)
@@ -50,7 +50,7 @@ class BaciLoader:
             df = filter_african_countries(df, "exporter_iso3_code")
             # Deflate to constant BASE_YEAR USD using each exporter's IMF deflator
             df = deflate_to_constant_usd(df, id_column="exporter_iso3_code")
-            df.to_csv(PATHS.EXPORTS_HIST_CONST, index=False)
+            df.to_csv(PATHS.EXPORTS_HIST, index=False)
         return df
 
     @staticmethod
