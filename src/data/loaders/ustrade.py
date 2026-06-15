@@ -237,9 +237,11 @@ class UStradeLoader:
             PATHS.AUTOS,
             PATHS.BUSES,
             PATHS.MHDV,
-            PATHS.EXEMPTIONS_1,
-            PATHS.EXEMPTIONS_2,
-            PATHS.EXEMPTIONS_3,
+            PATHS.TIMBER_SOFTWOOD,
+            PATHS.TIMBER_FURNITURE,
+            PATHS.ANNEX_III_SAC,    # 15% transitional rate (Apr 6, 2026 – Dec 31, 2027); comes after SAC_DERIVATIVES so 15% overrides 25% for any overlapping codes
+            PATHS.EXEMPTIONS_S122,
+            PATHS.PHARMA_PATENTED,  # Must come after EXEMPTIONS_S122: overrides any prior pharma exemptions for patented codes
         ]
         product_rate_map = self.build_code_rate_map(json_paths)
 

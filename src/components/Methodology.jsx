@@ -35,7 +35,7 @@ export function Methodology() {
                 <div ref={contentRef}>
 
                     <p className="text-body update-note">
-                        Last updated: June 9, 2026
+                        Last updated: June 15, 2026
                     </p>
 
                     <p className="text-body">
@@ -43,7 +43,7 @@ export function Methodology() {
                     </p>
 
                     <p className="text-body">
-                        The ETR for each country is computed as a weighted average of the tariff rates applied to US imports from that country across the products in a sector, using trade values from 2022 to 2024
+                        The ETR for each country is computed as a weighted average of the tariff rates applied to US imports from that country across the products in a sector, using annual average trade values between 2022 and 2024.
                     </p>
 
                     <div className="tariff-card">
@@ -56,24 +56,26 @@ export function Methodology() {
                         </ul>
                         <p className="text-body">The ETR is calculated as follows:</p>
                         <pre>ETR = [(10 × 0.5) + (5 × 0.25) + (2 × 0)] / (10 + 5 + 2) = 0.37</pre>
-                        <p className="text-body">So, Country A faces an effective tariff rate of 37% on its exports to the US.</p>
+                        <p className="text-body">Country A faces an effective tariff rate of 37% on its exports to the US.</p>
                     </div>
 
                     <p className="text-body">
                         The recent evolution of US tariff policy has been marked by frequent reversals, escalations, and
-                        reciprocal measures, making the landscape challenging to track. <a href="https://www.congress.gov/crs_external_products/R/PDF/R48549/R48549.5.pdf" target="_blank">This document</a> provides
+                        reciprocal measures, making the landscape challenging to track. <a href="https://ustr.gov/trade-topics/presidential-tariff-actions" target="_blank">This document</a> provides
                         a useful summary of the tariff landscape. In addition, we rely on the following data sources to compute country- and sector-specific ETRs:</p>
 
                     <ul className="text-body">
-                        <li>US import values from African countries (<a href="https://usatrade.census.gov/index.php" target="_blank">USA Trade Online</a>)</li>
-                        <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03596/implementation-of-duties-on-aluminum-pursuant-to-proclamation-10895-adjusting-imports-of-aluminum" target="_blank">Tariffs on aluminum</a> (Section 232, Proclamation 10895, effective March 12, 2025)</li>
-                        <li><a href="https://www.federalregister.gov/documents/2025/03/05/2025-03598/implementation-of-duties-on-steel-pursuant-to-proclamation-10896-adjusting-imports-of-steel-into-the" target="_blank">Tariffs on steel</a> (Section 232, Proclamation 10896, effective March 12, 2025)</li>
-                        <li><a href="https://www.federalregister.gov/documents/2025/04/03/2025-05930/adjusting-imports-of-automobiles-and-automobile-parts-into-the-united-states" target="_blank">Tariffs on automobiles and auto parts</a> (Section 232, Proclamation 10908, effective April 3, 2025; amended by <a href="https://www.federalregister.gov/documents/2025/05/05/2025-07833/adjusting-imports-of-automobiles-and-automobile-parts-into-the-united-states" target="_blank">Proclamation 10925</a>, April 29, 2025)</li>
-                        <li><a href="https://www.federalregister.gov/documents/2025/08/05/2025-14893/adjusting-imports-of-copper-into-the-united-states" target="_blank">Tariffs on copper</a> (Section 232, Proclamation 10962, effective August 1, 2025; amended by <a href="https://www.federalregister.gov/documents/2026/04/09/2026-06960/strengthening-actions-taken-to-adjust-imports-of-aluminum-steel-and-copper-into-the-united-states" target="_blank">Proclamation 11021</a>, April 6, 2026)</li>
-                        <li><a href="https://www.federalregister.gov/documents/2025/10/22/2025-19639/adjusting-imports-of-medium-and-heavy-duty-vehicles-medium-and-heavy-duty-vehicle-parts-and-buses" target="_blank">Tariffs on medium- and heavy-duty vehicles, parts, and buses</a> (Section 232, Proclamation 10984, effective November 1, 2025)</li>
-                        <li><a href="https://www.federalregister.gov/documents/2026/02/25/2026-03824/imposing-a-temporary-import-surcharge-to-address-fundamental-international-payments-problems" target="_blank">Country-level import surcharge</a> (Section 122, Proclamation 11012, effective February 24, 2026; 10% uniform surcharge on all countries not otherwise exempt, replacing earlier IEEPA reciprocal tariffs struck down by the Supreme Court on February 20, 2026)</li>
-                        <li>Tariff exemptions (<a href="https://www.whitehouse.gov/wp-content/uploads/2025/04/Annex-II.pdf" target="_blank">April 2, 2025</a>; <a href="https://www.whitehouse.gov/presidential-actions/2025/04/clarification-of-exceptions-under-executive-order-14257-of-april-2-2025-as-amended/" target="_blank">April 11, 2025</a>)</li>
-                        <li><a href="https://www.federalregister.gov/documents/2025/11/25/2025-21203/modifying-the-scope-of-the-reciprocal-tariff-with-respect-to-certain-agricultural-products" target="_blank">Agricultural and food product exemptions</a> from reciprocal tariffs (Executive Order 14360, effective November 13, 2025)</li>
+                        <li>US imports from African countries (<a href="https://usatrade.census.gov/index.php" target="_blank">US Census</a>)</li>
+                        <li>50% tariff on aluminum (Section 232, <a href="https://www.federalregister.gov/documents/2025/03/05/2025-03596/implementation-of-duties-on-aluminum-pursuant-to-proclamation-10895-adjusting-imports-of-aluminum" target="_blank">Proclamation 10895</a>, effective March 12, 2025)</li>
+                        <li>50% tariff on steel (Section 232, <a href="https://www.federalregister.gov/documents/2025/03/05/2025-03598/implementation-of-duties-on-steel-pursuant-to-proclamation-10896-adjusting-imports-of-steel-into-the" target="_blank">Proclamation 10896</a>, effective March 12, 2025)</li>
+                        <li>25% tariff on automobiles and auto parts (Section 232, <a href="https://www.federalregister.gov/documents/2025/04/03/2025-05930/adjusting-imports-of-automobiles-and-automobile-parts-into-the-united-states" target="_blank">Proclamation 10908</a>, as amended by <a href="https://www.federalregister.gov/documents/2025/05/05/2025-07833/adjusting-imports-of-automobiles-and-automobile-parts-into-the-united-states" target="_blank">Proclamation 10925</a>; effective April 3, 2025 for automobiles and May 3, 2025 for auto parts)</li>
+                        <li>50% tariff on copper (Section 232, <a href="https://www.federalregister.gov/documents/2025/08/05/2025-14893/adjusting-imports-of-copper-into-the-united-states" target="_blank">Proclamation 10962</a>, effective August 1, 2025; rate structure amended by <a href="https://www.federalregister.gov/documents/2026/04/09/2026-06960/strengthening-actions-taken-to-adjust-imports-of-aluminum-steel-and-copper-into-the-united-states" target="_blank">Proclamation 11021</a>, April 6, 2026)</li>
+                        <li>Tariffs on softwood timber and lumber (10%) and certain wood furniture and kitchen cabinets (25%) (Section 232, <a href="https://www.federalregister.gov/documents/2025/10/06/2025-19482/adjusting-imports-of-timber-lumber-and-their-derivative-products-into-the-united-states" target="_blank">Proclamation 10976</a>, effective October 14, 2025; <a href="https://www.federalregister.gov/documents/2026/01/09/2026-00327/amendments-to-adjusting-imports-of-timber-lumber-and-their-derivative-products-into-the-united" target="_blank">amended January 2026</a> to defer rate increases to January 1, 2027)</li>
+                        <li>25% tariff on medium- and heavy-duty vehicles, parts, and buses (Section 232, <a href="https://www.federalregister.gov/documents/2025/10/22/2025-19639/adjusting-imports-of-medium-and-heavy-duty-vehicles-medium-and-heavy-duty-vehicle-parts-and-buses" target="_blank">Proclamation 10984</a>, effective November 1, 2025)</li>
+                        <li>10% uniform import surcharge on all non-exempt countries (Section 122, <a href="https://www.federalregister.gov/documents/2026/02/25/2026-03824/imposing-a-temporary-import-surcharge-to-address-fundamental-international-payments-problems" target="_blank">Proclamation 11012</a>, effective February 24, 2026) with exemptions (<a href="https://www.whitehouse.gov/wp-content/uploads/2026/02/2026Section122.prc_.ANNEX1_.FINAL_.pdf" target="_blank">Annex I</a> and <a href="https://www.whitehouse.gov/wp-content/uploads/2026/02/2026Section122.prc_.ANNEX2_.Final_.pdf" target="_blank">Annex II</a>)</li>
+                        <li>25% tariff on derivative articles substantially made of steel, aluminum, or copper (Section 232, <a href="https://www.federalregister.gov/documents/2026/04/09/2026-06960/strengthening-actions-taken-to-adjust-imports-of-aluminum-steel-and-copper-into-the-united-states" target="_blank">Proclamation 11021</a>, Annex I-B, effective April 6, 2026; amended by <a href="https://www.whitehouse.gov/presidential-actions/2026/06/strengthening-and-amending-section-232-actions-with-respect-to-steel-and-aluminum/" target="_blank">Proclamation 11032</a>, effective June 8, 2026, to add steel storage racks and aluminum lithographic plates)</li>
+                        <li>15% transitional tariff on certain industrial machinery, agricultural equipment, and HVAC equipment substantially made of steel or aluminum (Section 232, <a href="https://www.federalregister.gov/documents/2026/04/09/2026-06960/strengthening-actions-taken-to-adjust-imports-of-aluminum-steel-and-copper-into-the-united-states" target="_blank">Proclamation 11021</a>, Annex III, effective April 6, 2026 through December 31, 2027; rises to 25% after January 1, 2028; agricultural equipment and HVAC added to Annex III by <a href="https://www.whitehouse.gov/presidential-actions/2026/06/strengthening-and-amending-section-232-actions-with-respect-to-steel-and-aluminum/" target="_blank">Proclamation 11032</a>, effective June 8, 2026)</li>
+                        <li>100% tariff on patented pharmaceuticals and active pharmaceutical ingredients, with generics exempt (Section 232, <a href="https://www.federalregister.gov/documents/2026/04/09/2026-06956/adjusting-imports-of-pharmaceuticals-and-pharmaceutical-ingredients-into-the-united-states" target="_blank">Proclamation 11020</a>, effective July 31, 2026 for named companies / September 29, 2026 for all others)</li>
                     </ul>
 
                     <p className="text-body">

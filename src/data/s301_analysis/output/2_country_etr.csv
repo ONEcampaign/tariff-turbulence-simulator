@@ -1,8 +1,55 @@
-Country,Total Exports (const. 2024 USD bn),Baseline ETR (%),S301 ETR (%),ETR Change (pp)
-Algeria,3.16,4.59,6.05,1.46
-Angola,1.43,1.61,3.39,1.78
-Egypt,2.6,11.86,22.68,10.82
-Libya,2.61,0.14,0.31,0.17
-Morocco,1.77,9.96,19.82,9.86
-Nigeria,3.8,0.43,1.42,0.99
-South Africa,14.59,9.39,18.91,9.52
+Country,Annual Export to the US ($ million),Baseline ETR (%),S301 ETR (%),ETR Change (pp),Direction
+Algeria,3164.3,4.6,4.7,0.1,Up
+Angola,1426.8,1.6,2.0,0.4,Up
+Benin,28.1,8.0,0.0,-8.0,Down
+Botswana,516.3,10.0,0.0,-10.0,Down
+Burkina Faso,6.8,5.3,2.1,-3.2,Down
+Burundi,9.2,1.4,0.0,-1.3,Down
+Cabo Verde,10.7,10.6,1.7,-8.9,Down
+Cameroon,228.1,0.9,0.2,-0.7,Down
+Central African Republic,2.8,8.2,2.4,-5.8,Down
+Chad,85.9,0.5,0.0,-0.5,Down
+Comoros,4.4,2.7,0.8,-1.9,Down
+Congo Republic,313.4,0.4,0.0,-0.4,Down
+Côte d'Ivoire,1072.6,0.9,0.3,-0.6,Down
+DR Congo,310.5,0.7,0.0,-0.7,Down
+Djibouti,8.7,8.6,0.2,-8.4,Down
+Egypt,2601.6,11.9,13.8,1.9,Up
+Equatorial Guinea,246.4,1.1,0.0,-1.1,Down
+Eritrea,0.0,nan,nan,nan,No change
+Eswatini,32.7,9.5,0.9,-8.6,Down
+Ethiopia,533.5,7.3,0.7,-6.6,Down
+Gabon,225.3,1.5,0.1,-1.5,Down
+Gambia,3.6,10.3,2.9,-7.4,Down
+Ghana,1938.6,1.0,0.0,-0.9,Down
+Guinea,13.2,7.3,1.8,-5.5,Down
+Guinea-Bissau,0.7,2.1,0.5,-1.6,Down
+Kenya,842.6,8.8,0.7,-8.1,Down
+Lesotho,312.9,10.0,0.0,-10.0,Down
+Liberia,76.5,0.9,0.2,-0.6,Down
+Libya,2612.8,0.1,0.2,0.0,Up
+Madagascar,859.4,6.7,0.0,-6.6,Down
+Malawi,40.1,6.3,0.0,-6.3,Down
+Mali,10.7,8.5,3.2,-5.2,Down
+Mauritania,7.2,10.7,4.7,-6.0,Down
+Mauritius,286.9,10.0,0.2,-9.8,Down
+Morocco,1768.3,9.9,11.4,1.5,Up
+Mozambique,217.5,8.1,1.0,-7.1,Down
+Namibia,262.5,7.3,0.1,-7.2,Down
+Niger,11.6,14.5,6.7,-7.8,Down
+Nigeria,3798.0,0.4,0.5,0.1,Up
+Rwanda,46.3,2.3,0.2,-2.1,Down
+Sao Tome and Principe,2.5,12.7,7.1,-5.5,Down
+Senegal,608.5,8.1,0.1,-8.0,Down
+Seychelles,14.0,10.4,1.5,-8.9,Down
+Sierra Leone,30.8,9.6,3.8,-5.8,Down
+Somalia,3.1,15.8,10.4,-5.4,Down
+South Africa,14594.0,9.5,10.4,0.9,Up
+South Sudan,1.0,10.2,0.6,-9.6,Down
+Sudan,27.8,10.0,0.0,-10.0,Down
+Tanzania,213.2,8.6,0.2,-8.4,Down
+Togo,129.6,9.8,0.0,-9.8,Down
+Tunisia,1057.3,10.2,2.7,-7.5,Down
+Uganda,140.4,3.2,0.1,-3.1,Down
+Zambia,142.8,8.0,0.1,-7.9,Down
+Zimbabwe,87.9,5.8,0.1,-5.8,Down
