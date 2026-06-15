@@ -1,8 +1,7 @@
 """Section 301 Forced Labor Tariff — ETR impact analysis.
 
-Computes ETR estimates under two scenarios for African countries targeted by
-the June 2, 2026 Section 301 proposed action and writes four output CSVs to
-src/data/analysis/output/:
+Computes ETR estimates under two scenarios for all African countries and writes
+four output CSVs to src/data/s301_analysis/output/:
 
   1_trade_context.csv  Country-level trade context (via BACI, 2022-2024)
   2_country_etr.csv    Country-level baseline vs S301 ETR comparison
@@ -10,13 +9,18 @@ src/data/analysis/output/:
   4_chapter_etr.csv    Chapter-level (2-digit HS) ETR comparison
 
 Scenario definitions
-  baseline_etr  existing pipeline: Section 122 country rates + product tariffs
-  s301_etr      S301 counterfactual: adds 12.5 pp to targeted countries for
-                products not exempt under Section 232 or S301 Annex A
+  baseline  All tariffs currently in effect: Section 232 product tariffs
+            (steel, aluminum, copper, autos, timber, pharma) + Section 122
+            country rates (country_specific_tariffs.json). Excludes S301.
+  s301      Section 232 product tariffs + S301 Annex A exemptions at 0% +
+            S301 12.5% duty for the seven targeted African countries as country
+            fallback. Section 122 country rates are NOT applied (replaced by S301).
 
-The seven targeted economies are:
+The seven S301-targeted economies are:
   Algeria (DZA), Angola (AGO), Egypt (EGY), Libya (LBY), Morocco (MAR),
   Nigeria (NGA), South Africa (ZAF)
+
+All African countries present in the USTrade data are included in outputs 2–4.
 
 ETR values are expressed as percentages (0–100).
 Trade values are in constant 2024 USD (deflated via IMF GDP deflators).
@@ -25,10 +29,10 @@ Trade values are in constant 2024 USD (deflated via IMF GDP deflators).
 
 Limitations
   - Action is PROPOSED as of June 10, 2026; comment period closes July 6, 2026.
-  - Section 232 exemption uses product-code prefix matching only; intra-subheading
-    ("Ex") scopes in S301 Annex A are modelled as fully exempt.
+  - S301 Annex A "Ex"-scoped codes are modelled as fully exempt (no description
+    field in trade data to distinguish intra-subheading scope).
 
-Run with:  python -m src.data.analysis.section_301
+Run with:  python -m src.data.s301_analysis.section_301
 """
 
 from __future__ import annotations
@@ -49,70 +53,53 @@ from src.data.s301_analysis.constants import HS_CHAPTER_NAMES
 OUTPUT_DIR = Path(__file__).parent / "output"
 
 S301_PATH = PATHS.TARIFFS / "section_301_forced_labor_06_02_2026.json"
-
-# Products exempt from S301 stacking:
-#   - S232-subject goods (steel, aluminum, copper, autos, etc.) — explicitly
-#     excluded by the S301 FRN text.
-#   - S301 Annex A goods — explicitly excluded by Annex A of the June 2, 2026 FRN.
-# Note: IEEPA/Section 122 exemptions (EXEMPTIONS_1/2/3) are intentionally NOT
-# included here — exemption from Section 122 does not confer exemption from
-# Section 301, which is a separate authority with its own exclusion list.
 S301_ANNEX_A = PATHS.TARIFFS / "section_301_annex_a_exemptions_06_02_2026.json"
 
-S301_EXEMPT_PATHS = [
-    PATHS.STEEL,
+# Product-level tariff paths — mirrors UStradeLoader.add_rate_columns().
+# Used to build the S301 scenario product rate map (same product rules as baseline).
+_PRODUCT_RATE_PATHS: list[Path] = [
     PATHS.ALUMINUM,
+    PATHS.STEEL,
     PATHS.COPPER,
     PATHS.SAC_DERIVATIVES,
     PATHS.AUTOS,
     PATHS.BUSES,
     PATHS.MHDV,
-    S301_ANNEX_A,
+    PATHS.TIMBER_SOFTWOOD,
+    PATHS.TIMBER_FURNITURE,
+    PATHS.ANNEX_III_SAC,
+    PATHS.EXEMPTIONS_S122,
+    PATHS.PHARMA_PATENTED,
 ]
 
 
-# ── S301 rate helpers ──────────────────────────────────────────────────────────
+# ── S301 rate builder ──────────────────────────────────────────────────────────
 
-def build_s301_exempt_prefix_set(json_paths: list[Path]) -> set[str]:
-    """Return normalised code prefixes for products exempt from S301 stacking.
-
-    Only loads ``codes`` entries. ``exceptions`` within S232 files are
-    intentionally excluded — those goods are not 'subject to section 232
-    tariffs' and ARE subject to Section 301.
-    """
-    prefixes: set[str] = set()
-    for path in json_paths:
-        data = load_json(path)
-        for code in data.get("codes", []):
-            prefixes.add(str(code).replace(".", "").strip())
-    return prefixes
-
-
-def add_s301_rate_column(
+def build_s301_rate_column(
     df: pd.DataFrame,
+    loader: UStradeLoader,
     s301_map: dict[str, float],
-    s301_exempt_prefixes: set[str],
 ) -> pd.DataFrame:
-    """Add ``s301_rate`` column: baseline rate + Section 301 additional duty.
+    """Add ``s301_rate`` column using product-specific S232 rates + S301 country fallback.
 
-    Section 301 stacks on top of the baseline rate for targeted countries,
-    except for products whose code matches a prefix in ``s301_exempt_prefixes``.
+    Constructs the S301 scenario rate independently of the baseline ``rate`` column:
+      - Same product-level rate map as baseline (S232, timber, pharma, S122 exemptions).
+      - S301 Annex A codes at 0.0 — explicitly excluded from the S301 action.
+      - Country-level fallback: S301 rate (12.5%) for targeted countries, 0.0 otherwise.
+        Section 122 country rates are not applied in the S301 scenario.
 
-    Builds a per-unique-code exemption set once, then uses vectorised operations —
-    O(unique_codes × exempt_prefixes) rather than O(rows × exempt_prefixes).
+    Args:
+        df: Trade data with baseline ``rate`` column already set.
+        loader: UStradeLoader instance (provides build_code_rate_map / assign_tariff_rate).
+        s301_map: {iso3: rate} for the seven S301-targeted countries.
+
+    Returns:
+        Copy of df with ``s301_rate`` column added.
     """
-    sorted_exempt = sorted(s301_exempt_prefixes, key=len, reverse=True)
-
-    exempt_codes: set[str] = {
-        str(code)
-        for code in df["product_code"].unique()
-        if any(str(code).startswith(p) for p in sorted_exempt)
-    }
-
+    product_rate_map = loader.build_code_rate_map(_PRODUCT_RATE_PATHS + [S301_ANNEX_A])
+    s301_df = loader.assign_tariff_rate(df, product_rate_map, s301_map, default_rate=0.0)
     df = df.copy()
-    additional = df["iso3"].map(s301_map).fillna(0.0)
-    additional = additional.where(~df["product_code"].astype(str).isin(exempt_codes), 0.0)
-    df["s301_rate"] = df["rate"] + additional
+    df["s301_rate"] = s301_df["rate"]
     return df
 
 
@@ -158,13 +145,13 @@ def etr_by_chapter(df: pd.DataFrame, rate_col: str) -> pd.DataFrame:
 
 # ── Analysis pipeline ──────────────────────────────────────────────────────────
 
-def _load_and_prepare() -> tuple[pd.DataFrame, dict[str, float]]:
+def _load_and_prepare() -> pd.DataFrame:
     """Load trade data, assign baseline and S301 rates.
 
-    Returns (df, s301_map) where df already has 'rate' and 's301_rate' columns.
+    Returns df with both 'rate' (baseline) and 's301_rate' (S301 scenario) columns.
 
     Pipeline mirrors UStradeLoader.load() but stops before ETR/population:
-      load_data (per-year) → sector groups → normalize → deflate → average_years → rates → s301_rate
+      load_data → sector groups → normalize → deflate → average_years → rates → s301_rate
     """
     loader = UStradeLoader()
     df = loader.load_data()
@@ -172,17 +159,16 @@ def _load_and_prepare() -> tuple[pd.DataFrame, dict[str, float]]:
     df = loader.normalize_country_names(df)
     df = loader.deflate(df)
     df = loader.average_years(df)
-    df = loader.add_rate_columns(df)
+    df = loader.add_rate_columns(df)  # 'rate' = baseline: S232 products + S122 country rates
 
-    s301_exempt_prefixes = build_s301_exempt_prefix_set(S301_EXEMPT_PATHS)
     s301_data = load_json(S301_PATH)
     s301_map = {
         iso3: info["rate"]
         for iso3, info in s301_data.items()
         if isinstance(info, dict) and "rate" in info
     }
-    df = add_s301_rate_column(df, s301_map, s301_exempt_prefixes)
-    return df, s301_map
+    df = build_s301_rate_column(df, loader, s301_map)  # adds 's301_rate'
+    return df
 
 
 def _build_etr_table(
@@ -201,11 +187,8 @@ def _build_etr_table(
     return result
 
 
-def run_country_etr(
-    df: pd.DataFrame,
-    s301_map: dict[str, float],
-) -> pd.DataFrame:
-    """Country-level baseline vs S301 ETR for targeted countries.
+def run_country_etr(df: pd.DataFrame) -> pd.DataFrame:
+    """Country-level baseline vs S301 ETR for all African countries.
 
     Expects df to already have both 'rate' and 's301_rate' columns
     (produced by ``_load_and_prepare``).
@@ -213,26 +196,19 @@ def run_country_etr(
     Columns: country, iso3, total_exports, baseline_etr, s301_etr, s301_delta
     ETR values are in percent (0–100).
     """
-    s301_iso3 = set(s301_map.keys())
-
-    result = (
+    return (
         _build_etr_table(
             baseline_df=etr_by_country(df, "rate").rename(columns={"etr": "baseline_etr"}),
             s301_df=etr_by_country(df, "s301_rate"),
             merge_keys=["country", "iso3", "total_exports"],
         )
-        .query("iso3 in @s301_iso3")
         .sort_values("country")
         .reset_index(drop=True)
     )
-    return result
 
 
-def run_group_etr(
-    df: pd.DataFrame,
-    s301_map: dict[str, float],
-) -> pd.DataFrame:
-    """Sector-group-level baseline vs S301 ETR for targeted countries.
+def run_group_etr(df: pd.DataFrame) -> pd.DataFrame:
+    """Sector-group-level baseline vs S301 ETR for all African countries.
 
     Expects df to already have both 'rate' and 's301_rate' columns
     (produced by ``_load_and_prepare``).
@@ -240,26 +216,19 @@ def run_group_etr(
     Columns: country, iso3, sector, total_exports, baseline_etr, s301_etr, s301_delta
     ETR values are in percent (0–100). Rows are sorted by country then delta desc.
     """
-    s301_iso3 = set(s301_map.keys())
-
-    result = (
+    return (
         _build_etr_table(
             baseline_df=etr_by_group(df, "rate").rename(columns={"etr": "baseline_etr"}),
             s301_df=etr_by_group(df, "s301_rate"),
             merge_keys=["country", "iso3", "sector", "total_exports"],
         )
-        .query("iso3 in @s301_iso3")
         .sort_values(["country", "s301_delta"], ascending=[True, False])
         .reset_index(drop=True)
     )
-    return result
 
 
-def run_chapter_etr(
-    df: pd.DataFrame,
-    s301_map: dict[str, float],
-) -> pd.DataFrame:
-    """Chapter-level (2-digit HS) baseline vs S301 ETR for targeted countries.
+def run_chapter_etr(df: pd.DataFrame) -> pd.DataFrame:
+    """Chapter-level (2-digit HS) baseline vs S301 ETR for all African countries.
 
     Expects df to already have both 'rate' and 's301_rate' columns
     (produced by ``_load_and_prepare``).
@@ -270,38 +239,31 @@ def run_chapter_etr(
     Chapters with zero export activity are excluded; chapters with no S301 impact
     (s301_delta == 0) are retained to show fully-exempt product categories.
     """
-    s301_iso3 = set(s301_map.keys())
-
-    baseline_ch = etr_by_chapter(df, "rate").rename(columns={"etr": "baseline_etr"})
-    s301_ch = etr_by_chapter(df, "s301_rate")
-
-    result = (
+    return (
         _build_etr_table(
-            baseline_df=baseline_ch,
-            s301_df=s301_ch,
+            baseline_df=etr_by_chapter(df, "rate").rename(columns={"etr": "baseline_etr"}),
+            s301_df=etr_by_chapter(df, "s301_rate"),
             merge_keys=["country", "iso3", "chapter", "chapter_name", "total_exports"],
         )
-        .query("iso3 in @s301_iso3")
         .sort_values(["country", "s301_delta"], ascending=[True, False])
         .reset_index(drop=True)
     )
-    return result
 
 
 # ── Output formatting ─────────────────────────────────────────────────────────
 
-#: Raw USD -> USD billions (USTrade exports are in USD, not thousands)
-_USD_TO_BN = 1_000_000_000
+#: Raw USD -> USD millions (USTrade exports are in USD, not thousands)
+_USD_TO_MN = 1_000_000
 
 _ETR_RENAME: dict[str, str] = {
-    "country":      "Country",
-    "sector":       "Sector",
-    "chapter":      "Chapter",
-    "chapter_name": "Chapter Name",
-    "total_exports": "Total Exports (const. 2024 USD bn)",
-    "baseline_etr": "Baseline ETR (%)",
-    "s301_etr":     "S301 ETR (%)",
-    "s301_delta":   "ETR Change (pp)",
+    "country":       "Country",
+    "sector":        "Sector",
+    "chapter":       "Chapter",
+    "chapter_name":  "Chapter Name",
+    "total_exports": "Annual Export to the US ($ million)",
+    "baseline_etr":  "Baseline ETR (%)",
+    "s301_etr":      "S301 ETR (%)",
+    "s301_delta":    "ETR Change (pp)",
 }
 
 
@@ -309,23 +271,85 @@ def _format_etr_table(df: pd.DataFrame) -> pd.DataFrame:
     """Return a display-ready copy of an ETR table.
 
     - Drops ``iso3``
-    - Converts ``total_exports`` from USD to USD billions
+    - Converts ``total_exports`` from USD to USD millions
     - Rounds all numeric columns to 2 decimal places
     - Renames columns to display-friendly headers
     """
     out = df.drop(columns=["iso3"], errors="ignore").copy()
-    out["total_exports"] = (out["total_exports"] / _USD_TO_BN).round(2)
+    out["total_exports"] = (out["total_exports"] / _USD_TO_MN).round(1)
     num_cols = out.select_dtypes("number").columns
-    out[num_cols] = out[num_cols].round(2)
+    out[num_cols] = out[num_cols].round(1)
     return out.rename(columns=_ETR_RENAME)
+
+
+# ── Affected export share ─────────────────────────────────────────────────────
+
+def compute_export_share_affected_countries(year: int | None = None) -> pd.DataFrame:
+    """Share of each S301-targeted country's exports in all African exports to the US.
+
+    Builds its own pipeline (load → normalize → deflate) so it can filter to a
+    specific year without touching the averaged ``_load_and_prepare`` data.
+    When ``year`` is None all years in the analysis window are used and monetary
+    values are annual averages; the share is computed from totals so year-count
+    divisions cancel.
+
+    Args:
+        year: Calendar year to filter to (e.g. 2024). None uses all years.
+
+    Returns:
+        One row per targeted country with columns:
+          country, iso3, country_exports_mn, africa_total_exports_mn,
+          share_of_africa_pct
+        Monetary values in constant 2024 USD millions.
+    """
+    from src.data.s301_analysis.constants import S301_COUNTRIES
+
+    from src.data.config import BASE_YEAR
+
+    loader = UStradeLoader()
+    raw = loader.load_data()
+    raw = loader.normalize_country_names(raw)
+
+    if year is not None:
+        raw = raw[raw["year"] == year]
+
+    # Deflating to constant BASE_YEAR USD is a no-op for BASE_YEAR data itself
+    # (factor = 1). Skip it to preserve countries whose deflators are missing
+    # (e.g. Eritrea), since current BASE_YEAR USD == constant BASE_YEAR USD.
+    if year != BASE_YEAR:
+        raw = loader.deflate(raw)
+
+    n_years = raw["year"].nunique() or 1
+    africa_total = raw["exports"].sum()
+
+    rows = []
+    for iso3, country in S301_COUNTRIES.items():
+        country_exports = raw.loc[raw["iso3"] == iso3, "exports"].sum()
+        rows.append({
+            "iso3": iso3, "country": country,
+            "country_exports": country_exports,
+            "africa_total": africa_total,
+        })
+
+    result = pd.DataFrame(rows)
+    result["share"] = result["country_exports"] / result["africa_total"]
+    result["country_exports_mn"] = (result["country_exports"] / n_years / _USD_TO_MN).round(1)
+    result["africa_total_exports_mn"] = (result["africa_total"] / n_years / _USD_TO_MN).round(1)
+    result["share_of_africa_pct"] = (result["share"] * 100).round(1)
+
+    return (
+        result
+        .drop(columns=["country_exports", "africa_total", "share"])
+        .sort_values("share_of_africa_pct", ascending=False)
+        .reset_index(drop=True)
+    )
 
 
 # ── Legacy compatibility ───────────────────────────────────────────────────────
 
 def run() -> pd.DataFrame:
     """Return country-level ETR comparison (backward-compatible entry point)."""
-    df, s301_map = _load_and_prepare()
-    return run_country_etr(df, s301_map)
+    return run_country_etr(_load_and_prepare())
 
 
 # ── CLI entry point ────────────────────────────────────────────────────────────
@@ -340,25 +364,40 @@ if __name__ == "__main__":
     print(f"  -> {OUTPUT_DIR / '1_trade_context.csv'}")
 
     print("\nBuilding ETR tables (USTrade)…")
-    df, s301_map = _load_and_prepare()
+    df = _load_and_prepare()
 
     # ── Output 2: Country-level ETR ────────────────────────────────────────────
     print("  Computing country ETR…")
-    country_etr = run_country_etr(df, s301_map)
-    _format_etr_table(country_etr).to_csv(OUTPUT_DIR / "2_country_etr.csv", index=False)
+    country_etr = run_country_etr(df)
+    formatted_country = _format_etr_table(country_etr)
+    formatted_country["Direction"] = country_etr["s301_delta"].map(
+        lambda x: "Up" if x > 0 else ("Down" if x < 0 else "No change")
+    )
+    formatted_country.to_csv(OUTPUT_DIR / "2_country_etr.csv", index=False)
     print(f"  -> {OUTPUT_DIR / '2_country_etr.csv'}")
 
     # ── Output 3: Sector-group ETR ─────────────────────────────────────────────
     print("  Computing sector-group ETR…")
-    group_etr = run_group_etr(df, s301_map)
+    group_etr = run_group_etr(df)
     _format_etr_table(group_etr).to_csv(OUTPUT_DIR / "3_group_etr.csv", index=False)
     print(f"  -> {OUTPUT_DIR / '3_group_etr.csv'}")
 
     # ── Output 4: Chapter-level ETR ────────────────────────────────────────────
     print("  Computing chapter ETR…")
-    chapter_etr = run_chapter_etr(df, s301_map)
+    chapter_etr = run_chapter_etr(df)
     _format_etr_table(chapter_etr).to_csv(OUTPUT_DIR / "4_chapter_etr.csv", index=False)
     print(f"  -> {OUTPUT_DIR / '4_chapter_etr.csv'}")
+
+    # ── Output 5: Affected export share ───────────────────────────────────────
+    print("  Computing affected export share (2024)…")
+    affected = compute_export_share_affected_countries(year=2024)
+    affected.drop(columns=["iso3"]).rename(columns={
+        "country":                "Country",
+        "country_exports_mn":     "Annual Export to the US ($ million)",
+        "africa_total_exports_mn":"Africa Total Exports ($ million)",
+        "share_of_africa_pct":    "Share of Africa Exports (%)",
+    }).to_csv(OUTPUT_DIR / "5_affected_share.csv", index=False)
+    print(f"  -> {OUTPUT_DIR / '5_affected_share.csv'}")
 
     print("\nDone.")
 

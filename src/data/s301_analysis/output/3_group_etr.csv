@@ -1,57 +1,402 @@
-Country,Sector,Total Exports (const. 2024 USD bn),Baseline ETR (%),S301 ETR (%),ETR Change (pp)
-Algeria,Art & Collectibles,0.0,10.0,22.5,12.5
-Algeria,Textile & Apparel Manufacturing,0.0,10.0,22.5,12.5
-Algeria,Consumer Goods & Crafts,0.01,1.41,13.9,12.49
-Algeria,Agricultural & Foods,0.02,9.96,22.4,12.44
-Algeria,Chemical & Pharmaceutical,0.25,1.63,13.9,12.27
-Algeria,Industrial Equipment & Technology,0.0,11.78,22.32,10.54
-Algeria,Energy & Minerals,2.63,0.37,0.84,0.46
-Algeria,Base Metals,0.26,49.99,49.99,0.0
-Angola,Consumer Goods & Crafts,0.06,9.95,22.45,12.5
-Angola,Chemical & Pharmaceutical,0.12,10.0,22.5,12.5
-Angola,Textile & Apparel Manufacturing,0.0,10.0,22.5,12.5
-Angola,Art & Collectibles,0.0,10.0,22.5,12.5
-Angola,Agricultural & Foods,0.0,7.29,16.41,9.11
-Angola,Base Metals,0.02,22.44,31.0,8.56
-Angola,Industrial Equipment & Technology,0.0,13.82,20.25,6.43
-Angola,Energy & Minerals,1.23,0.08,0.18,0.1
-Egypt,Art & Collectibles,0.02,10.0,22.5,12.5
-Egypt,Textile & Apparel Manufacturing,1.34,10.0,22.5,12.5
-Egypt,Chemical & Pharmaceutical,0.27,3.61,16.03,12.42
-Egypt,Consumer Goods & Crafts,0.16,5.99,18.31,12.33
-Egypt,Agricultural & Foods,0.37,9.44,20.78,11.34
-Egypt,Industrial Equipment & Technology,0.04,11.43,22.49,11.06
-Egypt,Energy & Minerals,0.18,4.52,10.17,5.65
-Egypt,Base Metals,0.22,48.44,48.9,0.46
-Libya,Art & Collectibles,0.0,10.0,22.5,12.5
-Libya,Chemical & Pharmaceutical,0.03,10.0,22.5,12.5
-Libya,Textile & Apparel Manufacturing,0.0,10.0,22.5,12.5
-Libya,Consumer Goods & Crafts,0.0,8.67,21.17,12.5
-Libya,Industrial Equipment & Technology,0.0,10.84,21.66,10.82
-Libya,Agricultural & Foods,0.0,10.0,10.19,0.19
-Libya,Energy & Minerals,2.58,0.0,0.01,0.0
+Country,Sector,Annual Export to the US ($ million),Baseline ETR (%),S301 ETR (%),ETR Change (pp)
+Algeria,Art & Collectibles,0.8,10.0,12.5,2.5
+Algeria,Textile & Apparel Manufacturing,0.2,10.0,12.5,2.5
+Algeria,Agricultural & Foods,17.8,10.0,12.4,2.5
+Algeria,Industrial Equipment & Technology,2.5,17.6,18.6,1.0
+Algeria,Consumer Goods & Crafts,7.0,1.4,1.8,0.3
+Algeria,Chemical & Pharmaceutical,247.3,1.6,1.9,0.3
+Algeria,Energy & Minerals,2630.0,0.4,0.5,0.1
+Algeria,Base Metals,258.6,50.0,50.0,0.0
+Angola,Textile & Apparel Manufacturing,0.0,10.0,12.5,2.5
+Angola,Art & Collectibles,0.3,10.0,12.5,2.5
+Angola,Chemical & Pharmaceutical,121.2,10.0,12.5,2.5
+Angola,Consumer Goods & Crafts,59.6,9.9,12.4,2.5
+Angola,Agricultural & Foods,0.3,7.3,9.1,1.8
+Angola,Base Metals,17.0,22.4,24.1,1.7
+Angola,Industrial Equipment & Technology,0.2,12.5,12.9,0.4
+Angola,Energy & Minerals,1228.1,0.1,0.1,0.0
+Benin,Industrial Equipment & Technology,0.0,14.4,9.3,-5.1
+Benin,Agricultural & Foods,24.8,7.8,0.0,-7.8
+Benin,Consumer Goods & Crafts,1.2,8.6,0.0,-8.6
+Benin,Art & Collectibles,0.1,10.0,0.0,-10.0
+Benin,Chemical & Pharmaceutical,0.0,10.0,0.0,-10.0
+Benin,Textile & Apparel Manufacturing,1.9,10.0,0.0,-10.0
+Botswana,Base Metals,0.0,18.5,14.1,-4.4
+Botswana,Chemical & Pharmaceutical,0.0,4.5,0.0,-4.5
+Botswana,Industrial Equipment & Technology,0.9,17.8,13.2,-4.6
+Botswana,Consumer Goods & Crafts,515.0,10.0,0.0,-10.0
+Botswana,Agricultural & Foods,0.0,10.0,0.0,-10.0
+Botswana,Art & Collectibles,0.3,10.0,0.0,-10.0
+Botswana,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Burkina Faso,Agricultural & Foods,4.3,0.6,0.0,-0.6
+Burkina Faso,Base Metals,0.2,21.3,18.8,-2.5
+Burkina Faso,Industrial Equipment & Technology,1.0,14.9,8.4,-6.5
+Burkina Faso,Consumer Goods & Crafts,0.4,11.9,3.7,-8.2
+Burkina Faso,Art & Collectibles,0.2,10.0,0.0,-10.0
+Burkina Faso,Chemical & Pharmaceutical,0.0,10.0,0.0,-10.0
+Burkina Faso,Textile & Apparel Manufacturing,0.7,10.0,0.0,-10.0
+Burundi,Energy & Minerals,2.5,0.0,0.0,0.0
+Burundi,Agricultural & Foods,5.4,0.0,0.0,-0.0
+Burundi,Industrial Equipment & Technology,0.5,10.3,0.6,-9.7
+Burundi,Art & Collectibles,0.0,10.0,0.0,-10.0
+Burundi,Chemical & Pharmaceutical,0.4,10.0,0.0,-10.0
+Burundi,Consumer Goods & Crafts,0.0,10.0,0.0,-10.0
+Burundi,Textile & Apparel Manufacturing,0.4,10.0,0.0,-10.0
+Cabo Verde,Energy & Minerals,0.0,0.0,0.0,0.0
+Cabo Verde,Industrial Equipment & Technology,2.0,11.7,5.8,-5.8
+Cabo Verde,Base Metals,0.2,20.6,14.3,-6.2
+Cabo Verde,Consumer Goods & Crafts,0.8,13.4,5.7,-7.7
+Cabo Verde,Chemical & Pharmaceutical,0.1,10.6,1.0,-9.6
+Cabo Verde,Agricultural & Foods,7.7,9.8,0.0,-9.8
+Cabo Verde,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Cameroon,Energy & Minerals,120.0,0.0,0.0,-0.0
+Cameroon,Chemical & Pharmaceutical,10.7,0.7,0.2,-0.5
+Cameroon,Agricultural & Foods,44.7,0.6,0.0,-0.6
+Cameroon,Consumer Goods & Crafts,43.6,1.4,0.0,-1.4
+Cameroon,Base Metals,0.6,27.2,25.2,-2.0
+Cameroon,Industrial Equipment & Technology,5.3,10.4,3.7,-6.8
+Cameroon,Art & Collectibles,2.4,10.0,0.0,-10.0
+Cameroon,Textile & Apparel Manufacturing,0.9,10.0,0.0,-10.0
+Central African Republic,Agricultural & Foods,0.4,1.2,0.0,-1.2
+Central African Republic,Consumer Goods & Crafts,1.0,4.5,0.5,-3.9
+Central African Republic,Industrial Equipment & Technology,1.0,13.5,5.8,-7.7
+Central African Republic,Base Metals,0.0,18.6,10.8,-7.8
+Central African Republic,Chemical & Pharmaceutical,0.1,10.3,1.8,-8.5
+Central African Republic,Art & Collectibles,0.2,10.0,0.0,-10.0
+Central African Republic,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Chad,Base Metals,0.0,50.0,50.0,0.0
+Chad,Energy & Minerals,81.3,0.0,0.0,0.0
+Chad,Chemical & Pharmaceutical,0.3,0.8,0.0,-0.8
+Chad,Industrial Equipment & Technology,0.6,2.9,0.2,-2.6
+Chad,Consumer Goods & Crafts,0.0,4.2,0.0,-4.2
+Chad,Art & Collectibles,0.1,10.0,0.0,-10.0
+Chad,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Chad,Agricultural & Foods,3.6,10.0,0.0,-10.0
+Comoros,Base Metals,0.1,25.0,25.0,0.0
+Comoros,Agricultural & Foods,3.4,0.0,0.0,-0.0
+Comoros,Industrial Equipment & Technology,0.1,20.7,17.9,-2.8
+Comoros,Chemical & Pharmaceutical,0.3,7.7,0.0,-7.7
+Comoros,Consumer Goods & Crafts,0.5,10.0,0.0,-10.0
+Comoros,Textile & Apparel Manufacturing,0.1,10.0,0.0,-10.0
+Congo Republic,Energy & Minerals,262.2,0.0,0.0,0.0
+Congo Republic,Consumer Goods & Crafts,24.5,0.6,0.1,-0.5
+Congo Republic,Base Metals,15.1,1.5,0.0,-1.5
+Congo Republic,Agricultural & Foods,2.4,3.1,0.0,-3.1
+Congo Republic,Industrial Equipment & Technology,0.9,7.7,4.1,-3.6
+Congo Republic,Chemical & Pharmaceutical,5.2,8.5,0.1,-8.4
+Congo Republic,Art & Collectibles,3.0,10.0,0.0,-10.0
+Congo Republic,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Côte d'Ivoire,Base Metals,0.1,49.1,49.1,0.0
+Côte d'Ivoire,Energy & Minerals,41.4,0.0,0.0,-0.0
+Côte d'Ivoire,Agricultural & Foods,825.0,0.6,0.0,-0.6
+Côte d'Ivoire,Chemical & Pharmaceutical,190.9,1.7,1.0,-0.7
+Côte d'Ivoire,Consumer Goods & Crafts,7.5,2.0,0.0,-2.0
+Côte d'Ivoire,Industrial Equipment & Technology,4.9,19.4,16.3,-3.1
+Côte d'Ivoire,Art & Collectibles,2.5,10.0,0.0,-10.0
+Côte d'Ivoire,Textile & Apparel Manufacturing,0.3,10.0,0.0,-10.0
+DR Congo,Base Metals,175.0,0.2,0.0,-0.2
+DR Congo,Energy & Minerals,103.5,0.5,0.0,-0.5
+DR Congo,Chemical & Pharmaceutical,1.1,1.4,0.0,-1.4
+DR Congo,Agricultural & Foods,16.7,3.2,0.0,-3.2
+DR Congo,Industrial Equipment & Technology,0.8,11.8,7.6,-4.2
+DR Congo,Consumer Goods & Crafts,10.4,4.7,0.0,-4.7
+DR Congo,Art & Collectibles,2.9,10.0,0.0,-10.0
+DR Congo,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Djibouti,Industrial Equipment & Technology,1.9,7.4,1.0,-6.4
+Djibouti,Agricultural & Foods,4.8,8.5,0.0,-8.5
+Djibouti,Consumer Goods & Crafts,0.4,9.9,0.0,-9.9
+Djibouti,Art & Collectibles,0.0,10.0,0.0,-10.0
+Djibouti,Chemical & Pharmaceutical,0.0,10.0,0.0,-10.0
+Djibouti,Textile & Apparel Manufacturing,1.6,10.0,0.0,-10.0
+Egypt,Art & Collectibles,15.5,10.0,12.5,2.5
+Egypt,Textile & Apparel Manufacturing,1340.0,10.0,12.5,2.5
+Egypt,Agricultural & Foods,371.5,9.4,11.3,1.9
+Egypt,Consumer Goods & Crafts,163.8,6.0,7.4,1.4
+Egypt,Energy & Minerals,175.3,4.5,5.6,1.1
+Egypt,Industrial Equipment & Technology,43.5,16.5,17.6,1.1
+Egypt,Chemical & Pharmaceutical,274.6,3.6,4.5,0.9
+Egypt,Base Metals,217.4,48.4,48.5,0.1
+Equatorial Guinea,Energy & Minerals,220.4,0.0,0.0,0.0
+Equatorial Guinea,Industrial Equipment & Technology,0.3,14.9,8.2,-6.7
+Equatorial Guinea,Agricultural & Foods,0.0,10.0,0.0,-10.0
+Equatorial Guinea,Art & Collectibles,0.5,10.0,0.0,-10.0
+Equatorial Guinea,Chemical & Pharmaceutical,25.2,10.0,0.0,-10.0
+Equatorial Guinea,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Eritrea,Agricultural & Foods,0.0,nan,nan,nan
+Eritrea,Base Metals,0.0,nan,nan,nan
+Eritrea,Chemical & Pharmaceutical,0.0,nan,nan,nan
+Eritrea,Consumer Goods & Crafts,0.0,nan,nan,nan
+Eritrea,Industrial Equipment & Technology,0.0,nan,nan,nan
+Eritrea,Textile & Apparel Manufacturing,0.0,nan,nan,nan
+Eswatini,Base Metals,0.8,21.8,18.2,-3.5
+Eswatini,Chemical & Pharmaceutical,2.1,4.7,0.0,-4.7
+Eswatini,Industrial Equipment & Technology,4.4,10.8,3.1,-7.7
+Eswatini,Agricultural & Foods,19.8,9.0,0.0,-9.0
+Eswatini,Consumer Goods & Crafts,1.2,10.0,0.1,-10.0
+Eswatini,Art & Collectibles,0.0,10.0,0.0,-10.0
+Eswatini,Textile & Apparel Manufacturing,4.4,10.0,0.0,-10.0
+Ethiopia,Base Metals,0.0,8.8,8.8,0.0
+Ethiopia,Energy & Minerals,0.2,2.2,0.0,-2.2
+Ethiopia,Agricultural & Foods,238.2,3.0,0.0,-3.0
+Ethiopia,Industrial Equipment & Technology,25.7,18.6,14.5,-4.1
+Ethiopia,Chemical & Pharmaceutical,1.1,10.0,0.2,-9.8
+Ethiopia,Consumer Goods & Crafts,9.1,9.9,0.0,-9.9
+Ethiopia,Art & Collectibles,2.6,10.0,0.0,-10.0
+Ethiopia,Textile & Apparel Manufacturing,256.6,10.0,0.0,-10.0
+Gabon,Energy & Minerals,183.5,0.1,0.0,-0.1
+Gabon,Chemical & Pharmaceutical,3.2,0.9,0.0,-0.9
+Gabon,Base Metals,0.3,18.0,12.5,-5.5
+Gabon,Consumer Goods & Crafts,31.8,7.9,0.0,-7.9
+Gabon,Industrial Equipment & Technology,2.4,12.7,4.8,-7.9
+Gabon,Agricultural & Foods,0.1,10.0,0.0,-10.0
+Gabon,Art & Collectibles,4.1,10.0,0.0,-10.0
+Gabon,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Gambia,Base Metals,0.0,9.8,6.7,-3.0
+Gambia,Consumer Goods & Crafts,0.1,4.1,0.0,-4.1
+Gambia,Industrial Equipment & Technology,1.5,11.4,6.8,-4.5
+Gambia,Chemical & Pharmaceutical,0.1,5.7,0.0,-5.7
+Gambia,Agricultural & Foods,1.2,9.8,0.0,-9.8
+Gambia,Art & Collectibles,0.0,10.0,0.0,-10.0
+Gambia,Energy & Minerals,0.7,10.0,0.0,-10.0
+Gambia,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Ghana,Energy & Minerals,1462.5,0.0,0.0,-0.0
+Ghana,Agricultural & Foods,317.1,1.8,0.0,-1.8
+Ghana,Industrial Equipment & Technology,2.9,11.8,8.3,-3.5
+Ghana,Consumer Goods & Crafts,21.1,4.6,0.6,-4.0
+Ghana,Chemical & Pharmaceutical,50.5,5.2,0.1,-5.1
+Ghana,Base Metals,26.3,10.3,0.4,-9.9
+Ghana,Art & Collectibles,11.5,10.0,0.0,-10.0
+Ghana,Textile & Apparel Manufacturing,46.6,10.0,0.0,-10.0
+Guinea,Chemical & Pharmaceutical,3.0,0.8,0.1,-0.7
+Guinea,Consumer Goods & Crafts,2.0,2.7,0.0,-2.7
+Guinea,Industrial Equipment & Technology,3.9,12.9,5.7,-7.2
+Guinea,Agricultural & Foods,2.7,7.8,0.0,-7.8
+Guinea,Base Metals,1.2,10.4,0.7,-9.7
+Guinea,Art & Collectibles,0.2,10.0,0.0,-10.0
+Guinea,Energy & Minerals,0.0,10.0,0.0,-10.0
+Guinea,Textile & Apparel Manufacturing,0.2,10.0,0.0,-10.0
+Guinea-Bissau,Agricultural & Foods,0.6,0.0,0.0,0.0
+Guinea-Bissau,Industrial Equipment & Technology,0.1,11.9,3.6,-8.2
+Guinea-Bissau,Chemical & Pharmaceutical,0.0,10.0,0.0,-10.0
+Guinea-Bissau,Consumer Goods & Crafts,0.0,10.0,0.0,-10.0
+Guinea-Bissau,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Kenya,Energy & Minerals,30.4,0.1,0.0,-0.1
+Kenya,Base Metals,7.3,40.0,39.9,-0.1
+Kenya,Agricultural & Foods,149.8,2.3,0.0,-2.3
+Kenya,Industrial Equipment & Technology,8.7,11.2,5.7,-5.4
+Kenya,Chemical & Pharmaceutical,16.4,23.1,15.1,-8.1
+Kenya,Consumer Goods & Crafts,11.4,9.2,0.0,-9.2
+Kenya,Art & Collectibles,2.5,10.0,0.0,-10.0
+Kenya,Textile & Apparel Manufacturing,616.1,10.0,0.0,-10.0
+Lesotho,Industrial Equipment & Technology,1.5,10.0,0.2,-9.8
+Lesotho,Agricultural & Foods,0.9,10.0,0.0,-10.0
+Lesotho,Art & Collectibles,0.0,10.0,0.0,-10.0
+Lesotho,Consumer Goods & Crafts,91.2,10.0,0.0,-10.0
+Lesotho,Textile & Apparel Manufacturing,219.3,10.0,0.0,-10.0
+Liberia,Energy & Minerals,0.2,0.0,0.0,0.0
+Liberia,Chemical & Pharmaceutical,69.8,0.0,0.0,-0.0
+Liberia,Base Metals,0.3,47.9,47.3,-0.5
+Liberia,Industrial Equipment & Technology,0.9,10.6,4.9,-5.6
+Liberia,Consumer Goods & Crafts,4.0,7.5,0.0,-7.5
+Liberia,Agricultural & Foods,0.8,10.0,0.0,-10.0
+Liberia,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Liberia,Art & Collectibles,0.3,10.0,0.0,-10.0
+Libya,Art & Collectibles,0.7,10.0,12.5,2.5
+Libya,Textile & Apparel Manufacturing,0.0,10.0,12.5,2.5
+Libya,Chemical & Pharmaceutical,33.9,10.0,12.5,2.5
+Libya,Consumer Goods & Crafts,0.0,9.1,11.2,2.1
+Libya,Industrial Equipment & Technology,0.1,11.6,13.4,1.7
+Libya,Energy & Minerals,2577.8,0.0,0.0,0.0
 Libya,Base Metals,0.0,25.0,25.0,0.0
-Morocco,Art & Collectibles,0.01,10.0,22.5,12.5
-Morocco,Textile & Apparel Manufacturing,0.32,10.0,22.5,12.5
-Morocco,Chemical & Pharmaceutical,0.1,4.03,16.51,12.48
-Morocco,Consumer Goods & Crafts,0.07,10.49,22.54,12.05
-Morocco,Agricultural & Foods,0.42,8.92,19.94,11.02
-Morocco,Base Metals,0.01,10.81,20.32,9.51
-Morocco,Industrial Equipment & Technology,0.75,11.89,19.86,7.97
-Morocco,Energy & Minerals,0.08,4.38,9.86,5.48
-Nigeria,Art & Collectibles,0.0,10.0,22.5,12.5
-Nigeria,Textile & Apparel Manufacturing,0.01,10.0,22.5,12.5
-Nigeria,Chemical & Pharmaceutical,0.17,2.19,14.68,12.5
-Nigeria,Consumer Goods & Crafts,0.01,6.18,18.66,12.48
-Nigeria,Base Metals,0.05,9.93,22.4,12.47
-Nigeria,Industrial Equipment & Technology,0.0,11.18,22.37,11.19
-Nigeria,Agricultural & Foods,0.08,6.86,15.37,8.5
-Nigeria,Energy & Minerals,3.48,0.01,0.02,0.01
-South Africa,Art & Collectibles,0.04,10.0,22.5,12.5
-South Africa,Consumer Goods & Crafts,8.43,4.05,16.53,12.49
-South Africa,Textile & Apparel Manufacturing,0.04,10.05,22.51,12.46
-South Africa,Chemical & Pharmaceutical,0.68,9.74,21.61,11.88
-South Africa,Agricultural & Foods,0.71,7.27,16.3,9.02
-South Africa,Base Metals,1.08,21.61,29.11,7.5
-South Africa,Energy & Minerals,0.72,3.79,8.48,4.69
-South Africa,Industrial Equipment & Technology,2.89,22.2,24.52,2.32
+Libya,Agricultural & Foods,0.3,10.0,0.2,-9.8
+Madagascar,Energy & Minerals,62.9,0.2,0.0,-0.2
+Madagascar,Agricultural & Foods,201.4,0.6,0.0,-0.6
+Madagascar,Base Metals,89.6,6.2,0.1,-6.1
+Madagascar,Industrial Equipment & Technology,0.6,14.5,7.8,-6.6
+Madagascar,Chemical & Pharmaceutical,5.8,8.3,0.0,-8.3
+Madagascar,Consumer Goods & Crafts,73.1,10.0,0.0,-10.0
+Madagascar,Art & Collectibles,1.1,10.0,0.0,-10.0
+Madagascar,Textile & Apparel Manufacturing,425.0,10.0,0.0,-10.0
+Malawi,Agricultural & Foods,39.1,6.2,0.0,-6.2
+Malawi,Industrial Equipment & Technology,0.1,14.5,7.9,-6.5
+Malawi,Art & Collectibles,0.1,10.0,0.0,-10.0
+Malawi,Consumer Goods & Crafts,0.6,10.0,0.0,-10.0
+Malawi,Chemical & Pharmaceutical,0.1,10.0,0.0,-10.0
+Malawi,Textile & Apparel Manufacturing,0.1,10.0,0.0,-10.0
+Mali,Energy & Minerals,0.1,0.0,0.0,0.0
+Mali,Consumer Goods & Crafts,3.1,3.4,1.0,-2.4
+Mali,Base Metals,0.2,35.2,31.5,-3.7
+Mali,Industrial Equipment & Technology,3.7,11.4,6.9,-4.5
+Mali,Chemical & Pharmaceutical,0.1,7.4,0.0,-7.4
+Mali,Agricultural & Foods,2.1,7.5,0.0,-7.5
+Mali,Art & Collectibles,1.3,10.0,0.0,-10.0
+Mali,Textile & Apparel Manufacturing,0.2,10.0,0.0,-10.0
+Mauritania,Base Metals,0.0,50.0,50.0,0.0
+Mauritania,Chemical & Pharmaceutical,1.5,0.9,0.0,-0.9
+Mauritania,Industrial Equipment & Technology,3.1,15.4,10.3,-5.2
+Mauritania,Consumer Goods & Crafts,1.0,10.2,0.4,-9.8
+Mauritania,Agricultural & Foods,1.1,10.0,0.0,-10.0
+Mauritania,Art & Collectibles,0.2,10.0,0.0,-10.0
+Mauritania,Textile & Apparel Manufacturing,0.3,10.0,0.0,-10.0
+Mauritius,Base Metals,0.2,39.0,36.8,-2.2
+Mauritius,Chemical & Pharmaceutical,2.9,6.7,1.5,-5.2
+Mauritius,Industrial Equipment & Technology,14.0,9.7,2.4,-7.3
+Mauritius,Energy & Minerals,1.4,9.0,0.0,-9.0
+Mauritius,Agricultural & Foods,116.8,10.0,0.0,-10.0
+Mauritius,Consumer Goods & Crafts,83.3,10.0,0.0,-10.0
+Mauritius,Art & Collectibles,0.6,10.0,0.0,-10.0
+Mauritius,Textile & Apparel Manufacturing,67.7,10.0,0.0,-10.0
+Morocco,Art & Collectibles,5.2,10.0,12.5,2.5
+Morocco,Textile & Apparel Manufacturing,317.9,10.0,12.5,2.5
+Morocco,Consumer Goods & Crafts,71.0,10.0,12.5,2.5
+Morocco,Agricultural & Foods,424.2,8.9,11.0,2.1
+Morocco,Energy & Minerals,79.6,4.4,5.5,1.1
+Morocco,Chemical & Pharmaceutical,104.4,4.0,5.0,1.0
+Morocco,Industrial Equipment & Technology,751.7,11.9,12.6,0.7
+Morocco,Base Metals,14.3,10.3,10.5,0.2
+Mozambique,Base Metals,3.8,48.9,48.6,-0.3
+Mozambique,Energy & Minerals,65.0,1.4,0.0,-1.4
+Mozambique,Industrial Equipment & Technology,3.5,17.2,13.0,-4.2
+Mozambique,Agricultural & Foods,26.0,9.4,0.0,-9.4
+Mozambique,Consumer Goods & Crafts,118.8,10.0,0.0,-10.0
+Mozambique,Art & Collectibles,0.4,10.0,0.0,-10.0
+Mozambique,Chemical & Pharmaceutical,0.1,10.0,0.0,-10.0
+Mozambique,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Namibia,Energy & Minerals,74.8,0.3,0.0,-0.3
+Namibia,Base Metals,0.1,39.2,36.5,-2.7
+Namibia,Industrial Equipment & Technology,4.3,12.3,5.0,-7.4
+Namibia,Chemical & Pharmaceutical,2.1,9.7,0.0,-9.7
+Namibia,Agricultural & Foods,4.9,9.8,0.0,-9.8
+Namibia,Consumer Goods & Crafts,174.7,10.0,0.0,-10.0
+Namibia,Art & Collectibles,0.7,10.0,0.0,-10.0
+Namibia,Textile & Apparel Manufacturing,0.9,10.0,0.0,-10.0
+Niger,Energy & Minerals,0.2,0.2,0.0,-0.2
+Niger,Base Metals,0.3,20.2,18.8,-1.5
+Niger,Chemical & Pharmaceutical,1.7,35.8,30.1,-5.7
+Niger,Consumer Goods & Crafts,0.4,8.7,1.7,-7.0
+Niger,Industrial Equipment & Technology,7.6,10.9,2.5,-8.4
+Niger,Agricultural & Foods,0.8,9.8,0.0,-9.8
+Niger,Art & Collectibles,0.3,10.0,0.0,-10.0
+Niger,Textile & Apparel Manufacturing,0.4,10.0,0.0,-10.0
+Nigeria,Art & Collectibles,4.7,10.0,12.5,2.5
+Nigeria,Textile & Apparel Manufacturing,6.7,10.0,12.5,2.5
+Nigeria,Base Metals,45.3,9.9,12.4,2.5
+Nigeria,Industrial Equipment & Technology,4.2,11.9,13.9,1.9
+Nigeria,Agricultural & Foods,77.8,6.9,8.5,1.6
+Nigeria,Consumer Goods & Crafts,11.3,6.3,7.9,1.6
+Nigeria,Chemical & Pharmaceutical,172.1,2.2,2.7,0.5
+Nigeria,Energy & Minerals,3475.9,0.0,0.0,0.0
+Rwanda,Energy & Minerals,3.8,0.0,0.0,0.0
+Rwanda,Base Metals,6.2,0.9,0.9,-0.0
+Rwanda,Agricultural & Foods,30.1,1.3,0.0,-1.3
+Rwanda,Industrial Equipment & Technology,0.5,8.8,5.8,-3.0
+Rwanda,Consumer Goods & Crafts,3.4,9.7,0.0,-9.7
+Rwanda,Chemical & Pharmaceutical,0.2,9.8,0.0,-9.8
+Rwanda,Art & Collectibles,0.3,10.0,0.0,-10.0
+Rwanda,Textile & Apparel Manufacturing,1.8,10.0,0.0,-10.0
+Sao Tome and Principe,Energy & Minerals,0.2,0.0,0.0,0.0
+Sao Tome and Principe,Base Metals,0.1,42.7,41.3,-1.5
+Sao Tome and Principe,Agricultural & Foods,0.2,3.1,0.0,-3.1
+Sao Tome and Principe,Industrial Equipment & Technology,1.8,13.1,6.9,-6.2
+Sao Tome and Principe,Consumer Goods & Crafts,0.2,14.7,7.8,-6.9
+Sao Tome and Principe,Chemical & Pharmaceutical,0.0,31.0,23.3,-7.7
+Sao Tome and Principe,Art & Collectibles,0.0,10.0,0.0,-10.0
+Sao Tome and Principe,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Senegal,Chemical & Pharmaceutical,17.4,0.3,0.1,-0.2
+Senegal,Energy & Minerals,114.0,1.0,0.0,-1.0
+Senegal,Industrial Equipment & Technology,2.4,16.3,12.5,-3.8
+Senegal,Base Metals,0.3,28.5,23.1,-5.3
+Senegal,Agricultural & Foods,73.0,10.0,0.0,-10.0
+Senegal,Consumer Goods & Crafts,350.2,10.0,0.0,-10.0
+Senegal,Art & Collectibles,0.8,10.0,0.0,-10.0
+Senegal,Textile & Apparel Manufacturing,50.5,10.0,0.0,-10.0
+Seychelles,Energy & Minerals,0.0,0.0,0.0,0.0
+Seychelles,Base Metals,0.3,28.3,26.8,-1.5
+Seychelles,Chemical & Pharmaceutical,1.2,7.0,1.5,-5.6
+Seychelles,Industrial Equipment & Technology,4.5,11.1,2.7,-8.4
+Seychelles,Agricultural & Foods,5.2,10.0,0.0,-10.0
+Seychelles,Consumer Goods & Crafts,2.2,10.0,0.0,-10.0
+Seychelles,Textile & Apparel Manufacturing,0.5,10.0,0.0,-10.0
+Seychelles,Art & Collectibles,0.1,10.0,0.0,-10.0
+Sierra Leone,Energy & Minerals,6.5,0.0,0.0,-0.0
+Sierra Leone,Base Metals,1.3,43.1,41.8,-1.3
+Sierra Leone,Agricultural & Foods,4.0,5.5,0.0,-5.5
+Sierra Leone,Industrial Equipment & Technology,10.2,12.8,5.7,-7.1
+Sierra Leone,Chemical & Pharmaceutical,1.0,12.3,4.5,-7.8
+Sierra Leone,Consumer Goods & Crafts,7.3,9.6,0.2,-9.4
+Sierra Leone,Art & Collectibles,0.1,10.0,0.0,-10.0
+Sierra Leone,Textile & Apparel Manufacturing,0.4,10.0,0.0,-10.0
+Somalia,Industrial Equipment & Technology,1.5,20.9,19.5,-1.4
+Somalia,Base Metals,0.0,25.2,23.6,-1.6
+Somalia,Consumer Goods & Crafts,0.3,13.4,6.9,-6.5
+Somalia,Agricultural & Foods,0.7,10.0,0.0,-10.0
+Somalia,Art & Collectibles,0.2,10.0,0.0,-10.0
+Somalia,Chemical & Pharmaceutical,0.3,10.0,0.0,-10.0
+Somalia,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+South Africa,Art & Collectibles,37.6,10.0,12.5,2.5
+South Africa,Textile & Apparel Manufacturing,35.6,10.0,12.5,2.5
+South Africa,Chemical & Pharmaceutical,681.0,10.4,12.5,2.2
+South Africa,Agricultural & Foods,713.9,7.3,9.0,1.7
+South Africa,Consumer Goods & Crafts,8434.8,4.0,5.0,1.0
+South Africa,Energy & Minerals,717.3,3.8,4.7,0.9
+South Africa,Base Metals,1081.9,21.6,22.2,0.6
+South Africa,Industrial Equipment & Technology,2891.8,22.6,22.9,0.4
+South Sudan,Base Metals,0.0,50.0,50.0,0.0
+South Sudan,Industrial Equipment & Technology,0.1,10.9,6.7,-4.2
+South Sudan,Agricultural & Foods,0.7,10.0,0.0,-10.0
+South Sudan,Art & Collectibles,0.1,10.0,0.0,-10.0
+South Sudan,Chemical & Pharmaceutical,0.0,10.0,0.0,-10.0
+South Sudan,Consumer Goods & Crafts,0.1,10.0,0.0,-10.0
+South Sudan,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Sudan,Agricultural & Foods,26.7,10.0,0.0,-10.0
+Sudan,Art & Collectibles,0.0,10.0,0.0,-10.0
+Sudan,Chemical & Pharmaceutical,1.1,10.0,0.0,-10.0
+Sudan,Consumer Goods & Crafts,0.0,10.0,0.0,-10.0
+Tanzania,Energy & Minerals,0.6,0.8,0.0,-0.8
+Tanzania,Base Metals,0.2,29.1,25.4,-3.6
+Tanzania,Agricultural & Foods,53.2,4.2,0.0,-4.2
+Tanzania,Industrial Equipment & Technology,3.3,16.7,11.3,-5.4
+Tanzania,Chemical & Pharmaceutical,1.5,7.9,0.0,-7.9
+Tanzania,Consumer Goods & Crafts,67.8,9.9,0.0,-9.9
+Tanzania,Art & Collectibles,0.5,10.0,0.0,-10.0
+Tanzania,Textile & Apparel Manufacturing,86.1,10.0,0.0,-10.0
+Togo,Base Metals,0.0,22.8,21.4,-1.4
+Togo,Consumer Goods & Crafts,0.9,7.5,0.1,-7.4
+Togo,Industrial Equipment & Technology,0.5,10.7,3.3,-7.4
+Togo,Agricultural & Foods,117.2,9.8,0.0,-9.8
+Togo,Chemical & Pharmaceutical,1.1,10.0,0.0,-10.0
+Togo,Energy & Minerals,0.0,10.0,0.0,-10.0
+Togo,Textile & Apparel Manufacturing,9.8,10.0,0.0,-10.0
+Togo,Art & Collectibles,0.0,10.0,0.0,-10.0
+Tunisia,Energy & Minerals,92.8,2.4,0.0,-2.4
+Tunisia,Chemical & Pharmaceutical,115.8,3.4,0.0,-3.4
+Tunisia,Base Metals,17.3,20.1,15.7,-4.4
+Tunisia,Industrial Equipment & Technology,292.3,15.0,8.8,-6.2
+Tunisia,Consumer Goods & Crafts,48.1,10.1,0.4,-9.7
+Tunisia,Agricultural & Foods,349.6,10.0,0.0,-10.0
+Tunisia,Art & Collectibles,0.8,10.0,0.0,-10.0
+Tunisia,Textile & Apparel Manufacturing,140.7,10.0,0.0,-10.0
+Uganda,Base Metals,0.0,2.2,2.2,0.0
+Uganda,Agricultural & Foods,115.6,1.7,0.0,-1.7
+Uganda,Industrial Equipment & Technology,4.6,10.2,1.1,-9.1
+Uganda,Consumer Goods & Crafts,4.6,9.6,0.0,-9.6
+Uganda,Chemical & Pharmaceutical,13.3,10.5,0.6,-9.9
+Uganda,Art & Collectibles,0.9,10.0,0.0,-10.0
+Uganda,Energy & Minerals,1.1,10.0,0.0,-10.0
+Uganda,Textile & Apparel Manufacturing,0.2,10.0,0.0,-10.0
+Zambia,Base Metals,21.1,0.2,0.0,-0.2
+Zambia,Agricultural & Foods,11.9,3.1,0.0,-3.1
+Zambia,Industrial Equipment & Technology,1.0,18.2,15.1,-3.1
+Zambia,Chemical & Pharmaceutical,0.1,13.9,4.4,-9.6
+Zambia,Energy & Minerals,0.7,9.7,0.0,-9.7
+Zambia,Consumer Goods & Crafts,107.8,10.0,0.0,-10.0
+Zambia,Art & Collectibles,0.2,10.0,0.0,-10.0
+Zambia,Textile & Apparel Manufacturing,0.0,10.0,0.0,-10.0
+Zimbabwe,Base Metals,30.5,0.0,0.0,-0.0
+Zimbabwe,Consumer Goods & Crafts,5.0,6.6,0.1,-6.5
+Zimbabwe,Industrial Equipment & Technology,1.6,10.5,2.4,-8.1
+Zimbabwe,Agricultural & Foods,47.8,9.0,0.0,-9.0
+Zimbabwe,Energy & Minerals,1.0,9.5,0.0,-9.5
+Zimbabwe,Art & Collectibles,1.3,10.0,0.0,-10.0
+Zimbabwe,Chemical & Pharmaceutical,0.1,10.0,0.0,-10.0
+Zimbabwe,Textile & Apparel Manufacturing,0.6,10.0,0.0,-10.0
