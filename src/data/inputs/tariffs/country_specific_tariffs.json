@@ -1,10 +1,11 @@
 {
-  "name": "Section 122 temporary import surcharge (Proclamation 11012 of February 20, 2026)",
+  "name": "Section 122 temporary import surcharge (Proclamation 11012 of February 24, 2026)",
   "source": "https://www.federalregister.gov/documents/2026/02/25/2026-03824/imposing-a-temporary-import-surcharge-to-address-fundamental-international-payments-problems",
   "notes": [
     "Replaces IEEPA reciprocal tariffs (struck down by Supreme Court on Feb 20, 2026).",
-    "10% rate issued Feb 20, 2026.",
+    "Rate: 10% ad valorem (Proclamation 11012, February 20, 2026). Statutory ceiling under section 122 is 15%.",
     "Exempt: all goods already subject to Section 232 tariffs (steel, aluminum, copper, autos/parts) per proclamation paragraph 14(k).",
+    "Exempt: goods covered by EXEMPTIONS_S122 (Annex I and II of Proclamation 11012).",
     "Court of International Trade ruled Section 122 unlawful on May 7, 2026 (stayed by CAFC on May 12, 2026); tariff remains in effect as of June 2026.",
     "Expires July 24, 2026 (150-day statutory limit) unless extended by Congress."
   ],
@@ -50,8 +51,7 @@
   },
   "MAR": {
     "rate": 0.1,
-    "country": "Morocco",
-    "note": "US-Morocco Free Trade Agreement (effective Jan 1, 2006) grants duty-free treatment to qualifying goods under general note 27 to the HTSUS. The Section 122 proclamation does not explicitly exempt US FTA partners other than USMCA. For methodology purposes, Morocco is assigned the standard 10% Section 122 rate; the FTA preference on qualifying goods is not modeled at the product level. This results in a slight overestimation of Morocco's effective tariff rate."
+    "country": "Morocco"
   },
   "MDG": {
     "rate": 0.1,

@@ -1,0 +1,23 @@
+{
+  "name": "Upholstered wooden furniture, kitchen cabinets, and vanities subject to 25% Section 232 duty (Proclamation 10976, effective October 14, 2025)",
+  "source": "https://www.federalregister.gov/documents/2025/10/06/2025-19482/adjusting-imports-of-timber-lumber-and-their-derivative-products-into-the-united-states",
+  "notes": [
+    "Proclamation 10976 of September 29, 2025. Effective October 14, 2025.",
+    "HTSUS 9903.76.02: 25% on upholstered wooden furniture (couches, sofas, chairs). Applies to all countries EXCEPT UK (10%), EU (15%), Japan (15%).",
+    "HTSUS 9903.76.03: 25% on completed kitchen cabinets, vanities, and parts thereof. Applies to all countries EXCEPT UK (10%), EU (15%), Japan (15%).",
+    "Rate was originally scheduled to increase to 30% (furniture) and 50% (cabinets) on January 1, 2026; DEFERRED to January 1, 2027 by the December 31, 2025 amendment proclamation.",
+    "9903.76.04 carve-out: articles classified under the cabinet subheadings that are OTHER THAN completed wooden kitchen cabinets/vanities or parts thereof are NOT subject to this duty. The model applies this rate to the full 10-digit subheadings below as a conservative approximation.",
+    "Products subject to this proclamation are NOT subject to Section 122 surcharge (Section 232 stacking rule).",
+    "African countries with notable exposure: South Africa, Morocco, Egypt (wooden furniture and cabinetry exporters)."
+  ],
+  "rate": 0.25,
+  "codes": [
+    "9401614011",
+    "9401614031",
+    "9401616011",
+    "9401616031",
+    "9403409060",
+    "9403608093",
+    "9403910080"
+  ]
+}

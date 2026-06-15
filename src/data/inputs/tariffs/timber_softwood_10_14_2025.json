@@ -1,0 +1,30 @@
+{
+  "name": "Softwood timber and lumber products subject to 10% Section 232 duty (Proclamation 10976, effective October 14, 2025)",
+  "source": "https://www.federalregister.gov/documents/2025/10/06/2025-19482/adjusting-imports-of-timber-lumber-and-their-derivative-products-into-the-united-states",
+  "notes": [
+    "Proclamation 10976 of September 29, 2025. Effective October 14, 2025.",
+    "HTSUS heading 9903.76.01: 10% ad valorem on softwood timber and lumber products (all countries).",
+    "No country-specific exceptions for softwood — UK, EU, Japan caps apply only to furniture/cabinet codes.",
+    "Products subject to this proclamation are NOT subject to Section 122 surcharge (Section 232 stacking rule).",
+    "By October 1, 2026 the Secretary must report on hardwood timber; hardwood tariffs may follow.",
+    "Amended December 31, 2025: rate increases for furniture/cabinets deferred to January 1, 2027 (not applicable to softwood tier)."
+  ],
+  "rate": 0.10,
+  "codes": [
+    "44031100",
+    "44032101",
+    "44032201",
+    "44032301",
+    "44032401",
+    "44032501",
+    "44032601",
+    "44039901",
+    "44061100",
+    "44069100",
+    "44071100",
+    "44071200",
+    "44071300",
+    "44071400",
+    "44071900"
+  ]
+}
