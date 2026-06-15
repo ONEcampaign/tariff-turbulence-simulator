@@ -62,16 +62,19 @@
 }
 
 .dropdown-list-item {
-    font-weight: 500;
+    font-weight: 400;
     padding: 5px 0;
     cursor: pointer;
 }
 
-.dropdown-list-item:hover,
-.dropdown-list-item:focus {
+.dropdown-list-item:hover {
     background: #F8F7F8;
     border: none;
     outline: none;
+}
+
+.dropdown-list-item.selected {
+    font-weight: 600;
 }
 
 .dropdown-search {
