@@ -10,7 +10,8 @@
     "CBP CSMS #65794272 identifies the Chapter 99 reporting headings: 9903.78.01 (copper content, 50%) and 9903.78.02 (non-copper content, 0%).",
     "The official HTS code annex (Annex to Proclamation 10962) covers 76 subheadings in Chapter 74 and 4 subheadings in Chapter 85 (8544.42.10, 8544.42.20, 8544.42.90, 8544.49.10). All 80 codes verified from the FR 2025-14893 PDF annex.",
     "Codes in this file are the full 10-digit HTSUS subheadings from the proclamation annex (subdivision (b) of U.S. note 36 to subchapter III of chapter 99).",
-    "Section 232 copper tariffs exempt goods already subject to Section 232 auto/parts tariffs (no stacking). S232 goods are also exempt from the Section 122 temporary surcharge."
+    "Section 232 copper tariffs exempt goods already subject to Section 232 auto/parts tariffs (no stacking). S232 goods are also exempt from the Section 122 temporary surcharge.",
+    "Proclamation 11021 Annex I-A includes only Chapter 74 (primary copper articles). The four Chapter 85 insulated-wire codes (8544.42.10, 8544.42.20, 8544.42.90, 8544.49.10) originally added by Proclamation 10962 as 'intensive copper derivative products' are derivative articles under Proclamation 11021 and belong in Annex I-B (25%). They have been moved to steel_aluminum_copper_derivatives_04_02_2026.json."
   ],
   "rate": 0.5,
   "codes": [
@@ -89,10 +90,6 @@
     "74198016",
     "74198017",
     "74198030",
-    "74198050",
-    "85444210",
-    "85444220",
-    "85444290",
-    "85444910"
+    "74198050"
   ]
 }
