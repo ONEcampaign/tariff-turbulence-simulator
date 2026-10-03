@@ -3,9 +3,9 @@ import {title} from "./src/js/copyText.js"
 
 export default {
   title: title,
-  head: `<link rel="icon" href=${icon} type="image/png" sizes="32x32">`,
+  head: `<link rel="icon" href=${icon}>`,
 
-  base: "/trade-explorer",
+  base: "/tariff-simulator",
   preserveExtension: true,
 
   root: "src",

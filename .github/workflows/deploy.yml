@@ -45,11 +45,19 @@ jobs:
       - id: date
         run: echo "date=$(TZ=America/Los_Angeles date +'%Y-%U')" >> $GITHUB_OUTPUT
 
+      # npm modules (_npm) are left out so unversioned `npm:` imports resolve to
+      # the current release on every deploy.
       - id: cache-data
         uses: actions/cache@v4
         with:
-          path: src/.observablehq/cache
+          path: |
+            src/.observablehq/cache
+            !src/.observablehq/cache/_npm
           key: data-${{ hashFiles('src/data/*') }}-${{ steps.date.outputs.date }}
+
+      # Caches saved before the _npm exclusion still carry it.
+      - name: Drop cached npm modules
+        run: rm -rf src/.observablehq/cache/_npm
 
       - name: Build Observable Framework app
         run: uv run npm run build
