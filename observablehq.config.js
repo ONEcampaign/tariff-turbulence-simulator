@@ -5,7 +5,7 @@ export default {
   title: title,
   head: `<link rel="icon" href=${icon}>`,
 
-  base: "/trade-explorer",
+  base: "/tariff-simulator",
   preserveExtension: true,
 
   root: "src",
